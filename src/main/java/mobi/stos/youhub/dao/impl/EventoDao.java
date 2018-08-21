@@ -11,5 +11,6 @@ public class EventoDao extends AbstractHibernateDao<Evento> implements IEventoDa
     public EventoDao() {
         super(Evento.class);
     }
+
   
 }

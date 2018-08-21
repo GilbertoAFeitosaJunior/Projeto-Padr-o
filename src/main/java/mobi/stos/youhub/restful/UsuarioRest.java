@@ -12,7 +12,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mobi.stos.youhub.bean.Manager;
+import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.bo.IManagerBo;
+import mobi.stos.youhub.bo.IUsuarioBo;
+import mobi.stos.youhub.restful.model.Login;
 import mobi.stos.youhub.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,13 +25,35 @@ import org.springframework.stereotype.Component;
  * @author Weibson
  */
 @Component
-@Path("/manager")
-public class ManagerRest {
+@Path("/usuario")
+public class UsuarioRest {
 
     @Autowired
     IManagerBo managerBo;
 
-    @Path("/delete")
+    @Autowired
+    IUsuarioBo usuarioBo;
+
+    @Path("/login")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(Login login) {
+        try {
+            if (login.getLogin() != null && login.getSenha() != null) {
+                Usuario usuario = this.usuarioBo.login(login.getLogin(), login.getSenha());
+                if (usuario != null) {
+                    return Response.status(Response.Status.OK).build();
+                }
+            }
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/manager/delete")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,7 +70,7 @@ public class ManagerRest {
         }
     }
 
-    @Path("/cadastrar")
+    @Path("/manager/cadastrar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +91,7 @@ public class ManagerRest {
         }
     }
 
-    @Path("/carregar/{id}")
+    @Path("/manager/carregar/{id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

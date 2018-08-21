@@ -2,7 +2,6 @@ package mobi.stos.youhub.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlTransient;
-import mobi.stos.youhub.enumm.SituacaoConvidadoEnum;
 import mobi.stos.youhub.enumm.TipoPagamentoEnum;
-import mobi.stos.youhub.util.Util;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.json.annotations.JSON;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

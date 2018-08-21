@@ -17,6 +17,9 @@ public class UsuarioDao extends AbstractHibernateDao<Usuario> implements IUsuari
     @Override
     public Usuario byEmail(String email) {
         Criteria criteria = getCurrentSession().createCriteria(Usuario.class);
+        criteria.createAlias("manager", "manager");
+        criteria.createAlias("diretorSala", "diretorSala");
+        criteria.add(Restrictions.or(Restrictions.eq("manager.email", email).ignoreCase(), Restrictions.eq("diretorSala.email", email).ignoreCase()));
         criteria.add(Restrictions.eq("email", email).ignoreCase());
         criteria.setMaxResults(1);
         return (Usuario) criteria.uniqueResult();

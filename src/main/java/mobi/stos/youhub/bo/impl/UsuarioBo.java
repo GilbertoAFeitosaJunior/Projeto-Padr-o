@@ -26,13 +26,12 @@ public class UsuarioBo extends AbstractService<Usuario> implements IUsuarioBo {
     public Usuario login(String login, String senha) throws LoginException, SenhaException {
         Usuario usuario = dao.byEmail(login);
         if (usuario == null) {
-            throw new LoginException();
+            return null;
         }
         if (!usuario.getSenha().equals(senha)) {
-            throw new SenhaException();
+            return null;
         }
         usuario.setUltimoAcesso(new Date());
-        dao.persist(usuario);
         return usuario;
     }
 
