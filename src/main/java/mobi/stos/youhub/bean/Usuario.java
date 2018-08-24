@@ -40,15 +40,26 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private long cpf;
 
+    @Column(length = 100)
+    private String login;
+
     @Column(nullable = false, length = 100)
     private String senha;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(insertable = false)
     private Date ultimoAcesso;
-    
+
     @Column(length = 32)
     private String hash;
+
+    public String getCpjStringMask() {
+        return Util.format("###.###.###-##", Util.zeroFill(this.cpf, 11));
+    }
+
+    public void setCpjStringMask(String cpf) {
+        this.cpf = Long.parseLong(Util.onlyNumber(cpf));
+    }
 
     public Long getId() {
         return id;
@@ -93,6 +104,14 @@ public class Usuario implements Serializable {
         } else {
             this.senha = senha;
         }
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @XmlTransient

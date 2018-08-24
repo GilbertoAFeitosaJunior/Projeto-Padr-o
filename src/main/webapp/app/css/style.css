@@ -30,11 +30,11 @@ a, a:hover, a:focus {
 }
 ::selection {
 
-    background: #fa2698;
+    background: #f37c20;
     color: #fff;
 }
 ::-moz-selection {
-    background: #fa2698;
+    background: #f37c20;
     color: #fff;
 }
 
@@ -61,7 +61,7 @@ a, a:hover, a:focus {
     margin: 0;
     padding:20px 15px;
     text-align: center;
-    background: #fa2698;
+    background: #434343;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     color: #fff;
@@ -102,12 +102,12 @@ a, a:hover, a:focus {
 }
 
 .form-signin .btn-login {
-    background: #f67a6e;
+    background: #f37c20;
     color: #fff;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Open Sans', sans-serif;
-    box-shadow: 0 4px #e56b60;
+    box-shadow: 0 4px #f37c20;
     margin-bottom: 20px;
 }
 
@@ -171,7 +171,7 @@ a, a:hover, a:focus {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #fa2698;
+    background: #434343;
     overflow-y: scroll;
 }
 
@@ -230,7 +230,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #d40675;
+    background: #35404D;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -255,7 +255,7 @@ ul.sidebar-menu li ul.sub li a {
 }
 
 ul.sidebar-menu li ul.sub li a:hover, ul.sidebar-menu li ul.sub li.active a {
-    color: white;
+    color: #FF6C60;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -280,7 +280,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: white;
+    color: #aeb2b7;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -294,7 +294,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #d40675;
+    background: #35404d;
     color: #fff;
     display: block;
     border-radius: 4px;
@@ -314,11 +314,11 @@ ul.sidebar-menu li a i {
 }
 
 ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
-    color: white;
+    color: #f37c20;
 }
 
 ul.sidebar-menu li a.active i {
-    color: white;
+    color: #f37c20;
 }
 
 
@@ -371,7 +371,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #FF6C60;
+    color: #f37c20;
 }
 
 
@@ -4736,7 +4736,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 /*footer*/
 
 .site-footer {
-    background: #fa2698;
+    background: #5b6e84;
     color: #fff;
     padding: 10px 0;
 }

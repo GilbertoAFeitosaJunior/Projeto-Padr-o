@@ -8,7 +8,7 @@
 
     <section class="panel">
         <header class="panel-heading">
-            Pesquisar Usu&aacute;rio
+            Pesquisar Tipo do Evento
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
@@ -77,18 +77,14 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>cpf</th>
-                        <th>E-mail</th>
-                        <th>&Uacute;ltimo Acesso</th>
+                        <th>Nome</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="usuarios">
+                    <s:iterator value="tipoEventos">
                         <tr>       
-                            <td><s:property value="cpjStringMask" /></td>
-                            <td><s:property value="login" /></td>
-                            <td><s:property value="ultimoAcessoFormat" /></td>
+                            <td><s:property value="nome" /></td>                           
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -138,16 +134,16 @@
                         _helperID = null;
                         var list = {
                             add: function () {
-                                window.location = "prepareUsuario";
+                                window.location = "prepareTipoEvento";
                             },
                             edit: function (id) {
-                                window.location = "prepareUsuario?usuario.id=" + id;
+                                window.location = "prepareTipoEvento?tipoEvento.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteUsuario?usuario.id=" + _helperID;
+                                window.location = "deleteTipoEvento?tipoEvento.id=" + _helperID;
                             }
                         };
 
@@ -159,7 +155,7 @@
                                 "operador": "${consulta.operador}",
                                 "campo": "${consulta.campo}",
                                 "valor": "${consulta.valor}",
-                                "url": "listUsuario"
+                                "url": "listTipoEvento"
                             });
                         });
     </script>

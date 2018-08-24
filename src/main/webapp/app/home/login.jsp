@@ -40,7 +40,7 @@
     <s:form theme="simple" cssClass="form-signin" action="login" method="post">
         <h2 class="form-signin-heading">Login</h2>
         <div class="login-wrap">
-            <s:textfield type="email" cssClass="form-control" placeholder="Usuário" autofocus="true" name="usuario.email" autocomplete="off" required="true" />
+            <s:textfield type="email" cssClass="form-control" placeholder="Usuário" autofocus="true" name="usuario.login" autocomplete="off" required="true" />
             <s:password cssClass="form-control" placeholder="Senha" name="usuario.senha" required="true" />
             <%
                 HttpSession sessao = request.getSession();

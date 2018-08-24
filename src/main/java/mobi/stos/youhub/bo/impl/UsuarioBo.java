@@ -32,6 +32,7 @@ public class UsuarioBo extends AbstractService<Usuario> implements IUsuarioBo {
             return null;
         }
         usuario.setUltimoAcesso(new Date());
+        this.persist(usuario);
         return usuario;
     }
 

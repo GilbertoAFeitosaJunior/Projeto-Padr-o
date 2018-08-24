@@ -15,16 +15,16 @@
                 <s:hidden name="usuario.id" />
 
                 <div class="form-group">
-                    <label>Nome:</label>
+                    <label>CPF:</label>
                     <div>
-                        <s:textfield name="usuario.nome" id="usuario.nome" maxlength="100" cssClass="form-control" required="true"/>
+                        <s:textfield name="usuario.cpjStringMask" id="usuario.cpjStringMask" data-mask="999.999.999-99" maxlength="100" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>E-mail:</label>
                     <div>
-                        <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                        <s:textfield name="usuario.login" id="usuario.login" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 

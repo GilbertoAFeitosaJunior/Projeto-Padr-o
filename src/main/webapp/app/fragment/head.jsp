@@ -71,7 +71,7 @@
                         <!-- user login dropdown start-->
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="username"><s:property value="#session.logged.nome"/></span>
+                                <span class="username"><s:property value="#session.logged.login"/></span>
                             </a>
                         </li>
                     </ul>

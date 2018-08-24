@@ -3,7 +3,7 @@ var Script = function () {
     $().ready(function () {
         $("#form").validate({
             messages: {
-                "usuario.nome": {
+                "usuario.cpjStringMask": {
                     required: "Favor preencher esse campo"
                 },
                 "usuario.email": {
