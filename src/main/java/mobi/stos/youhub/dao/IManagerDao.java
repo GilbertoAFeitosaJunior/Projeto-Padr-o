@@ -5,5 +5,4 @@ import mobi.stos.youhub.common.IOperations;
 
 public interface IManagerDao extends IOperations<Manager> {
 
-  
 }

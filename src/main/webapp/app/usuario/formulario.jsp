@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label>E-mail:</label>
                     <div>
-                        <s:textfield name="usuario.login" id="usuario.login" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                        <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
 
     <%@include file="../fragment/endpage.jsp" %>
     <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-    <script type="text/javascript" src="../usuario/js/script.min.js"></script>
+    <script type="text/javascript" src="../usuario/js/script.js"></script>
     <%@include file="../fragment/truend.jsp" %>
 
 </compress:html>

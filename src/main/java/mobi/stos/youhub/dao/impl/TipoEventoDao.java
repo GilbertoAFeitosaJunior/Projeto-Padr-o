@@ -11,6 +11,4 @@ public class TipoEventoDao extends AbstractHibernateDao<TipoEvento> implements I
     public TipoEventoDao() {
         super(TipoEvento.class);
     }
-
-   
 }

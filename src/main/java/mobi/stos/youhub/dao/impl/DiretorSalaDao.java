@@ -12,5 +12,4 @@ public class DiretorSalaDao extends AbstractHibernateDao<DiretorSala> implements
         super(DiretorSala.class);
     }
 
-   
 }

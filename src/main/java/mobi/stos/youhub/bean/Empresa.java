@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import mobi.stos.youhub.util.Util;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -29,7 +30,7 @@ public class Empresa implements Serializable {
     private String nomeFantasia;
 
     @Column(nullable = false, length = 18)
-    private String cnpj;
+    private Long cnpj;
 
     @Column(length = 2)
     private String dddCelular;
@@ -67,11 +68,20 @@ public class Empresa implements Serializable {
         this.nomeFantasia = nomeFantasia;
     }
 
-    public String getCnpj() {
+    public String getCnpjStringMask() {
+        return Util.format("##.###.###/####-##", Util.zeroFill(this.cnpj, 14));
+
+    }
+
+    public void setCnpjStringMask(String cnpj) {
+        this.cnpj = Long.parseLong(Util.onlyNumber(cnpj));
+    }
+
+    public Long getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
+    public void setCnpj(Long cnpj) {
         this.cnpj = cnpj;
     }
 

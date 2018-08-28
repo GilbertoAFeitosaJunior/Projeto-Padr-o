@@ -5,4 +5,5 @@ import mobi.stos.youhub.common.IOperations;
 
 public interface IDiretorSalaBo extends IOperations<DiretorSala> {
 
+    
 }

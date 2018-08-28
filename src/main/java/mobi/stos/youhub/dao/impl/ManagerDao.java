@@ -12,5 +12,4 @@ public class ManagerDao extends AbstractHibernateDao<Manager> implements IManage
         super(Manager.class);
     }
 
-   
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.youhub.bean.Evento;
-import mobi.stos.youhub.bean.Usuario;
+import mobi.stos.youhub.bean.TipoEvento;
 import mobi.stos.youhub.bo.IEventoBo;
+import mobi.stos.youhub.bo.ITipoEventoBo;
 import mobi.stos.youhub.common.GenericAction;
 import static mobi.stos.youhub.common.GenericAction.request;
 import mobi.stos.youhub.exception.LoginExpiradoException;
@@ -24,8 +25,12 @@ public class EventoAction extends GenericAction {
 
     private Evento evento;
     private List<Evento> eventos;
+    private List<TipoEvento> tipoEventos;
     @Autowired
     private IEventoBo eventoBo;
+
+    @Autowired
+    private ITipoEventoBo tipoEventoBo;
 
     @Action(value = "prepareEvento",
             interceptorRefs = {
@@ -41,6 +46,8 @@ public class EventoAction extends GenericAction {
             if (evento != null && evento.getId() != null) {
                 evento = this.eventoBo.load(this.evento.getId());
             }
+
+            this.tipoEventos = this.tipoEventoBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -110,6 +117,14 @@ public class EventoAction extends GenericAction {
         }
     }
 
+    public List<TipoEvento> getTipoEventos() {
+        return tipoEventos;
+    }
+
+    public void setTipoEventos(List<TipoEvento> tipoEventos) {
+        this.tipoEventos = tipoEventos;
+    }
+
     public Evento getEvento() {
         return evento;
     }
@@ -135,7 +150,7 @@ public class EventoAction extends GenericAction {
 
     @Override
     public void prepare() throws Exception {
-        setMenu(Usuario.class.getSimpleName());
+        setMenu(Evento.class.getSimpleName());
     }
 
     @Override

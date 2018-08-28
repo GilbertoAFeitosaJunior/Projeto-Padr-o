@@ -6,6 +6,7 @@ import mobi.stos.youhub.bo.IUsuarioBo;
 import mobi.stos.youhub.common.AbstractService;
 import mobi.stos.youhub.common.IOperations;
 import mobi.stos.youhub.dao.IUsuarioDao;
+import mobi.stos.youhub.exception.AvoidDuplicationEmailException;
 import mobi.stos.youhub.exception.LoginException;
 import mobi.stos.youhub.exception.SenhaException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,15 @@ public class UsuarioBo extends AbstractService<Usuario> implements IUsuarioBo {
     @Override
     public Usuario byHash(String hash) {
         return dao.byHash(hash);
+    }
+
+    @Override
+    public Usuario cadastrar(Usuario usuario) throws AvoidDuplicationEmailException {    
+        System.out.println("chegou aqui...");
+        if (dao.byEmail(usuario.getEmail()) != null) {
+            throw new AvoidDuplicationEmailException();          
+        }
+        return dao.persist(usuario);
     }
 
 }

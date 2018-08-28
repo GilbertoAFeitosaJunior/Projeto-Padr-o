@@ -56,7 +56,7 @@ public class UsuarioAction extends GenericAction {
                 if (usuario == null) {
                     return INPUT;
                 }
-                usuario = usuarioBo.login(usuario.getLogin(), usuario.getSenha());
+                usuario = usuarioBo.login(usuario.getEmail(), usuario.getSenha());
                 Map session = ActionContext.getContext().getSession();
                 session.put("logged", usuario);
 
@@ -89,7 +89,7 @@ public class UsuarioAction extends GenericAction {
                     return ERROR;
                 }
             }
-            usuario = usuarioBo.login(usuario.getLogin(), usuario.getSenha());
+            usuario = usuarioBo.login(usuario.getEmail(), usuario.getSenha());
             if (usuario == null) {
                 throw new AccessDeniedException();
             }
@@ -181,28 +181,31 @@ public class UsuarioAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
             })
     public String persist() {
         try {
             GenericAction.isLogged(request);
 
-            if (usuario.getId() != null) {
+            if (usuario != null && usuario.getId() != null) {
                 Usuario entity = usuarioBo.load(usuario.getId());
 
                 if (Strings.isNullOrEmpty(usuario.getSenha())) {
-                    usuario.setLogin(entity.getLogin());
+                    usuario.setSenha(entity.getSenha());
                 }
 
-                if (Strings.isNullOrEmpty(usuario.getSenha())) {
-                    usuario.setSenha(entity.getLogin());
-                }
-
+                usuario.setEmail(entity.getEmail());
+                this.usuarioBo.persist(entity);
+            } else {
+                usuarioBo.cadastrar(usuario);                
             }
-            usuarioBo.persist(usuario);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listUsuario");
         } catch (Exception e) {
+            e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }
@@ -265,7 +268,7 @@ public class UsuarioAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
-        list.add(new Keys("login", "login"));
+        list.add(new Keys("email", "E-mail"));
         return list;
     }
 

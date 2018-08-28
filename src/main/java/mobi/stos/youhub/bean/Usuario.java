@@ -37,11 +37,14 @@ public class Usuario implements Serializable {
     @ManyToOne
     private DiretorSala diretorSala;
 
+    @ManyToOne
+    private Empresa empresa;
+
     @Column(nullable = false)
     private long cpf;
 
     @Column(length = 100)
-    private String login;
+    private String email;
 
     @Column(nullable = false, length = 100)
     private String senha;
@@ -106,12 +109,12 @@ public class Usuario implements Serializable {
         }
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @XmlTransient
@@ -165,6 +168,14 @@ public class Usuario implements Serializable {
                 return "";
             }
         }
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
 }
