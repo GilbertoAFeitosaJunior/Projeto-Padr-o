@@ -1,14 +1,18 @@
 package mobi.stos.youhub.action;
 
+import com.google.api.client.repackaged.com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.youhub.bean.Manager;
+import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.bo.IManagerBo;
+import mobi.stos.youhub.bo.IUsuarioBo;
 import mobi.stos.youhub.common.GenericAction;
 import static mobi.stos.youhub.common.GenericAction.request;
 import mobi.stos.youhub.exception.LoginExpiradoException;
@@ -26,11 +30,18 @@ public class ManagerAction extends GenericAction {
     private File upload;
     private String uploadContentType;
     private String uploadFileName;
+    private String ark;
+    private Usuario usuario;
+
+    private List<Usuario> usuarios;
 
     private Manager manager;
     private List<Manager> managers;
     @Autowired
     private IManagerBo managerBo;
+
+    @Autowired
+    private IUsuarioBo usuarioBo;
 
     @Action(value = "prepareManager",
             interceptorRefs = {
@@ -43,8 +54,8 @@ public class ManagerAction extends GenericAction {
     public String preparar() {
         try {
             GenericAction.isLogged(request);
-            if (manager != null && manager.getId() != null) {
-                manager = this.managerBo.load(this.manager.getId());
+            if (usuario != null && usuario.getId() != null) {
+                usuario = usuarioBo.load(usuario.getId());
             }
             return SUCCESS;
         } catch (Exception e) {
@@ -64,14 +75,9 @@ public class ManagerAction extends GenericAction {
     public String persist() {
         try {
             GenericAction.isLogged(request);
-
-            if (manager != null && manager.getId() != null) {
-                Manager entity = this.managerBo.load(manager.getId());
-                manager.setFoto(entity.getFoto());
-            }
-                       
+            boolean hasUpload = false;
             if (upload != null) {
-                String ark = Util.uploadFile(upload, uploadContentType,
+                ark = Util.uploadFile(upload, uploadContentType,
                         "repo/youhube/fotos/",
                         new String[]{
                             "image/png",
@@ -79,10 +85,42 @@ public class ManagerAction extends GenericAction {
                             "image/gif"
                         },
                         request, uploadFileName);
-                manager.setFoto(ark);
+                hasUpload = true;
             }
 
-           // managerBo.cadastrar(manager);
+            if (usuario != null && usuario.getId() == null) {
+                Manager entity = this.managerBo.persist(usuario.getManager());
+                if (hasUpload) {
+                    entity.setFoto(ark);
+                    this.managerBo.persist(entity);
+                }
+                usuario.setManager(entity);
+                this.usuarioBo.cadastrar(usuario);
+            } else {
+                Usuario entityUsu = this.usuarioBo.load(usuario.getId());
+                usuario.setEmail(entityUsu.getEmail());
+                if (Strings.isNullOrEmpty(usuario.getSenha())) {
+                    usuario.setSenha(entityUsu.getSenha());
+                }
+                Manager entity = this.managerBo.load(usuario.getManager().getId());
+
+                if (hasUpload) {
+                    ServletContext context = request.getServletContext();
+                    File file = new File(context.getRealPath("/") + entity.getFoto());
+
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    entity = this.usuario.getManager();
+                    entity.setFoto(ark);
+                    usuario.getManager().setFoto(entity.getFoto());
+                } else {
+                    usuario.getManager().setFoto(entity.getFoto());
+                }
+                this.managerBo.persist(usuario.getManager());
+                this.usuarioBo.persist(usuario);
+            }
+
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listManager");
         } catch (Exception e) {
@@ -97,11 +135,17 @@ public class ManagerAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
             })
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            managerBo.delete(manager.getId());
+
+            this.usuario = this.usuarioBo.load(usuario.getId());
+            this.usuarioBo.delete(usuario.getId());
+            managerBo.delete(usuario.getManager().getId());
+
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listManager");
         } catch (LoginExpiradoException e) {
@@ -125,13 +169,31 @@ public class ManagerAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-            managers = managerBo.list(getConsulta());
+            Consulta consulta = getConsulta();
+            consulta.addAliasTable("manager", "manager");
+            usuarios = usuarioBo.list(getConsulta());
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             e.printStackTrace();
             return ERROR;
         }
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public File getUpload() {
@@ -177,7 +239,7 @@ public class ManagerAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
-        list.add(new Keys("nome", "Nome"));
+        list.add(new Keys("manager.nome", "Nome"));
         return list;
     }
 

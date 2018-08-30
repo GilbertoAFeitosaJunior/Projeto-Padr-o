@@ -20,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a href="listEmpresa" <s:if test='menu == "Manager"'> class="active"</s:if>>
+            <a href="listEmpresa" <s:if test='menu == "Empresa"'> class="active"</s:if>>
                 <i class="fa fa-building"></i>
                 <span>Empresa</span>
             </a>

@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
     @ManyToOne
     private Empresa empresa;
 
-    @Column(nullable = false)
+    
     private long cpf;
 
     @Column(length = 100)

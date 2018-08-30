@@ -12,18 +12,17 @@
 
         <div class="panel-body">
             <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistManager" theme="simple" enctype="multipart/form-data">
-                <s:hidden name="manager.id" />
-
+                <s:hidden name="usuario.id" />
+                <s:hidden name="usuario.manager.id" />
 
                 <div class="row">
-
                     <div class="col-lg-8">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Nome:</label>
                                     <div>
-                                        <s:textfield name="manager.nome" id="manager.nome" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                                        <s:textfield name="usuario.manager.nome" id="usuario.manager.nome" type="text" maxlength="100" cssClass="form-control" required="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -34,26 +33,48 @@
                                 <div class="form-group">
                                     <label>E-mail:</label>
                                     <div>
-                                        <s:textfield name="manager.email" id="manager.nome" type="email" maxlength="100" cssClass="form-control" required="true"/>
+                                        <s:textfield name="usuario.email" id="usuario.nome" type="email" maxlength="100" cssClass="form-control" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Senha:</label>
+                                    <div>
+                                        <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4">         
+                                <div class="form-group">
+                                    <label>CPF:</label>
+                                    <div>
+                                        <s:textfield name="usuario.cpjStringMask" id="usuario.cpjStringMask" data-mask="999.999.999-99" maxlength="100" cssClass="form-control" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>DDD:</label>
                                     <div>
-                                        <s:textfield name="manager.ddd" id="manager.ddd" maxlength="2" cssClass="form-control" required="true"/>
+                                        <s:textfield name="usuario.manager.ddd" id="manager.ddd" maxlength="2" cssClass="form-control" />
                                     </div>
                                 </div>
                             </div>                
-                            <div class="col-lg-8">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Telefone:</label>
                                     <div>
-                                        <s:textfield name="manager.celular" id="manager.celular"  maxlength="9" cssClass="form-control" required="true"/>
+                                        <s:textfield name="usuario.manager.celular" id="manager.celular"  maxlength="9" cssClass="form-control" />
                                     </div>
                                 </div>
                             </div> 
@@ -66,8 +87,8 @@
                             <div>
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                     <div class="fileupload-new thumbnail" style="max-width: 200px;">
-                                        <s:if test='manager.foto != ""'>
-                                            <img src="../../<s:property value="manager.foto"/>" style="max-width: 200px" id="preview" />
+                                        <s:if test='usuario.manager.foto != ""'>
+                                            <img src="../../<s:property value="usuario.manager.foto"/>" style="max-width: 200px" id="preview" />
                                         </s:if>
                                         <s:else>
                                             <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=sem+imagem" alt="" id="preview" />

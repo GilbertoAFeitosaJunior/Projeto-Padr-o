@@ -8,17 +8,17 @@ var Script = function () {
                 }
             },
             messages: {
-                "manager.nome": {
+                "usuario.empresa.razaoSocial": {
                     required: "Favor preencher esse campo"
                 },
-                "manager.email": {
+                "usuario.empresa.nomeFantasia": {
                     required: "Favor preencher esse campo",
                     email: "E-mail inválidado"
                 },
-                "manager.ddd": {
+                "usuario.empresa.cnpjStringMask": {
                     required: "Favor preencher esse campo"
                 },
-                "manager.celular": {
+                "usuario.email": {
                     required: "Favor preencher esse campo"
                 }
             }

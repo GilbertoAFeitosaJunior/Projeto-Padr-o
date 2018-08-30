@@ -1,14 +1,17 @@
 package mobi.stos.youhub.action;
 
+import com.google.api.client.repackaged.com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.youhub.bean.DiretorSala;
 import mobi.stos.youhub.bean.Empresa;
 import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.bo.IEmpresaBo;
+import mobi.stos.youhub.bo.IUsuarioBo;
 import mobi.stos.youhub.common.GenericAction;
 import static mobi.stos.youhub.common.GenericAction.request;
 import mobi.stos.youhub.exception.LoginExpiradoException;
@@ -23,9 +26,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class EmpresaAction extends GenericAction {
 
     private Empresa empresa;
+    private Usuario usuario;
+
+    private List<Usuario> usuarios;
     private List<Empresa> empresas;
+
     @Autowired
     private IEmpresaBo empresaBo;
+
+    @Autowired
+    private IUsuarioBo usuarioBo;
 
     @Action(value = "prepareEmpresa",
             interceptorRefs = {
@@ -38,8 +48,8 @@ public class EmpresaAction extends GenericAction {
     public String preparar() {
         try {
             GenericAction.isLogged(request);
-            if (empresa != null && empresa.getId() != null) {
-                empresa = this.empresaBo.load(this.empresa.getId());
+            if (usuario != null && usuario.getId() != null) {
+                usuario = usuarioBo.load(usuario.getId());
             }
             return SUCCESS;
         } catch (Exception e) {
@@ -55,15 +65,34 @@ public class EmpresaAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
             })
     public String persist() {
         try {
             GenericAction.isLogged(request);
-            empresaBo.persist(empresa);
+
+            if (usuario != null && usuario.getId() == null) {
+                Empresa entity = this.empresaBo.persist(usuario.getEmpresa());
+                usuario.setEmpresa(entity);
+                this.usuarioBo.cadastrar(usuario);
+            } else {
+                Usuario entity = this.usuarioBo.load(usuario.getId());
+                usuario.setEmail(entity.getEmail());
+                if (Strings.isNullOrEmpty(usuario.getSenha())) {
+                    usuario.setSenha(entity.getSenha());
+                }
+
+                this.empresaBo.persist(usuario.getEmpresa());
+                this.usuarioBo.persist(usuario);
+            }
+
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEmpresa");
         } catch (Exception e) {
+            e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }
@@ -73,15 +102,20 @@ public class EmpresaAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
             })
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            empresaBo.delete(empresa.getId());
+            this.usuario = this.usuarioBo.load(usuario.getId());
+            this.usuarioBo.delete(usuario.getId());
+            this.empresaBo.delete(usuario.getEmpresa().getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listEmpresa");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }
@@ -101,13 +135,31 @@ public class EmpresaAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-            empresas = empresaBo.list(getConsulta());
+            Consulta consulta = getConsulta();
+            consulta.addAliasTable("empresa", "empresa");
+            usuarios = usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             e.printStackTrace();
             return ERROR;
         }
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Empresa getEmpresa() {
@@ -129,13 +181,13 @@ public class EmpresaAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
-        list.add(new Keys("razaoSocial", "Nome"));
+        list.add(new Keys("empresa.razaoSocial", "Razão Social"));
         return list;
     }
 
     @Override
     public void prepare() throws Exception {
-        setMenu(Usuario.class.getSimpleName());
+        setMenu(Empresa.class.getSimpleName());
     }
 
     @Override

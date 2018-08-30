@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label>Senha:</label>
                             <div>
-                                <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" required="true"/>
+                                <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control"/>
                             </div>
                         </div>
                     </div>

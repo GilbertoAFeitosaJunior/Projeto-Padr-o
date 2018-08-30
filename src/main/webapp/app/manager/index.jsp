@@ -77,14 +77,18 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>Nome</th>      
+                        <th>E-mail</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="managers">
+                    <s:iterator value="usuarios">
                         <tr>       
-                            <td><s:property value="nome" /></td>                           
+                            <td> <img src="../../<s:property value="manager.foto"/>" class="img-responsive img-thumbnail" height="60" width="60" /> </td>
+                            <td><s:property value="manager.nome" /></td>                           
+                            <td><s:property value="email" /></td>                             
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -137,13 +141,13 @@
                                 window.location = "prepareManager";
                             },
                             edit: function (id) {
-                                window.location = "prepareManager?manager.id=" + id;
+                                window.location = "prepareManager?usuario.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteManager?manager.id=" + _helperID;
+                                window.location = "deleteManager?usuario.id=" + _helperID;
                             }
                         };
 

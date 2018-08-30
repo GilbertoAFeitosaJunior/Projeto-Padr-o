@@ -3,19 +3,19 @@ var Script = function () {
     $().ready(function () {
         $("#form").validate({
             rules: {
-                "manager.email": {
+                "usuario.email": {
                     email: true
                 }
             },
             messages: {
-                "manager.nome": {
+                "usuario.manager.nome": {
                     required: "Favor preencher esse campo"
                 },
-                "manager.email": {
+                "usuario.email": {
                     required: "Favor preencher esse campo",
                     email: "E-mail inválidado"
                 },
-                "manager.ddd": {
+                "usuario.cpjStringMask": {
                     required: "Favor preencher esse campo"
                 },
                 "manager.celular": {

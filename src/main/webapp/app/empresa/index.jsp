@@ -15,7 +15,7 @@
         </header>
 
         <div class="panel-body">
-            <s:form acceptcharset="UTF-8" method="post" action="listDiretorSala" theme="simple">
+            <s:form acceptcharset="UTF-8" method="post" action="listEmpresa" theme="simple">
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -77,14 +77,16 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Nome</th>      
+                        <th>Razão Social</th>      
+                        <th>CNPJ</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="managers">
+                    <s:iterator value="usuarios">
                         <tr>       
-                            <td><s:property value="nome" /></td>                           
+                            <td><s:property value="empresa.razaoSocial" /></td>                           
+                            <td><s:property value="empresa.cnpjStringMask" /></td>                           
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -137,13 +139,13 @@
                                 window.location = "prepareEmpresa";
                             },
                             edit: function (id) {
-                                window.location = "prepareEmpresa?empresa.id=" + id;
+                                window.location = "prepareEmpresa?usuario.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteEmpresa?empresa.id=" + _helperID;
+                                window.location = "deleteEmpresa?usuario.id=" + _helperID;
                             }
                         };
 

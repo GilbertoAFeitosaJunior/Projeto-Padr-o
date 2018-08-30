@@ -22,16 +22,16 @@ import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DiretorSalaAction extends GenericAction {
-    
+
     private DiretorSala diretorSala;
     private Usuario usuario;
-    
+
     private List<Usuario> usuarios;
     @Autowired
     private IDiretorSalaBo diretorSalaBo;
     @Autowired
     private IUsuarioBo usuarioBo;
-    
+
     @Action(value = "prepareDiretorSala",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -52,7 +52,7 @@ public class DiretorSalaAction extends GenericAction {
             return ERROR;
         }
     }
-    
+
     @Action(value = "persistDiretorSala",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
@@ -66,7 +66,7 @@ public class DiretorSalaAction extends GenericAction {
     public String persist() {
         try {
             GenericAction.isLogged(request);
-            
+
             if (usuario != null && usuario.getId() == null) {
                 DiretorSala entity = this.diretorSalaBo.persist(usuario.getDiretorSala());
                 usuario.setDiretorSala(entity);
@@ -74,9 +74,15 @@ public class DiretorSalaAction extends GenericAction {
             } else {
                 Usuario entity = this.usuarioBo.load(usuario.getId());
                 usuario.setEmail(entity.getEmail());
+                
+                if (Strings.isNullOrEmpty(usuario.getSenha())) {
+                    usuario.setSenha(entity.getSenha());
+                }
+                
                 this.usuarioBo.persist(usuario);
+                this.diretorSalaBo.persist(usuario.getDiretorSala());
             }
-            
+
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listDiretorSala");
         } catch (Exception e) {
@@ -86,7 +92,7 @@ public class DiretorSalaAction extends GenericAction {
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "deleteDiretorSala",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -98,7 +104,7 @@ public class DiretorSalaAction extends GenericAction {
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            
+
             this.usuario = this.usuarioBo.load(usuario.getId());
             this.usuarioBo.delete(usuario.getId());
             this.diretorSalaBo.delete(usuario.getDiretorSala().getId());
@@ -110,7 +116,7 @@ public class DiretorSalaAction extends GenericAction {
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "listDiretorSala",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -128,7 +134,7 @@ public class DiretorSalaAction extends GenericAction {
             }
             Consulta consulta = getConsulta();
             consulta.addAliasTable("diretorSala", "diretorSala");
-            usuarios = usuarioBo.list(getConsulta());
+            usuarios = usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -136,51 +142,51 @@ public class DiretorSalaAction extends GenericAction {
             return ERROR;
         }
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public DiretorSala getDiretorSala() {
         return diretorSala;
     }
-    
+
     public void setDiretorSala(DiretorSala diretorSala) {
         this.diretorSala = diretorSala;
     }
-    
+
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
-    
+
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-    
+
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("diretorSala.nome", "Nome"));
         return list;
     }
-    
+
     @Override
     public void prepare() throws Exception {
-        setMenu(Usuario.class.getSimpleName());
+        setMenu(DiretorSala.class.getSimpleName());
     }
-    
+
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         GenericAction.request = hsr;
     }
-    
+
     @Override
     public void setServletResponse(HttpServletResponse hsr) {
         GenericAction.response = hsr;
     }
-    
+
 }

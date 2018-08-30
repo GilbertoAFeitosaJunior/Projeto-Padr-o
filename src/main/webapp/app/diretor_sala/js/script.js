@@ -9,7 +9,13 @@ var Script = function () {
                 }
             },
             messages: {
-                "diretorSala.nome": {
+                "usuario.diretorSala.nome": {
+                    required: "Favor preencher esse campo"
+                },
+                "usuario.email": {
+                    required: "Favor preencher esse campo"
+                },
+                "usuario.cpjStringMask": {
                     required: "Favor preencher esse campo"
                 }
             }
