@@ -71,6 +71,9 @@ public class ManagerAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
+
             })
     public String persist() {
         try {
@@ -126,6 +129,7 @@ public class ManagerAction extends GenericAction {
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }

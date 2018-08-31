@@ -79,6 +79,7 @@
                     <tr>
                         <th>Razão Social</th>      
                         <th>CNPJ</th>      
+                        <th>E-mail</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
@@ -87,6 +88,7 @@
                         <tr>       
                             <td><s:property value="empresa.razaoSocial" /></td>                           
                             <td><s:property value="empresa.cnpjStringMask" /></td>                           
+                            <td><s:property value="email" /></td>                           
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">

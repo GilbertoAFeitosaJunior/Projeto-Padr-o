@@ -65,8 +65,6 @@
                             </div>
                         </div>
                     </div> 
-                </div>
-                <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>DDD:</label>
@@ -94,8 +92,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Senha:</label>
@@ -105,6 +101,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <div class="panel-body pull-right">
                     <button type="button" class="btn btn-danger" onclick="window.location = 'listEmpresa'">Cancelar</button>
