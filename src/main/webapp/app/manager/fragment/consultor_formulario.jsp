@@ -17,10 +17,10 @@
 
         <br />
 
-        <table class="table table-striped table-advance table-hover" id="tPreContrato">
+        <table class="table table-striped table-advance table-hover" id="tConsultor">
             <thead>
-                <tr>  
-                    <th>Foto</th>
+                <tr>                      
+                    <th>Foto</th>    
                     <th>Nome</th>    
                     <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                 </tr>
@@ -64,13 +64,8 @@
                                 <label>Foto:</label>
                                 <div>
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="max-width: 200px;">
-                                            <s:if test='consultor.foto != ""'>
-                                                <img src="../../<s:property value="consultor.foto"/>" style="max-width: 200px" id="preview" />
-                                            </s:if>
-                                            <s:else>
-                                                <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=sem+imagem" alt="" id="preview" />
-                                            </s:else>
+                                        <div class="fileupload-new thumbnail" style="max-width: 200px;">                                         
+                                            <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=sem+imagem" alt="" id="preview" />
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                         <div>

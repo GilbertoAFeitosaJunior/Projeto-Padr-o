@@ -1,5 +1,6 @@
 package mobi.stos.youhub.bo.impl;
 
+import java.util.List;
 import mobi.stos.youhub.bean.Consultor;
 import mobi.stos.youhub.bo.IConsultorBo;
 import mobi.stos.youhub.common.AbstractService;
@@ -17,6 +18,11 @@ public class ConsultorBo extends AbstractService<Consultor> implements IConsulto
     @Override
     protected IOperations<Consultor> getDao() {
         return dao;
+    }
+
+    @Override
+    public List<Consultor> listByConsultor(long idManager) {
+        return dao.listByConsultor(idManager);
     }
 
 }

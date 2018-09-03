@@ -28,18 +28,21 @@ var Script = function () {
 
 $(function () {
     consultor.init();
+
 });
 
 
 var consultor = {
-    init: function () {      
+    init: function () {
         uploadAjax();
+        this.list();
     },
     clearModal: function () {
-        var inputs = ["#id", "#consultorNome"];
+        var inputs = ["#id", "#consultorNome", "#uploadConsultor"];
         for (var i in inputs) {
             $(inputs[i]).val("");
         }
+        imageUtils.cleanUpload('uploadConsultor');
     },
     persist: function (event) {
         var data = new FormData();
@@ -61,18 +64,21 @@ var consultor = {
                 success: function (data, textStatus, jqXHR) {
                     if (typeof data.error === 'undefined') {
                         // Success so call function to process the form
-                        //preContrato.list();
-                        var inputs = ["#id", "#consultorNome"];
+
+                        var inputs = ["#id", "#consultorNome", "#uploadConsultor"];
                         for (var i in inputs) {
                             $(inputs[i]).val("");
                         }
+                        imageUtils.cleanUpload('uploadConsultor');
                         $("#novoConsultorModal").modal('hide');
-                        notify.success("Sucesso", "Registro salvo com sucesso!");                      
+                        notify.success("Sucesso", "Registro salvo com sucesso!");
                     } else {
                         // Handle errors here
                         console.log('ERRORS: ' + data.error);
                     }
                     $('#uploadConsultor').val("");
+                    consultor.list();
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // Handle errors here
@@ -83,12 +89,79 @@ var consultor = {
         } catch (err) {
             httpSend("persistConsultor", "POST", data, "_blank");
         }
+    },
+    list: function () {
+        $.ajax({
+            type: "POST",
+            url: "listConsultor",
+            data: {
+                "consultor.manager.id": $("[name='usuario.manager.id']").val()
+            },
+            dataType: "json"
+        }).done(function (json) {
+            var html = "";
+            $.each(json.consultors, function (index, value) {
+                html += "<tr>";
+                html += "<td> <img src=\"../../" + value.foto + "\" class=\"img-responsive img-thumbnail\" height=\"60\" width=\"60\" /> </td>";
+                html += "<td>" + value.nome + "</td>";
+                html += "<td class='text-right'>";
+                html += '<a class="btn btn-primary btn-xs" onclick="consultor.edit(' + value.id + ');"><i class="fa fa-pencil"></i></a> ';
+                html += '<a class="btn btn-danger btn-xs" onclick="consultor.remove(' + value.id + ');"><i class="fa fa-trash-o "></i></a>';
+                html += "</td>";
+                html += "</tr>";
+            });
+
+            $("#tConsultor tbody").html(html);
+
+
+        });
+    },
+    remove: function (id) {
+        if (confirm("Deseja realmente excluir esse registro?")) {
+            $.ajax({
+                type: "POST",
+                url: "deleteConsultor",
+                data: {
+                    "consultor.id": id
+                },
+                dataType: "json"
+            }).done(function (json) {
+
+                if (json.jsonReturn.success) {
+                    consultor.list();
+                    notify.success("Sucesso", "Registro excluído com sucesso!");
+                } else {
+                    notify.error("Erro", json.jsonReturn.mensagem);
+                }
+
+            }).fail(function () {
+                notify.error("Erro", "Erro ao tentar excluir o registro, favor tente novamente.");
+            }).always(function () {
+
+            });
+        }
+    },
+    edit: function (id) {
+        $.ajax({
+            type: "POST",
+            url: "prepareConsultor",
+            data: {
+                "consultor.id": id
+            },
+            dataType: "json"
+        }).done(function (json) {
+            $("#id").val(json.consultor.id);
+            $("#consultorNome").val(json.consultor.nome);
+            $("#novoConsultorModal").modal('show');
+        }).fail(function () {
+            notify.error("Erro", "Erro ao abrir o formulário de edição. Favor tente novamente.");
+        }).always(function () {
+        });
     }
 };
 
 function uploadAjax() {
     $('#uploadConsultor').on('change', prepareUpload);
-    //$("#formArquivo").on("submit", persist);
 }
 
 var files;
