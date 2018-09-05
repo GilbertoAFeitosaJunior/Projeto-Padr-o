@@ -40,7 +40,9 @@ public class Usuario implements Serializable {
     @ManyToOne
     private Empresa empresa;
 
-    
+    @ManyToOne
+    private Consultor consultor;
+
     private long cpf;
 
     @Column(length = 100)
@@ -126,7 +128,6 @@ public class Usuario implements Serializable {
         this.ultimoAcesso = ultimoAcesso;
     }
 
-    @XmlTransient
     public String getHash() {
         return hash;
     }
@@ -176,6 +177,14 @@ public class Usuario implements Serializable {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Consultor getConsultor() {
+        return consultor;
+    }
+
+    public void setConsultor(Consultor consultor) {
+        this.consultor = consultor;
     }
 
 }

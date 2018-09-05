@@ -22,6 +22,8 @@
                 <tr>                      
                     <th>Foto</th>    
                     <th>Nome</th>    
+                    <th>E-mail</th>    
+                    <th>CPF</th>    
                     <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                 </tr>
             </thead>
@@ -43,7 +45,8 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <input type="hidden" id="id" />
+                    <input type="hidden" name="usuario.consultor.id" id="consultorId" />
+                    <input type="hidden" name="usuario.id" id="usuarioId"/>
 
 
                     <div class="row">
@@ -51,7 +54,39 @@
                             <div class="form-group">
                                 <label>Nome:</label>
                                 <div>
-                                    <s:textfield name="consultor.nome" id="consultorNome" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                                    <s:textfield name="usuario.consultor.nome" id="consultorNome" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>E-mail:</label>
+                                <div>
+                                    <s:textfield name="usuario.email" id="consultorEmail" type="email" maxlength="100" cssClass="form-control" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>CPF:</label>
+                                <div>
+                                    <s:textfield name="usuario.cpjStringMask" id="consultorCPF"  maxlength="100" data-mask="999.999.999-99" cssClass="form-control" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Senha:</label>
+                                <div>
+                                    <s:password name="usuario.senha" id="consutlorSenha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control"/>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +99,10 @@
                                 <label>Foto:</label>
                                 <div>
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="max-width: 200px;">                                         
+                                        <div class="fileupload-new thumbnail" style="max-width: 200px;">                                       
+
                                             <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=sem+imagem" alt="" id="preview" />
+
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                         <div>

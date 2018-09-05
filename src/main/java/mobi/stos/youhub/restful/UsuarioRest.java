@@ -2,7 +2,6 @@ package mobi.stos.youhub.restful;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -34,16 +33,40 @@ public class UsuarioRest {
     @Autowired
     IUsuarioBo usuarioBo;
 
+    @Path("/recuperar/{email}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response recuperar(@PathParam("email") String email) {
+        try {
+            Usuario usuario = this.usuarioBo.byEmail(email);
+            if (usuario != null) {
+                return Response.status(Response.Status.OK).build();
+            }
+
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(Login login) {
         try {
+
             if (login.getLogin() != null && login.getSenha() != null) {
+                String hash = Util.createHash();
                 Usuario usuario = this.usuarioBo.login(login.getLogin(), login.getSenha());
+
                 if (usuario != null) {
-                    return Response.status(Response.Status.OK).build();
+                    usuario.setHash(hash);
+                    this.usuarioBo.persist(usuario);
+                    return Response.status(Response.Status.OK).entity(usuario).build();
+
                 }
             }
             return Response.status(Response.Status.UNAUTHORIZED).build();

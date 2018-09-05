@@ -248,6 +248,7 @@ public class UsuarioAction extends GenericAction {
             consulta.addCriterion(Restrictions.isNull("manager"));
             consulta.addCriterion(Restrictions.isNull("diretorSala"));
             consulta.addCriterion(Restrictions.isNull("empresa"));
+            consulta.addCriterion(Restrictions.isNull("consultor"));
             usuarios = usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {

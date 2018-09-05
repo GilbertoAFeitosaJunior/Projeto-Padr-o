@@ -79,6 +79,9 @@ public class Evento implements Serializable {
     @ManyToOne
     private DiretorSala diretorSala;
 
+    @Column(length = 100)
+    private String foto;
+
     public Long getId() {
         return id;
     }
@@ -221,6 +224,14 @@ public class Evento implements Serializable {
 
     public void setDiretorSala(DiretorSala diretorSala) {
         this.diretorSala = diretorSala;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
 }

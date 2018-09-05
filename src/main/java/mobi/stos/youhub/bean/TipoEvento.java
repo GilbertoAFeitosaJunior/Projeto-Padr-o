@@ -21,8 +21,11 @@ public class TipoEvento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false, length = 100)
     private String nome;
+
+    private boolean temAcompanhamento;
 
     public Long getId() {
         return id;
@@ -38,6 +41,14 @@ public class TipoEvento implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean isTemAcompanhamento() {
+        return temAcompanhamento;
+    }
+
+    public void setTemAcompanhamento(boolean temAcompanhamento) {
+        this.temAcompanhamento = temAcompanhamento;
     }
 
 }

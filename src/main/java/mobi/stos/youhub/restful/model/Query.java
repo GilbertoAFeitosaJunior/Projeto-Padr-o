@@ -8,6 +8,7 @@ public class Query {
 
     private long id;
     private String query;
+    private String estado;
     private int page;
 
     public long getId() {
@@ -24,6 +25,14 @@ public class Query {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getPage() {

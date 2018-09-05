@@ -23,6 +23,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ManagerAction extends GenericAction {
@@ -81,7 +82,7 @@ public class ManagerAction extends GenericAction {
             boolean hasUpload = false;
             if (upload != null) {
                 ark = Util.uploadFile(upload, uploadContentType,
-                        "repo/youhube/fotos/",
+                        "repo/youhub/fotos/",
                         new String[]{
                             "image/png",
                             "image/jpeg",
@@ -175,6 +176,7 @@ public class ManagerAction extends GenericAction {
             }
             Consulta consulta = getConsulta();
             consulta.addAliasTable("manager", "manager");
+            consulta.addCriterion(Restrictions.isNotNull("manager")); 
             usuarios = usuarioBo.list(getConsulta());
             return SUCCESS;
         } catch (Exception e) {

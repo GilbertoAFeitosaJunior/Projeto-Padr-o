@@ -15,14 +15,26 @@
                 <s:hidden name="tipoEvento.id" />
 
 
-                <div class="form-group">
-                    <label>Nome:</label>
-                    <div>
-                        <s:textfield name="tipoEvento.nome" id="tipoEvento.nome" type="text" maxlength="100" cssClass="form-control" required="true"/>
+
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <div>
+                                <s:textfield name="tipoEvento.nome" id="tipoEvento.nome" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Acompanhamento:</label>
+                            <div>
+                                <s:select name="tipoEvento.temAcompanhamento" id="beneficio.temAcompanhamento" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-              
 
                 <div class="panel-body pull-right">
                     <button type="button" class="btn btn-danger" onclick="window.location = 'listTipoEvento'">Cancelar</button>

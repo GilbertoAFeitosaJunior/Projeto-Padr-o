@@ -28,60 +28,104 @@
 
             <div class="row">
                 <div class="col-lg-8">
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Tipo de evento:</label>
+                                <div>
+                                    <s:select name="evento.tipoEvento.id" id="evento.tipoEvento.id" cssClass="form-control" list="tipoEventos" listKey="id" listValue="nome" emptyOption="true" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Diretor de Sala:</label>
+                                <div>
+                                    <s:select name="evento.diretorSala.id" id="evento.diretorSala.id" cssClass="form-control" list="diretorSalas" listKey="id" listValue="nome" emptyOption="true" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Início do Evento:</label>
+                                <div class="input-group m-bot15 right date default-datetime-picker">
+                                    <s:textfield name="evento.dataInicio" id="evento.dataInicio" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataInicio})}" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Início do fim:</label>
+                                <div class="input-group m-bot15 right date default-datetime-picker">
+                                    <s:textfield name="evento.dataFim" id="evento.dataFim" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataFim})}" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Valor:</label>
+                                <div>
+                                    <s:textfield name="evento.valor" id="evento.valor" type="text" maxlength="100" cssClass="form-control money text-right" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>palestrante:</label>
+                                <div>
+                                    <s:textfield name="evento.palestrante" id="evento.palestrante" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">                 
                     <div class="form-group">
-                        <label>Tipo de evento:</label>
+                        <label>Foto:</label>
                         <div>
-                            <s:select name="evento.tipoEvento" id="evento.tipoEvento" cssClass="form-control" list="tipoEventos" listKey="id" listValue="nome" emptyOption="true" required="true"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Início do Evento:</label>
-                        <div class="input-group m-bot15 right date default-datetime-picker">
-                            <s:textfield name="evento.inicioEvento" id="evento.inicioEvento" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.inicioEvento})}" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Início do fim:</label>
-                        <div class="input-group m-bot15 right date default-datetime-picker">
-                            <s:textfield name="evento.inicioEvento" id="evento.inicioEvento" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.inicioEvento})}" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Valor:</label>
-                        <div>
-                            <s:textfield name="evento.valor" id="evento.valor" type="text" maxlength="100" cssClass="form-control money text-right" required="true"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="form-group">
-                        <label>palestrante:</label>
-                        <div>
-                            <s:textfield name="evento.palestrante" id="evento.palestrante" type="text" maxlength="100" cssClass="form-control" required="true"/>
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="max-width: 200px;">
+                                    <s:if test='evento.foto != ""'>
+                                        <img src="../../<s:property value="evento.foto"/>" style="max-width: 200px" id="preview" />
+                                    </s:if>
+                                    <s:else>
+                                        <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=sem+imagem" alt="" id="preview" />
+                                    </s:else>
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
+                                    <span class="btn btn-white btn-file">
+                                        <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Selecione a image</span>
+                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Troque</span>
+                                        <input type="file" class="default" id="upload" name="upload" accept="image/*" />
+                                    </span>
+                                    <a href="javascript: imageUtils.cleanUpload('uploadCapa')" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
+                                        <i class="fa fa-trash"></i> Remova
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +136,7 @@
                     <div class="form-group">
                         <label>Descricao:</label>
                         <div>
-                            <s:textarea name="evento.palestrante" id="evento.palestrante"  rows="5" cssClass="form-control" required="true"/>
+                            <s:textarea name="evento.descricao" id="evento.descricao"  rows="5" cssClass="form-control" required="true"/>
                         </div>
                     </div>
                 </div>
@@ -183,7 +227,7 @@
                     <div class="form-group">
                         <label>Data limite de compra:</label>
                         <div class="input-group m-bot15 right date default-datetime-picker">
-                            <s:textfield name="evento.dataLimiteCompra" id="evento.dataLimiteCompra" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.inicioEvento})}" />
+                            <s:textfield name="evento.dataLimiteCompra" id="evento.dataLimiteCompra" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataLimiteCompra})}" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
                             </span>

@@ -19,6 +19,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DiretorSalaAction extends GenericAction {
@@ -133,7 +134,8 @@ public class DiretorSalaAction extends GenericAction {
                 setConsulta(new Consulta(field));
             }
             Consulta consulta = getConsulta();
-            consulta.addAliasTable("diretorSala", "diretorSala");
+            consulta.addAliasTable("diretorSala", "diretorSala");           
+            consulta.addCriterion(Restrictions.isNotNull("diretorSala"));     
             usuarios = usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {

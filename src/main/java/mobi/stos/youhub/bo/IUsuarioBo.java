@@ -1,5 +1,6 @@
 package mobi.stos.youhub.bo;
 
+import java.util.List;
 import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.common.IOperations;
 import mobi.stos.youhub.exception.AvoidDuplicationEmailException;
@@ -13,4 +14,10 @@ public interface IUsuarioBo extends IOperations<Usuario> {
     Usuario byHash(String hash);
 
     Usuario cadastrar(Usuario usuario) throws AvoidDuplicationEmailException;
+
+    Usuario byEmail(String email);
+
+    List<Usuario> listConsultorByManager(Long idMananger);
+    
+    Usuario loadByConsultor(Long idConsultor);
 }

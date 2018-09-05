@@ -38,7 +38,7 @@ var consultor = {
         this.list();
     },
     clearModal: function () {
-        var inputs = ["#id", "#consultorNome", "#uploadConsultor"];
+        var inputs = ["#consultorId", "#usuarioId", "#consultorNome", "#uploadConsultor", "#consultorEmail", "#consutlorSenha", "#consultorCPF"];
         for (var i in inputs) {
             $(inputs[i]).val("");
         }
@@ -46,9 +46,13 @@ var consultor = {
     },
     persist: function (event) {
         var data = new FormData();
-        data.append("consultor.id", $("#id").val());
-        data.append("consultor.nome", $("#consultorNome").val());
-        data.append("consultor.manager.id", $("[name='usuario.manager.id']").val());
+        data.append("usuario.id", $("[name='usuario.id']").val());
+        data.append("usuario.consultor.id", $("[name='usuario.consultor.id']").val());
+        data.append("usuario.consultor.nome", $("#consultorNome").val());
+        data.append("usuario.email", $("#consultorEmail").val());
+        data.append("usuario.senha", $("#consutlorSenha").val());
+        data.append("usuario.cpjStringMask", $("#consultorCPF").val());
+        data.append("usuario.consultor.manager.id", $("[name='usuario.manager.id']").val());
         $.each(files, function (key, value) {
             data.append("upload", value);
         });
@@ -65,7 +69,7 @@ var consultor = {
                     if (typeof data.error === 'undefined') {
                         // Success so call function to process the form
 
-                        var inputs = ["#id", "#consultorNome", "#uploadConsultor"];
+                        var inputs = ["#consultorId", "#usuarioId", "#consultorNome", "#uploadConsultor", "#consultorEmail", "#consutlorSenha", "#consultorCPF"];
                         for (var i in inputs) {
                             $(inputs[i]).val("");
                         }
@@ -100,13 +104,15 @@ var consultor = {
             dataType: "json"
         }).done(function (json) {
             var html = "";
-            $.each(json.consultors, function (index, value) {
+            $.each(json.usuarios, function (index, value) {
                 html += "<tr>";
-                html += "<td> <img src=\"../../" + value.foto + "\" class=\"img-responsive img-thumbnail\" height=\"60\" width=\"60\" /> </td>";
-                html += "<td>" + value.nome + "</td>";
+                html += "<td> <img src=\"../../" + value.consultor.foto + "\" class=\"img-responsive img-thumbnail\" height=\"60\" width=\"60\" /> </td>";
+                html += "<td>" + value.consultor.nome + "</td>";
+                html += "<td>" + value.email + "</td>";
+                html += "<td>" + value.cpjStringMask + "</td>";
                 html += "<td class='text-right'>";
-                html += '<a class="btn btn-primary btn-xs" onclick="consultor.edit(' + value.id + ');"><i class="fa fa-pencil"></i></a> ';
-                html += '<a class="btn btn-danger btn-xs" onclick="consultor.remove(' + value.id + ');"><i class="fa fa-trash-o "></i></a>';
+                html += '<a class="btn btn-primary btn-xs" onclick="consultor.edit(' + value.consultor.id + ');"><i class="fa fa-pencil"></i></a> ';
+                html += '<a class="btn btn-danger btn-xs" onclick="consultor.remove(' + value.consultor.id + ');"><i class="fa fa-trash-o "></i></a>';
                 html += "</td>";
                 html += "</tr>";
             });
@@ -150,8 +156,17 @@ var consultor = {
             },
             dataType: "json"
         }).done(function (json) {
-            $("#id").val(json.consultor.id);
-            $("#consultorNome").val(json.consultor.nome);
+
+            console.log(json.usuario.consultor.nome);
+            $("[name='usuario.consultor.id']").val(json.usuario.consultor.id);
+            $("[name='usuario.id']").val(json.usuario.id);
+            $("[name='usuario.consultor.nome']").val(json.usuario.consultor.nome);
+            $("[name='usuario.email']").val(json.usuario.email);
+            $("[name='usuario.senha']").val(json.usuario.senha);
+            $("[name='usuario.cpjStringMask']").val(json.usuario.cpjStringMask);
+            $("[name='usuario.consultor.foto']").val(json.usuario.consultor.foto);
+
+
             $("#novoConsultorModal").modal('show');
         }).fail(function () {
             notify.error("Erro", "Erro ao abrir o formulário de edição. Favor tente novamente.");

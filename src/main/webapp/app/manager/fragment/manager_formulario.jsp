@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label>E-mail:</label>
                             <div>
-                                <s:textfield name="usuario.email" id="usuario.nome" type="email" maxlength="100" cssClass="form-control" required="true"/>
+                                <s:textfield name="usuario.email" id="usuario.email" type="email" maxlength="100" cssClass="form-control" required="true"/>
                             </div>
                         </div>
                     </div>

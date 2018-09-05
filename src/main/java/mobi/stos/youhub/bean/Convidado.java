@@ -68,7 +68,7 @@ public class Convidado implements Serializable {
     @Column(length = 2)
     private String uf;
 
-    @Column(nullable = false)
+   
     private int cep;
 
     public Long getId() {

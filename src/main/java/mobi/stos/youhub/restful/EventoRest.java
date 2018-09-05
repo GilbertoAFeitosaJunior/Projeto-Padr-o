@@ -2,7 +2,6 @@ package mobi.stos.youhub.restful;
 
 import java.util.List;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Component;
 @Path("/evento")
 public class EventoRest {
 
-   
     private List<Evento> eventos;
 
     @Autowired
@@ -82,7 +80,7 @@ public class EventoRest {
             consulta.addAliasTable("tipoEvento", "tipoEvento", JoinType.INNER_JOIN);
             consulta.setCampo("titulo");
             consulta.setValor(query.getQuery());
-            consulta.addCriterion(Restrictions.eq("tipoEvento.id", query.getId()));
+            consulta.addCriterion(Restrictions.eq("uf", query.getEstado()).ignoreCase());
             consulta.setLimiteResultados(10);
             consulta.setPaginaAtual(query.getPage());
             consulta.addOrder(Order.asc("dataInicio"));

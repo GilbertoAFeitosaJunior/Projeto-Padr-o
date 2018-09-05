@@ -21,6 +21,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class EmpresaAction extends GenericAction {
@@ -137,6 +138,7 @@ public class EmpresaAction extends GenericAction {
             }
             Consulta consulta = getConsulta();
             consulta.addAliasTable("empresa", "empresa");
+             consulta.addCriterion(Restrictions.isNotNull("empresa"));     
             usuarios = usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {

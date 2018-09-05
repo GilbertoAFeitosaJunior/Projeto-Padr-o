@@ -78,13 +78,15 @@
                 <thead>
                     <tr>
                         <th>Título</th>      
+                        <th>Tipo de Evento</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
                     <s:iterator value="eventos">
                         <tr>       
-                            <td><s:property value="nome" /></td>                           
+                            <td><s:property value="titulo" /></td>                           
+                            <td><s:property value="tipoEvento.nome" /></td>                           
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -143,7 +145,7 @@
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteeEvento?evento.id=" + _helperID;
+                                window.location = "deleteEvento?evento.id=" + _helperID;
                             }
                         };
 

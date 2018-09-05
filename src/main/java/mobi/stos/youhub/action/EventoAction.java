@@ -2,17 +2,21 @@ package mobi.stos.youhub.action;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.youhub.bean.DiretorSala;
 import mobi.stos.youhub.bean.Evento;
 import mobi.stos.youhub.bean.TipoEvento;
+import mobi.stos.youhub.bo.IDiretorSalaBo;
 import mobi.stos.youhub.bo.IEventoBo;
 import mobi.stos.youhub.bo.ITipoEventoBo;
 import mobi.stos.youhub.common.GenericAction;
 import static mobi.stos.youhub.common.GenericAction.request;
 import mobi.stos.youhub.exception.LoginExpiradoException;
+import mobi.stos.youhub.util.Util;
 import mobi.stos.youhub.util.consulta.Consulta;
 import mobi.stos.youhub.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
@@ -23,14 +27,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class EventoAction extends GenericAction {
 
+    private File upload;
+    private String uploadContentType;
+    private String uploadFileName;
+
     private Evento evento;
     private List<Evento> eventos;
     private List<TipoEvento> tipoEventos;
+    private List<DiretorSala> diretorSalas;
     @Autowired
     private IEventoBo eventoBo;
 
     @Autowired
     private ITipoEventoBo tipoEventoBo;
+
+    @Autowired
+    private IDiretorSalaBo diretorSalaBo;
 
     @Action(value = "prepareEvento",
             interceptorRefs = {
@@ -47,7 +59,9 @@ public class EventoAction extends GenericAction {
                 evento = this.eventoBo.load(this.evento.getId());
             }
 
+            this.diretorSalas = this.diretorSalaBo.listall();
             this.tipoEventos = this.tipoEventoBo.listall();
+
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -66,11 +80,31 @@ public class EventoAction extends GenericAction {
     public String persist() {
         try {
             GenericAction.isLogged(request);
+
+            if (evento != null && evento.getId() != null) {
+                Evento entity = this.eventoBo.load(evento.getId());
+                evento.setFoto(entity.getFoto());
+            }
+
+            if (upload != null) {
+                String ark = Util.uploadFile(upload, uploadContentType,
+                        "repo/youhub/fotos/",
+                        new String[]{
+                            "image/png",
+                            "image/jpeg",
+                            "image/gif"
+                        },
+                        request, uploadFileName);
+
+                evento.setFoto(ark);
+            }
+
             eventoBo.persist(evento);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEvento");
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            e.printStackTrace();
         }
         return SUCCESS;
     }
@@ -80,6 +114,9 @@ public class EventoAction extends GenericAction {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
+
             })
     public String delete() {
         try {
@@ -89,6 +126,7 @@ public class EventoAction extends GenericAction {
             setRedirectURL("listEvento");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }
@@ -115,6 +153,38 @@ public class EventoAction extends GenericAction {
             e.printStackTrace();
             return ERROR;
         }
+    }
+
+    public File getUpload() {
+        return upload;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
+    }
+
+    public String getUploadContentType() {
+        return uploadContentType;
+    }
+
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
+    }
+
+    public String getUploadFileName() {
+        return uploadFileName;
+    }
+
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
+    }
+
+    public List<DiretorSala> getDiretorSalas() {
+        return diretorSalas;
+    }
+
+    public void setDiretorSalas(List<DiretorSala> diretorSalas) {
+        this.diretorSalas = diretorSalas;
     }
 
     public List<TipoEvento> getTipoEventos() {
