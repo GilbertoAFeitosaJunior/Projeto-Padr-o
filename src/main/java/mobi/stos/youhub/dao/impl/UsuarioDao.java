@@ -43,6 +43,7 @@ public class UsuarioDao extends AbstractHibernateDao<Usuario> implements IUsuari
         return criteria.list();
     }
 
+    @Override
     public Usuario loadByConsultor(Long idConsultor) {
         Criteria criteria = getCurrentSession().createCriteria(Usuario.class);
         criteria.createAlias("consultor", "consultor", JoinType.INNER_JOIN);

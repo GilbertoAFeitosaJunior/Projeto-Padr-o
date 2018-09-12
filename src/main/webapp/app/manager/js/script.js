@@ -46,8 +46,8 @@ var consultor = {
     },
     persist: function (event) {
         var data = new FormData();
-        data.append("usuario.id", $("[name='usuario.id']").val());
-        data.append("usuario.consultor.id", $("[name='usuario.consultor.id']").val());
+        data.append("usuario.id", $("#usuarioId").val());
+        data.append("usuario.consultor.id", $("#consultorId").val());
         data.append("usuario.consultor.nome", $("#consultorNome").val());
         data.append("usuario.email", $("#consultorEmail").val());
         data.append("usuario.senha", $("#consutlorSenha").val());
@@ -158,14 +158,13 @@ var consultor = {
         }).done(function (json) {
 
             console.log(json.usuario.consultor.nome);
-            $("[name='usuario.consultor.id']").val(json.usuario.consultor.id);
-            $("[name='usuario.id']").val(json.usuario.id);
-            $("[name='usuario.consultor.nome']").val(json.usuario.consultor.nome);
-            $("[name='usuario.email']").val(json.usuario.email);
-            $("[name='usuario.senha']").val(json.usuario.senha);
-            $("[name='usuario.cpjStringMask']").val(json.usuario.cpjStringMask);
-            $("[name='usuario.consultor.foto']").val(json.usuario.consultor.foto);
-
+            ["#consultorId", "#usuarioId", "#consultorNome", "#uploadConsultor", "#consultorEmail", "#consutlorSenha", "#consultorCPF"];
+            $("#consultorId").val(json.usuario.consultor.id);
+            $("#usuarioId").val(json.usuario.id);
+            $("#consultorNome").val(json.usuario.consultor.nome);
+            $("#consultorEmail").val(json.usuario.email);
+            $("#consutlorSenha").val(json.usuario.senha);
+            $("#consultorCPF").val(json.usuario.cpjStringMask);  
 
             $("#novoConsultorModal").modal('show');
         }).fail(function () {

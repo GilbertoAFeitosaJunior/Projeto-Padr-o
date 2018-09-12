@@ -36,4 +36,14 @@ public class IngressoBo extends AbstractService<Ingresso> implements IIngressoBo
         return dao.listPresente(idEvento);
     }
 
+    @Override
+    public Long totalConsultorNoEvento(Long idEvento, Long idManager) {
+        return dao.totalConsultorNoEvento(idEvento, idManager);
+    }
+
+    @Override
+    public Long totalConvidadoNoEvento(Long idEvento) {
+        return dao.totalConvidadoNoEvento(idEvento);
+    }
+
 }

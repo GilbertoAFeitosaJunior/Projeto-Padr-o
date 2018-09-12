@@ -23,7 +23,7 @@ public class Consultor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Manager manager;
 
     @Column(nullable = false, length = 100)

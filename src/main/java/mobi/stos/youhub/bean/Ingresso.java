@@ -15,7 +15,6 @@ import mobi.stos.youhub.enumm.SituacaoPagamentoEnum;
 import mobi.stos.youhub.enumm.TipoIngressoEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Type;
 
 /**
  *
@@ -35,6 +34,9 @@ public class Ingresso implements Serializable {
 
     @ManyToOne
     private Manager manager;
+
+    @ManyToOne
+    private Consultor consultor;
 
     @ManyToOne
     private Convidado convidado;
@@ -81,6 +83,14 @@ public class Ingresso implements Serializable {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public Consultor getConsultor() {
+        return consultor;
+    }
+
+    public void setConsultor(Consultor consultor) {
+        this.consultor = consultor;
     }
 
     public Convidado getConvidado() {

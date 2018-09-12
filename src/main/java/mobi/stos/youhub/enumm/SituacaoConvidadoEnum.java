@@ -8,6 +8,7 @@ public enum SituacaoConvidadoEnum {
 
     RELACIONADO("Relacionado"),
     NAO_RELACIONADO("Não Relacionado"),
+    PAGO("Pago"),
     PRE_CADASTRO("Pre Cadastro"),
     CADASTRO("Cadastro"),
     CANCELADO("Cancelado");

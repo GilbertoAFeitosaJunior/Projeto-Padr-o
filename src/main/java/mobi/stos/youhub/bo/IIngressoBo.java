@@ -8,8 +8,12 @@ import mobi.stos.youhub.enumm.SituacaoConvidadoEnum;
 public interface IIngressoBo extends IOperations<Ingresso> {
 
     List<Ingresso> listConvidados(Long idEvento, SituacaoConvidadoEnum situacao);
-    
-     List<Ingresso> listFalta(Long idEvento);
-     
-     List<Ingresso> listPresente(Long idEvento);
+
+    List<Ingresso> listFalta(Long idEvento);
+
+    List<Ingresso> listPresente(Long idEvento);
+
+    Long totalConsultorNoEvento(Long idEvento, Long idManager);
+
+    Long totalConvidadoNoEvento(Long idEvento);
 }

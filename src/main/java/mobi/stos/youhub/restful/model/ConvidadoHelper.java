@@ -7,6 +7,7 @@ package mobi.stos.youhub.restful.model;
 public class ConvidadoHelper {
 
     private Long idConsultor;
+    private Long idUsuario;
     private String nome;
     private int ddd;
     private int celular;
@@ -21,6 +22,16 @@ public class ConvidadoHelper {
     public void setIdConsultor(Long idConsultor) {
         this.idConsultor = idConsultor;
     }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
 
     public String getNome() {
         return nome;

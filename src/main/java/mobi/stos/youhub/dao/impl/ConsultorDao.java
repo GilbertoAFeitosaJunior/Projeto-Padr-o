@@ -16,14 +16,13 @@ public class ConsultorDao extends AbstractHibernateDao<Consultor> implements ICo
     public ConsultorDao() {
         super(Consultor.class);
     }
-    
+
     @Override
-     public List<Consultor> listByConsultor (long idManager) {
+    public List<Consultor> listByConsultor(long idManager) {
         Criteria criteria = getCurrentSession().createCriteria(Consultor.class);
-        criteria.createAlias("manager", "manager" ,  JoinType.INNER_JOIN);
-        criteria.add(Restrictions.eq("manager.id", idManager));  
+        criteria.createAlias("manager", "manager", JoinType.INNER_JOIN);
+        criteria.add(Restrictions.eq("manager.id", idManager));
         criteria.addOrder(Order.desc("id"));
         return criteria.list();
     }
-
 }
