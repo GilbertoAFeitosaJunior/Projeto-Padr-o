@@ -16,4 +16,8 @@ public interface IIngressoBo extends IOperations<Ingresso> {
     Long totalConsultorNoEvento(Long idEvento, Long idManager);
 
     Long totalConvidadoNoEvento(Long idEvento);
+
+    Long totalConvidadoPorConsultor(Long idEvento, Long idConsultor);
+    
+    List<Ingresso> convidadoPorConsultoEvento(Long idEvento, Long idConsultor);
 }

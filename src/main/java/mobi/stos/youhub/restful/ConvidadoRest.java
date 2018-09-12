@@ -52,7 +52,8 @@ public class ConvidadoRest {
 
     @Autowired
     private IUsuarioBo usuarioBo;
-
+    
+    
     @GET
     @Path("marcacomopago/{id}")
     @Consumes(MediaType.APPLICATION_JSON)

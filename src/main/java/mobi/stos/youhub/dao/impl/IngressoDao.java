@@ -111,6 +111,26 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
         criteria.add(Restrictions.eq("evento.id", idEvento));
         return (Long) criteria.uniqueResult();
     }
+    
+    public List<Ingresso> convidadoPorConsultoEvento(Long idEvento, Long idConsultor) {
+        Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
+        criteria.createAlias("evento", "evento", JoinType.INNER_JOIN);
+        criteria.createAlias("consultor", "consultor", JoinType.INNER_JOIN);
+        criteria.add(Restrictions.eq("evento.id", idEvento));
+        criteria.add(Restrictions.eq("consultor.id", idConsultor));
+        return criteria.list();
+    }
+
+    @Override
+    public Long totalConvidadoPorConsultor(Long idEvento, Long idConsultor) {
+        Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
+        criteria.setProjection(Projections.count("id"));
+        criteria.createAlias("evento", "evento", JoinType.INNER_JOIN);
+        criteria.createAlias("consultor", "consultor", JoinType.INNER_JOIN);
+        criteria.add(Restrictions.eq("evento.id", idEvento));
+        criteria.add(Restrictions.eq("consultor.id", idConsultor));
+        return (Long) criteria.uniqueResult();
+    }
 
     @Override
     public List<Ingresso> listConvidados(Long idEvento, SituacaoConvidadoEnum situacao) {
