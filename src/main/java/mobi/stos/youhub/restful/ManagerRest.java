@@ -61,13 +61,13 @@ public class ManagerRest {
         }
     }
 
-    @Path("/listarconvidados")
+    @Path("/listarconsultores")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response aberto(QueryConvidado queryConvidado) {
+    public Response listarconsultores(QueryConvidado queryConvidado) {
         try {
-            this.consultors = this.managerBo.consultoresNoEvento(queryConvidado);
+            this.consultors = this.ingressoBo.consultoresNoEvento(queryConvidado);
             return Response.status(Response.Status.OK).entity(this.consultors).build();
         } catch (Exception e) {
             e.printStackTrace();

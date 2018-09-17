@@ -1,12 +1,15 @@
 package mobi.stos.youhub.bo.impl;
 
+import java.util.Date;
 import java.util.List;
+import mobi.stos.youhub.bean.Consultor;
 import mobi.stos.youhub.bean.Ingresso;
 import mobi.stos.youhub.bo.IIngressoBo;
 import mobi.stos.youhub.common.AbstractService;
 import mobi.stos.youhub.common.IOperations;
 import mobi.stos.youhub.dao.IIngressoDao;
 import mobi.stos.youhub.enumm.SituacaoConvidadoEnum;
+import mobi.stos.youhub.restful.model.QueryConvidado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +57,16 @@ public class IngressoBo extends AbstractService<Ingresso> implements IIngressoBo
     @Override
     public List<Ingresso> convidadoPorConsultoEvento(Long idEvento, Long idConsultor) {
         return dao.convidadoPorConsultoEvento(idEvento, idConsultor);
+    }
+
+    @Override
+    public List<Consultor> consultoresNoEvento(QueryConvidado queryConvidado) {
+        return dao.consultoresNoEvento(queryConvidado);
+    }
+
+    @Override
+    public List<Ingresso> listIngressoPorConsultor(Long idConsultor, Date dataInicio) {
+        return dao.listIngressoPorConsultor(idConsultor, dataInicio);
     }
 
 }

@@ -1,5 +1,7 @@
 package mobi.stos.youhub.bo.impl;
 
+import java.util.Date;
+import java.util.List;
 import mobi.stos.youhub.bean.Evento;
 import mobi.stos.youhub.bo.IEventoBo;
 import mobi.stos.youhub.common.AbstractService;
@@ -17,6 +19,11 @@ public class EventoBo extends AbstractService<Evento> implements IEventoBo {
     @Override
     protected IOperations<Evento> getDao() {
         return dao;
+    }
+
+    @Override
+    public List<Evento> eventoPorData(Long idManager, Date dataInicio) {
+        return dao.eventoPorData(idManager, dataInicio);
     }
 
 }

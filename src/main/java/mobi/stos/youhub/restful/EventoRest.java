@@ -11,7 +11,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mobi.stos.youhub.bean.Evento;
 import mobi.stos.youhub.bo.IEventoBo;
+import mobi.stos.youhub.bo.IIngressoBo;
 import mobi.stos.youhub.bo.ITipoEventoBo;
+import mobi.stos.youhub.restful.model.IngressoHelper;
 import mobi.stos.youhub.restful.model.Query;
 import mobi.stos.youhub.util.consulta.Consulta;
 import org.hibernate.criterion.Order;
@@ -27,15 +29,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Path("/evento")
 public class EventoRest {
-
+    
     private List<Evento> eventos;
-
+    
     @Autowired
     ITipoEventoBo tipoEventoBo;
-
+    
+    @Autowired
+    IIngressoBo ingressoBo;
+    
     @Autowired
     IEventoBo eventoBo;
-
+    
     @Path("/delete")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -52,7 +57,7 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-
+    
     @Path("/cadastrar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -69,12 +74,33 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-
+    
+    @Path("/listar/data")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listByDate(IngressoHelper ingressoHelper) {
+        try {
+            
+            this.eventos = this.eventoBo.eventoPorData(ingressoHelper.getIdManager(), ingressoHelper.getData());
+            
+            eventos.forEach(u -> {
+                u.setTipoEvento(null);
+                u.setDiretorSala(null);
+            });
+            
+            return Response.status(Response.Status.OK).entity(this.eventos).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+    
     @Path("/lista")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response list(Query query) {//id to tipo de evento.
+    public Response list(Query query) {
         try {
             Consulta consulta = new Consulta();
             consulta.addAliasTable("tipoEvento", "tipoEvento", JoinType.INNER_JOIN);
@@ -91,7 +117,7 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-
+    
     @Path("/carregar/{id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -108,5 +134,5 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-
+    
 }

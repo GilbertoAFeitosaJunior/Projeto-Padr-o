@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import mobi.stos.youhub.enumm.SituacaoPagamentoEnum;
 import mobi.stos.youhub.enumm.TipoIngressoEnum;
+import mobi.stos.youhub.enumm.TipoPagamentoEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -60,6 +61,8 @@ public class Ingresso implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEntradaEvento;
+
+    private TipoPagamentoEnum tipoPagamentoEnum;
 
     public Long getId() {
         return id;
@@ -155,6 +158,14 @@ public class Ingresso implements Serializable {
 
     public void setDataEntradaEvento(Date dataEntradaEvento) {
         this.dataEntradaEvento = dataEntradaEvento;
+    }
+
+    public TipoPagamentoEnum getTipoPagamentoEnum() {
+        return tipoPagamentoEnum;
+    }
+
+    public void setTipoPagamentoEnum(TipoPagamentoEnum tipoPagamentoEnum) {
+        this.tipoPagamentoEnum = tipoPagamentoEnum;
     }
 
 }

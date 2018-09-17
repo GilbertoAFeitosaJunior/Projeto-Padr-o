@@ -27,6 +27,13 @@ public class TipoEvento implements Serializable {
 
     private boolean temAcompanhamento;
 
+    public TipoEvento() {
+    }
+
+    public TipoEvento(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
