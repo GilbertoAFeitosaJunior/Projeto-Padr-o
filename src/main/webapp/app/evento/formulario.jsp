@@ -13,6 +13,9 @@
     <div class="panel-body">
         <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEvento" theme="simple" enctype="multipart/form-data">
             <s:hidden name="evento.id" />
+            <s:hidden name="evento.situacaoFechamentoEnum" />
+            <s:hidden name="evento.dataInicio" />
+            <s:hidden name="evento.dataFim" />
 
 
             <div class="row">
@@ -55,9 +58,9 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Início do Evento:</label>
+                                <label>Data do Evento:</label>
                                 <div class="input-group m-bot15 right date default-datetime-picker">
-                                    <s:textfield name="evento.dataInicio" id="evento.dataInicio" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataInicio})}" />
+                                    <s:textfield name="evento.dataDoEvento" id="evento.dataDoEvento" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataDoEvento})}" />
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -66,13 +69,14 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Início do fim:</label>
+                                <label>Data limite de compra:</label>
                                 <div class="input-group m-bot15 right date default-datetime-picker">
-                                    <s:textfield name="evento.dataFim" id="evento.dataFim" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataFim})}" />
+                                    <s:textfield name="evento.dataLimiteCompra" id="evento.dataLimiteCompra" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataLimiteCompra})}" />
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
                                     </span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -222,19 +226,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Data limite de compra:</label>
-                        <div class="input-group m-bot15 right date default-datetime-picker">
-                            <s:textfield name="evento.dataLimiteCompra" id="evento.dataLimiteCompra" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataLimiteCompra})}" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listEvento'">Cancelar</button>

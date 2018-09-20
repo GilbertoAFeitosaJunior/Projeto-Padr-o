@@ -1,6 +1,8 @@
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+
 
 /**
  *
@@ -9,9 +11,15 @@ import java.util.Calendar;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-09-05 12:12:00"));
-        System.out.println("###############" + calendar.getTimeInMillis());
+        calendar.setTimeInMillis(new Date().getTime());
+
+      
+        
+        System.out.println("data: " + calendar.getTimeInMillis());
+               
+       
     }
 
 }

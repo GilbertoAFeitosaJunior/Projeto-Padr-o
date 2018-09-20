@@ -7,6 +7,7 @@ package mobi.stos.youhub.enumm;
 public enum SituacaoFechamentoEnum {
 
     ABERTO("Aberto"),
+    ANDAMENTO("Andamento"),
     FECHADO("Fechado"),
     CANCELADO("Cancelado");
 

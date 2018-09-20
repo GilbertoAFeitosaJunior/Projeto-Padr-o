@@ -156,8 +156,6 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
                     .append("LIMIT 10 OFFSET ((? - 1)*10)")
                     .toString();
 
-            System.out.println(sql.toString());
-
             PreparedStatement preparedStatement = cnctn.prepareStatement(sql);
             preparedStatement.setLong(1, queryConvidado.getIdEvento());
             preparedStatement.setLong(2, queryConvidado.getIdManager());
@@ -184,13 +182,25 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
         Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
         criteria.createAlias("evento", "evento", JoinType.INNER_JOIN);
         criteria.createAlias("consultor", "consultor", JoinType.INNER_JOIN);
-        criteria.add(Restrictions.eq("consultor.id", idConsultor));       
-        criteria.add(Restrictions.sqlRestriction("DATE(evento1_.datainicio) = ?", new Object[]{
+        criteria.add(Restrictions.eq("consultor.id", idConsultor));
+        criteria.add(Restrictions.sqlRestriction("DATE(evento1_.datadoevento) = ?", new Object[]{
             dataInicio
         }, new DateType[]{
             DateType.INSTANCE
         }));
         return criteria.list();
+    }
+
+    @Override
+    public Ingresso verificarConvidado(Long idConvidado, Long idEvento) {
+        Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
+        criteria.createAlias("convidado", "convidado");
+        criteria.createAlias("evento", "evento");
+        criteria.add(Restrictions.eq("convidado.id", idConvidado));
+        criteria.add(Restrictions.eq("evento.id", idEvento));
+        criteria.setMaxResults(1);
+        return (Ingresso) criteria.uniqueResult();
+
     }
 
 }

@@ -81,7 +81,7 @@ public class Questionario implements Serializable {
     private String opcaoInvestimento3;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date acompanhamentoAgendado;
+    private Date acompanhamentoAgendado;// progamar push...
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataQuestionario;

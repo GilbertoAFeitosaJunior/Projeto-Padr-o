@@ -14,18 +14,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EventoDao extends AbstractHibernateDao<Evento> implements IEventoDao {
-
+    
     public EventoDao() {
         super(Evento.class);
     }
-
+    
     @Override
     public List<Evento> eventoPorData(Long idManager, Date dataInicio) {
         
         return getCurrentSession().doReturningWork((cnctn) -> {
             String sql = new StringBuilder()
                     .append("SELECT DISTINCT evento.id , evento.bairro, evento.complemento, evento.datafim, evento.cidade, "
-                            + " evento.datainicio, evento.datalimitecompra, evento.descricao, evento.logradouro, "
+                            + " evento.datadoevento, evento.datainicio,  evento.datalimitecompra, evento.descricao, evento.logradouro, "
                             + " evento.numero, evento.pais, evento.palestrante, evento.pontoreferencia, "
                             + " evento.titulo, evento.uf, evento.valor, evento.diretorsala_id, "
                             + " evento.tipoevento_id, evento.foto  ")
@@ -37,21 +37,21 @@ public class EventoDao extends AbstractHibernateDao<Evento> implements IEventoDa
                     .append("ORDER BY evento.id")
                     .toString();
             System.out.println(sql);
-
+            
             PreparedStatement preparedStatement = cnctn.prepareStatement(sql);
             preparedStatement.setLong(1, idManager);
             preparedStatement.setDate(2, new java.sql.Date(dataInicio.getTime()));
             ResultSet rs = preparedStatement.executeQuery();
-
+            
             List<Evento> eventos = new ArrayList<>();
             Evento evento;
             while (rs.next()) {
                 evento = new Evento();
-              
+                
                 evento.setId(rs.getLong("id"));
                 evento.setTipoEvento(new TipoEvento(rs.getLong("tipoevento_id")));
                 evento.setTitulo(rs.getString("titulo"));
-                evento.setDataInicio(rs.getDate("dataInicio"));
+                evento.setDataDoEvento(rs.getDate("datadoevento"));
                 evento.setDataFim(rs.getDate("dataFim"));
                 evento.setValor(rs.getBigDecimal("valor"));
                 evento.setDescricao(rs.getString("descricao"));
@@ -66,12 +66,13 @@ public class EventoDao extends AbstractHibernateDao<Evento> implements IEventoDa
                 evento.setPontoReferencia(rs.getString("pontoreferencia"));
                 evento.setDataLimiteCompra(rs.getDate("datalimitecompra"));
                 evento.setDiretorSala(new DiretorSala(rs.getLong("id")));
+                evento.setDataInicio(rs.getDate("datainicio"));
                 evento.setFoto(rs.getString("foto"));
-
+                
                 eventos.add(evento);
             }
             return eventos;
         });
     }
-
+    
 }

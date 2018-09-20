@@ -69,4 +69,9 @@ public class IngressoBo extends AbstractService<Ingresso> implements IIngressoBo
         return dao.listIngressoPorConsultor(idConsultor, dataInicio);
     }
 
+    @Override
+    public Ingresso verificarConvidado(Long idConvidado, Long idEvento) {
+        return dao.verificarConvidado(idConvidado, idEvento);
+    }
+
 }

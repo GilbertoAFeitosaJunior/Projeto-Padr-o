@@ -1,6 +1,8 @@
 package mobi.stos.youhub.restful;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,10 +11,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import mobi.stos.youhub.bean.DiretorSala;
 import mobi.stos.youhub.bean.Evento;
+import mobi.stos.youhub.bo.IDiretorSalaBo;
 import mobi.stos.youhub.bo.IEventoBo;
 import mobi.stos.youhub.bo.IIngressoBo;
 import mobi.stos.youhub.bo.ITipoEventoBo;
+import mobi.stos.youhub.enumm.SituacaoFechamentoEnum;
+import mobi.stos.youhub.restful.model.EventoHelper;
 import mobi.stos.youhub.restful.model.IngressoHelper;
 import mobi.stos.youhub.restful.model.Query;
 import mobi.stos.youhub.util.consulta.Consulta;
@@ -29,18 +35,73 @@ import org.springframework.stereotype.Component;
 @Component
 @Path("/evento")
 public class EventoRest {
-    
+
     private List<Evento> eventos;
-    
+
     @Autowired
     ITipoEventoBo tipoEventoBo;
-    
+
+    @Autowired
+    IDiretorSalaBo diretorSalaBo;
+
     @Autowired
     IIngressoBo ingressoBo;
-    
+
     @Autowired
     IEventoBo eventoBo;
-    
+
+    @Path("/iniciar")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response iniciarEvento(EventoHelper eventoHelper) {
+        try {
+            Evento evento = this.eventoBo.load(eventoHelper.getIdEvento());
+            DiretorSala diretorSala = this.diretorSalaBo.load(eventoHelper.getIdDiretorSala());
+            if (evento != null && diretorSala != null) {
+                if (Objects.equals(evento.getDiretorSala().getId(), diretorSala.getId())) {
+                    evento.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.ANDAMENTO);
+                    evento.setDataInicio(new Date());
+                    this.eventoBo.persist(evento);
+                    return Response.status(Response.Status.OK).build();
+                } else {
+                    return Response.status(Response.Status.UNAUTHORIZED).build(); // Diretor de Sala não autorizado...
+                }
+            }
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build(); // evento ou direto de sala não existe.
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/fechar")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fechar(EventoHelper eventoHelper) {
+        try {
+            Evento evento = this.eventoBo.load(eventoHelper.getIdEvento());
+            DiretorSala diretorSala = this.diretorSalaBo.load(eventoHelper.getIdDiretorSala());
+
+            if (evento != null && diretorSala != null) {
+                if (Objects.equals(evento.getDiretorSala().getId(), diretorSala.getId())) {
+                    evento.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.FECHADO);
+                    evento.setDataInicio(new Date());
+                    this.eventoBo.persist(evento);
+                    return Response.status(Response.Status.OK).build();
+                } else {
+                    return Response.status(Response.Status.UNAUTHORIZED).build(); // Diretor de Sala não autorizado...
+                }
+            }
+
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build(); // evento ou direto de sala não existe.
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
     @Path("/delete")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,7 +118,7 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/cadastrar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -74,28 +135,28 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/listar/data")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response listByDate(IngressoHelper ingressoHelper) {
         try {
-            
+
             this.eventos = this.eventoBo.eventoPorData(ingressoHelper.getIdManager(), ingressoHelper.getData());
-            
+
             eventos.forEach(u -> {
                 u.setTipoEvento(null);
                 u.setDiretorSala(null);
             });
-            
+
             return Response.status(Response.Status.OK).entity(this.eventos).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/lista")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -117,7 +178,7 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/carregar/{id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -134,5 +195,5 @@ public class EventoRest {
             return Response.serverError().build();
         }
     }
-    
+
 }

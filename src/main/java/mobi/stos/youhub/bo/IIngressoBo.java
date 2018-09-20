@@ -28,4 +28,6 @@ public interface IIngressoBo extends IOperations<Ingresso> {
 
     List<Ingresso> listIngressoPorConsultor(Long idConsultor, Date dataInicio);
 
+    Ingresso verificarConvidado(Long idConvidado, Long idEvento);
+
 }

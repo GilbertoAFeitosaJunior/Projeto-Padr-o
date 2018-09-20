@@ -1,5 +1,7 @@
 package mobi.stos.youhub.restful;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,9 +16,11 @@ import mobi.stos.youhub.bo.IEventoBo;
 import mobi.stos.youhub.bo.IQuestionarioBo;
 import mobi.stos.youhub.enumm.SituacaoFechamentoEnum;
 import mobi.stos.youhub.restful.model.Query;
+import mobi.stos.youhub.restful.model.QuestionarioHelper;
 import mobi.stos.youhub.util.consulta.Consulta;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.mapping.Collection;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +40,28 @@ public class QuestionarioRest {
     
     @Autowired
     IEventoBo eventoBo;
+    
+    @Path("/agendamento")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response agendamento(QuestionarioHelper questionarioHelper) {
+        try {
+            this.questionarios = this.questionarioBo.agendamentoQuestionario(questionarioHelper.getIdManager(), questionarioHelper.getData());
+            
+            List<QuestionarioHelper> questionarioHelpers = new ArrayList<>();
+            questionarios.forEach(u -> {
+                questionarioHelpers.add(new QuestionarioHelper(u.getConvidado().getManager().getId(), u.getId(), u.getAcompanhamentoAgendado()));
+            });
+            
+            questionarioHelpers.sort((a, b) -> a.getIdQuestionario().compareTo(b.getIdQuestionario()));
+            
+            return Response.status(Response.Status.OK).entity(questionarioHelpers).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
     
     @Path("/salvar")
     @POST

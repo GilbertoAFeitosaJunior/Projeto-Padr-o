@@ -42,9 +42,6 @@ public class Ingresso implements Serializable {
     @ManyToOne
     private Convidado convidado;
 
-    @Column(nullable = false, length = 10)
-    private String codigo;
-
     private TipoIngressoEnum tipoIngressoEnum;
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
@@ -102,14 +99,6 @@ public class Ingresso implements Serializable {
 
     public void setConvidado(Convidado convidado) {
         this.convidado = convidado;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public TipoIngressoEnum getTipoIngressoEnum() {

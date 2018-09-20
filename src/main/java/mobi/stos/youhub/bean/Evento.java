@@ -11,13 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import mobi.stos.youhub.enumm.SituacaoFechamentoEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 
 /**
  *
- * @author Weibson
+ * @author Gilberto Feitosa
  */
 @Entity
 @DynamicInsert
@@ -36,10 +37,13 @@ public class Evento implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date dataInicio;
+    private Date dataDoEvento;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataInicio;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
@@ -82,6 +86,9 @@ public class Evento implements Serializable {
     @Column(length = 100)
     private String foto;
 
+    @Column(nullable = false)
+    private SituacaoFechamentoEnum situacaoFechamentoEnum;
+
     public Long getId() {
         return id;
     }
@@ -106,12 +113,12 @@ public class Evento implements Serializable {
         this.titulo = titulo;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public Date getDataDoEvento() {
+        return dataDoEvento;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setDataDoEvento(Date dataDoEvento) {
+        this.dataDoEvento = dataDoEvento;
     }
 
     public Date getDataFim() {
@@ -120,6 +127,14 @@ public class Evento implements Serializable {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
     public BigDecimal getValor() {
@@ -232,6 +247,14 @@ public class Evento implements Serializable {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public SituacaoFechamentoEnum getSituacaoFechamentoEnum() {
+        return situacaoFechamentoEnum;
+    }
+
+    public void setSituacaoFechamentoEnum(SituacaoFechamentoEnum situacaoFechamentoEnum) {
+        this.situacaoFechamentoEnum = situacaoFechamentoEnum;
     }
 
 }

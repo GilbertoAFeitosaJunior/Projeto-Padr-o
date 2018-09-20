@@ -19,6 +19,7 @@ import mobi.stos.youhub.bean.Manager;
 import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.bo.IConsultorBo;
 import mobi.stos.youhub.bo.IConvidadoBo;
+import mobi.stos.youhub.bo.IEventoBo;
 import mobi.stos.youhub.bo.IIngressoBo;
 import mobi.stos.youhub.bo.IManagerBo;
 import mobi.stos.youhub.bo.IUsuarioBo;
@@ -51,29 +52,10 @@ public class ConvidadoRest {
     private IIngressoBo ingressoBo;
 
     @Autowired
+    private IEventoBo eventoBo;
+
+    @Autowired
     private IUsuarioBo usuarioBo;
-    
-    
-    @GET
-    @Path("marcacomopago/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response marcacomopago(@PathParam("id") Long id) {
-        try {
-
-            Convidado entity = this.convidadoBo.load(id);
-            if (entity != null) {
-                entity.setSituacao(SituacaoConvidadoEnum.PAGO);
-                this.convidadoBo.persist(entity);
-                Response.status(Response.Status.OK).build();
-            }
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        }
-    }
 
     @POST
     @Path("salvar")

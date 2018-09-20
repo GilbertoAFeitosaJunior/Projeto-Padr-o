@@ -149,6 +149,16 @@ public class ManagerAction extends GenericAction {
 
             this.usuario = this.usuarioBo.load(usuario.getId());
             this.usuarioBo.delete(usuario.getId());
+            Manager entity = this.managerBo.load(usuario.getManager().getId());
+            if (entity != null && entity.getFoto() != null) {
+                ServletContext context = request.getServletContext();
+                File file = new File(context.getRealPath("/") + entity.getFoto());
+
+                if (file.exists()) {
+                    file.delete();
+                }
+
+            }
             managerBo.delete(usuario.getManager().getId());
 
             addActionMessage("Registro excluído com sucesso.");
@@ -176,7 +186,7 @@ public class ManagerAction extends GenericAction {
             }
             Consulta consulta = getConsulta();
             consulta.addAliasTable("manager", "manager");
-            consulta.addCriterion(Restrictions.isNotNull("manager")); 
+            consulta.addCriterion(Restrictions.isNotNull("manager"));
             usuarios = usuarioBo.list(getConsulta());
             return SUCCESS;
         } catch (Exception e) {

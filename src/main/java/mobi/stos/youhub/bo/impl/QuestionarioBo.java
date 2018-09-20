@@ -1,5 +1,7 @@
 package mobi.stos.youhub.bo.impl;
 
+import java.util.Date;
+import java.util.List;
 import mobi.stos.youhub.bean.Questionario;
 import mobi.stos.youhub.bo.IQuestionarioBo;
 import mobi.stos.youhub.common.AbstractService;
@@ -17,6 +19,11 @@ public class QuestionarioBo extends AbstractService<Questionario> implements IQu
     @Override
     protected IOperations<Questionario> getDao() {
         return dao;
+    }
+
+    @Override
+    public List<Questionario> agendamentoQuestionario(Long idManager, Date data) {
+        return dao.agendamentoQuestionario(idManager, data);
     }
 
 }

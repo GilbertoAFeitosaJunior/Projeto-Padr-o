@@ -11,6 +11,7 @@ public class IngressoHelper {
     private Long idConsultor;
     private Long idManager;
     private Long idEvento;
+    private Long idConvidado;
     private Date data;
 
     public Long getIdConsultor() {
@@ -35,6 +36,14 @@ public class IngressoHelper {
 
     public void setIdEvento(Long idEvento) {
         this.idEvento = idEvento;
+    }
+
+    public Long getIdConvidado() {
+        return idConvidado;
+    }
+
+    public void setIdConvidado(Long idConvidado) {
+        this.idConvidado = idConvidado;
     }
 
     public Date getData() {

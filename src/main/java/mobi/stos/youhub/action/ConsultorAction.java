@@ -4,6 +4,7 @@ import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.File;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.youhub.bean.Consultor;
@@ -79,8 +80,20 @@ public class ConsultorAction extends GenericAction {
                 usuario.setConsultor(this.consultorBo.persist(usuario.getConsultor()));
             } else {
                 if (hasUpload) {
+                    Consultor entity = this.consultorBo.load(usuario.getConsultor().getId());
+                    
+                    if (entity != null && entity.getFoto() != null) {
+                        ServletContext context = request.getServletContext();
+                        File file = new File(context.getRealPath("/") + entity.getFoto());
+
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                    }
+
                     usuario.getConsultor().setFoto(ark);
                     usuario.setConsultor(this.consultorBo.persist(usuario.getConsultor()));
+
                 } else {
                     Consultor entity = this.consultorBo.load(usuario.getConsultor().getId());
                     usuario.getConsultor().setFoto(entity.getFoto());
@@ -122,7 +135,19 @@ public class ConsultorAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Usuario entity = this.usuarioBo.loadByConsultor(consultor.getId());
+
             this.usuarioBo.delete(entity.getId());
+
+            Consultor c = this.consultorBo.load(consultor.getId());
+            if (c != null && c.getFoto() != null) {
+                ServletContext context = request.getServletContext();
+                File file = new File(context.getRealPath("/") + c.getFoto());
+
+                if (file.exists()) {
+                    file.delete();
+                }
+            }
+
             this.consultorBo.delete(consultor.getId());
             jsonReturn = new JsonReturn(true);
         } catch (Exception e) {
