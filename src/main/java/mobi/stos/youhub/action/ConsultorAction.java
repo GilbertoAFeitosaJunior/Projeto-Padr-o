@@ -75,7 +75,7 @@ public class ConsultorAction extends GenericAction {
                 hasUpload = true;
             }
 
-            if (usuario != null && usuario.getConsultor() == null) {
+            if (usuario != null && usuario.getConsultor().getId() == null) {
                 usuario.getConsultor().setFoto(ark);
                 usuario.setConsultor(this.consultorBo.persist(usuario.getConsultor()));
             } else {

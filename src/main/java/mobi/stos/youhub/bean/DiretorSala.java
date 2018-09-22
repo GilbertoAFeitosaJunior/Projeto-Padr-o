@@ -25,11 +25,25 @@ public class DiretorSala implements Serializable {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    public DiretorSala() {
-    }
+    @Column(nullable = false)
+    private int ddd;
+
+    @Column(nullable = false)
+    private int celular;
+
+    @Column(length = 100)
+    private String push;
+
+    @Column(length = 100)
+    private String foto;
+
+    private boolean assistente;
 
     public DiretorSala(Long id) {
         this.id = id;
+    }
+
+    public DiretorSala() {
     }
 
     public Long getId() {
@@ -46,6 +60,46 @@ public class DiretorSala implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getDdd() {
+        return ddd;
+    }
+
+    public void setDdd(int ddd) {
+        this.ddd = ddd;
+    }
+
+    public int getCelular() {
+        return celular;
+    }
+
+    public void setCelular(int celular) {
+        this.celular = celular;
+    }
+
+    public String getPush() {
+        return push;
+    }
+
+    public void setPush(String push) {
+        this.push = push;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public boolean isAssistente() {
+        return assistente;
+    }
+
+    public void setAssistente(boolean assistente) {
+        this.assistente = assistente;
     }
 
 }

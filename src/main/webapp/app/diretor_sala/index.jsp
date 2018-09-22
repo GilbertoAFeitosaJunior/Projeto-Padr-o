@@ -77,16 +77,27 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>Nome</th>      
                         <th>E-mail</th>      
+                        <th>Assistente</th>      
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
                     <s:iterator value="usuarios">
-                        <tr>       
+                        <tr>     
+                            <td> <img src="../../<s:property value="diretorSala.foto"/>" class="img-responsive img-thumbnail" height="60" width="60" /> </td>
                             <td><s:property value="diretorSala.nome" /></td>                           
-                            <td><s:property value="email" /></td>                           
+                            <td><s:property value="email" /></td>       
+
+                            <s:if test="diretorSala.assistente">
+                                <td class="text-center"><label class="label label-success">SIM</label></td>
+                            </s:if>                           
+                            <s:else>
+                                <td class="text-center"><label class="label label-danger" >Não</label></td>
+                            </s:else>
+
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">

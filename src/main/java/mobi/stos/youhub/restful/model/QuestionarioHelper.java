@@ -10,7 +10,11 @@ public class QuestionarioHelper {
 
     private Long idManager;
     private Long idQuestionario;
+    private String menssagem;
     private Date data;
+
+    public QuestionarioHelper() {
+    }
 
     public QuestionarioHelper(Long idManager, Long idQuestionario, Date data) {
         this.idManager = idManager;
@@ -18,7 +22,11 @@ public class QuestionarioHelper {
         this.data = data;
     }
 
-    public QuestionarioHelper() {
+    public QuestionarioHelper(Long idManager, Long idQuestionario, String menssagem, Date data) {
+        this.idManager = idManager;
+        this.idQuestionario = idQuestionario;
+        this.menssagem = menssagem;
+        this.data = data;
     }
 
     public Long getIdManager() {
@@ -35,6 +43,14 @@ public class QuestionarioHelper {
 
     public void setIdQuestionario(Long idQuestionario) {
         this.idQuestionario = idQuestionario;
+    }
+
+    public String getMenssagem() {
+        return menssagem;
+    }
+
+    public void setMenssagem(String menssagem) {
+        this.menssagem = menssagem;
     }
 
     public Date getData() {

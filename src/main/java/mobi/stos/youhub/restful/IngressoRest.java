@@ -20,6 +20,7 @@ import mobi.stos.youhub.enumm.SituacaoFechamentoEnum;
 import mobi.stos.youhub.enumm.SituacaoPagamentoEnum;
 import mobi.stos.youhub.enumm.TipoIngressoEnum;
 import mobi.stos.youhub.restful.model.IngressoHelper;
+import mobi.stos.youhub.restful.model.PagamentoHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,30 @@ public class IngressoRest {
 
     @Autowired
     private IEventoBo eventoBo;
+
+    @POST
+    @Path("/pagamento")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response pagamento(PagamentoHelper pagamentoHelper) {
+        try {
+            Evento evento = this.eventoBo.load(pagamentoHelper.getEvento().getId());
+            Convidado convidado = this.convidadoBo.load(pagamentoHelper.getConvidado().getId());
+
+            if (evento != null && convidado != null) {
+                pagamentoHelper.setConvidado(convidado);
+                pagamentoHelper.setEvento(evento);
+
+                return Response.status(Response.Status.OK).entity(pagamentoHelper).build();
+            }
+
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
 
     @POST
     @Path("/gerar")

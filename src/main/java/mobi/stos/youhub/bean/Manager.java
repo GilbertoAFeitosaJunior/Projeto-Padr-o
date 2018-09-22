@@ -37,6 +37,18 @@ public class Manager implements Serializable {
     @Column(length = 100)
     private String foto;
 
+    public Manager() {
+    }
+
+    public Manager(Long id, String nome, int ddd, int celular, String push, String foto) {
+        this.id = id;
+        this.nome = nome;
+        this.ddd = ddd;
+        this.celular = celular;
+        this.push = push;
+        this.foto = foto;
+    }
+
     public Long getId() {
         return id;
     }

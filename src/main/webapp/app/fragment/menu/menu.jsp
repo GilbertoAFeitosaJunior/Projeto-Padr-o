@@ -15,6 +15,11 @@
                <span>Usuários</span>
            </a>
            <ul class="sub">
+               <li <s:if test='menu == "Empresa"'>class="active"</s:if>>
+                   <a href="listEmpresa">
+                       <span>Empresa</span>
+                   </a>
+               </li>  
                <li <s:if test='menu == "DiretorSala"'>class="active"</s:if>>
                    <a href="listDiretorSala">
                        <span>Diretor de Sala</span>
@@ -25,11 +30,7 @@
                        <span>Manager</span>
                    </a>
                </li>  
-               <li <s:if test='menu == "Empresa"'>class="active"</s:if>>
-                   <a href="listEmpresa">
-                       <span>Empresa</span>
-                   </a>
-               </li>  
+
            </ul>
         </li>
         <li class="sub-menu">

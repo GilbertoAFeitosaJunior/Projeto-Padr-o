@@ -1,7 +1,7 @@
 package mobi.stos.youhub.restful;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,8 +11,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import mobi.stos.youhub.bean.Historico;
 import mobi.stos.youhub.bean.Questionario;
 import mobi.stos.youhub.bo.IEventoBo;
+import mobi.stos.youhub.bo.IHistoricoBo;
 import mobi.stos.youhub.bo.IQuestionarioBo;
 import mobi.stos.youhub.enumm.SituacaoFechamentoEnum;
 import mobi.stos.youhub.restful.model.Query;
@@ -20,7 +22,6 @@ import mobi.stos.youhub.restful.model.QuestionarioHelper;
 import mobi.stos.youhub.util.consulta.Consulta;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.mapping.Collection;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,15 +33,65 @@ import org.springframework.stereotype.Component;
 @Component
 @Path("/questionario")
 public class QuestionarioRest {
-    
+
     private List<Questionario> questionarios;
-    
+
+    private List<Historico> historicos;
+
     @Autowired
     IQuestionarioBo questionarioBo;
-    
+
+    @Autowired
+    IHistoricoBo historicoBo;
+
     @Autowired
     IEventoBo eventoBo;
-    
+
+    @Path("/agendamento/historico/{idQuestionario}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response agendamento(@PathParam("idQuestionario") Long idQuestionario) {
+        try {
+
+            this.historicos = this.historicoBo.historicoAgendamento(idQuestionario);
+
+            return Response.status(Response.Status.OK).entity(historicos).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/agendar")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response agendar(QuestionarioHelper questionarioHelper) {
+        try {
+
+            Questionario questionario = this.questionarioBo.load(questionarioHelper.getIdQuestionario());
+            if (questionario != null) {
+                Historico historico = new Historico();
+                historico.setDataAcompanhamentoAgendado(questionarioHelper.getData());
+                historico.setDataContato(new Date());
+                historico.setQuestionario(questionario);
+                historico.setTexto(questionarioHelper.getMenssagem());
+
+                questionario.setAcompanhamentoAgendado(questionarioHelper.getData());
+
+                this.historicoBo.persist(historico);
+                this.questionarioBo.persist(questionario);
+                return Response.status(Response.Status.OK).build();
+            }
+
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
     @Path("/agendamento")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -48,21 +99,19 @@ public class QuestionarioRest {
     public Response agendamento(QuestionarioHelper questionarioHelper) {
         try {
             this.questionarios = this.questionarioBo.agendamentoQuestionario(questionarioHelper.getIdManager(), questionarioHelper.getData());
-            
+
             List<QuestionarioHelper> questionarioHelpers = new ArrayList<>();
             questionarios.forEach(u -> {
                 questionarioHelpers.add(new QuestionarioHelper(u.getConvidado().getManager().getId(), u.getId(), u.getAcompanhamentoAgendado()));
             });
-            
-            questionarioHelpers.sort((a, b) -> a.getIdQuestionario().compareTo(b.getIdQuestionario()));
-            
+
             return Response.status(Response.Status.OK).entity(questionarioHelpers).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/salvar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +129,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/deletar/{id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -97,7 +146,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/listar")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -111,7 +160,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/listar/aberto")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -133,7 +182,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/listar/fechado")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -155,7 +204,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/listar/cancelado")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -177,7 +226,7 @@ public class QuestionarioRest {
             return Response.serverError().build();
         }
     }
-    
+
     @Path("/carregar/{id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
