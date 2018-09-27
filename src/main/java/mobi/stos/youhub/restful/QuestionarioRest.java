@@ -46,6 +46,46 @@ public class QuestionarioRest {
     @Autowired
     IEventoBo eventoBo;
 
+    @Path("/cancelar/{idQuestionario}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response cancelar(@PathParam("idQuestionario") Long idQuestionario) {
+        try {
+
+            Questionario questionario = this.questionarioBo.load(idQuestionario);
+
+            if (questionario != null) {
+                questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.CANCELADO);
+            }
+
+            return Response.status(Response.Status.OK).entity(historicos).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/fechar/{idQuestionario}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fechar(@PathParam("idQuestionario") Long idQuestionario) {
+        try {
+
+            Questionario questionario = this.questionarioBo.load(idQuestionario);
+
+            if (questionario != null) {
+                questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.FECHADO);
+            }
+
+            return Response.status(Response.Status.OK).entity(historicos).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
     @Path("/agendamento/historico/{idQuestionario}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -73,7 +113,7 @@ public class QuestionarioRest {
             if (questionario != null) {
                 Historico historico = new Historico();
                 historico.setDataAcompanhamentoAgendado(questionarioHelper.getData());
-                historico.setDataContato(new Date()); 
+                historico.setDataContato(new Date());
                 questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.ANDAMENTO);
                 historico.setQuestionario(questionario);
                 historico.setTexto(questionarioHelper.getMenssagem());
@@ -101,8 +141,8 @@ public class QuestionarioRest {
             this.questionarios = this.questionarioBo.agendamentoQuestionario(questionarioHelper.getIdManager(), questionarioHelper.getData());
 
             questionarios.forEach(u -> {
-                u.getConvidado().setManager(null);               
-               
+                u.getConvidado().setManager(null);
+
             });
 
             return Response.status(Response.Status.OK).entity(questionarios).build();
