@@ -1,6 +1,5 @@
 $(function () {
     $(".money").maskMoney({
-        thousands: "",
         allowZero: true
     });
 });

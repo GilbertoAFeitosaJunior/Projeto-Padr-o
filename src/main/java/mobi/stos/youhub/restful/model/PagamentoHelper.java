@@ -3,6 +3,7 @@ package mobi.stos.youhub.restful.model;
 import java.util.Date;
 import mobi.stos.youhub.bean.Convidado;
 import mobi.stos.youhub.bean.Evento;
+import mobi.stos.youhub.bean.Ingresso;
 
 /**
  *
@@ -12,6 +13,7 @@ public class PagamentoHelper {
 
     private Evento evento;
     private Convidado convidado;
+    private Ingresso ingresso;
     private long numeroCartao;
     private long codidoSegura;
     private Date dateVencimentoCarto;
@@ -19,7 +21,8 @@ public class PagamentoHelper {
     private long cpf;
     private double valorCompra;
 
-    public Evento getEvento() {
+    
+        public Evento getEvento() {
         return evento;
     }
 
@@ -81,6 +84,14 @@ public class PagamentoHelper {
 
     public void setValorCompra(double valorCompra) {
         this.valorCompra = valorCompra;
+    }
+
+    public Ingresso getIngresso() {
+        return ingresso;
+    }
+
+    public void setIngresso(Ingresso ingresso) {
+        this.ingresso = ingresso;
     }
 
 }

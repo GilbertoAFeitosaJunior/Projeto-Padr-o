@@ -30,4 +30,6 @@ public interface IIngressoBo extends IOperations<Ingresso> {
 
     Ingresso verificarConvidado(Long idConvidado, Long idEvento);
 
+    List<Ingresso> listarConvidadosPorEventoManager(Long idManager, Date date);
+
 }

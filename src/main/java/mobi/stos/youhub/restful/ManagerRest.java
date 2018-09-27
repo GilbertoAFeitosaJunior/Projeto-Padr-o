@@ -1,5 +1,6 @@
 package mobi.stos.youhub.restful;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,8 +11,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mobi.stos.youhub.bean.Consultor;
+import mobi.stos.youhub.bean.Convidado;
+import mobi.stos.youhub.bean.Ingresso;
 import mobi.stos.youhub.bo.IIngressoBo;
-import mobi.stos.youhub.bo.IManagerBo;
 import mobi.stos.youhub.restful.model.IngressoHelper;
 import mobi.stos.youhub.restful.model.QueryConvidado;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,6 @@ public class ManagerRest {
 
     @Autowired
     private IIngressoBo ingressoBo;
-
-    @Autowired
-    private IManagerBo managerBo;
 
     private List<Consultor> consultors;
 
@@ -69,6 +68,31 @@ public class ManagerRest {
         try {
             this.consultors = this.ingressoBo.consultoresNoEvento(queryConvidado);
             return Response.status(Response.Status.OK).entity(this.consultors).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/listar/convidados")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response convidados(IngressoHelper ingressoHelper) {
+        try {
+            List<Ingresso> ingressos = this.ingressoBo.listarConvidadosPorEventoManager(ingressoHelper.getIdManager(), ingressoHelper.getData());
+
+            List<Convidado> convidados = new ArrayList<>();
+
+            ingressos.forEach(u -> {
+                convidados.add(u.getConvidado());
+            });
+
+            convidados.forEach(u -> {
+                u.setManager(null);
+            });
+
+            return Response.status(Response.Status.OK).entity(convidados).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

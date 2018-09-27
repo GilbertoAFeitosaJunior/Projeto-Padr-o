@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label>Valor:</label>
                                 <div>
-                                    <s:textfield name="evento.valor" id="evento.valor" type="text" maxlength="100" cssClass="form-control money text-right" required="true"/>
+                                    <s:textfield name="evento.valor" id="evento.valor" cssClass="form-control money" value="%{getText('format.money', {evento.valor})}" required="true"/>
                                 </div>
                             </div>
                         </div>
@@ -241,10 +241,17 @@
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
 
 
-<script type="text/javascript" src="../assets/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
-<script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-<script type="text/javascript" src="../assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../evento/js/script.js"></script>
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
+<script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<script type="text/javascript" src="../assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript" src="../assets/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+
+
 <script type="text/javascript">
                     $(function () {
                         $("html").niceScroll().remove();

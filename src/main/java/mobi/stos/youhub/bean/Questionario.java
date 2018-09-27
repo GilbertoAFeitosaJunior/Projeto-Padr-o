@@ -53,31 +53,31 @@ public class Questionario implements Serializable {
 
     private boolean escolaParticular;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String sonho1;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String sonho2;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String sonho3;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String objecao1;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String objecao2;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String objecao3;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String opcaoInvestimento1;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String opcaoInvestimento2;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String opcaoInvestimento3;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -86,7 +86,7 @@ public class Questionario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataQuestionario;
 
-    @Column(nullable = false)
+  
     private SituacaoFechamentoEnum situacaoFechamentoEnum;
 
     public Long getId() {

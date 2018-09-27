@@ -86,6 +86,8 @@ public class ConsultorRest {
         }
     }
     
+    
+    //retorna os convidados no evento em uma data especifica 
     @Path("/convidados")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

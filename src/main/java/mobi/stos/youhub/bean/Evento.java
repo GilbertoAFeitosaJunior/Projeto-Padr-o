@@ -2,6 +2,7 @@ package mobi.stos.youhub.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -138,6 +139,9 @@ public class Evento implements Serializable {
     }
 
     public BigDecimal getValor() {
+        if (valor != null) {
+            return valor.setScale(2, RoundingMode.HALF_EVEN);
+        }
         return valor;
     }
 

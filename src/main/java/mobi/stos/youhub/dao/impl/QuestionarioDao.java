@@ -2,7 +2,6 @@ package mobi.stos.youhub.dao.impl;
 
 import java.util.Date;
 import java.util.List;
-import mobi.stos.youhub.bean.Ingresso;
 import mobi.stos.youhub.bean.Questionario;
 import mobi.stos.youhub.common.AbstractHibernateDao;
 import mobi.stos.youhub.dao.IQuestionarioDao;

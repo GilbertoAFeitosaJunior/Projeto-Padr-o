@@ -66,8 +66,8 @@
                 prefix: "",
                 suffix: "",
                 affixesStay: true,
-                thousands: ",",
-                decimal: ".",
+                thousands: ".",
+                decimal: ",",
                 precision: 2,
                 allowZero: false,
                 allowNegative: false

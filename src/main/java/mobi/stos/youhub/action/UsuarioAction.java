@@ -1,4 +1,4 @@
-package mobi.stos.femidriver.action;
+package mobi.stos.youhub.action;
 
 import com.google.api.client.repackaged.com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;

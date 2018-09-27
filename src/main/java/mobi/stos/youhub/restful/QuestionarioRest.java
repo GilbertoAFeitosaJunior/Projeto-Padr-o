@@ -1,6 +1,5 @@
 package mobi.stos.youhub.restful;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -63,7 +62,7 @@ public class QuestionarioRest {
         }
     }
 
-    @Path("/agendar")
+    @Path("/reagendar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +73,8 @@ public class QuestionarioRest {
             if (questionario != null) {
                 Historico historico = new Historico();
                 historico.setDataAcompanhamentoAgendado(questionarioHelper.getData());
-                historico.setDataContato(new Date());
+                historico.setDataContato(new Date()); 
+                questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.ANDAMENTO);
                 historico.setQuestionario(questionario);
                 historico.setTexto(questionarioHelper.getMenssagem());
 
@@ -100,12 +100,12 @@ public class QuestionarioRest {
         try {
             this.questionarios = this.questionarioBo.agendamentoQuestionario(questionarioHelper.getIdManager(), questionarioHelper.getData());
 
-            List<QuestionarioHelper> questionarioHelpers = new ArrayList<>();
             questionarios.forEach(u -> {
-                questionarioHelpers.add(new QuestionarioHelper(u.getConvidado().getManager().getId(), u.getId(), u.getAcompanhamentoAgendado()));
+                u.getConvidado().setManager(null);               
+               
             });
 
-            return Response.status(Response.Status.OK).entity(questionarioHelpers).build();
+            return Response.status(Response.Status.OK).entity(questionarios).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -118,9 +118,9 @@ public class QuestionarioRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(Questionario questionario) {
         try {
-            if (questionario != null && questionario.getId() != null) {
+            if (questionario != null) {
                 questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.ABERTO);
-                this.questionarioBo.persist(questionarios);
+                this.questionarioBo.persist(questionario);
                 return Response.status(Response.Status.CREATED).build();
             }
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();

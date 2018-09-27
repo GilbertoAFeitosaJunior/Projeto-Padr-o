@@ -53,13 +53,13 @@ public class IngressoRest {
             Evento evento = this.eventoBo.load(pagamentoHelper.getEvento().getId());
             Convidado convidado = this.convidadoBo.load(pagamentoHelper.getConvidado().getId());
 
-            if (evento != null && convidado != null) {
-                pagamentoHelper.setConvidado(convidado);
-                pagamentoHelper.setEvento(evento);
-
-                return Response.status(Response.Status.OK).entity(pagamentoHelper).build();
-            }
-
+            // a programar. kkkk
+//            if (evento != null && convidado != null) {
+//                pagamentoHelper.setConvidado(convidado);
+//                pagamentoHelper.setEvento(evento);
+//
+//                return Response.status(Response.Status.OK).entity(pagamentoHelper).build();
+//            }
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 
         } catch (Exception e) {
@@ -84,19 +84,21 @@ public class IngressoRest {
                     Ingresso ingresso = this.ingressoBo.verificarConvidado(convidado.getId(), evento.getId());
 
                     if (Objects.isNull(ingresso)) {
+
                         ingresso = new Ingresso();
                         ingresso.setConvidado(convidado);
                         ingresso.setConsultor(consultor);
                         ingresso.setEvento(evento);
+                        ingresso.setValor(evento.getValor());
                         ingresso.setDataGeracao(new Date());
                         ingresso.setDataPagamento(new Date());
                         ingresso.setManager(consultor.getManager());
-                        ingresso.setSituacaoPagamentoEnum(SituacaoPagamentoEnum.PAGO);
-                        ingresso.setTipoIngressoEnum(TipoIngressoEnum.NORMAL);
+                        ingresso.setSituacaoPagamentoEnum(SituacaoPagamentoEnum.EM_ABERTO);
+                        ingresso.setTipoIngressoEnum(TipoIngressoEnum.NORMAL);                       
 
                         ingresso = this.ingressoBo.persist(ingresso);
 
-                        Response.status(Response.Status.CREATED).entity(ingresso).build();
+                        return Response.status(Response.Status.CREATED).entity(ingresso).build();
                     } else {
                         return Response.status(Response.Status.CONFLICT).build(); // convidado já tem o ingresso.
                     }

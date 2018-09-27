@@ -15,63 +15,68 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IngressoBo extends AbstractService<Ingresso> implements IIngressoBo {
-
+    
     @Autowired
     private IIngressoDao dao;
-
+    
     @Override
     protected IOperations<Ingresso> getDao() {
         return dao;
     }
-
+    
     @Override
     public List<Ingresso> listConvidados(Long idEvento, SituacaoConvidadoEnum situacao) {
         return dao.listConvidados(idEvento, situacao);
     }
-
+    
     @Override
     public List<Ingresso> listFalta(Long idEvento) {
         return dao.listFalta(idEvento);
     }
-
+    
     @Override
     public List<Ingresso> listPresente(Long idEvento) {
         return dao.listPresente(idEvento);
     }
-
+    
     @Override
     public Long totalConsultorNoEvento(Long idEvento, Long idManager) {
         return dao.totalConsultorNoEvento(idEvento, idManager);
     }
-
+    
     @Override
     public Long totalConvidadoNoEvento(Long idEvento) {
         return dao.totalConvidadoNoEvento(idEvento);
     }
-
+    
     @Override
     public Long totalConvidadoPorConsultor(Long idEvento, Long idConsultor) {
         return dao.totalConvidadoPorConsultor(idEvento, idConsultor);
     }
-
+    
     @Override
     public List<Ingresso> convidadoPorConsultoEvento(Long idEvento, Long idConsultor) {
         return dao.convidadoPorConsultoEvento(idEvento, idConsultor);
     }
-
+    
     @Override
     public List<Consultor> consultoresNoEvento(QueryConvidado queryConvidado) {
         return dao.consultoresNoEvento(queryConvidado);
     }
-
+    
     @Override
     public List<Ingresso> listIngressoPorConsultor(Long idConsultor, Date dataInicio) {
         return dao.listIngressoPorConsultor(idConsultor, dataInicio);
     }
-
+    
     @Override
     public Ingresso verificarConvidado(Long idConvidado, Long idEvento) {
         return dao.verificarConvidado(idConvidado, idEvento);
     }
-
+    
+    @Override
+    public List<Ingresso> listarConvidadosPorEventoManager(Long idManager, Date date) {
+        return dao.listarConvidadosPorEventoManager(idManager, date);
+    }
+    
 }

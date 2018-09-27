@@ -49,40 +49,6 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
         return criteria.list();
     }
 
-    public List<Consultor> consultoresNoEvento(final Long idEvento, Long idManager, int page) {
-
-        return getCurrentSession().doReturningWork((Connection cnctn) -> {
-            String sql = new StringBuilder()
-                    .append("SELECT consultor.id, consultor.foto, consultor.nome  FROM ingresso  ")
-                    .append("INNER JOIN consultor ON consultor.id = consultor_id")
-                    .append("WHERE evento_id = ? AND consultor.manager_id = ?")
-                    .append("GROUP BY consultor.id")
-                    .append("ORDER BY consultor.nome")
-                    .append("LIMIT 10 OFFSET ((? - 1)*10)")
-                    .toString();
-
-            PreparedStatement preparedStatement = cnctn.prepareStatement(sql);
-            preparedStatement.setLong(1, idEvento);
-            preparedStatement.setLong(2, idManager);
-            preparedStatement.setInt(3, page);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            List<Consultor> consultors = new ArrayList<>();
-            Consultor consultor;
-            while (rs.next()) {
-                consultor = new Consultor();
-
-                consultor.setId(rs.getLong("id"));
-                consultor.setFoto(rs.getString("foto"));
-                consultor.setNome("nome");
-
-                consultors.add(consultor);
-            }
-
-            return consultors;
-        });
-    }
-
     @Override
     public Long totalConsultorNoEvento(Long idEvento, Long idManager) {
         Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
@@ -149,18 +115,18 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
             String sql = new StringBuilder()
                     .append("SELECT consultor.id, consultor.foto, consultor.nome  FROM ingresso  ")
                     .append("INNER JOIN consultor ON consultor.id = consultor_id ")
-                    .append("WHERE evento_id = ? AND consultor.manager_id = ? ")
+                    .append("WHERE evento_id = ? AND ingresso.manager_id = ? ")
                     .append("AND consultor.nome  ILIKE ? ")
-                    .append("GROUP BY consultor.id ")
+                    .append("AND dataentradaevento IS NOT NULL ")
                     .append("ORDER BY consultor.nome ")
-                    .append("LIMIT 10 OFFSET ((? - 1)*10)")
+                    .append("LIMIT 10 OFFSET ?")
                     .toString();
 
             PreparedStatement preparedStatement = cnctn.prepareStatement(sql);
             preparedStatement.setLong(1, queryConvidado.getIdEvento());
             preparedStatement.setLong(2, queryConvidado.getIdManager());
             preparedStatement.setString(3, "%" + queryConvidado.getQuery() + "%");
-            preparedStatement.setInt(4, queryConvidado.getPage());
+            preparedStatement.setInt(4, (queryConvidado.getPage() - 1) * 10);
             ResultSet rs = preparedStatement.executeQuery();
 
             List<Consultor> consultors = new ArrayList<>();
@@ -200,6 +166,21 @@ public class IngressoDao extends AbstractHibernateDao<Ingresso> implements IIngr
         criteria.add(Restrictions.eq("evento.id", idEvento));
         criteria.setMaxResults(1);
         return (Ingresso) criteria.uniqueResult();
+
+    }
+
+    @Override
+    public List<Ingresso> listarConvidadosPorEventoManager(Long idManager, Date date) {
+        Criteria criteria = getCurrentSession().createCriteria(Ingresso.class);
+        criteria.createAlias("manager", "manager");
+        criteria.createAlias("evento", "evento");
+        criteria.add(Restrictions.eq("manager.id", idManager));
+        criteria.add(Restrictions.sqlRestriction("DATE(evento2_.datadoevento) = ?", new Object[]{
+            date
+        }, new DateType[]{
+            DateType.INSTANCE
+        }));
+        return criteria.list();
 
     }
 
