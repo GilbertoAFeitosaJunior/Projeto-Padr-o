@@ -1,9 +1,9 @@
 package mobi.stos.youhub.restful.model;
 
-import java.util.Date;
 import mobi.stos.youhub.bean.Convidado;
 import mobi.stos.youhub.bean.Evento;
 import mobi.stos.youhub.bean.Ingresso;
+import mobi.stos.youhub.enumm.TipoPagamentoEnum;
 
 /**
  *
@@ -11,31 +11,50 @@ import mobi.stos.youhub.bean.Ingresso;
  */
 public class PagamentoHelper {
 
-    private Evento evento;
-    private Convidado convidado;
-    private Ingresso ingresso;
+    /*
+    1 - numeroCartao
+2 - codidoSegura
+3 - dateVencimentoCarto - Formato: 00/0000
+4 - nomeTitularCartao
+5 - cpf - Obs.: Dono do cartão 
+6 - valorCompra
+7 - convidado
+8 - evento
+
+     */
+    private Long idEvento;
+    private Long idConvidado;
+    private Long idIngresso;
     private long numeroCartao;
     private long codidoSegura;
-    private Date dateVencimentoCarto;
+    private String dateVencimentoCartao;
     private String nomeTitularCartao;
-    private long cpf;
+    private long cpf; // dono do cartão
     private double valorCompra;
+    private TipoPagamentoEnum tipoPagamentoEnum;
 
-    
-        public Evento getEvento() {
-        return evento;
+    public Long getIdEvento() {
+        return idEvento;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setIdEvento(Long idEvento) {
+        this.idEvento = idEvento;
     }
 
-    public Convidado getConvidado() {
-        return convidado;
+    public Long getIdConvidado() {
+        return idConvidado;
     }
 
-    public void setConvidado(Convidado convidado) {
-        this.convidado = convidado;
+    public void setIdConvidado(Long idConvidado) {
+        this.idConvidado = idConvidado;
+    }
+
+    public Long getIdIngresso() {
+        return idIngresso;
+    }
+
+    public void setIdIngresso(Long idIngresso) {
+        this.idIngresso = idIngresso;
     }
 
     public long getNumeroCartao() {
@@ -54,12 +73,12 @@ public class PagamentoHelper {
         this.codidoSegura = codidoSegura;
     }
 
-    public Date getDateVencimentoCarto() {
-        return dateVencimentoCarto;
+    public String getDateVencimentoCartao() {
+        return dateVencimentoCartao;
     }
 
-    public void setDateVencimentoCarto(Date dateVencimentoCarto) {
-        this.dateVencimentoCarto = dateVencimentoCarto;
+    public void setDateVencimentoCartao(String dateVencimentoCartao) {
+        this.dateVencimentoCartao = dateVencimentoCartao;
     }
 
     public String getNomeTitularCartao() {
@@ -86,12 +105,12 @@ public class PagamentoHelper {
         this.valorCompra = valorCompra;
     }
 
-    public Ingresso getIngresso() {
-        return ingresso;
+    public TipoPagamentoEnum getTipoPagamentoEnum() {
+        return tipoPagamentoEnum;
     }
 
-    public void setIngresso(Ingresso ingresso) {
-        this.ingresso = ingresso;
+    public void setTipoPagamentoEnum(TipoPagamentoEnum tipoPagamentoEnum) {
+        this.tipoPagamentoEnum = tipoPagamentoEnum;
     }
 
 }

@@ -1,4 +1,4 @@
-package mobi.stos.youhub.thread;
+package mobi.stos.youhub.threads;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;

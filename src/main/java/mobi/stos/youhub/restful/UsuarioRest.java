@@ -14,7 +14,9 @@ import mobi.stos.youhub.bean.Manager;
 import mobi.stos.youhub.bean.Usuario;
 import mobi.stos.youhub.bo.IManagerBo;
 import mobi.stos.youhub.bo.IUsuarioBo;
+import mobi.stos.youhub.interfaces.IFutureCallback;
 import mobi.stos.youhub.restful.model.Login;
+import mobi.stos.youhub.threads.LoginThread;
 import mobi.stos.youhub.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -59,15 +61,30 @@ public class UsuarioRest {
         try {
 
             if (login.getLogin() != null && login.getSenha() != null) {
-                String hash = Util.createHash();
-                Usuario usuario = this.usuarioBo.login(login.getLogin(), login.getSenha());
+                LoginThread thread = new LoginThread(login);
+                thread.onFutureCallback(new IFutureCallback() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println("####################### retorno deu certo");
+                    }
 
-                if (usuario != null) {
-                    usuario.setHash(hash);
-                    this.usuarioBo.persist(usuario);
-                    return Response.status(Response.Status.OK).entity(usuario).build();
+                    @Override
+                    public void onError(Exception exception) {
+                        System.out.println("###################### retorno deu errado");
+                        exception.printStackTrace();
+                    }
+                });
+                thread.start();
 
-                }
+//                String hash = Util.createHash();
+//                Usuario usuario = this.usuarioBo.login(login.getLogin(), login.getSenha());
+//
+//                if (usuario != null) {
+//                    usuario.setHash(hash);
+//                    this.usuarioBo.persist(usuario);
+//                    return Response.status(Response.Status.OK).entity(usuario).build();
+//
+//                }
             }
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (Exception e) {

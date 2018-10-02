@@ -1,14 +1,14 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <ul class="sidebar-menu" id="nav-accordion">
     <li>
-        <a href="dashboard" <s:if test='menu == "#"'> class="active"</s:if>>
-                <i class="fa fa-dashboard"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
+        <a href="#"  class="active">
+           <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
 
-        <li class="sub-menu">
-            <a href="javascript:;" <s:if test='menu == "DiretorSala"  
+    <li class="sub-menu">
+        <a href="javascript:;" <s:if test='menu == "DiretorSala"  
               || menu == "Manager"
               || menu == "Empresa"'>class="active"</s:if>>
                <i class="fa fa-users"></i>

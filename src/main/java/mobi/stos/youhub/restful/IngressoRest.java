@@ -12,6 +12,7 @@ import mobi.stos.youhub.bean.Consultor;
 import mobi.stos.youhub.bean.Convidado;
 import mobi.stos.youhub.bean.Evento;
 import mobi.stos.youhub.bean.Ingresso;
+import mobi.stos.youhub.bean.PagamentoCadastro;
 import mobi.stos.youhub.bo.IConsultorBo;
 import mobi.stos.youhub.bo.IConvidadoBo;
 import mobi.stos.youhub.bo.IEventoBo;
@@ -50,8 +51,31 @@ public class IngressoRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response pagamento(PagamentoHelper pagamentoHelper) {
         try {
-            Evento evento = this.eventoBo.load(pagamentoHelper.getEvento().getId());
-            Convidado convidado = this.convidadoBo.load(pagamentoHelper.getConvidado().getId());
+            Evento evento = this.eventoBo.load(pagamentoHelper.getIdEvento());
+            Convidado convidado = this.convidadoBo.load(pagamentoHelper.getIdConvidado());
+            Ingresso ingresso = this.ingressoBo.load(pagamentoHelper.getIdIngresso());
+
+            if (evento != null && convidado != null && ingresso != null) {
+                PagamentoCadastro pagamentoCadastro = null;
+                switch (pagamentoHelper.getTipoPagamentoEnum()) {
+                    case CASH:
+                        pagamentoCadastro = new PagamentoCadastro();
+                        pagamentoCadastro.setConvidado(convidado);
+
+                        return Response.status(Response.Status.OK).build();
+                    case CARTAO:
+                        System.out.println("########## cartão");
+                        return Response.status(Response.Status.OK).build();
+                    case BOLETO:
+                        System.out.println("########## boleto");
+                        return Response.status(Response.Status.OK).build();
+                    case DEPOSITO:
+                        System.out.println("########## deposito");
+                        return Response.status(Response.Status.OK).build();
+                    default:
+                        return Response.status(Response.Status.NOT_FOUND).build(); // erro no tipo de pagamento;
+                }
+            }
 
             // a programar. kkkk
 //            if (evento != null && convidado != null) {
@@ -94,7 +118,7 @@ public class IngressoRest {
                         ingresso.setDataPagamento(new Date());
                         ingresso.setManager(consultor.getManager());
                         ingresso.setSituacaoPagamentoEnum(SituacaoPagamentoEnum.EM_ABERTO);
-                        ingresso.setTipoIngressoEnum(TipoIngressoEnum.NORMAL);                       
+                        ingresso.setTipoIngressoEnum(TipoIngressoEnum.NORMAL);
 
                         ingresso = this.ingressoBo.persist(ingresso);
 

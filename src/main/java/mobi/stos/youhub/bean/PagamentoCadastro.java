@@ -31,6 +31,9 @@ public class PagamentoCadastro implements Serializable {
     @ManyToOne
     private Convidado convidado;
 
+    @ManyToOne
+    private Ingresso ingresso;
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dataGeracao;
@@ -60,6 +63,14 @@ public class PagamentoCadastro implements Serializable {
 
     public void setConvidado(Convidado convidado) {
         this.convidado = convidado;
+    }
+
+    public Ingresso getIngresso() {
+        return ingresso;
+    }
+
+    public void setIngresso(Ingresso ingresso) {
+        this.ingresso = ingresso;
     }
 
     public Date getDataGeracao() {

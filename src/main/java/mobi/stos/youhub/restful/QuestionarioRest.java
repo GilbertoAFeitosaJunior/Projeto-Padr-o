@@ -114,7 +114,9 @@ public class QuestionarioRest {
                 Historico historico = new Historico();
                 historico.setDataAcompanhamentoAgendado(questionarioHelper.getData());
                 historico.setDataContato(new Date());
+                
                 questionario.setSituacaoFechamentoEnum(SituacaoFechamentoEnum.ANDAMENTO);
+               
                 historico.setQuestionario(questionario);
                 historico.setTexto(questionarioHelper.getMenssagem());
 

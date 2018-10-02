@@ -5,11 +5,11 @@ package mobi.stos.youhub.enumm;
  * @author Weibson
  */
 public enum TipoPagamentoEnum {
-
-    BOLETO("Boleto"),
+    
+    CASH("CASH"),
     CARTAO("Cartão"),
-    DEPOSITO("Deposito"),
-    CASH("CASH");
+    BOLETO("Boleto"),
+    DEPOSITO("Deposito");
 
     private final String name;
 

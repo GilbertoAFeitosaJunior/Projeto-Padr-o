@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label>Data do Evento:</label>
                                 <div class="input-group m-bot15 right date default-datetime-picker">
-                                    <s:textfield name="evento.dataDoEvento" id="evento.dataDoEvento" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataDoEvento})}" />
+                                    <s:textfield name="evento.dataDoEvento" id="evento.dataDoEvento" readonly="true" required="true" cssClass="form-control" value="%{getText('format.dateLong', {evento.dataLimiteCompra})}" />
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-danger date-set"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
             </div>
-
+           
 
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listEvento'">Cancelar</button>
@@ -238,18 +238,20 @@
 </section>
 
 <%@include file="../fragment/endpage.jsp" %>
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
 
 
-<script type="text/javascript" src="../evento/js/script.js"></script>
-<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
-<script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-<script type="text/javascript" src="../assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
 <script type="text/javascript" src="../assets/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+<script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
+
+
+
 
 
 <script type="text/javascript">
@@ -261,6 +263,11 @@
                             autoclose: true,
                             todayBtn: true,
                             pickerPosition: "bottom-left"
+                        });
+
+                        $('.default-date-picker').datepicker({
+                            format: 'dd/mm/yyyy',
+                            autoclose: true
                         });
                     });
 </script>
