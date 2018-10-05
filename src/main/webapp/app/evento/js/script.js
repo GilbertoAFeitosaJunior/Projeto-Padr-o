@@ -53,7 +53,7 @@ var Script = function () {
                 "evento.dataFim": {
                     required: "Favor preencher esse campo"
                 },
-                "evento.diretorSala.id": {
+                "evento.dataDoEvento": {
                     required: "Favor preencher esse campo"
                 }
                

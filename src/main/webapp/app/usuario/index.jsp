@@ -77,7 +77,7 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>CPF</th>
+                        <th>Nome</th>
                         <th>E-mail</th>
                         <th>&Uacute;ltimo Acesso</th>
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
@@ -86,7 +86,7 @@
                 <tbody>
                     <s:iterator value="usuarios">
                         <tr>       
-                            <td><s:property value="cpjStringMask" /></td>
+                            <td><s:property value="nome" /></td>
                             <td><s:property value="email" /></td>
                             <td><s:property value="ultimoAcessoFormat" /></td>
                             <td class="text-right">

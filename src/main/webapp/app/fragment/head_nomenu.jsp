@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="S'tos App" />
         <link rel="shortcut icon" href="../img/favicon.png" />
-        <title>YouHub</title>
+        <title>Be Pro</title>
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet" />
         <link href="../css/bootstrap-reset.css" rel="stylesheet" />
@@ -40,7 +40,7 @@
                     <span class="fa fa-bars"></span>
                 </button>
                 <!--logo start-->
-                <a href="#" class="logo">SUE<span>App</span></a>
+                <a href="#" class="logo">Be Pro<span>App</span></a>
                 <!--logo end-->
                 <div class="top-nav ">
                     <ul class="nav pull-right top-menu">

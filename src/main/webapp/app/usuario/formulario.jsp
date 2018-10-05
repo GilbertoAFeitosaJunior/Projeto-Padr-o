@@ -14,10 +14,11 @@
             <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistUsuario" theme="simple" enctype="multipart/form-data">
                 <s:hidden name="usuario.id" />
 
+
                 <div class="form-group">
-                    <label>CPF:</label>
+                    <label>Nome:</label>
                     <div>
-                        <s:textfield name="usuario.cpjStringMask" id="usuario.cpjStringMask" data-mask="999.999.999-99" maxlength="100" cssClass="form-control" required="true"/>
+                        <s:textfield name="usuario.nome" id="usuario.nome" maxlength="100" cssClass="form-control" required="true" />
                     </div>
                 </div>
 

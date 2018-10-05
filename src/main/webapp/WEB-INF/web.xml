@@ -26,7 +26,7 @@
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>mobi.stos.youhub.spring</param-value>
+        <param-value>mobi.stos.bepro.spring</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -44,7 +44,7 @@
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>mobi.stos.youhub.restful;org.codehaus.jackson.jaxrs</param-value>
+            <param-value>mobi.stos.bepro.restful;org.codehaus.jackson.jaxrs</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -57,7 +57,7 @@
     <filter>
         <description>Cache-Control for static resources</description>
         <filter-name>StaticCacheControlFilter</filter-name>
-        <filter-class>mobi.stos.youhub.filter.StaticResourceCacheFilter</filter-class>
+        <filter-class>mobi.stos.bepro.filter.StaticResourceCacheFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>StaticCacheControlFilter</filter-name>

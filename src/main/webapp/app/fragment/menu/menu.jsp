@@ -2,39 +2,13 @@
 <ul class="sidebar-menu" id="nav-accordion">
     <li>
         <a href="#"  class="active">
-           <i class="fa fa-dashboard"></i>
+            <i class="fa fa-dashboard"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
     <li class="sub-menu">
-        <a href="javascript:;" <s:if test='menu == "DiretorSala"  
-              || menu == "Manager"
-              || menu == "Empresa"'>class="active"</s:if>>
-               <i class="fa fa-users"></i>
-               <span>Usuários</span>
-           </a>
-           <ul class="sub">
-               <li <s:if test='menu == "Empresa"'>class="active"</s:if>>
-                   <a href="listEmpresa">
-                       <span>Empresa</span>
-                   </a>
-               </li>  
-               <li <s:if test='menu == "DiretorSala"'>class="active"</s:if>>
-                   <a href="listDiretorSala">
-                       <span>Diretor de Sala</span>
-                   </a>
-               </li>  
-               <li <s:if test='menu == "Manager"'>class="active"</s:if>>
-                   <a href="listManager">
-                       <span>Manager</span>
-                   </a>
-               </li>  
-
-           </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;" <s:if test='menu == "TipoEvento" || 
+        <a href="javascript:;" <s:if test='menu == "TipoEvento" || 
               menu == "Evento"'>class="active"</s:if>>
                <i class="fa fa-check-square-o"></i>
                <span>Evento</span>
@@ -53,12 +27,10 @@
            </ul>
         </li>
 
-
-
         <li>
             <a href="listUsuario" <s:if test='menu == "Usuario"'> class="active"</s:if>>
             <i class="fa fa-user"></i>
-            <span>Usu&aacute;rios do painel</span>
+            <span>Usu&aacute;rios</span>
         </a>
     </li>
 

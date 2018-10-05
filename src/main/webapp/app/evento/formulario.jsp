@@ -1,7 +1,5 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
-
 
 <%@include file="../fragment/head.jsp" %>
 
@@ -14,9 +12,6 @@
         <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEvento" theme="simple" enctype="multipart/form-data">
             <s:hidden name="evento.id" />
             <s:hidden name="evento.situacaoFechamentoEnum" />
-            <s:hidden name="evento.dataInicio" />
-            <s:hidden name="evento.dataFim" />
-
 
             <div class="row">
                 <div class="col-lg-12">
@@ -31,25 +26,12 @@
 
             <div class="row">
                 <div class="col-lg-8">
-
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Tipo de evento:</label>
                                 <div>
                                     <s:select name="evento.tipoEvento.id" id="evento.tipoEvento.id" cssClass="form-control" list="tipoEventos" listKey="id" listValue="nome" emptyOption="true" required="true"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Diretor de Sala:</label>
-                                <div>
-                                    <s:select name="evento.diretorSala.id" id="evento.diretorSala.id" cssClass="form-control" list="diretorSalas" listKey="id" listValue="nome" emptyOption="true" required="true"/>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +207,7 @@
                     </div>
                 </div>
             </div>
-           
+
 
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listEvento'">Cancelar</button>
@@ -237,22 +219,18 @@
     </div>
 </section>
 
-<%@include file="../fragment/endpage.jsp" %>
+<%@include file="../fragment/endpage.jsp" %>   
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
 
-
+ <script type="text/javascript" src="../evento/js/script.js"></script>
 <script type="text/javascript" src="../assets/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
-
-
-
-
 
 <script type="text/javascript">
                     $(function () {
