@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  * @author Weibson
  */
 @Component
-@Path("/consultor")
+@Path("/evento")
 public class EventoRest {
 
     private List<Evento> eventos;

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  * @author Weibson
  */
 @Component
-@Path("/consultor")
+@Path("/convidado")
 public class ConvidadoRest {
 
     @Autowired

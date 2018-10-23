@@ -9,14 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import mobi.stos.bepro.bean.Evento;
 import mobi.stos.bepro.bean.TipoEvento;
-import mobi.stos.bepro.bo.IEventoBo;
 import mobi.stos.bepro.bo.ITipoEventoBo;
-import mobi.stos.bepro.restful.model.Query;
-import mobi.stos.bepro.util.consulta.Consulta;
-import org.hibernate.criterion.Order;
-import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @author Weibson
  */
 @Component
-@Path("/consultor")
+@Path("/tipoevento")
 public class TipoEventoRest {
 
     @Autowired

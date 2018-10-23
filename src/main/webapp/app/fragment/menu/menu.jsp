@@ -28,6 +28,11 @@
         </li>
 
         <li>
+            <a href="listPodcast" <s:if test='menu == "Podcast"'> class="active"</s:if>>
+            <i class="fa fa-podcast"></i>
+            <span>Podcast</span>
+        </a>
+        <li>
             <a href="listUsuario" <s:if test='menu == "Usuario"'> class="active"</s:if>>
             <i class="fa fa-user"></i>
             <span>Usu&aacute;rios</span>
