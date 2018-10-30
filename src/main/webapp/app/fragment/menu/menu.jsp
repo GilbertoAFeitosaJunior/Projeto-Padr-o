@@ -7,33 +7,9 @@
         </a>
     </li>
 
-    <li class="sub-menu">
-        <a href="javascript:;" <s:if test='menu == "TipoEvento" || 
-              menu == "Evento"'>class="active"</s:if>>
-               <i class="fa fa-check-square-o"></i>
-               <span>Evento</span>
-           </a>
-           <ul class="sub">
-               <li <s:if test='menu == "TipoEvento"'>class="active"</s:if>>
-                   <a href="listTipoEvento">
-                       <span>Tipo do Evento</span>
-                   </a>
-               </li>  
-               <li <s:if test='menu == "Evento"'>class="active"</s:if>>
-                   <a href="listEvento">
-                       <span>Evento</span>
-                   </a>
-               </li>  
-           </ul>
-        </li>
 
-        <li>
-            <a href="listPodcast" <s:if test='menu == "Podcast"'> class="active"</s:if>>
-            <i class="fa fa-podcast"></i>
-            <span>Podcast</span>
-        </a>
-        <li>
-            <a href="listUsuario" <s:if test='menu == "Usuario"'> class="active"</s:if>>
+    <li>
+        <a href="listUsuario" <s:if test='menu == "Usuario"'> class="active"</s:if>>
             <i class="fa fa-user"></i>
             <span>Usu&aacute;rios</span>
         </a>

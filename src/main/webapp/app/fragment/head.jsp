@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="S'tos App" />
-        <title>Be Pro</title>
+        <title>Educador</title>
 
         <link rel="apple-touch-icon" sizes="57x57" href="../img/icon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="../img/icon/apple-icon-60x60.png">
@@ -64,7 +64,7 @@
                     <div data-original-title="Alternar Navegação" data-placement="right" class="fa fa-bars tooltips"></div>
                 </div>
                 <!--logo start-->
-                <a href="dashboard" class="logo">Be Pro</a>
+                <a href="dashboard" class="logo">Educador</a>
                 <!--logo end-->
                 <div class="top-nav ">
                     <ul class="nav pull-right top-menu">

@@ -15,27 +15,48 @@
                 <s:hidden name="usuario.id" />
 
 
-                <div class="form-group">
-                    <label>Nome:</label>
-                    <div>
-                        <s:textfield name="usuario.nome" id="usuario.nome" maxlength="100" cssClass="form-control" required="true" />
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">                      
+                            <label>Situacão:</label>
+                            <div>
+                                <s:select name="usuario.ativo" id="usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value"  emptyOption="true"  required="true"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">                      
+                            <label>Nome:</label>
+                            <div>
+                                <s:textfield name="usuario.nome" id="usuario.nome" maxlength="100" cssClass="form-control" required="true" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>E-mail:</label>
-                    <div>
-                        <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                <div class="row">
+                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <div>
+                                <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">                      
+                            <label>Senha:</label>
+                            <div>
+                                <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" required="true"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Senha:</label>
-                    <div>
-                        <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" required="true"/>
-                    </div>
-                </div>
-
 
                 <div class="panel-body pull-right">
                     <button type="button" class="btn btn-danger" onclick="window.location = 'listUsuario'">Cancelar</button>
