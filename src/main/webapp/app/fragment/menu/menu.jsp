@@ -14,6 +14,14 @@
             <span>Usu&aacute;rios</span>
         </a>
     </li>
+    
+    <li>
+        <a href="listSecretaria" <s:if test='menu == "Secretaria"'> class="active"</s:if>>
+            <i class="fa fa-bookmark"></i>
+            <span>Secretarias</span>
+        </a>
+    </li>
+    
 
     <li>
         <a href="logout">
