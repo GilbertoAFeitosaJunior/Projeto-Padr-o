@@ -8,14 +8,14 @@
 
     <section class="panel">
         <header class="panel-heading">
-            Pesquisar Secretaria
+            Pesquisar Projeto
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
         </header>
 
         <div class="panel-body">
-            <s:form acceptcharset="UTF-8" method="post" action="listSecretaria" theme="simple">
+            <s:form acceptcharset="UTF-8" method="post" action="listProjeto" theme="simple">
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -78,13 +78,17 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Secretaria</th>
+                        <th>Situação</th>
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="secretarias">
+                    <s:iterator value="projetos">
                         <tr>       
                             <td><s:property value="nome" /></td>
+                            <td><s:property value="secretaria.nome" /></td>
+                            <td><s:property value="situacaoProjetoEnum.name" />  </td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -134,16 +138,16 @@
                         _helperID = null;
                         var list = {
                             add: function () {
-                                window.location = "prepareSecretaria";
+                                window.location = "prepareProjeto";
                             },
                             edit: function (id) {
-                                window.location = "prepareSecretaria?secretaria.id=" + id;
+                                window.location = "prepareProjeto?projeto.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteSecretaria?secretaria.id=" + _helperID;
+                                window.location = "deleteProjeto?projeto.id=" + _helperID;
                             }
                         };
 
@@ -155,10 +159,11 @@
                                 "operador": "${consulta.operador}",
                                 "campo": "${consulta.campo}",
                                 "valor": "${consulta.valor}",
-                                "url": "listSecretaria"
+                                "url": "listProjeto"
                             });
                         });
     </script>
     <%@include file="../fragment/truend.jsp" %>
 
 </compress:html>
+

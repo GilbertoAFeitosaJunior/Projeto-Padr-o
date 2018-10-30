@@ -17,11 +17,17 @@
     
     <li>
         <a href="listSecretaria" <s:if test='menu == "Secretaria"'> class="active"</s:if>>
-            <i class="fa fa-bookmark"></i>
+            <i class="fa fa-address-book"></i>
             <span>Secretarias</span>
         </a>
     </li>
     
+    <li>
+        <a href="listProjeto" <s:if test='menu == "Projeto"'> class="active"</s:if>>
+            <i class="fa fa-folder-open"></i>
+            <span>Projetos</span>
+        </a>
+    </li>
 
     <li>
         <a href="logout">
