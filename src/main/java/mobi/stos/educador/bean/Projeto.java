@@ -35,9 +35,6 @@ public class Projeto implements Serializable{
     
     @Type (type = "text")
     private String dadosContato;
-
-    
-    
     
     public Long getId() {
         return id;

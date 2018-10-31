@@ -28,6 +28,13 @@
             <span>Projetos</span>
         </a>
     </li>
+    
+    <li>
+        <a href="listEscola" <s:if test='menu == "Projeto"'> class="active"</s:if>>
+            <i class="fa fa-book"></i>
+            <span>Escolas</span>
+        </a>
+    </li>
 
     <li>
         <a href="logout">

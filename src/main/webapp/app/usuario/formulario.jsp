@@ -21,7 +21,7 @@
                         <div class="form-group">                      
                             <label>Situacão:</label>
                             <div>
-                                <s:select name="usuario.ativo" id="usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value"  emptyOption="true"  required="true"/>
+                                <s:select name="usuario.ativo" id="usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
                             </div>
                         </div>
                     </div>

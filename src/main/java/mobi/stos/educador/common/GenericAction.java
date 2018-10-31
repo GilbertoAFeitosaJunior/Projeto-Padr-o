@@ -148,8 +148,8 @@ public abstract class GenericAction extends ActionSupport implements Preparable,
     @JSON(serialize = false)
     public List getBooleanConditionEnum() {
         List<Keys> keys = new ArrayList<>();
-        keys.add(new Keys("true", "Sim"));
-        keys.add(new Keys("false", "Não"));
+        keys.add(new Keys("true", "Ativo"));
+        keys.add(new Keys("false", "Desativado"));
         return keys;
     }
 
