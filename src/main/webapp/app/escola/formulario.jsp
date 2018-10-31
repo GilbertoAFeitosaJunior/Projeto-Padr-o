@@ -32,7 +32,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                         <label>CEP</label>
-                        <s:textfield type="text" name="escola.cepStringMask" id="escola.cepStringMask" cssClass="form-control" data-mask="999999-999" required="true" />
+                        <s:textfield type="text" name="escola.cepStringMask" id="escola.cepStringMask" cssClass="form-control" data-mask="99999-999" required="true" />
                         </div>
                     </div>
                     <div class="col-lg-8">

@@ -9,7 +9,7 @@ var Script = function () {
                 "escola.projeto.id": {
                     required: "Favor preencher esse campo"
                 },
-                "escola.cep": {
+                "escola.cepStringMask": {
                     required: "Favor preencher esse campo"
                 },
                 "escola.logradouro": {
