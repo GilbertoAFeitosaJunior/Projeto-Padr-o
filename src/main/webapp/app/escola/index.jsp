@@ -77,23 +77,23 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th class="col-lg-5">Nome</th>
-                        <th class="col-lg-2">Projeto</th>
-                        <th class="col-lg-2">Situação</th>
-                        <th class="col-lg-1">Relacionamento</th>
-                        <th class="col-lg-1">UF</th>
-                        <th class="col-lg-2 text-right">A&ccedil;&otilde;es</th>
+                        <th class="col-lg-5 col-sm-5 col-xs-5">Nome</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2">Projeto</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">Relacionamento</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">UF</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
                     <s:iterator value="escolas">
                         <tr>       
-                            <td class="col-lg-5"><s:property value="nome" /></td>
-                            <td class="col-lg-2"><s:property value="projeto.nome" /></td>
-                            <td class="col-lg-2"><s:property value="situacaoEnum.name" /></td>
-                            <td class="col-lg-1"><s:property value="nivelRelacionamentoEnum.name" /></td>
-                            <td class="col-lg-1"><s:property value="uf" /></td>
-                            <td class="col-lg-2 text-right">
+                            <td ><s:property value="nome" /></td>
+                            <td><s:property value="projeto.nome" /></td>
+                            <td ><s:property value="situacaoEnum.name" /></td>
+                            <td ><s:property value="nivelRelacionamentoEnum.name" /></td>
+                            <td ><s:property value="uf" /></td>
+                            <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
                                         <i class="fa fa-edit"></i>

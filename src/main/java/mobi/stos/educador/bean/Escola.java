@@ -32,7 +32,8 @@ public class Escola implements Serializable {
 
     @Column(length = 100, nullable = false)
     private String nome;
-
+    
+    @Column(nullable = false)
     private int cep;
 
     @Column(length = 100, nullable = false)
@@ -69,9 +70,9 @@ public class Escola implements Serializable {
     private String inep;
     
     public String getCepStringMask() {
-        return Util.format("#####-###", Util.zeroFill(this.cep, 11));
+        return Util.format("#####-###", Util.zeroFill(this.cep, 8));
     }
-    public void setCpjStringMask(String cep) {
+    public void setCepStringMask(String cep) {
         this.cep = Integer.parseInt(Util.onlyNumber(cep));
     }
 

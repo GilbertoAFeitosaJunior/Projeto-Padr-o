@@ -87,6 +87,8 @@ public class EscolaAction extends GenericAction{
             if (escola != null && escola.getId() != null) {
                 entity = escolaBo.load(escola.getId());
             }
+            System.out.println(escola.getCep());
+            System.out.println(escola.getCepStringMask());
             this.escolaBo.persist(escola);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEscola");
