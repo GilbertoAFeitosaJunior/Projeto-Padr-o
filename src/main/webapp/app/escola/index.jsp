@@ -77,15 +77,23 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th class="col-lg-5">Nome</th>
+                        <th class="col-lg-2">Projeto</th>
+                        <th class="col-lg-2">Situação</th>
+                        <th class="col-lg-1">Relacionamento</th>
+                        <th class="col-lg-1">UF</th>
                         <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
                     <s:iterator value="escolas">
                         <tr>       
-                            <td><s:property value="nome" /></td>
-                            <td class="text-right">
+                            <td class="col-lg-5"><s:property value="nome" /></td>
+                            <td class="col-lg-2"><s:property value="projeto.nome" /></td>
+                            <td class="col-lg-2"><s:property value="situacaoEnum.name" /></td>
+                            <td class="col-lg-1"><s:property value="nivelRelacionamentoEnum.name" /></td>
+                            <td class="col-lg-1"><s:property value="uf" /></td>
+                            <td class="col-lg-1 text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
                                         <i class="fa fa-edit"></i>

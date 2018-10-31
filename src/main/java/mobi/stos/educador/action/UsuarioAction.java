@@ -72,6 +72,27 @@ public class UsuarioAction extends GenericAction {
         }
     }
 
+    @Action(value = "prepareUsuario",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
+                @Result(name = SUCCESS, location = "/app/usuario/formulario.jsp")
+            })
+    public String preparar() {
+        try {
+            GenericAction.isLogged(request);
+            if (usuario != null && usuario.getId() != null) {
+                usuario = this.usuarioBo.load(this.usuario.getId());
+            }
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+    }
+    
     @Action(value = "login",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -161,7 +182,7 @@ public class UsuarioAction extends GenericAction {
                 ,
                 @Result(name = SUCCESS, location = "/app/usuario/formulario.jsp")
             })
-    public String preparar() {
+    public String prepararBoolean() {
         try {
             GenericAction.isLogged(request);
             if (usuario != null && usuario.getId() != null) {

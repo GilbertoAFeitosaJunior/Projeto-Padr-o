@@ -15,19 +15,100 @@
                 <s:hidden name="escola.id" />
 
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Projeto</label>
-                            <s:select name="escola.projeto.id" id="escola.projeto.id" list="projetos" listKey="id" listValue="nome" required="true" cssClass="form-control" />
-                        </div>
-                    </div>
                     <div class="col-lg-8">
                         <div class="form-group">                      
                             <label>Nome:</label>
-                                <s:textfield name="escola.nome" id="escola.nome" maxlength="255" cssClass="form-control" required="true" />
+                                <s:textfield name="escola.nome" id="escola.nome" maxlength="100" cssClass="form-control" required="true" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Projeto</label>
+                            <s:select name="escola.projeto.id" id="escola.projeto.id" list="projetos" listKey="id" listValue="nome" required="true" cssClass="form-control" emptyOption="true"/>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                        <label>CEP</label>
+                        <s:textfield type="text" name="escola.cepStringMask" id="escola.cepStringMask" cssClass="form-control" data-mask="999999-999" required="true" />
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Logradouro</label>
+                            <s:textfield type="text" name="escola.logradouro" id="escola.logradouro" cssClass="form-control" required="true" maxlength="100"/>
+                        </div>
+                    </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label>Numero</label>
+                                <s:textfield type="text" name="escola.numero" id="escola.numero" cssClass="form-control" required="true" maxlength="10" />
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label>Complemento</label>
+                        <s:textfield type="text" name="escola.complemento" id="escola.complemento" cssClass="form-control" maxlength="100"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Bairro</label>
+                            <s:textfield type="text" name="escola.bairro" id="escola.bairro" cssClass="form-control" required="true" maxlength="50" />
+                        </div>
+                    </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label>Cidade</label>
+                                <s:textfield type="text" name="escola.cidade" id="escola.cidade" cssClass="form-control" required="true" maxlength="50" />
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="form-group">
+                                <label>UF</label>
+                                <s:textfield type="text" name="escola.uf" id="escola.uf" cssClass="form-control" required="true" maxlength="2" />
+                            </div>
+                        </div>
+                </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Nivel de Relacionamento</label>
+                                        <s:select name="escola.nivelRelacionamentoEnum" id="escola.nivelRelacionamentoEnum" list="nivelRelacionamentoEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Situação</label>
+                                        <s:select name="escola.situacaoEnum" id="situacaoEnum" list="situacaoEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
+                                    </div>
+                                </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Inep</label>
+                                            <s:textfield name="escola.inep" id="escola.inep" maxlength="50" cssClass="form-control" />
+                                        </div>
+                                    </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Responsável</label>
+                                            <s:textfield name="escola.responsavel" id="escola.responsavel" cssClass="form-control" maxlength="100" />
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>Contato</label>
+                                                <s:textarea name="escola.responsavelContato" id="escola.responsavelContato" cssClass="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                
 
                 <div class="panel-body pull-right">
                     <button type="button" class="btn btn-danger" onclick="window.location = 'listEscola'">Cancelar</button>

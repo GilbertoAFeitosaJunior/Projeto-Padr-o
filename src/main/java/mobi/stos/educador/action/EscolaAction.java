@@ -4,6 +4,7 @@ package mobi.stos.educador.action;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,8 @@ import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IProjetoBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
+import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
+import mobi.stos.educador.enumm.SituacaoProjetoEnum;
 import mobi.stos.educador.exception.LoginExpiradoException;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
@@ -139,11 +142,22 @@ public class EscolaAction extends GenericAction{
             return ERROR;
         }
     }
+    
+    @JSON(serialize = false)
+    public List getNivelRelacionamentoEnums() {
+        return Arrays.asList(NivelRelacionamentoEnum.values());
+    }
+    
+    @JSON(serialize = false)
+    public List getSituacaoEnums() {
+        return Arrays.asList(SituacaoProjetoEnum.values());
+    }
 
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
+        list.add(new Keys("uf", "UF"));
         return list;
     }
 

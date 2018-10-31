@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
+import mobi.stos.educador.util.Util;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -53,7 +54,7 @@ public class Escola implements Serializable {
     private String uf;
 
     @Column(nullable = false)
-    private NivelRelacionamentoEnum nivelRelacionamento;
+    private NivelRelacionamentoEnum nivelRelacionamentoEnum;
 
     @Column(length = 100)
     private String responsavel;
@@ -66,6 +67,13 @@ public class Escola implements Serializable {
 
     @Column(length = 50)
     private String inep;
+    
+    public String getCepStringMask() {
+        return Util.format("#####-###", Util.zeroFill(this.cep, 11));
+    }
+    public void setCpjStringMask(String cep) {
+        this.cep = Integer.parseInt(Util.onlyNumber(cep));
+    }
 
     public Long getId() {
         return id;
@@ -137,11 +145,11 @@ public class Escola implements Serializable {
         this.uf = uf;
     }
 
-    public NivelRelacionamentoEnum getNivelRelacionamento() {
-        return nivelRelacionamento;
+    public NivelRelacionamentoEnum getNivelRelacionamentoEnum() {
+        return nivelRelacionamentoEnum;
     }
-    public void setNivelRelacionamento(NivelRelacionamentoEnum nivelRelacionamento) {
-        this.nivelRelacionamento = nivelRelacionamento;
+    public void setNivelRelacionamentoEnum(NivelRelacionamentoEnum nivelRelacionamentoEnum) {
+        this.nivelRelacionamentoEnum = nivelRelacionamentoEnum;
     }
 
     public String getResponsavel() {
