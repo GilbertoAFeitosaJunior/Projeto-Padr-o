@@ -22,7 +22,7 @@
                         <div class="form-group">                      
                             <label>Secretaria:</label>
                             <div>
-                                <s:select name="projeto.secretaria.id" id="projeto.secretaria.id" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" required="true"/>
+                                <s:select name="projeto.secretaria.id" id="projeto.secretaria.id" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" emptyOption="true" required="true"/>
                             </div>
                         </div>
                     </div>        
@@ -32,7 +32,7 @@
                         <div class="form-group">                      
                             <label>Situação do Projeto</label>
                             <div>
-                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control"    list="situacaoProjetoEnums" listValue="name" required="true"/>
+                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control"    list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
                             </div>
                         </div>
                     </div>          

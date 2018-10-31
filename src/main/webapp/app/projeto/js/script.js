@@ -9,7 +9,7 @@ var Script = function () {
                 "projeto.situacaoProjetoEnum": {
                     required: "Favor preencher esse campo"
                 },
-                "projeto.secretaria": {
+                "projeto.secretaria.id": {
                     required: "Favor preencher esse campo"
                 }
             }
