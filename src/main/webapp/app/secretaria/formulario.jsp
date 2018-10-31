@@ -7,7 +7,7 @@
 
     <section class="panel">
         <header class="panel-heading">
-            Salvar Usu&aacute;rio
+            Salvar Secretaria
         </header>
 
         <div class="panel-body">
