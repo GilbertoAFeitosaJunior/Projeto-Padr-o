@@ -22,7 +22,7 @@
                         <div class="form-group">                      
                             <label>Secretaria:</label>
                             <div>
-                                <s:select <option selected=" " /> name="projeto.secretaria.id" id="projeto.secretaria.id" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" required="true"/>
+                                <s:select  name="projeto.secretaria.id" id="projeto.secretariaption selected=" " />.id" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" required="true"/>
                             </div>
                         </div>
                     </div>        
