@@ -153,7 +153,7 @@ public class UsuarioAction extends GenericAction {
         }
     }
 
-    @Action(value = "prepareUsuario",
+    @Action(value = "booleanConditionEnumUsuario",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
