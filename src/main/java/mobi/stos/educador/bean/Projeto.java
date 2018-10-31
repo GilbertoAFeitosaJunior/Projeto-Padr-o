@@ -30,7 +30,7 @@ public class Projeto implements Serializable{
     @Column(length = 100)
     private String responsavel;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Secretaria secretaria;
     
     @Type (type = "text")
