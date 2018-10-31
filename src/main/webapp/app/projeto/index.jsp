@@ -77,10 +77,10 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Secretaria</th>
-                        <th>Situação</th>
-                        <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
+                        <th class="col-lg-5 col-sm-5 col-xs-5 text-left">Nome</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Secretaria</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-left" >Situação</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
