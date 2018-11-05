@@ -38,7 +38,7 @@
     
     <li>
         <a href="listMetodologia" <s:if test='menu == "Metodologia"'> class="active"</s:if>>
-            <i class="fa fa-folder-open"></i>
+            <i class="fa fa-archive"></i>
             <span>Metodologias</span>
         </a>
     </li>
