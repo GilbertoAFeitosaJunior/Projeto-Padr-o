@@ -35,6 +35,13 @@
             <span>Escolas</span>
         </a>
     </li>
+    
+    <li>
+        <a href="listMetodologia" <s:if test='menu == "Metodologia"'> class="active"</s:if>>
+            <i class="fa fa-folder-open"></i>
+            <span>Metodologias</span>
+        </a>
+    </li>
 
     <li>
         <a href="logout">

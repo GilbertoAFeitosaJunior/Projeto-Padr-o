@@ -8,14 +8,14 @@
 
     <section class="panel">
         <header class="panel-heading">
-            Pesquisar Secretaria
+            Pesquisar Metodologia
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
         </header>
 
         <div class="panel-body">
-            <s:form acceptcharset="UTF-8" method="post" action="listSecretaria" theme="simple">
+            <s:form acceptcharset="UTF-8" method="post" action="listMetodologia" theme="simple">
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -77,14 +77,20 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th class="col-lg-5 col-sm-5 col-xs-5 text-left">Nome</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Escola</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-left" >Aplicabilidade</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-left" >Ativo</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="secretarias">
+                    <s:iterator value="metodologias">
                         <tr>       
                             <td><s:property value="nome" /></td>
+                            <td><s:property value="escola.nome" /></td>
+                            <td><s:property value="aplicabilidadeEnum.name" />  </td>
+                            <td><s:property value="ativo" /></td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
@@ -134,16 +140,16 @@
                         _helperID = null;
                         var list = {
                             add: function () {
-                                window.location = "prepareSecretaria";
+                                window.location = "prepareMetodologia";
                             },
                             edit: function (id) {
-                                window.location = "prepareSecretaria?secretaria.id=" + id;
+                                window.location = "prepareMetodologia?metodologia.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteSecretaria?secretaria.id=" + _helperID;
+                                window.location = "deleteMetodologia?metodologia.id=" + _helperID;
                             }
                         };
 
@@ -155,10 +161,12 @@
                                 "operador": "${consulta.operador}",
                                 "campo": "${consulta.campo}",
                                 "valor": "${consulta.valor}",
-                                "url": "listSecretaria"
+                                "url": "listMetodologia"
                             });
                         });
     </script>
     <%@include file="../fragment/truend.jsp" %>
 
 </compress:html>
+
+
