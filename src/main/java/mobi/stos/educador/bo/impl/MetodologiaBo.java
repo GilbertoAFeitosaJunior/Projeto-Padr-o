@@ -18,5 +18,10 @@ public class MetodologiaBo extends AbstractService<Metodologia> implements IMeto
     protected IOperations<Metodologia> getDao() {
         return dao;
     }
+
+    @Override
+    public void deleteMetodologiaEscola(Long idMetodologia, Long idEscola) {
+        dao.deleteMetodologiaEscola(idMetodologia, idEscola);
+    }
     
 }

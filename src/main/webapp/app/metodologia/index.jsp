@@ -78,7 +78,6 @@
                 <thead>
                     <tr>
                         <th class="col-lg-5 col-sm-5 col-xs-5 text-left">Nome</th>
-                        <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Escola</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-left" >Aplicabilidade</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-left" >Ativo</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
@@ -88,7 +87,6 @@
                     <s:iterator value="metodologias">
                         <tr>       
                             <td><s:property value="nome" /></td>
-                            <td><s:property value="escola.nome" /></td>
                             <td><s:property value="aplicabilidadeEnum.name" />  </td>
                             <td><s:property value="ativo" /></td>
                             <td class="text-right">

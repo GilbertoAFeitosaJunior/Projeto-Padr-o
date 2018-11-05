@@ -15,6 +15,7 @@ import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.enumm.AplicabilidadeEnum;
 import mobi.stos.educador.exception.LoginExpiradoException;
+import mobi.stos.educador.util.JsonReturn;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
@@ -43,6 +44,53 @@ public class MetodologiaAction extends GenericAction{
     private IEscolaBo escolaBo;
     
     
+    
+    
+    @Action(value = "listMetodologiaEscola",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String listMetodologiaEscola() {
+        try {
+            GenericAction.isLogged(request);
+            metodologia = this.metodologiaBo.load(metodologia.getId());
+            jsonReturn = new JsonReturn(true);
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
+
+    @Action(value = "deleteMetodologiaEscola",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String deleteMetodologiaEscola() {
+        try {
+            GenericAction.isLogged(request);
+            
+            this.metodologiaBo.deleteMetodologiaEscola(metodologia.getId(), escola.getId());
+//            metodologia = null;
+//            escola = null;
+            
+            jsonReturn = new JsonReturn("Excluido com sucesso",true);
+            
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
+    
+    
+    
+    
+    
     @Action(value = "prepareMetodologia",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -69,7 +117,7 @@ public class MetodologiaAction extends GenericAction{
     
     
     
-    @Action(value = "persistProdutoFornecedor",
+    @Action(value = "persistMetodologiaEscola",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
                 ,
@@ -110,6 +158,34 @@ public class MetodologiaAction extends GenericAction{
             return SUCCESS;
         }
     
+    @Action(value = "persistMetodologia",
+            interceptorRefs = {
+                @InterceptorRef(value = "fileUploadStack")
+                ,
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
+            })
+    public String persist() {
+        try {
+            GenericAction.isLogged(request);
+            Metodologia entity = null;
+            if (metodologia != null && metodologia.getId() != null) {
+                entity = metodologiaBo.load(metodologia.getId());
+            }
+            this.metodologiaBo.persist(metodologia);
+            addActionMessage("Registro salvo com sucesso.");
+            setRedirectURL("listMetodologia");
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+        return SUCCESS;
+    }
+    
     
     @Action(value = "deleteMetodologia",
             interceptorRefs = {
@@ -148,7 +224,7 @@ public class MetodologiaAction extends GenericAction{
             }
 
             Consulta c = getConsulta();
-            c.addAliasTable("escolas", "escolas", JoinType.INNER_JOIN);
+//            c.addAliasTable("escolas", "escolas", JoinType.INNER_JOIN);
             this.metodologias = metodologiaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -163,7 +239,26 @@ public class MetodologiaAction extends GenericAction{
     
     
     
-    
+//    @Action(value = "booleanConditionEnumUsuario",
+//            interceptorRefs = {
+//                @InterceptorRef(value = "basicStack")},
+//            results = {
+//                @Result(name = ERROR, location = "/app/notify/")
+//                ,
+//                @Result(name = SUCCESS, location = "/app/metodologia/formulario.jsp")
+//            })
+//    public String prepararBoolean() {
+//        try {
+//            GenericAction.isLogged(request);
+//            if (metodologia != null && metodologia.getId() != null) {
+//                metodologia = this.metodologia.load(this.metodologia.getId());
+//            }
+//            return SUCCESS;
+//        } catch (Exception e) {
+//            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+//            return ERROR;
+//        }
+//    }
     
     
     
@@ -224,12 +319,12 @@ public class MetodologiaAction extends GenericAction{
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
-        list.add(new Keys("escola.nome", "Escola"));
+//        list.add(new Keys("escola.nome", "Escola"));
         return list;
     }
     
     @JSON(serialize = false)
-    public List getSituacaoProjetoEnums() {
+    public List getAplicabilidadeEnums() {
         return Arrays.asList(AplicabilidadeEnum.values());
     }
     
