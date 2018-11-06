@@ -12,7 +12,7 @@
 
             <div class="row">
 
-                <div class="col-lg-4">
+                <div class="col-lg-8">
                     <div class="form-group">                      
                         <label>Nome:</label>
                         <div>
@@ -20,34 +20,23 @@
                         </div>
                     </div>
                 </div>        
-
-
-                <div class="col-lg-4">
-                    <div class="form-group">                      
-                        <label>Aplicabilidade da Metodologia:   </label>
-                        <div>
-                            <s:select name="metodologia.aplicabilidadeEnum" id="metodologia.aplicabilidadeEnum" cssClass="form-control"    list="aplicabilidadeEnums" listValue="name" emptyOption="true" required="true"/>
-                        </div>
-                    </div>
-                </div>          
-
             </div>
 
-            <div class="row">
+        
 
                 <div class="row">        
                     <div class="col-lg-8">
                         <div class="form-group">                      
                             <label>Descrição:</label>
                             <div>
-                                <s:textfield name="metodologia.descricao" id="metodologia.descricao" cssClass="form-control" />
+                                <s:textarea name="metodologia.descricao" id="metodologia.descricao" cssClass="form-control" />
                             </div>
                         </div>
                     </div>
                 </div>        
 
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-4">
                         <div class="form-group">                      
                             <label>Situação:</label>
                             <div>
@@ -55,6 +44,15 @@
                             </div>
                         </div>
                     </div>
+                            
+                            <div class="col-lg-4">
+                    <div class="form-group">                      
+                        <label>Aplicabilidade da Metodologia:   </label>
+                        <div>
+                            <s:select name="metodologia.aplicabilidadeEnum" id="metodologia.aplicabilidadeEnum" cssClass="form-control"    list="aplicabilidadeEnums" listValue="name" emptyOption="true" required="true"/>
+                        </div>
+                    </div>
+                </div>  
                 </div>            
 
 
@@ -67,4 +65,5 @@
 
 
         </div>
+
 </section>
