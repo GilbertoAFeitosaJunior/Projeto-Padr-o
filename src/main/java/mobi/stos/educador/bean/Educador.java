@@ -2,11 +2,17 @@
 package mobi.stos.educador.bean;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,6 +33,14 @@ public class Educador implements Serializable {
     
     @ManyToOne(optional = false)
     private Usuario usuario;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "escola_educador",
+            joinColumns = {
+                @JoinColumn(name = "escola_id", nullable = false, referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "educador_id", nullable = false, referencedColumnName = "id")})
+    private Set<Escola> escolas;
     
     @Column(length = 100, nullable = false)
     private String nome;
@@ -150,6 +164,25 @@ public class Educador implements Serializable {
     }
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public Set<Escola> getEscolas() {
+        return escolas;
+    }
+    public void setEscolas(Set<Escola> escolas) {
+        this.escolas = escolas;
+    }
+
+    public void addEscola(Escola escola) {
+        if (this.escolas == null) {
+            this.escolas = new HashSet<>();
+        }  
+        this.escolas.add(escola);
+    }
+    public void removeFornecedor(Escola escola) {
+        if (this.escolas != null) {
+            this.escolas.remove(escola);
+        }
     }
     
 }
