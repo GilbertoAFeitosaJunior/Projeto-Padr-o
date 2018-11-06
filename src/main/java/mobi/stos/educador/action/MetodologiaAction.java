@@ -47,8 +47,6 @@ public class MetodologiaAction extends GenericAction{
     
     
     @Action(value = "listMetodologiaEscola",
-            interceptorRefs = {
-                @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = SUCCESS, type = "json")
             })
@@ -56,6 +54,7 @@ public class MetodologiaAction extends GenericAction{
         try {
             GenericAction.isLogged(request);
             metodologia = this.metodologiaBo.load(metodologia.getId());
+            escola = this.escolaBo.load(escola.getId());
             jsonReturn = new JsonReturn(true);
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -186,6 +185,44 @@ public class MetodologiaAction extends GenericAction{
         return SUCCESS;
     }
     
+    @Action(value = "persistMetodologiaJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String persistMetodologiaJson() {
+        try {
+            GenericAction.isLogged(request);
+            System.out.println("AQUI PORRA");
+            System.out.println(metodologia.getId());
+            System.out.println(escola.getId());
+            
+           if (escola.getId() != null) {
+                metodologia = this.metodologiaBo.load(metodologia.getId());
+                escola = this.escolaBo.load(escola.getId());
+
+                boolean ok = true;
+                for (Escola e : metodologia.getEscolas()) {
+                    if (e.getId() == ((long) escola.getId())) {
+                        ok = false;
+                    }
+                }
+                if (ok) {
+                    metodologia.addEscola(escola);
+                    this.metodologiaBo.persist(metodologia);
+                    jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
+                } else {
+                    jsonReturn = new JsonReturn("O fornecedor já incluso no produto.", false);
+                }
+            } else {
+                jsonReturn = new JsonReturn(false);
+            }
+
+        } catch (Exception e) {
+             e.printStackTrace();
+             //this.jsonReturn = new JsonReturn(false);
+         }
+            return SUCCESS;
+        }     
     
     @Action(value = "deleteMetodologia",
             interceptorRefs = {

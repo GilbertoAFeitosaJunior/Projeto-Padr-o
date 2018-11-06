@@ -19,5 +19,9 @@ public enum NivelRelacionamentoEnum {
     public String getName() {
         return name;
     }
+    
+    public static NivelRelacionamentoEnum retornaEnumNaPosicao (int posicao){
+        return NivelRelacionamentoEnum.values()[posicao];
+    }
 
 }

@@ -20,5 +20,10 @@ public enum SituacaoProjetoEnum {
     public String getName() {
         return name;
     }
+
+
+    public static SituacaoProjetoEnum retornaEnumNaPosicao (int posicao){
+        return SituacaoProjetoEnum.values()[posicao];
+    }
     
 }
