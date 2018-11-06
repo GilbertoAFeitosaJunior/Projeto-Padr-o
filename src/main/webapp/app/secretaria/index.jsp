@@ -78,7 +78,7 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th class="col-lg-1 text-right">A&ccedil;&otilde;es</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
