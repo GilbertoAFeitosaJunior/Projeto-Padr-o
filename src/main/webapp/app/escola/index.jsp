@@ -77,7 +77,7 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th class="col-lg-5 col-sm-5 col-xs-5">Nome</th>
+                        <th class="col-lg-6 col-sm-6 col-xs-6">Nome</th>
                         <th class="col-lg-2 col-sm-2 col-xs-2">Projeto</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1">Relacionamento</th>

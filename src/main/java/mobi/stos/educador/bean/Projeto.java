@@ -36,12 +36,12 @@ public class Projeto implements Serializable{
     @Type (type = "text")
     private String dadosContato;
     
-    public Projeto(){
-        
+    public Projeto() {
+
     }
 
     public Projeto(long id) {
-         this.id=id;
+        this.id = id;
     }
     
     public Long getId() {

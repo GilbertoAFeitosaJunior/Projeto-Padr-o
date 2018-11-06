@@ -2,6 +2,7 @@
 package mobi.stos.educador.bean;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import mobi.stos.educador.util.Util;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -106,8 +109,12 @@ public class Educador implements Serializable {
     public String getSenha() {
         return senha;
     }
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String senha) throws NoSuchAlgorithmException {
+        if (StringUtils.isNotEmpty(senha) && senha.length() < 32) {
+            this.senha = Util.md5(senha);
+        } else {
+            this.senha = senha;
+        }
     }
 
     public int getDdd() {
