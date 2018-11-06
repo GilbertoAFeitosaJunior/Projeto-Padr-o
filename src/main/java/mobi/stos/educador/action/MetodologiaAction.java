@@ -74,7 +74,6 @@ public class MetodologiaAction extends GenericAction {
 
             System.out.println(metodologia.getId());
             System.out.println(escola.getId());
-
             this.metodologiaBo.deleteMetodologiaEscola(metodologia.getId(), escola.getId());
 
             jsonReturn = new JsonReturn("Excluido com sucesso", true);

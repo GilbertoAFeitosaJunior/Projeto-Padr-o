@@ -69,27 +69,58 @@ var escola = {
         });
     },
 
-    remove: function (id) {
-        $.ajax({
-            type: "POST",
-            url: "deleteMetodologiaEscola",
-            data: {
-                "metodologia.id": $("[name='metodologia.id']").val(),
-                "escola.id": id
-            },
-            dataType: "json"
-        }).done(function (json) {
-            notify.success("Sucesso", "Registro excluído com sucesso!");
-            escola.list();
+//    remove: function (id) {
+//        $.ajax({
+//            type: "POST",
+//            url: "deleteMetodologiaEscola",
+//            data: {
+//                "metodologia.id": $("[name='metodologia.id']").val(),
+//                "escola.id": id
+//            },
+//            dataType: "json"
+//        }).done(function (json) {
+//            notify.success("Sucesso", "Registro excluído com sucesso!");
+//            escola.list();
+//
+//        }).fail(function () {
+//            notify.error("Erro", "Erro ao tentar excluir o registro, favor tente novamente.");
+//        }).always(function () {
+//        });
+//    },
 
-        }).fail(function () {
-            notify.error("Erro", "Erro ao tentar excluir o registro, favor tente novamente.");
-        }).always(function () {
-        });
-    },
+
     init: function () {
         this.list();
+    },
+
+
+    remove: function (id) {
+        if (confirm("Deseja excluir esse registro?")) {
+            $.ajax({
+                type: "POST",
+                url: "deleteMetodologiaEscola",
+                data: {
+                    "metodologia.id": $("[name='metodologia.id']").val(),
+                    "escola.id": id
+                },
+                dataType: "json"
+            })
+                    .done(function (json) {
+
+                        notify.success("Sucesso", "Registro deletado");
+
+                        escola.list();
+
+                    })
+                    .fail(function () {
+                        notify.error("Erro", "Impossível de estabelecer conexão servidor");
+                    })
+                    .always(function () {
+                        //fill = "";
+                    });
+        }
     }
+
 
 
 

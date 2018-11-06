@@ -74,17 +74,14 @@ public class MetodologiaDao extends AbstractHibernateDao<Metodologia> implements
     @Override
     public void deleteMetodologiaEscola(long idMetodologia, long idEscola) {
 
-        System.out.println("dao idMetodologia" + idMetodologia);
-        System.out.println("dao idEscola" + idEscola);
         
         Metodologia metodologia = super.load(idMetodologia);
 
         if (metodologia != null) {
             StringBuilder sql = new StringBuilder();
-            sql.append("DELETE");
-            sql.append("FROM metodologia_escola a ");
-            sql.append("WHERE a.metodologia_id = :metodologia_id and a.escola_id = :escola_id");
-
+            sql.append(" DELETE ");
+            sql.append(" FROM metodologia_escola a ");
+            sql.append(" WHERE a.metodologia_id = :metodologia_id and a.escola_id = :escola_id ");
             SQLQuery query = getCurrentSession().createSQLQuery(sql.toString());
             query.setParameter("metodologia_id", idMetodologia);
             query.setParameter("escola_id", idEscola);
