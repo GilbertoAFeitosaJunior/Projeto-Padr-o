@@ -8,7 +8,7 @@
     <div class="panel-body">
 
         <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistMetodologia" theme="simple" enctype="multipart/form-data">
-            <s:hidden name="metodologia.id" />
+            <s:hidden name="metodologia.id"/>
 
             <div class="row">
 
@@ -16,7 +16,7 @@
                     <div class="form-group">                      
                         <label>Nome:</label>
                         <div>
-                            <s:textfield name="metodologia.nome" id="metodologia.nome" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" emptyOption="true" required="true"/>
+                            <s:textfield name="metodologia.nome" id="metodologia.nome" cssClass="form-control" required="true"/>
                         </div>
                     </div>
                 </div>        
