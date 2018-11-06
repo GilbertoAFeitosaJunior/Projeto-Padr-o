@@ -25,27 +25,22 @@ import org.apache.struts2.json.annotations.JSON;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
+public class MetodologiaAction extends GenericAction {
 
-
-public class MetodologiaAction extends GenericAction{
-    
     private Metodologia metodologia;
-    
+
     private Escola escola;
-    
+
     private List<Metodologia> metodologias;
-    
+
     private List<Escola> escolas;
-    
+
     @Autowired
     private IMetodologiaBo metodologiaBo;
-    
+
     @Autowired
     private IEscolaBo escolaBo;
-    
-    
-    
-    
+
     @Action(value = "listMetodologiaEscola",
             results = {
                 @Result(name = SUCCESS, type = "json")
@@ -53,8 +48,11 @@ public class MetodologiaAction extends GenericAction{
     public String listMetodologiaEscola() {
         try {
             GenericAction.isLogged(request);
+
             metodologia = this.metodologiaBo.load(metodologia.getId());
-            escola = this.escolaBo.load(escola.getId());
+            for (Escola escola1 : metodologia.getEscolas()) {
+                escola1.setProjeto(null);
+            }
             jsonReturn = new JsonReturn(true);
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -71,25 +69,23 @@ public class MetodologiaAction extends GenericAction{
             })
     public String deleteMetodologiaEscola() {
         try {
+
             GenericAction.isLogged(request);
-            
+
+            System.out.println(metodologia.getId());
+            System.out.println(escola.getId());
+
             this.metodologiaBo.deleteMetodologiaEscola(metodologia.getId(), escola.getId());
-//            metodologia = null;
-//            escola = null;
-            
-            jsonReturn = new JsonReturn("Excluido com sucesso",true);
-            
+
+            jsonReturn = new JsonReturn("Excluido com sucesso", true);
+
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             jsonReturn = new JsonReturn(false);
         }
         return SUCCESS;
     }
-    
-    
-    
-    
-    
+
     @Action(value = "prepareMetodologia",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -104,7 +100,7 @@ public class MetodologiaAction extends GenericAction{
             if (metodologia != null && metodologia.getId() != null) {
                 metodologia = this.metodologiaBo.load(this.metodologia.getId());
             }
-
+            this.metodologias = this.metodologiaBo.listall();
             this.escolas = this.escolaBo.listall();
 
             return SUCCESS;
@@ -113,50 +109,7 @@ public class MetodologiaAction extends GenericAction{
             return ERROR;
         }
     }
-    
-    
-    
-    @Action(value = "persistMetodologiaEscola",
-            interceptorRefs = {
-                @InterceptorRef(value = "fileUploadStack")
-                ,
-                @InterceptorRef(value = "basicStack")},
-            results = {
-                @Result(name = SUCCESS, location = "/app/notify/")
-                ,
-                @Result(name = ERROR, location = "/app/notify/")
-            })
-    public String persistMetodologiaEscola() {
-        try {
-            GenericAction.isLogged(request);
 
-            if (escola.getId() != null) {
-                metodologia = this.metodologiaBo.load(metodologia.getId());
-                escola = this.escolaBo.load(escola.getId());
-
-                boolean ok = true;
-                for (Escola e : metodologia.getEscolas()) {
-                    if (e.getId() == ((long) escola.getId())) {
-                        ok = false;
-                    }
-                }
-                if (ok) {
-                    metodologia.addEscola(escola);
-                    this.metodologiaBo.persist(metodologia);
-                    addActionMessage("Registro salvo com sucesso.");
-                } else {
-                    addActionMessage("Já existe uma escola cadastrada!");
-                }
-            } else {
-                addActionMessage("Escola não existe!");
-            }
-
-        } catch (Exception e) {
-             e.printStackTrace();
-         }
-            return SUCCESS;
-        }
-    
     @Action(value = "persistMetodologia",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
@@ -184,7 +137,7 @@ public class MetodologiaAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "persistMetodologiaJson",
             results = {
                 @Result(name = SUCCESS, type = "json")
@@ -195,8 +148,8 @@ public class MetodologiaAction extends GenericAction{
             System.out.println("AQUI PORRA");
             System.out.println(metodologia.getId());
             System.out.println(escola.getId());
-            
-           if (escola.getId() != null) {
+
+            if (escola.getId() != null) {
                 metodologia = this.metodologiaBo.load(metodologia.getId());
                 escola = this.escolaBo.load(escola.getId());
 
@@ -218,12 +171,12 @@ public class MetodologiaAction extends GenericAction{
             }
 
         } catch (Exception e) {
-             e.printStackTrace();
-             //this.jsonReturn = new JsonReturn(false);
-         }
-            return SUCCESS;
-        }     
-    
+            e.printStackTrace();
+            //this.jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
+
     @Action(value = "deleteMetodologia",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -241,9 +194,7 @@ public class MetodologiaAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
-    
-    
+
     @Action(value = "listMetodologia",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -261,7 +212,6 @@ public class MetodologiaAction extends GenericAction{
             }
 
             Consulta c = getConsulta();
-//            c.addAliasTable("escolas", "escolas", JoinType.INNER_JOIN);
             this.metodologias = metodologiaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -270,38 +220,8 @@ public class MetodologiaAction extends GenericAction{
             return ERROR;
         }
     }
-    
-    
-    
-    
-    
-    
-//    @Action(value = "booleanConditionEnumUsuario",
-//            interceptorRefs = {
-//                @InterceptorRef(value = "basicStack")},
-//            results = {
-//                @Result(name = ERROR, location = "/app/notify/")
-//                ,
-//                @Result(name = SUCCESS, location = "/app/metodologia/formulario.jsp")
-//            })
-//    public String prepararBoolean() {
-//        try {
-//            GenericAction.isLogged(request);
-//            if (metodologia != null && metodologia.getId() != null) {
-//                metodologia = this.metodologia.load(this.metodologia.getId());
-//            }
-//            return SUCCESS;
-//        } catch (Exception e) {
-//            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
-//            return ERROR;
-//        }
-//    }
-    
-    
-    
-    
-    //getters and setters
 
+    //getters and setters
     public Metodologia getMetodologia() {
         return metodologia;
     }
@@ -326,22 +246,6 @@ public class MetodologiaAction extends GenericAction{
         this.escolas = escolas;
     }
 
-    public IMetodologiaBo getMetodologiaBo() {
-        return metodologiaBo;
-    }
-
-    public void setMetodologiaBo(IMetodologiaBo metodologiaBo) {
-        this.metodologiaBo = metodologiaBo;
-    }
-
-    public IEscolaBo getEscolaBo() {
-        return escolaBo;
-    }
-
-    public void setEscolaBo(IEscolaBo escolaBo) {
-        this.escolaBo = escolaBo;
-    }
-
     public Escola getEscola() {
         return escola;
     }
@@ -349,24 +253,20 @@ public class MetodologiaAction extends GenericAction{
     public void setEscola(Escola escola) {
         this.escola = escola;
     }
-    
-    
-    
+
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
-//        list.add(new Keys("escola.nome", "Escola"));
         return list;
     }
-    
+
     @JSON(serialize = false)
     public List getAplicabilidadeEnums() {
         return Arrays.asList(AplicabilidadeEnum.values());
     }
-    
-    //métodos abstratos
 
+    //métodos abstratos
     @Override
     public void prepare() throws Exception {
         setMenu(Metodologia.class.getSimpleName());
@@ -381,7 +281,5 @@ public class MetodologiaAction extends GenericAction{
     public void setServletResponse(HttpServletResponse hsr) {
         GenericAction.response = hsr;
     }
-    
-    
-    
+
 }

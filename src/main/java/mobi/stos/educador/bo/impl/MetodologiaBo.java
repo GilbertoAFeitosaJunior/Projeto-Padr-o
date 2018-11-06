@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MetodologiaBo extends AbstractService<Metodologia> implements IMetodologiaBo{
-    
+public class MetodologiaBo extends AbstractService<Metodologia> implements IMetodologiaBo {
+
     @Autowired
     private IMetodologiaDao dao;
 
@@ -23,5 +23,5 @@ public class MetodologiaBo extends AbstractService<Metodologia> implements IMeto
     public void deleteMetodologiaEscola(Long idMetodologia, Long idEscola) {
         dao.deleteMetodologiaEscola(idMetodologia, idEscola);
     }
-    
+
 }

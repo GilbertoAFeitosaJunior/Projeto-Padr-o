@@ -60,10 +60,10 @@ public class MetodologiaDao extends AbstractHibernateDao<Metodologia> implements
             entity.setLogradouro((String) tuple[7]);
             entity.setNumero((String) tuple[8]);
             entity.setUf((String) tuple[9]);
-            entity.setNivelRelacionamentoEnum(NivelRelacionamentoEnum.retornaEnumNaPosicao((int)tuple[10]));
+            entity.setNivelRelacionamentoEnum(NivelRelacionamentoEnum.retornaEnumNaPosicao((int) tuple[10]));
             entity.setResponsavel((String) tuple[11]);
             entity.setResponsavelContato((String) tuple[12]);
-            entity.setSituacaoEnum(SituacaoProjetoEnum.retornaEnumNaPosicao((int)tuple[13]));
+            entity.setSituacaoEnum(SituacaoProjetoEnum.retornaEnumNaPosicao((int) tuple[13]));
             entity.setInep((String) tuple[14]);
             set.add(entity);
         }
@@ -74,6 +74,9 @@ public class MetodologiaDao extends AbstractHibernateDao<Metodologia> implements
     @Override
     public void deleteMetodologiaEscola(long idMetodologia, long idEscola) {
 
+        System.out.println("dao idMetodologia" + idMetodologia);
+        System.out.println("dao idEscola" + idEscola);
+        
         Metodologia metodologia = super.load(idMetodologia);
 
         if (metodologia != null) {
