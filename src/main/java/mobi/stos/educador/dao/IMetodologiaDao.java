@@ -6,6 +6,6 @@ import mobi.stos.educador.common.IOperations;
 
 public interface IMetodologiaDao extends IOperations<Metodologia>{
     
-        public void deleteMetodologiaEscola(long idMetodologia, long idEscola);
+    public void deleteMetodologiaEscola(long idMetodologia, long idEscola);
     
 }

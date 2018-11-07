@@ -25,4 +25,9 @@ public class EducadorBo extends AbstractService<Educador> implements IEducadorBo
         return dao;
     }
 
+    @Override
+    public void deleteEducadorEscola(Long idEducador, Long idEscola) {
+        dao.deleteEducadorEscola(idEducador, idEscola);
+    }
+
 }

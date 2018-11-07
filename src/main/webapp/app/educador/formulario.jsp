@@ -35,6 +35,6 @@
 <%@include file="../fragment/endpage.jsp" %>
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script type="text/javascript" src="../educador/js/educador_formulario.js"></script>
-
+<script type="text/javascript" src="../educador/js/escola_formulario.js"></script>
 <%@include file="../fragment/truend.jsp" %>
 

@@ -77,14 +77,22 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th class="">Nome</th>
+                        <th >Nome</th>
+                        <th >DDD</th>
+                        <th >Celular</th>
+                        <th >E-mail</th>
+                        <th >UF</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
                     <s:iterator value="educadors">
                         <tr>       
-                            <td ><s:property value="nome" /></td>
+                            <td ><s:property value="nome"/></td>
+                            <td ><s:property value="ddd"/></td>
+                            <td ><s:property value="celular"/></td>
+                            <td ><s:property value="email"/></td>
+                            <td ><s:property value="uf"/></td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">

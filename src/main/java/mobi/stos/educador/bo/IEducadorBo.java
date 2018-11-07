@@ -10,4 +10,6 @@ import mobi.stos.educador.common.IOperations;
 
 public interface IEducadorBo extends IOperations<Educador>{
     
+    public void deleteEducadorEscola(Long idEducador, Long idEscola);
+    
 }

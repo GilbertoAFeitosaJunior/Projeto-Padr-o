@@ -99,9 +99,41 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-
     
-      @Action(value = "listEducador",
+    @Action(value = "persistEducadorEscolaJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String persistEducadorEscolaJson() {
+        try {
+            GenericAction.isLogged(request);
+            if (escola.getId() != null) {
+                educador = this.educadorBo.load(educador.getId());
+                escola = this.escolaBo.load(escola.getId());
+
+                boolean escolaDiferente = true;
+                for (Escola e : educador.getEscolas()) {
+                    if (e.getId() == ((long) escola.getId())) {
+                        escolaDiferente = false;
+                    }
+                }
+                if (escolaDiferente) {
+                    educador.addEscola(escola);
+                    this.educadorBo.persist(educador);
+                    jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
+                } else {
+                    jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
+                }
+            } else {
+                jsonReturn = new JsonReturn(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "listEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
@@ -126,7 +158,26 @@ public class EducadorAction extends GenericAction{
         }
     }
     
-     @Action(value = "deleteEducador",
+    @Action(value = "listEducadorEscolaJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String listEducadorEscolaJson() {
+        try {
+            GenericAction.isLogged(request);
+            educador = this.educadorBo.load(educador.getId());
+            for (Escola escola : educador.getEscolas()) {
+                escola.setProjeto(null);
+            }
+            jsonReturn = new JsonReturn(true);
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "deleteEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
@@ -143,7 +194,25 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-
+    
+    @Action(value = "deleteEducadorEscolaJson",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String deleteEducadorEscolaJson() {
+        try {
+            GenericAction.isLogged(request);
+            this.educadorBo.deleteEducadorEscola(educador.getId(), escola.getId());
+            jsonReturn = new JsonReturn("Excluido com sucesso", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
     
     @Override
     public JsonReturn getJsonReturn() {
@@ -191,14 +260,13 @@ public class EducadorAction extends GenericAction{
     public void setEducadors(List<Educador> educadors) {
         this.educadors = educadors;
     }
+    
     public List<Escola> getEscolas() {
         return escolas;
     }
     public void setEscolas(List<Escola> escolas) {
         this.escolas = escolas;
     }
-    
-    
 
     @Override
     public void prepare() throws Exception {
@@ -214,6 +282,5 @@ public class EducadorAction extends GenericAction{
     public void setServletResponse(HttpServletResponse hsr) {
         GenericAction.response = hsr;
     }
-
 
 }
