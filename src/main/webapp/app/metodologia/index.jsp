@@ -88,7 +88,14 @@
                         <tr>       
                             <td><s:property value="nome" /></td>
                             <td><s:property value="aplicabilidadeEnum.name" />  </td>
-                            <td><s:property value="ativo" /></td>
+                            <td>
+                                <s:if test="ativo == true">
+                                    Ativo
+                                </s:if>
+                                <s:else>
+                                    Não 
+                                </s:else> 
+                            </td> 
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
