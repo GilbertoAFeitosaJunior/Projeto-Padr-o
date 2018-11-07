@@ -37,12 +37,17 @@ var escola = {
             dataType: "json"
         }).done(function (json) {
             escola.list();
+            if (json.jsonReturn.sucess){
             notify.success("Sucesso", "Salvo com sucesso");
+            }else{
+                notify.warning("Atenção!", json.jsonReturn.mensagem);
+            }
         }).fail(function () {
             notify.error("Erro", "Erro ao tentar salvar o registro, favor tente novamente.");
         }).always(function () {
         });
     },
+    
     list: function () {
         $.ajax({
             type: "POST",
@@ -68,26 +73,6 @@ var escola = {
         }).always(function () {
         });
     },
-
-//    remove: function (id) {
-//        $.ajax({
-//            type: "POST",
-//            url: "deleteMetodologiaEscola",
-//            data: {
-//                "metodologia.id": $("[name='metodologia.id']").val(),
-//                "escola.id": id
-//            },
-//            dataType: "json"
-//        }).done(function (json) {
-//            notify.success("Sucesso", "Registro excluído com sucesso!");
-//            escola.list();
-//
-//        }).fail(function () {
-//            notify.error("Erro", "Erro ao tentar excluir o registro, favor tente novamente.");
-//        }).always(function () {
-//        });
-//    },
-
 
     init: function () {
         this.list();
