@@ -46,7 +46,7 @@
     <li>
         <a href="listEducador" <s:if test='menu == "Educador"'> class="active"</s:if>>
             <i class="fa fa-pencil"></i>
-            <span>Educador</span>
+            <span>Educadores</span>
         </a>
     </li>
 
