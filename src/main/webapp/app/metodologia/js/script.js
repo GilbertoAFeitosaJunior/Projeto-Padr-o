@@ -36,9 +36,9 @@ var escola = {
             },
             dataType: "json"
         }).done(function (json) {
-            escola.list();
-            if (json.jsonReturn.sucess){
-            notify.success("Sucesso", "Salvo com sucesso");
+            if (json.jsonReturn.success){
+                notify.success("Sucesso", json.jsonReturn.mensagem);
+                escola.list();
             }else{
                 notify.warning("Atenção!", json.jsonReturn.mensagem);
             }
@@ -92,7 +92,7 @@ var escola = {
             })
                     .done(function (json) {
 
-                        notify.success("Sucesso", "Registro deletado");
+                        notify.success("Sucesso", "Registro deletado com sucesso    ");
 
                         escola.list();
 

@@ -158,9 +158,9 @@ public class MetodologiaAction extends GenericAction {
                 if (ok) {
                     metodologia.addEscola(escola);
                     this.metodologiaBo.persist(metodologia);
-                    jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
+                    jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
                 } else {
-                    jsonReturn = new JsonReturn("A Escola já está inclusa na metodologia.", true);
+                    jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
                 }
             } else {
                 jsonReturn = new JsonReturn(false);
