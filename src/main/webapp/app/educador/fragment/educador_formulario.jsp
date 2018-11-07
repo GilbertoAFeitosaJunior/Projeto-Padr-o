@@ -34,8 +34,8 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
-                        <label>Numero</label>
-                        <s:textfield type="text" name="educador.numero" id="educador.numero" cssClass="form-control" required="true" maxlength="10" data-mask="99" />
+                        <label>Número</label>
+                        <s:textfield type="text" name="educador.numero" id="educador.numero" cssClass="form-control" required="true" maxlength="10"/>
                     </div>
                 </div>
             </div>
@@ -69,18 +69,18 @@
                 <div class="col-lg-1">
                     <div class="form-group">
                         <label>DDD</label>
-                        <s:textfield type="text" name="educador.ddd" id="educador.ddd" cssClass="form-control" required="true" maxlength="2"/> 
+                        <s:textfield type="text" name="educador.ddd" id="educador.ddd" cssClass="form-control" required="true" data-mask="99" /> 
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>Celular</label>
-                        <s:textfield type="text" name="educador.celular" id="educador.celular" cssClass="form-control" required="true" maxlength="9"/> 
+                        <s:textfield type="text" name="educador.celularStringMask" id="educador.celularStringMask" cssClass="form-control" required="true" data-mask="99999-9999" /> 
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>E-mail</label>
                         <s:textfield type="email" name="educador.email" id="educador.email" cssClass="form-control" required="true" />
                     </div>
                 </div>

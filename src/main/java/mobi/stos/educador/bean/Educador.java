@@ -130,6 +130,14 @@ public class Educador implements Serializable {
     public void setCelular(int celular) {
         this.celular = celular;
     }
+    
+    public String getCelularStringMask() {
+        return Util.format("######-####", Util.zeroFill(this.celular, 9));
+
+    }
+    public void setCelularStringMask(String celular) {
+        this.celular = Integer.parseInt(Util.onlyNumber(celular));
+    }
 
     public String getLogradouro() {
         return logradouro;

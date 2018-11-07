@@ -9,12 +9,10 @@ var Script = function () {
                     required: "Favor preencher esse campo"
                 },
                 "educador.ddd":{
-                  required: "Favor preencher esse campo",
-                  maxlength: "Favor preencher esse campo com no máximo 2 dígitos"
+                  required: "Favor preencher esse campo"
                 },
-                "educador.celular":{
-                  required: "Favor preencher esse campo",
-                  maxlength: "Favor preencher esse campo com no máximo 9 dígitos"
+                "educador.celularStringMask":{
+                  required: "Favor preencher esse campo"
                 },
                 "educador.senha":{
                   required: "Favor preencher esse campo" 
@@ -23,7 +21,7 @@ var Script = function () {
                   required: "Favor preencher esse campo"
                 },
                 "educador.numero":{
-                  required: "Favor preencher esse campo",
+                  required: "Favor preencher esse campo"
                 },
                 "educador.complemento":{
                   required: "Favor preencher esse campo"

@@ -77,11 +77,11 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th >Nome</th>
-                        <th >DDD</th>
-                        <th >Celular</th>
-                        <th >E-mail</th>
-                        <th >UF</th>
+                        <th class="col-lg-6 col-sm-6 col-xs-6">Nome</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">DDD</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">Celular</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2">E-mail</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">UF</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
