@@ -1,7 +1,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <section class="panel">
     <header class="panel-heading">
-        Escola
+       Adicionar Escola
     </header>
 
     <div class="panel-body">

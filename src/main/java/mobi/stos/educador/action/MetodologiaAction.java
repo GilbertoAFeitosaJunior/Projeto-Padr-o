@@ -1,4 +1,4 @@
-package mobi.stos.educador.action;
+ package mobi.stos.educador.action;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -144,10 +144,7 @@ public class MetodologiaAction extends GenericAction {
     public String persistMetodologiaJson() {
         try {
             GenericAction.isLogged(request);
-            System.out.println("AQUI PORRA");
-            System.out.println(metodologia.getId());
-            System.out.println(escola.getId());
-
+            
             if (escola.getId() != null) {
                 metodologia = this.metodologiaBo.load(metodologia.getId());
                 escola = this.escolaBo.load(escola.getId());
@@ -161,9 +158,9 @@ public class MetodologiaAction extends GenericAction {
                 if (ok) {
                     metodologia.addEscola(escola);
                     this.metodologiaBo.persist(metodologia);
-                    jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
+                    jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
                 } else {
-                    jsonReturn = new JsonReturn("O fornecedor já incluso no produto.", false);
+                    jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
                 }
             } else {
                 jsonReturn = new JsonReturn(false);
@@ -251,6 +248,13 @@ public class MetodologiaAction extends GenericAction {
 
     public void setEscola(Escola escola) {
         this.escola = escola;
+    }
+    
+    
+    
+    @Override
+    public JsonReturn getJsonReturn() {
+        return super.getJsonReturn(); 
     }
 
     @JSON(serialize = false)

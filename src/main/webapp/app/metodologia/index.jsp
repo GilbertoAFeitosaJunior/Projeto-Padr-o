@@ -90,7 +90,7 @@
                             <td><s:property value="aplicabilidadeEnum.name" />  </td>
                             <td>
                                 <s:if test="ativo == true">
-                                    Ativo
+                                    Sim
                                 </s:if>
                                 <s:else>
                                     Não 
