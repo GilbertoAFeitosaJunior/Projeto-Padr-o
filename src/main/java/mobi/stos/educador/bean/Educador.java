@@ -38,11 +38,11 @@ public class Educador implements Serializable {
     private Usuario usuario;
     
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "escola_educador",
+    @JoinTable(name = "educador_escola",
             joinColumns = {
-                @JoinColumn(name = "escola_id", nullable = false, referencedColumnName = "id")},
+                @JoinColumn(name = "educador_id", nullable = false, referencedColumnName = "id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "educador_id", nullable = false, referencedColumnName = "id")})
+                @JoinColumn(name = "escola_id", nullable = false, referencedColumnName = "id")})
     private Set<Escola> escolas;
     
     @Column(length = 100, nullable = false)
@@ -194,7 +194,7 @@ public class Educador implements Serializable {
         }  
         this.escolas.add(escola);
     }
-    public void removeFornecedor(Escola escola) {
+    public void removeEscola(Escola escola) {
         if (this.escolas != null) {
             this.escolas.remove(escola);
         }

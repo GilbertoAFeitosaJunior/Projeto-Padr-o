@@ -146,7 +146,7 @@ public class MetodologiaAction extends GenericAction {
             GenericAction.isLogged(request);
             
             if (escola.getId() != null) {
-                metodologia = this.metodologiaBo.load(metodologia.getId());
+                metodologia = this.metodologiaBo.load(metodologia.getId()); 
                 escola = this.escolaBo.load(escola.getId());
 
                 boolean ok = true;

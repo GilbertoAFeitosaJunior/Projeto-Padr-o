@@ -1,8 +1,8 @@
 $(function () {
-    escola.init();
+    escolaEducador.init();
 });
 
-var escola = {
+var escolaEducador = {
     persist: function () {
         $.ajax({
             type: "POST",
@@ -15,7 +15,7 @@ var escola = {
         }).done(function (json) {
             if(json.jsonReturn.success){
                 notify.success("Sucesso", json.jsonReturn.mensagem );
-                escola.list();
+                escolaEducador.list();
             }else{
                 notify.warning("Atenção!", json.jsonReturn.mensagem );
             }
@@ -63,7 +63,7 @@ var escola = {
                 },
             }).done(function (json) {
                 notify.success("Sucesso", "Registro excluído com sucesso.");
-                escola.list();
+                escolaEducador.list();
 
             }).fail(function () {
                 notify.error("Erro", "Impossível de estabelecer conexão servidor.");

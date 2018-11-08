@@ -1,4 +1,3 @@
-
 package mobi.stos.educador.action;
 
 import static com.opensymphony.xwork2.Action.ERROR;
@@ -28,26 +27,25 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Matheus Monteiro
  */
+public class EducadorAction extends GenericAction {
 
-public class EducadorAction extends GenericAction{
-    
     private Educador educador;
     private Usuario usuario;
     private Escola escola;
-    
+
     private List<Usuario> usuarios;
     private List<Educador> educadors;
     private List<Escola> escolas;
-    
+
     @Autowired
     private IEducadorBo educadorBo;
-    
+
     @Autowired
     private IUsuarioBo usuarioBo;
-    
+
     @Autowired
     private IEscolaBo escolaBo;
-    
+
     @Action(value = "prepareEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -71,7 +69,7 @@ public class EducadorAction extends GenericAction{
             return ERROR;
         }
     }
-    
+
     @Action(value = "persistEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
@@ -90,7 +88,7 @@ public class EducadorAction extends GenericAction{
                 entity = educadorBo.load(educador.getId());
             }
             //String ufMaiusculo = educador.getUf().toUpperCase();
-           // educador.setUf(ufMaiusculo);
+            // educador.setUf(ufMaiusculo);
             this.educadorBo.persist(educador);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEducador");
@@ -101,7 +99,7 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "persistEducadorEscolaJson",
             results = {
                 @Result(name = SUCCESS, type = "json")
@@ -109,8 +107,7 @@ public class EducadorAction extends GenericAction{
     public String persistEducadorEscolaJson() {
         try {
             GenericAction.isLogged(request);
-            
-            
+
             if (escola.getId() != null) {
                 educador = this.educadorBo.load(educador.getId());
                 escola = this.escolaBo.load(escola.getId());
@@ -125,7 +122,12 @@ public class EducadorAction extends GenericAction{
                     System.out.println(escola.getId());
                     System.out.println(educador.getId());
                     educador.addEscola(escola);
+                    
+//                    for (Escola escola1 : educador.getEscolas()) {
+//                            System.out.println("############# escola: " + escola1.getNome());
+//                    }
                     this.educadorBo.persist(educador);
+
                     jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
                 } else {
                     jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
@@ -138,7 +140,7 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "listEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -163,7 +165,7 @@ public class EducadorAction extends GenericAction{
             return ERROR;
         }
     }
-    
+
     @Action(value = "listEducadorEscolaJson",
             results = {
                 @Result(name = SUCCESS, type = "json")
@@ -182,7 +184,7 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "deleteEducador",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -200,7 +202,7 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "deleteEducadorEscolaJson",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -219,10 +221,10 @@ public class EducadorAction extends GenericAction{
         }
         return SUCCESS;
     }
-    
+
     @Override
     public JsonReturn getJsonReturn() {
-        return super.getJsonReturn(); 
+        return super.getJsonReturn();
     }
 
     @JSON(serialize = false)
@@ -235,6 +237,7 @@ public class EducadorAction extends GenericAction{
     public Educador getEducador() {
         return educador;
     }
+
     public void setEducador(Educador educador) {
         this.educador = educador;
     }
@@ -242,6 +245,7 @@ public class EducadorAction extends GenericAction{
     public Usuario getUsuario() {
         return usuario;
     }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -249,6 +253,7 @@ public class EducadorAction extends GenericAction{
     public Escola getEscola() {
         return escola;
     }
+
     public void setEscola(Escola escola) {
         this.escola = escola;
     }
@@ -256,6 +261,7 @@ public class EducadorAction extends GenericAction{
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
+
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
@@ -263,13 +269,15 @@ public class EducadorAction extends GenericAction{
     public List<Educador> getEducadors() {
         return educadors;
     }
+
     public void setEducadors(List<Educador> educadors) {
         this.educadors = educadors;
     }
-    
+
     public List<Escola> getEscolas() {
         return escolas;
     }
+
     public void setEscolas(List<Escola> escolas) {
         this.escolas = escolas;
     }

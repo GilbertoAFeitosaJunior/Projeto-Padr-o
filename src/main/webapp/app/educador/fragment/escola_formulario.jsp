@@ -12,7 +12,7 @@
             </div>
         
             <div class="col-lg-3 form-group">
-             <button class="btn btn-primary " type="button" onclick="escola.persist()"><i class="fa fa-plus"></i> Adicionar</button>
+             <button class="btn btn-primary " type="button" onclick="escolaEducador.persist()"><i class="fa fa-plus"></i> Adicionar</button>
             </div>
         </div>
         <br/>
