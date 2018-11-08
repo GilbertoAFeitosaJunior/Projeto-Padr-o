@@ -49,7 +49,7 @@ var escolaEducador = {
         });
     },
     init: function () {
-        this.list();
+        escolaEducador.list();
     },
     remove: function (id) {
         if (confirm("Deseja excluir esse registro?")) {

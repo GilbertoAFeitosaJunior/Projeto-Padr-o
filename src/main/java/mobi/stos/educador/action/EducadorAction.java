@@ -87,8 +87,8 @@ public class EducadorAction extends GenericAction {
             if (educador != null && educador.getId() != null) {
                 entity = educadorBo.load(educador.getId());
             }
-            //String ufMaiusculo = educador.getUf().toUpperCase();
-            // educador.setUf(ufMaiusculo);
+            String ufMaiusculo = educador.getUf().toUpperCase();
+            educador.setUf(ufMaiusculo);
             this.educadorBo.persist(educador);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEducador");
