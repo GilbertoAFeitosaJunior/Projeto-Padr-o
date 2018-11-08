@@ -38,7 +38,7 @@ var escolaEducador = {
                 html += "<tr>";
                 html += "<td>" + value.nome + "</td>";
                 html += "<td class='text-right'>";
-                html += '<a class="btn btn-danger btn-xs" onclick="escola.remove(' + value.id + ');"><i class="fa fa-trash-o "></i></a>';
+                html += '<a class="btn btn-danger btn-xs" onclick="escolaEducador.remove(' + value.id + ');"><i class="fa fa-trash-o "></i></a>';
                 html += "</td>";
                 html += "</tr>";
             });
