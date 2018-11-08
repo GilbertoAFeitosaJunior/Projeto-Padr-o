@@ -89,8 +89,8 @@ public class EducadorAction extends GenericAction{
             if (educador != null && educador.getId() != null) {
                 entity = educadorBo.load(educador.getId());
             }
-            String ufMaiusculo = educador.getUf().toUpperCase();
-            educador.setUf(ufMaiusculo);
+            //String ufMaiusculo = educador.getUf().toUpperCase();
+           // educador.setUf(ufMaiusculo);
             this.educadorBo.persist(educador);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEducador");
@@ -109,6 +109,8 @@ public class EducadorAction extends GenericAction{
     public String persistEducadorEscolaJson() {
         try {
             GenericAction.isLogged(request);
+            
+            
             if (escola.getId() != null) {
                 educador = this.educadorBo.load(educador.getId());
                 escola = this.escolaBo.load(escola.getId());
@@ -120,6 +122,8 @@ public class EducadorAction extends GenericAction{
                     }
                 }
                 if (escolaDiferente) {
+                    System.out.println(escola.getId());
+                    System.out.println(educador.getId());
                     educador.addEscola(escola);
                     this.educadorBo.persist(educador);
                     jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);

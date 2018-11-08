@@ -42,8 +42,8 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
 
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
-        sql.append("a.id, a.projeto_id, a.nome, a.bairro, a.cep, a.cidade, a.complemento, a.logradouro, a.numero,   "
-                + "a.uf, a.nivelRelacionamentoEnum, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep ");
+        sql.append("a.id, a.projeto_id, a.nome, a.bairro, a.cep, a.cidade, a.complemento, a.logradouro, a.numero,"
+                + " a.uf, a.nivelRelacionamentoEnum, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep ");
         sql.append("FROM escola a ");
         sql.append("INNER JOIN escola_educador b ON b.escola_id= a.id ");
         sql.append("WHERE b.educador_id = :id ");
@@ -73,7 +73,6 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
             entity.setInep((String) tuple[14]);
             set.add(entity);
         }
-
         return set;
     }
 
@@ -83,9 +82,10 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
 
         if (educador != null) {
             StringBuilder sql = new StringBuilder();
-            sql.append("DELETE ");
-            sql.append("FROM escola_educador a ");
-            sql.append("WHERE a.educador_id = :educador_id and a.escola_id = :escola_id ");
+            sql.append(" DELETE ");
+            sql.append(" FROM escola_educador a ");
+            sql.append(" WHERE a.educador_id = :educador_id and a.escola_id = :escola_id ");
+            System.out.println(sql.toString());
             SQLQuery query = getCurrentSession().createSQLQuery(sql.toString());
             query.setParameter("educador_id", idEducador);
             query.setParameter("escola_id", idEscola);
