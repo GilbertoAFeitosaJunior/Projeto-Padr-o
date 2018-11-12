@@ -2,7 +2,7 @@ package mobi.stos.educador.enumm;
 
 /**
  *
- * @author DEV-JAVA
+ * @author Rafael Bloise
  */
 public enum AplicabilidadeEnum {
     

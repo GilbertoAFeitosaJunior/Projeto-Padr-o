@@ -1,5 +1,8 @@
 package mobi.stos.educador.dao.impl;
-
+/**
+ *
+ * @author Rafael Bloise
+ */
 import mobi.stos.educador.bean.Secretaria;
 import mobi.stos.educador.common.AbstractHibernateDao;
 import mobi.stos.educador.dao.ISecretariaDao;

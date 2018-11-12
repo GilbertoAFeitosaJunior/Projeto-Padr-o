@@ -1,17 +1,14 @@
 package mobi.stos.educador.action;
-/**
- *
- * @author Rafael Bloise
- */
+
 import com.google.api.client.repackaged.com.google.common.base.Strings;
-import static com.opensymphony.xwork2.Action.ERROR;
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mobi.stos.educador.bean.Secretaria;
-import mobi.stos.educador.bo.ISecretariaBo;
+import mobi.stos.educador.bean.GestorDoTerritorio;
+import mobi.stos.educador.bean.Usuario;
+import mobi.stos.educador.bo.IGestorDoTerritorioBo;
+import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.exception.LoginExpiradoException;
@@ -21,31 +18,46 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SecretariaAction extends GenericAction {
+/**
+ *
+ * @author Rafael Bloise
+ */
+public class GestorDoTerritorioAction extends GenericAction {
 
-    private Secretaria secretaria;
+    private GestorDoTerritorio gestorDoTerritorio;
 
-    private List<Secretaria> secretarias;
+    private Usuario usuario;
+
+    private List<GestorDoTerritorio> gestorDoTerritorios;
+
+    private List<Usuario> usuarios;
 
     @Autowired
-    private ISecretariaBo secretariaBo;
+    private IGestorDoTerritorioBo gestorDoTerritorioBo;
 
-    @Action(value = "prepareSecretaria",
+    @Autowired
+    private IUsuarioBo usuarioBo;
+
+    @Action(value = "prepareGestorDoTerritorio",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = ERROR, location = "/app/notify/")
                 ,
-                @Result(name = SUCCESS, location = "/app/secretaria/formulario.jsp")
+                @Result(name = SUCCESS, location = "/app/gestorDoTerritorio/formulario.jsp")
             })
     public String preparar() {
         try {
             GenericAction.isLogged(request);
-            if (secretaria != null && secretaria.getId() != null) {
-                secretaria = this.secretariaBo.load(this.secretaria.getId());
+            if (gestorDoTerritorio != null && gestorDoTerritorio.getId() != null) {
+                gestorDoTerritorio = this.gestorDoTerritorioBo.load(this.gestorDoTerritorio.getId());
             }
+
+            this.usuarios = this.usuarioBo.listall();
+
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -53,7 +65,7 @@ public class SecretariaAction extends GenericAction {
         }
     }
 
-    @Action(value = "persistSecretaria",
+    @Action(value = "persistGestorDoTerritorio",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
                 ,
@@ -66,14 +78,26 @@ public class SecretariaAction extends GenericAction {
     public String persist() {
         try {
             GenericAction.isLogged(request);
-            Secretaria entity = null;
-            if (secretaria != null && secretaria.getId() != null) {
-                 entity = secretariaBo.load(secretaria.getId());
-                }
+            Usuario entity;
             
-            this.secretariaBo.persist(secretaria);
+            if ( this.gestorDoTerritorio != null && this.gestorDoTerritorio.getId() != null) {
+                
+                entity = this.usuarioBo.load(this.gestorDoTerritorio.getUsuario().getId());
+                
+                
+                if (Strings.isNullOrEmpty(this.gestorDoTerritorio.getUsuario().getSenha())) {
+                    this.gestorDoTerritorio.getUsuario().setSenha(entity.getSenha());
+                }
+                
+            }else{
+                entity = this.usuarioBo.cadastrar(this.gestorDoTerritorio.getUsuario());
+                this.gestorDoTerritorio.setUsuario(entity);
+            }
+                this.usuarioBo.persist(this.gestorDoTerritorio.getUsuario());
+                this.gestorDoTerritorioBo.persist(this.gestorDoTerritorio);
+
             addActionMessage("Registro salvo com sucesso.");
-            setRedirectURL("listSecretaria");
+            setRedirectURL("listGestorDoTerritorio");
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -82,7 +106,7 @@ public class SecretariaAction extends GenericAction {
         return SUCCESS;
     }
 
-    @Action(value = "deleteSecretaria",
+    @Action(value = "deleteGestorDoTerritorio",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
@@ -91,22 +115,24 @@ public class SecretariaAction extends GenericAction {
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            secretariaBo.delete(secretaria.getId());
-            addActionMessage("Registro excluído com sucesso.");
-            setRedirectURL("listSecretaria");
+            Usuario entity;
+            gestorDoTerritorioBo.delete(gestorDoTerritorio.getId());
+            usuarioBo.delete(usuario.getId());
+            
+            setRedirectURL("listGestorDoTerritorio");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
         }
         return SUCCESS;
     }
 
-    @Action(value = "listSecretaria",
+    @Action(value = "listGestorDoTerritorio",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
                 @Result(name = ERROR, location = "/app/notify/")
                 ,
-                @Result(name = SUCCESS, location = "/app/secretaria/")
+                @Result(name = SUCCESS, location = "/app/gestorDoTerritorio/")
             })
     public String list() {
         try {
@@ -115,7 +141,10 @@ public class SecretariaAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-            secretarias = secretariaBo.list(getConsulta());
+
+            Consulta c = getConsulta();
+            c.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
+            this.gestorDoTerritorios = gestorDoTerritorioBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -124,9 +153,37 @@ public class SecretariaAction extends GenericAction {
         }
     }
 
-    @JSON(serialize = false)
-    public List<Secretaria> getSecretarias() {
-        return secretarias;
+    // Getter and Setter
+    public GestorDoTerritorio getGestorDoTerritorio() {
+        return gestorDoTerritorio;
+    }
+
+    public void setGestorDoTerritorio(GestorDoTerritorio gestorDoTerritorio) {
+        this.gestorDoTerritorio = gestorDoTerritorio;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<GestorDoTerritorio> getGestorDoTerritorios() {
+        return gestorDoTerritorios;
+    }
+
+    public void setGestorDoTerritorios(List<GestorDoTerritorio> gestorDoTerritorios) {
+        this.gestorDoTerritorios = gestorDoTerritorios;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @JSON(serialize = false)
@@ -136,17 +193,10 @@ public class SecretariaAction extends GenericAction {
         return list;
     }
 
-    public Secretaria getSecretaria() {
-        return secretaria;
-    }
-
-    public void setSecretaria(Secretaria secretaria) {
-        this.secretaria = secretaria;
-    }
-
+    //métodos abstratos
     @Override
     public void prepare() throws Exception {
-        setMenu(Secretaria.class.getSimpleName());
+        setMenu(GestorDoTerritorio.class.getSimpleName());
     }
 
     @Override

@@ -1,5 +1,8 @@
 package mobi.stos.educador.action;
-
+/**
+ *
+ * @author Rafael Bloise
+ */
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;

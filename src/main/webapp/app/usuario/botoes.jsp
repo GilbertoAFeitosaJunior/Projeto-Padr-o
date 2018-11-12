@@ -13,7 +13,7 @@
     <div class="panel-body">     
 
         <div class="col-lg-3 m-bot15">
-            <a href="" class="btn btn-primary btn-block">
+            <a href="listGestorDoTerritorio" class="btn btn-primary btn-block">
                 Gestor do Território
             </a>
         </div>     

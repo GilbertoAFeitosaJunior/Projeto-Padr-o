@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 
     @Column(length = 32)
     private String hash;
-
+    
     public Long getId() {
         return id;
     }

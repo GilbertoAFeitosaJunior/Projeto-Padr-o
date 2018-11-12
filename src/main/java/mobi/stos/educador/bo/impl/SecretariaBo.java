@@ -1,5 +1,8 @@
 package mobi.stos.educador.bo.impl;
-
+/**
+ *
+ * @author Rafael Bloise
+ */
 import mobi.stos.educador.bean.Secretaria;
 import mobi.stos.educador.bo.ISecretariaBo;
 import mobi.stos.educador.common.AbstractService;

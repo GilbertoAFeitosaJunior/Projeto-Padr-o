@@ -1,5 +1,8 @@
 package mobi.stos.educador.dao.impl;
-
+/**
+ *
+ * @author Rafael Bloise
+ */
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.List;

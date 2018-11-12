@@ -83,6 +83,8 @@
 
         </div>
     </section>
+    
+    
 
     <%@include file="../fragment/endpage.jsp" %>
     <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>

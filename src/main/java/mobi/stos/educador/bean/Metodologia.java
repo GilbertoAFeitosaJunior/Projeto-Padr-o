@@ -1,4 +1,7 @@
 package mobi.stos.educador.bean;
+/**
+ * @author Rafael Bloise
+ */
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +19,8 @@ import mobi.stos.educador.enumm.AplicabilidadeEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
+
+
 
 @Entity
 @DynamicUpdate
