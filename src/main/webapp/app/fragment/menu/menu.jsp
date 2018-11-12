@@ -9,7 +9,7 @@
 
 
     <li>
-        <a href="listUsuario" <s:if test='menu == "Usuario"'> class="active"</s:if>>
+        <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario"'> class="active"</s:if>>
             <i class="fa fa-user"></i>
             <span>Usu&aacute;rios</span>
         </a>

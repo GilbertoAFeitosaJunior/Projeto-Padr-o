@@ -71,6 +71,24 @@ public class UsuarioAction extends GenericAction {
             return ERROR;
         }
     }
+    
+      @Action(value = "prepareUsuarioBotoes",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
+                @Result(name = SUCCESS, location = "/app/usuario/botoes.jsp")
+            })
+    public String prepararBotoes() {
+        try {
+            GenericAction.isLogged(request);
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+    }
 
     @Action(value = "prepareUsuario",
             interceptorRefs = {
