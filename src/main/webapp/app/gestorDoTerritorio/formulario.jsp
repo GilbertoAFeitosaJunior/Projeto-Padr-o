@@ -5,17 +5,19 @@
 
     <%@include file="../fragment/head.jsp" %>
 
-    <section class="panel">
-        <header class="panel-heading">
-            Salvar Gestor Do Territorio
-        </header>
+    <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistGestorDoTerritorio" theme="simple" enctype="multipart/form-data">
+        <s:hidden name="gestorDoTerritorio.usuario.id" />
 
-        <div class="panel-body">
-            <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistGestorDoTerritorio" theme="simple" enctype="multipart/form-data">
+        <section class="panel">
+            <header class="panel-heading">
+                Salvar Gestor Do Territorio
+                <span class="tools pull-right">
+                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+                </span>
+            </header>
+
+            <div class="panel-body">
                 <s:hidden name="gestorDoTerritorio.id" />
-                <s:hidden name="gestorDoTerritorio.usuario.id" />
-
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">                      
@@ -27,47 +29,47 @@
                     </div>
                 </div>
 
-                </div>
+            </div>
 
         </section>
 
         <section class="panel">
-        <header class="panel-heading">
-            Dados para o Login
-             <span class="tools pull-right">
-                <a href="javascript:;" class="fa fa-chevron-down"></a>
-            </span>
-        </header>
-        <div class="panel-body">
-        <s:hidden name="usuario.id" />
+            <header class="panel-heading">
+                Dados para o Login
+                <span class="tools pull-right">
+                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+                </span>
+            </header>
+            <div class="panel-body">
+                <s:hidden name="usuario.id" />
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">                      
                             <label>Situacão:</label>
-                                <s:select name="gestorDoTerritorio.usuario.ativo" id="gestorDoTerritorio.usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
+                            <s:select name="gestorDoTerritorio.usuario.ativo" id="gestorDoTerritorio.usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="form-group">                      
                             <label>Nome de Usuário:</label>
-                                <s:textfield name="gestorDoTerritorio.usuario.nome" id="gestorDoTerritorio.usuario.nome" maxlength="100" cssClass="form-control" required="true" />
+                            <s:textfield name="gestorDoTerritorio.usuario.nome" id="gestorDoTerritorio.usuario.nome" maxlength="100" cssClass="form-control" required="true" />
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    
+
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail:</label>
-                                <s:textfield name="gestorDoTerritorio.usuario.email" id="gestorDoTerritorio.usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                            <s:textfield name="gestorDoTerritorio.usuario.email" id="gestorDoTerritorio.usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Senha:</label>
-                                <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
+                            <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
                         </div>
                     </div>
                 </div>
@@ -76,7 +78,7 @@
                     &nbsp;
                     <button type="submit" class="btn btn-success">Salvar Registro</button>
                 </div>
-        </s:form>
+            </s:form>
     </section>
 
 

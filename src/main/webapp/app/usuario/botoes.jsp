@@ -23,7 +23,7 @@
             </a>
         </div>     
         <div class="col-lg-3 m-bot15">
-            <a href="" class="btn btn-primary btn-block">
+            <a href="listCoordenadorPedagogico"  class="btn btn-primary btn-block">
                 Coordenador Pedagógico
             </a>
         </div>     
@@ -31,4 +31,7 @@
 </section>
 
 <%@include file="../fragment/endpage.jsp" %>
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
+<script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
 <%@include file="../fragment/truend.jsp" %>

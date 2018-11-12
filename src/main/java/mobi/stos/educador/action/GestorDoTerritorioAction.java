@@ -79,22 +79,21 @@ public class GestorDoTerritorioAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Usuario entity;
-            
-            if ( this.gestorDoTerritorio != null && this.gestorDoTerritorio.getId() != null) {
-                
+
+            if (this.gestorDoTerritorio != null && this.gestorDoTerritorio.getId() != null) {
+
                 entity = this.usuarioBo.load(this.gestorDoTerritorio.getUsuario().getId());
-                
-                
+
                 if (Strings.isNullOrEmpty(this.gestorDoTerritorio.getUsuario().getSenha())) {
                     this.gestorDoTerritorio.getUsuario().setSenha(entity.getSenha());
                 }
-                
-            }else{
+
+            } else {
                 entity = this.usuarioBo.cadastrar(this.gestorDoTerritorio.getUsuario());
                 this.gestorDoTerritorio.setUsuario(entity);
             }
-                this.usuarioBo.persist(this.gestorDoTerritorio.getUsuario());
-                this.gestorDoTerritorioBo.persist(this.gestorDoTerritorio);
+            this.usuarioBo.persist(this.gestorDoTerritorio.getUsuario());
+            this.gestorDoTerritorioBo.persist(this.gestorDoTerritorio);
 
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listGestorDoTerritorio");
@@ -115,10 +114,11 @@ public class GestorDoTerritorioAction extends GenericAction {
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            Usuario entity;
-            gestorDoTerritorioBo.delete(gestorDoTerritorio.getId());
-            usuarioBo.delete(usuario.getId());
-            
+
+            GestorDoTerritorio entity = gestorDoTerritorioBo.load(this.gestorDoTerritorio.getId());
+            this.gestorDoTerritorioBo.delete(this.gestorDoTerritorio.getId());
+            this.usuarioBo.delete(entity.getUsuario().getId());
+            addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listGestorDoTerritorio");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

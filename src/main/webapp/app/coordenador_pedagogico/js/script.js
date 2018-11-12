@@ -2,18 +2,18 @@ var Script = function () {
     $().ready(function () {
         $("#form").validate({
             messages: {
-                "gestorDoTerritorio.nome": {
+                "coordenadorPedagogico.nome": {
                     required: "Favor preencher esse campo"
                 },
-                "gestorDoTerritorio.usuario.nome": {
+                "coordenadorPedagogico.usuario.nome": {
                     required: "Favor preencher esse campo"
                 },
-                "gestorDoTerritorio.usuario.ativo": {
+                "coordenadorPedagogico.usuario.ativo": {
                     required: "Favor preencher esse campo"
                 },
-                "gestorDoTerritorio.usuario.email": {
+                "coordenadorPedagogico.usuario.email": {
                     required: "Favor preencher esse campo"
-                }             
+                }
             }
         });
     });
