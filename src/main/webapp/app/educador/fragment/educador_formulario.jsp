@@ -8,7 +8,7 @@
 
     <div class="panel-body">
 
-        <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEducador" theme="simple" enctype="multipart/form-data">
+        <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEducador" theme="simple" enctype="multipart/form-data" autocomplete="off">
             <s:hidden name="educador.id"/>
 
             <div class="row">
@@ -78,16 +78,16 @@
                         <s:textfield type="text" name="educador.celularStringMask" id="educador.celularStringMask" cssClass="form-control" required="true" data-mask="99999-9999" /> 
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <s:textfield type="email" name="educador.email" id="educador.email" cssClass="form-control" required="true" />
-                    </div>
-                </div>
                 <div class="col-lg-4">
                     <div class="form-group">
+                        <label>E-mail</label>
+                        <s:textfield type="email" name="educador.email" id="educador.email" cssClass="form-control" required="true" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
                         <label>Senha</label>
-                            <s:password name="educador.senha" id="educador.senha" maxlength="32" cssClass="form-control" required="true"/>
+                            <s:password name="educador.senha" id="educador.senha" maxlength="32" cssClass="form-control" placeholder="Deixe em branco se quiser manter a senha atual" autocomplete="off" />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package mobi.stos.educador.action;
 
+import com.google.api.client.repackaged.com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
@@ -86,7 +87,12 @@ public class EducadorAction extends GenericAction {
             Educador entity;
             if (educador != null && educador.getId() != null) {
                 entity = educadorBo.load(educador.getId());
+                
+                if (Strings.isNullOrEmpty(educador.getSenha())) {
+                    educador.setSenha(entity.getSenha());
+                }
             }
+            
             String ufMaiusculo = educador.getUf().toUpperCase();
             educador.setUf(ufMaiusculo);
             this.educadorBo.persist(educador);
