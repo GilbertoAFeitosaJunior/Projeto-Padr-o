@@ -33,6 +33,7 @@
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
         </header>
+        <s:hidden name="coordenadorPedagogico.usuario.id" />
         <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-3">

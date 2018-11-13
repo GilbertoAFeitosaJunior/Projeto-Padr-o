@@ -76,22 +76,17 @@ public class CoordenadorPedagogicoAction extends GenericAction{
         try {
             GenericAction.isLogged(request);
             Usuario entity;
-            
-            if ( this.coordenadorPedagogico != null && this.coordenadorPedagogico.getId() != null) {
-                
+            if (this.coordenadorPedagogico != null && this.coordenadorPedagogico.getId() != null) {
                 entity = this.usuarioBo.load(this.coordenadorPedagogico.getUsuario().getId());
-                
                 if (Strings.isNullOrEmpty(this.coordenadorPedagogico.getUsuario().getSenha())) {
                     this.coordenadorPedagogico.getUsuario().setSenha(entity.getSenha());
                 }
-                
             }else{
                 entity = this.usuarioBo.cadastrar(this.coordenadorPedagogico.getUsuario());
                 this.coordenadorPedagogico.setUsuario(entity);
             }
                 this.usuarioBo.persist(this.coordenadorPedagogico.getUsuario());
                 this.coordenadorPedagogicoBo.persist(this.coordenadorPedagogico);
-            
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listCoordenadorPedagogico");
         }catch (AvoidDuplicationEmailException e) {

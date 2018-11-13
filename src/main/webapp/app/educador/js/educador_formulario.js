@@ -37,7 +37,7 @@ var Script = function () {
                 },
                 "educador.email": {
                     required: "Favor preencher esse campo",
-                    email: "E-mail inválidado"
+                    email: "E-mail inválido"
                 }
             }
         });
