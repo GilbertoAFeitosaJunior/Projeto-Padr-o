@@ -18,7 +18,7 @@
             </a>
         </div>     
         <div class="col-lg-3 m-bot15">
-            <a href="" class="btn btn-primary btn-block">
+            <a href="listCoordenadorDeProjeto" class="btn btn-primary btn-block">
                 Coordenador de Projeto
             </a>
         </div>     
