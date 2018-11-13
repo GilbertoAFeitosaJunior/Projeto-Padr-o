@@ -3,11 +3,13 @@ package mobi.stos.educador.bean;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
@@ -48,6 +50,15 @@ public class Usuario implements Serializable {
 
     @Column(length = 32)
     private String hash;
+    
+    @OneToOne(mappedBy = "usuario")
+    private CoordenadorDeProjeto coordenadorDeProjeto;
+    
+    @OneToOne(mappedBy = "usuario")
+    private CoordenadorPedagogico coordenadorPedagogico;
+    
+    @OneToOne(mappedBy = "usuario")
+    private GestorDoTerritorio gestorDoTerritorio;
 
     public Usuario(Long id) {
         this.id = id;
@@ -149,5 +160,31 @@ public class Usuario implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    public CoordenadorDeProjeto getCoordenadorDeProjeto() {
+        return coordenadorDeProjeto;
+    }
+
+    public void setCoordenadorDeProjeto(CoordenadorDeProjeto coordenadorDeProjeto) {
+        this.coordenadorDeProjeto = coordenadorDeProjeto;
+    }
+
+    public CoordenadorPedagogico getCoordenadorPedagogico() {
+        return coordenadorPedagogico;
+    }
+
+    public void setCoordenadorPedagogico(CoordenadorPedagogico coordenadorPedagogico) {
+        this.coordenadorPedagogico = coordenadorPedagogico;
+    }
+
+    public GestorDoTerritorio getGestorDoTerritorio() {
+        return gestorDoTerritorio;
+    }
+
+    public void setGestorDoTerritorio(GestorDoTerritorio gestorDoTerritorio) {
+        this.gestorDoTerritorio = gestorDoTerritorio;
+    }
+    
+    
 
 }

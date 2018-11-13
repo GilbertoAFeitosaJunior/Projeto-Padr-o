@@ -27,6 +27,11 @@
                 Coordenador Pedagógico
             </a>
         </div>     
+        <div class="col-lg-3 m-bot15">
+            <a href="listUsuario"  class="btn btn-primary btn-block">
+               Usuário
+            </a>
+        </div>     
     </div>  
 </section>
 

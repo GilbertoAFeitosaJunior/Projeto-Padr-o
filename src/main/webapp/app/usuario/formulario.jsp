@@ -17,22 +17,16 @@
 
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">                      
                             <label>Situacão:</label>
-                            <div>
                                 <s:select name="usuario.ativo" id="usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-9">
                         <div class="form-group">                      
                             <label>Nome:</label>
-                            <div>
                                 <s:textfield name="usuario.nome" id="usuario.nome" maxlength="100" cssClass="form-control" required="true" />
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,7 +37,7 @@
                         <div class="form-group">
                             <label>E-mail:</label>
                             <div>
-                                <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                                <s:textfield name="usuario.email" id="usuario.email" type="email" placeholder="O usuário precisa ter um email" maxlength="100" cssClass="form-control" required="true"/>
                             </div>
                         </div>
                     </div>

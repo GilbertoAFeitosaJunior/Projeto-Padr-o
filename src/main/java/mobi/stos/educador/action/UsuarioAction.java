@@ -8,10 +8,14 @@ import com.opensymphony.xwork2.ActionContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.criteria.JoinType;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.educador.bean.Usuario;
+import mobi.stos.educador.bo.ICoordenadorDeProjetoBo;
+import mobi.stos.educador.bo.ICoordenadorPedagogicoBo;
+import mobi.stos.educador.bo.IGestorDoTerritorioBo;
 import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
@@ -27,6 +31,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsuarioAction extends GenericAction {
@@ -35,6 +40,15 @@ public class UsuarioAction extends GenericAction {
     private List<Usuario> usuarios;
     @Autowired
     private IUsuarioBo usuarioBo;
+    
+    @Autowired
+    private ICoordenadorDeProjetoBo coodernadorDeProjetoBo;
+    
+    @Autowired
+    private ICoordenadorPedagogicoBo coordenadorPedagogicoBo;
+    
+    @Autowired
+    private IGestorDoTerritorioBo gestorDoTerritorioBo;
 
     @Action(value = "resurrectLogin",
             interceptorRefs = {
@@ -253,16 +267,23 @@ public class UsuarioAction extends GenericAction {
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
+                @Result(name = ERROR, location = "/app/notify/"),
                 @Result(name = SUCCESS, location = "/app/notify/")
             })
     public String delete() {
         try {
             GenericAction.isLogged(request);
+            
             usuarioBo.delete(usuario.getId());
+            
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listUsuario");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }catch (Exception e){
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
         }
         return SUCCESS;
     }
@@ -282,7 +303,17 @@ public class UsuarioAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-            usuarios = usuarioBo.list(getConsulta());
+            
+            Consulta consulta = getConsulta();
+            consulta.addAliasTable("coordenadorPedagogico","coordenadorPedagogico", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addAliasTable("gestorDoTerritorio", "gestorDoTerritorio", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addCriterion(Restrictions.and(
+                    Restrictions.isNull("coordenadorPedagogico.id"),
+                    Restrictions.isNull("coordenadorDeProjeto.id"),
+                    Restrictions.isNull("gestorDoTerritorio.id")
+            ));
+            this.usuarios = this.usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

@@ -112,7 +112,7 @@ public class CoordenadorPedagogicoAction extends GenericAction{
             GenericAction.isLogged(request);
             CoordenadorPedagogico entity = coordenadorPedagogicoBo.load(this.coordenadorPedagogico.getId());
             this.coordenadorPedagogicoBo.delete(this.coordenadorPedagogico.getId());
-            this.usuarioBo.delete(entity.getUsuario().getId());
+            //this.usuarioBo.delete(entity.getUsuario().getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listCoordenadorPedagogico");
         } catch (Exception e) {
@@ -136,7 +136,8 @@ public class CoordenadorPedagogicoAction extends GenericAction{
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-           this.coordenadorPedagogicos = coordenadorPedagogicoBo.listall();
+            Consulta consulta = getConsulta();
+           this.coordenadorPedagogicos = coordenadorPedagogicoBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

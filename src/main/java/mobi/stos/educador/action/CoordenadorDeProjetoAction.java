@@ -112,7 +112,7 @@ public class CoordenadorDeProjetoAction extends GenericAction{
             GenericAction.isLogged(request);
             CoordenadorDeProjeto entity = coordenadorDeProjetoBo.load(this.coordenadorDeProjeto.getId());
             this.coordenadorDeProjetoBo.delete(this.coordenadorDeProjeto.getId());
-            this.usuarioBo.delete(entity.getUsuario().getId());
+            //this.usuarioBo.delete(entity.getUsuario().getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listCoordenadorDeProjeto");
         } catch (Exception e) {
@@ -136,7 +136,8 @@ public class CoordenadorDeProjetoAction extends GenericAction{
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-           this.coordenadorDeProjetos = coordenadorDeProjetoBo.listall();
+            Consulta consulta = getConsulta();
+           this.coordenadorDeProjetos = coordenadorDeProjetoBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -170,6 +171,7 @@ public class CoordenadorDeProjetoAction extends GenericAction{
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
+        list.add(new Keys("email", "E-mail"));
         return list;
     }
 
