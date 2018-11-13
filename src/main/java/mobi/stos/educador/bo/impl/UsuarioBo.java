@@ -1,6 +1,7 @@
 package mobi.stos.educador.bo.impl;
 
 import java.util.Date;
+import java.util.List;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.AbstractService;
@@ -54,6 +55,11 @@ public class UsuarioBo extends AbstractService<Usuario> implements IUsuarioBo {
     @Override
     public Usuario byEmail(String email) {
         return dao.byEmail(email);
+    }
+
+    @Override
+    public List<Usuario> listSomenteUsuarios() {
+        return dao.listSomenteUsuarios();
     }
 
 }

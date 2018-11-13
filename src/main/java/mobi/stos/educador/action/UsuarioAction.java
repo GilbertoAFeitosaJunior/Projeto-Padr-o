@@ -303,17 +303,7 @@ public class UsuarioAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-            
-            Consulta consulta = getConsulta();
-            consulta.addAliasTable("coordenadorPedagogico","coordenadorPedagogico", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-            consulta.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-            consulta.addAliasTable("gestorDoTerritorio", "gestorDoTerritorio", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-            consulta.addCriterion(Restrictions.and(
-                    Restrictions.isNull("coordenadorPedagogico.id"),
-                    Restrictions.isNull("coordenadorDeProjeto.id"),
-                    Restrictions.isNull("gestorDoTerritorio.id")
-            ));
-            this.usuarios = this.usuarioBo.list(consulta);
+                this.usuarios = this.usuarioBo.listSomenteUsuarios();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

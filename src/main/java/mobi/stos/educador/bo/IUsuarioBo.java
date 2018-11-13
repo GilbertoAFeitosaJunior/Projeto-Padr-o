@@ -1,5 +1,6 @@
 package mobi.stos.educador.bo;
 
+import java.util.List;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.common.IOperations;
 import mobi.stos.educador.exception.AvoidDuplicationEmailException;
@@ -15,4 +16,6 @@ public interface IUsuarioBo extends IOperations<Usuario> {
     Usuario cadastrar(Usuario usuario) throws AvoidDuplicationEmailException;
 
     Usuario byEmail(String email);
+    
+    List<Usuario> listSomenteUsuarios();
 }
