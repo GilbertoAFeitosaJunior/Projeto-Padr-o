@@ -14,8 +14,6 @@
             <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistUsuario" theme="simple" enctype="multipart/form-data">
                 <s:hidden name="usuario.id" />
 
-
-
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">                      

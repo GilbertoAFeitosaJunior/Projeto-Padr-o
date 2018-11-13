@@ -14,6 +14,9 @@ var Script = function () {
                 "coordenadorPedagogico.usuario.email": {
                     required: "Favor preencher esse campo",
                     email: "E-mail inválido"
+                },
+                "coordenadorPedagogico.usuario.senha": {
+                    required: "Favor preencher esse campo"
                 }
             }
         });

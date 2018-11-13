@@ -60,7 +60,12 @@
                     <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Senha:</label>
+                            <s:if test="coordenadorPedagogico == null" >
+                                <s:password name="coordenadorPedagogico.usuario.senha" id="coordenadorPedagogico.usuario.senha" placeholder="" maxlength="32" cssClass="form-control" required="true"/>
+                            </s:if>
+                            <s:else>
                                 <s:password name="coordenadorPedagogico.usuario.senha" id="coordenadorPedagogico.usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
+                            </s:else>
                         </div>
                     </div>
                 </div>

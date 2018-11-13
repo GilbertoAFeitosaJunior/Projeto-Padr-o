@@ -14,6 +14,9 @@ var Script = function () {
                 "coordenadorDeProjeto.usuario.email": {
                     required: "Favor preencher esse campo",
                     email: "E-mail inválido"
+                },
+                "coordenadorDeProjeto.usuario.senha": {
+                    required: "Favor preencher esse campo"
                 }
             }
         });
