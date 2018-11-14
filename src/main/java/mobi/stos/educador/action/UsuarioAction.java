@@ -328,6 +328,7 @@ public class UsuarioAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
+        list.add(new Keys("nome", "Nome"));
         list.add(new Keys("email", "E-mail"));
         return list;
     }
