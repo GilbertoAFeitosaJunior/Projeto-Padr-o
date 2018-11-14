@@ -132,6 +132,8 @@ public class UsuarioAction extends GenericAction {
                 @Result(name = ERROR, location = "/app/home/login.jsp")
                 ,
                 @Result(name = SUCCESS, location = "/app/home/index.jsp")
+                    //@Result(name = SUCCESS, type = "redirectAction", params = {"actionName", "prepareUsuarioBotoes"})
+
             })
     public String login() {
         Map session = ActionContext.getContext().getSession();
