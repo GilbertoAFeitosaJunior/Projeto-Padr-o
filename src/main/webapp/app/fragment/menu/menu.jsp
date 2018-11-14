@@ -9,7 +9,7 @@
 
 
     <li>
-        <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario" || menu =="CoordenadorPedagogico"'> class="active"</s:if>>
+        <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario" || menu =="CoordenadorPedagogico" || menu == "GestorDoTerritorio" || menu == "CoordenadorDeProjeto" '> class="active"</s:if>>
             <i class="fa fa-user"></i>
             <span>Usu&aacute;rios</span>
         </a>
