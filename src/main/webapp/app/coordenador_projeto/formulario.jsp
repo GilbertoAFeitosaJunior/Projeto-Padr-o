@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="panel-body pull-right">
-                    <button type="button" class="btn btn-danger" onclick="window.location = 'listCoordenadorPedagogico'">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location = 'listCoordenadorDeProjeto'">Cancelar</button>
                     &nbsp;
                     <button type="submit" class="btn btn-success">Salvar Registro</button>
                 </div>
