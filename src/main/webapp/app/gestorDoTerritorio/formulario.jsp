@@ -62,7 +62,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail:</label>
-                            <s:textfield name="gestorDoTerritorio.usuario.email" id="gestorDoTerritorio.usuario.email" type="email" placeholder="O usuário precisa ser um email" maxlength="100" cssClass="form-control" required="true"/>
+                            <s:textfield name="gestorDoTerritorio.usuario.email" id="gestorDoTerritorio.usuario.email" type="email" placeholder="O usuário precisa ter um email" maxlength="100" cssClass="form-control" required="true"/>
                         </div>
                     </div>
 
