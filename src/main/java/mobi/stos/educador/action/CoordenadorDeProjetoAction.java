@@ -54,7 +54,7 @@ public class CoordenadorDeProjetoAction extends GenericAction{
             if (coordenadorDeProjeto != null && coordenadorDeProjeto.getId() != null) {
                 coordenadorDeProjeto = this.coordenadorDeProjetoBo.load(coordenadorDeProjeto.getId());
             }
-            this.coordenadorDeProjetos = this.coordenadorDeProjetoBo.listall();
+            //this.coordenadorDeProjetos = this.coordenadorDeProjetoBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

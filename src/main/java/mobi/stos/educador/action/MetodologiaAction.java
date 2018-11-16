@@ -254,8 +254,6 @@ public class MetodologiaAction extends GenericAction {
         this.escola = escola;
     }
     
-    
-    
     @Override
     public JsonReturn getJsonReturn() {
         return super.getJsonReturn(); 
