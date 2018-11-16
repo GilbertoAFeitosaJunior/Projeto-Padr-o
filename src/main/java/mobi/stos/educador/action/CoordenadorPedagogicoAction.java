@@ -54,7 +54,7 @@ public class CoordenadorPedagogicoAction extends GenericAction{
             if (coordenadorPedagogico != null && coordenadorPedagogico.getId() != null) {
                 coordenadorPedagogico = this.coordenadorPedagogicoBo.load(coordenadorPedagogico.getId());
             }
-            this.coordenadorPedagogicos = this.coordenadorPedagogicoBo.listall();
+            //this.coordenadorPedagogicos = this.coordenadorPedagogicoBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

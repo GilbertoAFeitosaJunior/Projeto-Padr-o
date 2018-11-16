@@ -49,13 +49,21 @@
             <span>Educadores</span>
         </a>
     </li>
-    
-       <li>
+     
+    <li>
         <a href="listAtividade" <s:if test='menu == "Atividade"'> class="active"</s:if>>
             <i class="fa fa-pencil-square"></i>
             <span>Atividades</span>
         </a>
     </li>
+    
+    <li>
+        <a href="listPessoa" <s:if test='menu == "Pessoa"'> class="active"</s:if>>
+            <i class="fa fa-user"></i>
+            <span>Pessoas</span>
+    </a>
+     </li>
+       
 
     <li>
         <a href="logout">
