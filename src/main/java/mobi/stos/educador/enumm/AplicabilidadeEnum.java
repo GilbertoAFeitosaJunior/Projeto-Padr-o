@@ -21,4 +21,9 @@ public enum AplicabilidadeEnum {
         return name;
     }
     
+    
+    public static AplicabilidadeEnum retornaEnumNaPosicao (int posicao){
+        return AplicabilidadeEnum.values()[posicao];
+    }
+    
 }

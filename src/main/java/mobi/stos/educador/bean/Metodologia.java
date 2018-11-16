@@ -117,8 +117,6 @@ public class Metodologia implements Serializable{
         if (this.escolas != null) {
             this.escolas.remove(escola);
         }
-
-    
     }
 }
     

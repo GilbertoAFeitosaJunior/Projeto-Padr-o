@@ -49,6 +49,13 @@
             <span>Educadores</span>
         </a>
     </li>
+    
+       <li>
+        <a href="listAtividade" <s:if test='menu == "Atividade"'> class="active"</s:if>>
+            <i class="fa fa-pencil-square"></i>
+            <span>Atividades</span>
+        </a>
+    </li>
 
     <li>
         <a href="logout">
