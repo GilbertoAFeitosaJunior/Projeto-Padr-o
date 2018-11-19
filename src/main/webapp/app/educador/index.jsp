@@ -67,6 +67,12 @@
         <header class="panel-heading">Registros</header>
 
         <div class="panel-body pull-right">
+            
+             <a class="btn btn-primary" href="prepareUsuarioBotoes" >
+                <i class="fa fa-arrow-left"></i> 
+                Voltar
+            </a>
+            
             <button class="btn btn-primary" onclick="list.add();">
                 <i class="fa fa-plus"></i> 
                 Adicionar Novo

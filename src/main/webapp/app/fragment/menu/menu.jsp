@@ -9,7 +9,7 @@
 
 
     <li>
-        <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario" || menu =="CoordenadorPedagogico" || menu == "GestorDoTerritorio" || menu == "CoordenadorDeProjeto" '> class="active"</s:if>>
+        <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario" || menu =="CoordenadorPedagogico" || menu == "GestorDoTerritorio" || menu == "CoordenadorDeProjeto" || menu == "Educador" '> class="active"</s:if>>
             <i class="fa fa-user"></i>
             <span>Usu&aacute;rios</span>
         </a>
@@ -43,12 +43,12 @@
         </a>
     </li>
     
-    <li>
+<!--    <li>
         <a href="listEducador" <s:if test='menu == "Educador"'> class="active"</s:if>>
             <i class="fa fa-pencil"></i>
             <span>Educadores</span>
         </a>
-    </li>
+    </li>-->
      
     <li>
         <a href="listAtividade" <s:if test='menu == "Atividade"'> class="active"</s:if>>

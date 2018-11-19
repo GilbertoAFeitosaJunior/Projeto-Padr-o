@@ -59,6 +59,9 @@ public class Usuario implements Serializable {
     
     @OneToOne(mappedBy = "usuario")
     private GestorDoTerritorio gestorDoTerritorio;
+    
+     @OneToOne(mappedBy = "usuario")
+    private Educador educador;
 
     public Usuario(Long id) {
         this.id = id;
@@ -184,6 +187,17 @@ public class Usuario implements Serializable {
     public void setGestorDoTerritorio(GestorDoTerritorio gestorDoTerritorio) {
         this.gestorDoTerritorio = gestorDoTerritorio;
     }
+
+    public Educador getEducador() {
+        return educador;
+    }
+
+    public void setEducador(Educador educador) {
+        this.educador = educador;
+    }
+    
+    
+    
     
     
 

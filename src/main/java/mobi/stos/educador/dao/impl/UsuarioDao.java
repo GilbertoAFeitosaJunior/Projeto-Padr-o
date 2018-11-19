@@ -30,20 +30,24 @@ public class UsuarioDao extends AbstractHibernateDao<Usuario> implements IUsuari
         Criteria criteria = getCurrentSession().createCriteria(Usuario.class);
         criteria.add(Restrictions.eq("hash", hash));
         criteria.setMaxResults(1);
-        return (Usuario) criteria.uniqueResult();    }
+        return (Usuario) criteria.uniqueResult();
+    }
 
     @Override
     public List<Usuario> listSomenteUsuarios() {
-          Criteria consulta = getCurrentSession().createCriteria(Usuario.class);
-          consulta.createAlias("coordenadorPedagogico","coordenadorPedagogico", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-          consulta.createAlias("coordenadorDeProjeto", "coordenadorDeProjeto", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-          consulta.createAlias("gestorDoTerritorio", "gestorDoTerritorio", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
-            consulta.add(Restrictions.and(
-                    Restrictions.isNull("coordenadorPedagogico.id"),
-                    Restrictions.isNull("coordenadorDeProjeto.id"),
-                    Restrictions.isNull("gestorDoTerritorio.id")
-            ));
-            return consulta.list();
+        Criteria consulta = getCurrentSession().createCriteria(Usuario.class);
+        consulta.createAlias("coordenadorPedagogico", "coordenadorPedagogico", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+        consulta.createAlias("coordenadorDeProjeto", "coordenadorDeProjeto", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+        consulta.createAlias("gestorDoTerritorio", "gestorDoTerritorio", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+        consulta.createAlias("educador", "educador", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+
+        consulta.add(Restrictions.and(
+                Restrictions.isNull("coordenadorPedagogico.id"),
+                Restrictions.isNull("coordenadorDeProjeto.id"),
+                Restrictions.isNull("gestorDoTerritorio.id"),
+                Restrictions.isNull("educador.id")
+        ));
+        return consulta.list();
 
     }
 
