@@ -61,7 +61,7 @@ public class EducadorAction extends GenericAction {
             if (educador != null && educador.getId() != null) {
                 educador = this.educadorBo.load(educador.getId());
             }
-            this.educadors = this.educadorBo.listall();
+            //this.educadors = this.educadorBo.listall();
             this.usuarios = this.usuarioBo.listall();
             this.escolas = this.escolaBo.listall();
             return SUCCESS;

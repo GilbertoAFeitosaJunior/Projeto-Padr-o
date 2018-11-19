@@ -7,7 +7,6 @@
         </a>
     </li>
 
-
     <li>
         <a href="prepareUsuarioBotoes" <s:if test='menu == "Usuario" || menu =="CoordenadorPedagogico" || menu == "GestorDoTerritorio" || menu == "CoordenadorDeProjeto" '> class="active"</s:if>>
             <i class="fa fa-user"></i>
@@ -59,11 +58,17 @@
     
     <li>
         <a href="listPessoa" <s:if test='menu == "Pessoa"'> class="active"</s:if>>
-            <i class="fa fa-user"></i>
+            <i class="fa fa-users"></i>
             <span>Pessoas</span>
-    </a>
+         </a>
      </li>
-       
+     
+    <li>
+        <a href="listOficina" <s:if test='menu == "Oficina"'> class="active"</s:if>>
+            <i class="fa fa-cogs"></i>
+            <span>Oficinas</span>
+         </a>
+     </li>
 
     <li>
         <a href="logout">
