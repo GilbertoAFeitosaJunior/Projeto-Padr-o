@@ -31,7 +31,12 @@
             <a href="listUsuario"  class="btn btn-primary btn-block">
                Usuário
             </a>
-        </div>     
+        </div>
+        <div class="col-lg-3 m-bot15">
+            <a href="listEducador" class="btn btn-primary btn-block">
+                Educador
+            </a>
+        </div>  
     </div>  
 </section>
 

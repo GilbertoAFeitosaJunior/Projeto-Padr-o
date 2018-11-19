@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import mobi.stos.educador.util.Util;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
@@ -34,7 +36,7 @@ public class Educador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(optional = false)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     private Usuario usuario;
     
     @ManyToMany(fetch = FetchType.LAZY)
@@ -51,8 +53,6 @@ public class Educador implements Serializable {
     @Column(length = 100, nullable = false)
     private String email;
     
-    @Column(length = 32, nullable = false)
-    private String senha;
     
     @Column(nullable = false)
     private int ddd;
@@ -106,16 +106,6 @@ public class Educador implements Serializable {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) throws NoSuchAlgorithmException {
-        if (StringUtils.isNotEmpty(senha) && senha.length() < 32) {
-            this.senha = Util.md5(senha);
-        } else {
-            this.senha = senha;
-        }
-    }
 
     public int getDdd() {
         return ddd;

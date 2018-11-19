@@ -117,7 +117,6 @@ public class GestorDoTerritorioAction extends GenericAction {
 
             GestorDoTerritorio entity = gestorDoTerritorioBo.load(this.gestorDoTerritorio.getId());
             this.gestorDoTerritorioBo.delete(this.gestorDoTerritorio.getId());
-            this.usuarioBo.delete(entity.getUsuario().getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listGestorDoTerritorio");
         } catch (LoginExpiradoException e) {

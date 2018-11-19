@@ -22,6 +22,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -83,19 +84,36 @@ public class EducadorAction extends GenericAction {
             })
     public String persist() {
         try {
+//            GenericAction.isLogged(request);
+//            Educador entity;
+//            if (educador != null && educador.getId() != null) {
+//                entity = educadorBo.load(educador.getId());
+//                
+//                if (Strings.isNullOrEmpty(educador.getSenha())) {
+//                    educador.setSenha(entity.getSenha());
+//                }
+//            }
+//            
+//            String ufMaiusculo = educador.getUf().toUpperCase();
+//            educador.setUf(ufMaiusculo);
+//            this.educadorBo.persist(educador);
             GenericAction.isLogged(request);
-            Educador entity;
-            if (educador != null && educador.getId() != null) {
-                entity = educadorBo.load(educador.getId());
-                
-                if (Strings.isNullOrEmpty(educador.getSenha())) {
-                    educador.setSenha(entity.getSenha());
+            Usuario entity;
+
+            if (this.educador != null && this.educador.getId() != null) {
+
+                entity = this.usuarioBo.load(this.educador.getUsuario().getId());
+
+                if (Strings.isNullOrEmpty(this.educador.getUsuario().getSenha())) {
+                    this.educador.getUsuario().setSenha(entity.getSenha());
                 }
+
+            } else {
+                entity = this.usuarioBo.cadastrar(this.educador.getUsuario());
+                this.educador.setUsuario(entity);
             }
-            
-            String ufMaiusculo = educador.getUf().toUpperCase();
-            educador.setUf(ufMaiusculo);
-            this.educadorBo.persist(educador);
+            this.usuarioBo.persist(this.educador.getUsuario());
+            this.educadorBo.persist(this.educador);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEducador");
         } catch (Exception e) {
@@ -128,7 +146,7 @@ public class EducadorAction extends GenericAction {
                     System.out.println(escola.getId());
                     System.out.println(educador.getId());
                     educador.addEscola(escola);
-                    
+
 //                    for (Escola escola1 : educador.getEscolas()) {
 //                            System.out.println("############# escola: " + escola1.getNome());
 //                    }
@@ -163,6 +181,8 @@ public class EducadorAction extends GenericAction {
                 setConsulta(new Consulta(field));
             }
             Consulta c = getConsulta();
+            c.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
+
             this.educadors = educadorBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -200,7 +220,8 @@ public class EducadorAction extends GenericAction {
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            educadorBo.delete(educador.getId());
+            Educador entity = educadorBo.load(this.educador.getId());
+            this.educadorBo.delete(this.educador.getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listEducador");
         } catch (Exception e) {
