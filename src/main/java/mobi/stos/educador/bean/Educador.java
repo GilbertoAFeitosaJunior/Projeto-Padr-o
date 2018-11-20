@@ -78,6 +78,13 @@ public class Educador implements Serializable {
     @Column(length = 2, nullable = false)
     private String uf;
 
+    
+    public Educador() {
+    }
+    public Educador(Long id) {
+        this.id = id;
+    }
+    
     public Long getId() {
         return id;
     }

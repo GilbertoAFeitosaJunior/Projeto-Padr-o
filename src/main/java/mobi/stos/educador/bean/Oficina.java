@@ -4,11 +4,17 @@ package mobi.stos.educador.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,8 +43,13 @@ public class Oficina implements Serializable{
     @ManyToOne(optional = false)
     private Escola escola;
     
-    @ManyToOne(optional = false)
-    private Atividade atividade;
+   @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "oficina_atividade",
+            joinColumns = {
+                @JoinColumn(name = "oficina_id", nullable = false, referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "atividade_id", nullable = false, referencedColumnName = "id")})
+    private Set<Atividade> atividades;
     
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -50,7 +61,6 @@ public class Oficina implements Serializable{
     @Column(nullable = false)
     private SituacaoOficinaEnum situacaoEnum;
     
-    @Column(nullable = false)
     private String historico;
     
     @Temporal(TemporalType.DATE)
@@ -77,13 +87,25 @@ public class Oficina implements Serializable{
         this.escola = escola;
     }
 
-    public Atividade getAtividade() {
-        return atividade;
+    public Set<Atividade> getAtividades() {
+        return atividades;
     }
-    public void setAtividade(Atividade atividade) {
-        this.atividade = atividade;
+    public void setAtividades(Set<Atividade> atividades) {
+        this.atividades = atividades;
     }
-
+    
+    public void addAtividade(Atividade atividade) {
+        if (this.atividades == null) {
+            this.atividades = new HashSet<>();
+        }
+        this.atividades.add(atividade);
+    }
+    public void removeAtividade(Atividade atividade) {
+        if (this.atividades != null) {
+            this.atividades.remove(atividade);
+        }
+    }
+    
     public Date getDataPlanejada() {
         return dataPlanejada;
     }

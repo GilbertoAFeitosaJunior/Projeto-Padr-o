@@ -43,7 +43,7 @@
     </li>
     
 <!--    <li>
-        <a href="listEducador" <s:if test='menu == "Educador"'> class="active"</s:if>>
+        <a href="listEducador" <!s:if test='menu == "Educador"'> class="active"<!/s:if>>
             <i class="fa fa-pencil"></i>
             <span>Educadores</span>
         </a>

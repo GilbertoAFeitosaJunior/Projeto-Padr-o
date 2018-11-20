@@ -8,7 +8,6 @@ import com.opensymphony.xwork2.ActionContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.criteria.JoinType;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,13 +39,13 @@ public class UsuarioAction extends GenericAction {
     private List<Usuario> usuarios;
     @Autowired
     private IUsuarioBo usuarioBo;
-    
+
     @Autowired
     private ICoordenadorDeProjetoBo coodernadorDeProjetoBo;
-    
+
     @Autowired
     private ICoordenadorPedagogicoBo coordenadorPedagogicoBo;
-    
+
     @Autowired
     private IGestorDoTerritorioBo gestorDoTerritorioBo;
 
@@ -85,8 +84,8 @@ public class UsuarioAction extends GenericAction {
             return ERROR;
         }
     }
-    
-      @Action(value = "prepareUsuarioBotoes",
+
+    @Action(value = "prepareUsuarioBotoes",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
@@ -124,7 +123,7 @@ public class UsuarioAction extends GenericAction {
             return ERROR;
         }
     }
-    
+
     @Action(value = "login",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -132,7 +131,7 @@ public class UsuarioAction extends GenericAction {
                 @Result(name = ERROR, location = "/app/home/login.jsp")
                 ,
                 @Result(name = SUCCESS, location = "/app/home/index.jsp")
-                    //@Result(name = SUCCESS, type = "redirectAction", params = {"actionName", "prepareUsuarioBotoes"})
+            //@Result(name = SUCCESS, type = "redirectAction", params = {"actionName", "prepareUsuarioBotoes"})
 
             })
     public String login() {
@@ -160,7 +159,7 @@ public class UsuarioAction extends GenericAction {
             } else {
                 removeCookie();
             }
-
+            setMenu("Login");
             return SUCCESS;
         } catch (AccessDeniedException | LoginException | SenhaException e) {
             int tentativas = 1;
@@ -269,21 +268,22 @@ public class UsuarioAction extends GenericAction {
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
-                @Result(name = ERROR, location = "/app/notify/"),
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
                 @Result(name = SUCCESS, location = "/app/notify/")
             })
     public String delete() {
         try {
             GenericAction.isLogged(request);
-            
+
             usuarioBo.delete(usuario.getId());
-            
+
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listUsuario");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
-        }catch (Exception e){
+        } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
         }
@@ -301,11 +301,24 @@ public class UsuarioAction extends GenericAction {
     public String list() {
         try {
             GenericAction.isLogged(request);
+
             if (getConsulta() == null) {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-                this.usuarios = this.usuarioBo.listSomenteUsuarios();
+
+            Consulta consulta = getConsulta();
+            consulta.addAliasTable("coordenadorPedagogico", "coordenadorPedagogico", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addAliasTable("gestorDoTerritorio", "gestorDoTerritorio", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addAliasTable("educador", "educador", org.hibernate.sql.JoinType.LEFT_OUTER_JOIN);
+            consulta.addCriterion(Restrictions.and(
+                    Restrictions.isNull("coordenadorPedagogico.id"),
+                    Restrictions.isNull("coordenadorDeProjeto.id"),
+                    Restrictions.isNull("gestorDoTerritorio.id"),
+                    Restrictions.isNull("educador.id")
+            ));
+            this.usuarios = this.usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

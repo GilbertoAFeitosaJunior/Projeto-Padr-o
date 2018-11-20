@@ -48,7 +48,7 @@ public class Atividade implements Serializable{
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -56,7 +56,7 @@ public class Atividade implements Serializable{
     public String getNome() {
         return nome;
     }
-
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -64,7 +64,7 @@ public class Atividade implements Serializable{
     public String getDescricao() {
         return descricao;
     }
-
+    
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -72,21 +72,10 @@ public class Atividade implements Serializable{
     public Set<Metodologia> getMetodologias() {
         return metodologias;
     }
-
+    
     public void setMetodologias(Set<Metodologia> metodologias) {
         this.metodologias = metodologias;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
    // métodos para o atributo many to many
     
