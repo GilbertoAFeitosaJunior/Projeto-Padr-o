@@ -11,6 +11,6 @@ public interface IUsuarioDao extends IOperations<Usuario> {
     Usuario byHash(String hash);
 
     public List<Usuario> listSomenteUsuarios();
-
-
+    
+    
 }
