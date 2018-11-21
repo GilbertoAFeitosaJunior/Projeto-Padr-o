@@ -146,6 +146,8 @@ public class OficinaAction extends GenericAction {
               if (atividade.getId() != null) {
                 oficina = this.oficinaBo.load(oficina.getId()); 
                 atividade = this.atividadeBo.load(atividade.getId());
+                
+                oficina.getEducador().setEscolas(null);
 
                 boolean ok = true;
                 for (Atividade a : oficina.getAtividades()) {
@@ -156,7 +158,6 @@ public class OficinaAction extends GenericAction {
                 if (ok) {
                     oficina.addAtividade(atividade);
                     this.oficinaBo.persist(oficina);
-                    oficina.getEducador().setEscolas(null);
                     jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
                 } else {
                     jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
@@ -185,6 +186,28 @@ public class OficinaAction extends GenericAction {
             setRedirectURL("listOficina");
         } catch (LoginExpiradoException e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+        }
+        return SUCCESS;
+    }
+    
+     @Action(value = "listOficinaJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String listOficinaAtividadeJson() {
+        try {
+            GenericAction.isLogged(request);
+            System.out.println(oficina.getId());
+            
+            if (oficina != null && oficina.getId() != null) {
+                oficina = this.oficinaBo.load(oficina.getId());
+            }
+            
+            //oficina.getEducador().setEscolas(null);
+            jsonReturn = new JsonReturn(true);
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
         }
         return SUCCESS;
     }

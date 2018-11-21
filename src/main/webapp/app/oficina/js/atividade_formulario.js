@@ -1,3 +1,6 @@
+ $(function(){
+    atividades.list(); 
+ });
  
  var atividades = {
  
@@ -21,6 +24,31 @@
             }
         }).fail(function () {
             notify.error("Erro", "Erro ao tentar salvar o registro, favor tente novamente.");
+        }).always(function () {
+        });
+    },
+    list: function () {
+        $.ajax({
+            type: "POST",
+            url: "listOficinaJson",
+            dataType: "json",
+            data: {
+                "oficina.id": $("[name='oficina.atividade.id']").val()
+            }
+        }).done(function (json) {
+            var html = "";
+            $.each(json.oficina.atividades, function (index, value) {
+                html += "<tr>";
+                html += "<td>" + value.nome + "</td>";
+                html += "<td class='text-right'>";
+                html += '<a class="btn btn-danger btn-xs" onclick=""><i class="fa fa-trash-o "></i></a>';
+                html += "</td>";
+                html += "</tr>";
+            });
+            $("#tA tbody").html(html);
+
+        }).fail(function () {
+            notify.error("Erro", "Erro ao tentar excluir o registro, favor tente novamente.");
         }).always(function () {
         });
     }
