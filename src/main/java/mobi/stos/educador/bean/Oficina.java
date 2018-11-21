@@ -61,6 +61,7 @@ public class Oficina implements Serializable{
     @Column(nullable = false)
     private SituacaoOficinaEnum situacaoEnum;
     
+   @Column(columnDefinition="TEXT")
     private String historico;
     
     @Temporal(TemporalType.DATE)

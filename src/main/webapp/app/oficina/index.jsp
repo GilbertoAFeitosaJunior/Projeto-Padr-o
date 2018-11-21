@@ -77,6 +77,7 @@
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
+                        <th>Escola</th>
                         <th>Data de planejamento</th>
                         <th>Turno</th>
                         <th>Situação</th>
@@ -86,6 +87,7 @@
                 <tbody>
                     <s:iterator value="oficinas">
                         <tr>       
+                            <td><s:property value="escola.nome"/></td>
                             <td ><s:property value="dataPlanejada"/></td>
                             <td ><s:property value="turnoEnum.name"/></td>
                             <td ><s:property value="situacaoEnum.name"/></td>

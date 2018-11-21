@@ -143,13 +143,7 @@ public class EducadorAction extends GenericAction {
                     }
                 }
                 if (escolaDiferente) {
-                    System.out.println(escola.getId());
-                    System.out.println(educador.getId());
                     educador.addEscola(escola);
-
-//                    for (Escola escola1 : educador.getEscolas()) {
-//                            System.out.println("############# escola: " + escola1.getNome());
-//                    }
                     this.educadorBo.persist(educador);
 
                     jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
@@ -259,14 +253,6 @@ public class EducadorAction extends GenericAction {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
         return list;
-    }
-
-    public Educador getEducador() {
-        return educador;
-    }
-
-    public void setEducador(Educador educador) {
-        this.educador = educador;
     }
 
     public Usuario getUsuario() {

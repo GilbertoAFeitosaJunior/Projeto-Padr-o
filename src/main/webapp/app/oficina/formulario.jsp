@@ -3,45 +3,58 @@
 <%@include file="../fragment/head.jsp" %>
 
 
-<s:if test="oficina == null">
-    <%@include file="fragment/oficina_formulario.jsp" %>   
-</s:if>
-<s:else>
+<!--s:if test="oficina == null">
+    <!%@include file="fragment/oficina_formulario.jsp" %>   
+<!/s:if->
+<!s:else-->
     <section class="panel">
         <header class="panel-heading tab-bg-dark-navy-blue ">
             <ul class="nav nav-tabs">
-                <li class="active">
+                <li id="tab-oficina" class="tab-oficina active">
                     <a data-toggle="tab" href="#tab">Oficina</a>
                 </li>    
-                <li  >
-                    <a data-toggle="tab" href="#tab1">Anexos</a>
+                <li class="tab-atividade" >
+                    <a data-toggle="tab" href="#tab1">Atividade</a>
                 </li>  
-                <li  >
-                    <a data-toggle="tab" href="#tab2">Relatório</a>
+                <li id="tab-historico" >
+                    <a data-toggle="tab" href="#tab2">Histórico</a>
+                </li>  
+                <li id="tab-anexo" >
+                    <a data-toggle="tab" href="#tab3">Anexo</a>
+                </li>  
+                <li id="tab-relatorio" >
+                    <a data-toggle="tab" href="#tab4">Relatório</a>
                 </li>  
             </ul>            
         </header>
 
         <div class="panel-body">
             <div class="tab-content">
-                <div id="tab" class="tab-pane active" >
+                <div id="tab" class="tab-oficina tab-pane active" >
                     <%@include file="../oficina/fragment/oficina_formulario.jsp" %>
                 </div>   
-                <div id="tab1" class="tab-pane">
+                <div id="tab1" class="tab-atividade tab-pane " >
+                    <%@include file="../oficina/fragment/atividade_formulario.jsp" %>
+                </div>   
+                <div id="tab2" class="tab-pane " >
+                    <%@include file="../oficina/fragment/historico_formulario.jsp" %>
+                </div>   
+                <div id="tab3" class="tab-pane">
                     <%@include file="../oficina/fragment/anexo_formulario.jsp" %>
                 </div>  
-                <div id="tab2" class="tab-pane">
+                <div id="tab4" class="tab-pane">
                     <%@include file="../oficina/fragment/relatorio_formulario.jsp" %>
                 </div>  
             </div>           
         </div>
     </section>
-</s:else>
+<!--/s:else-->
 
 <%@include file="../fragment/endpage.jsp" %>
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script type="text/javascript" src="../oficina/js/oficina_formulario.js"></script>
+<script type="text/javascript" src="../oficina/js/atividade_formulario.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
                         $(function () {

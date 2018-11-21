@@ -16,17 +16,18 @@ import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IOficinaBo;
 import mobi.stos.educador.common.GenericAction;
+import static mobi.stos.educador.common.GenericAction.jsonReturn;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.enumm.SituacaoOficinaEnum;
 import mobi.stos.educador.enumm.TurnoEnum;
 import mobi.stos.educador.exception.LoginExpiradoException;
+import mobi.stos.educador.util.JsonReturn;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class OficinaAction extends GenericAction {
 
     private Oficina oficina;
+    private Atividade atividade;
+    
+    private Long id;
 
     private List<Oficina> oficinas;
     private List<Educador> educadors;
@@ -46,9 +50,6 @@ public class OficinaAction extends GenericAction {
 
     @Autowired
     private IOficinaBo oficinaBo;
-
-    @Autowired
-    private IEducadorBo educadorBo;
 
     @Autowired
     private IEscolaBo escolaBo;
@@ -71,7 +72,6 @@ public class OficinaAction extends GenericAction {
                 oficina = this.oficinaBo.load(oficina.getId());
             }
             this.atividades = this.atividadeBo.listall();
-            this.educadors = this.educadorBo.listall();
             this.escolas = this.escolaBo.listall();
             return SUCCESS;
         } catch (Exception e) {
@@ -80,33 +80,93 @@ public class OficinaAction extends GenericAction {
         }
     }
 
-    @Action(value = "persistOficina",
-            interceptorRefs = {
-                @InterceptorRef(value = "fileUploadStack")
-                ,
-                @InterceptorRef(value = "basicStack")},
+//    @Action(value = "persistOficina",
+//            interceptorRefs = {
+//                @InterceptorRef(value = "fileUploadStack")
+//                ,
+//                @InterceptorRef(value = "basicStack")},
+//            results = {
+//                @Result(name = SUCCESS, location = "/app/notify/")
+//                ,
+//                @Result(name = ERROR, location = "/app/notify/")
+//            })
+//    public String persist() {
+//        try {
+//            GenericAction.isLogged(request);
+//
+//            if (getLogged().getEducador() != null) {
+//                Educador educadorLogado = new Educador(getLogged().getEducador().getId());
+//                oficina.setEducador(educadorLogado);
+//                this.oficinaBo.persist(oficina);
+//                setRedirectURL("listOficina");
+//                addActionMessage("Registro salvo com sucesso.");
+//            } else {
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+//            return ERROR;
+//        }
+//        return SUCCESS;
+//    }
+    
+    @Action(value = "persistOficinaJson",
             results = {
-                @Result(name = SUCCESS, location = "/app/notify/")
-                ,
-                @Result(name = ERROR, location = "/app/notify/")
+                @Result(name = SUCCESS, type = "json")
             })
-    public String persist() {
+    public String persistOficinaJson() {
         try {
             GenericAction.isLogged(request);
-
-            if (getLogged().getEducador() != null) {
+             if (getLogged().getEducador() != null) {
                 Educador educadorLogado = new Educador(getLogged().getEducador().getId());
                 oficina.setEducador(educadorLogado);
-                this.oficinaBo.persist(oficina);
-                setRedirectURL("listOficina");
-                addActionMessage("Registro salvo com sucesso.");
+                oficina = this.oficinaBo.persist(oficina);
+                id = oficina.getId();
+                oficina = null;
+                jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
             } else {
+                jsonReturn = new JsonReturn("Erro ao salvar o registro.", false);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
-            return ERROR;
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "persistOficinaAtividadeJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String persistOficinaAtividadeJson() {
+        try {
+            GenericAction.isLogged(request);
+            
+              if (atividade.getId() != null) {
+                oficina = this.oficinaBo.load(oficina.getId()); 
+                atividade = this.atividadeBo.load(atividade.getId());
+
+                boolean ok = true;
+                for (Atividade a : oficina.getAtividades()) {
+                    if (a.getId() == ((long) atividade.getId())) {
+                        ok = false;
+                    }
+                }
+                if (ok) {
+                    oficina.addAtividade(atividade);
+                    this.oficinaBo.persist(oficina);
+                    oficina.getEducador().setEscolas(null);
+                    jsonReturn = new JsonReturn("Registro adicionado com sucesso.", true);
+                } else {
+                    jsonReturn = new JsonReturn("O Registro já está adicionado.", false);
+                }
+            } else {
+                jsonReturn = new JsonReturn(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return SUCCESS;
     }
@@ -144,20 +204,13 @@ public class OficinaAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-
-            Consulta c = getConsulta();
-            c.addCriterion(
-                    Restrictions.or(
-                            Restrictions.isNull("historico"),
-                            Restrictions.ilike("historico", c.getValor(), MatchMode.ANYWHERE)
-                    )
-            );
-            c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
             
+           Consulta c = getConsulta();
+           c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
+           c.addAliasTable("escola", "escola", JoinType.INNER_JOIN);
             if (getLogged().getEducador() != null) {
                 c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
             }
-            
             this.oficinas = this.oficinaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -167,6 +220,28 @@ public class OficinaAction extends GenericAction {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    @Override
+    public JsonReturn getJsonReturn() {
+        return super.getJsonReturn(); 
+    }
+
+    public Atividade getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
+    }
+    
+    
     public Oficina getOficina() {
         return oficina;
     }
@@ -210,7 +285,7 @@ public class OficinaAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
-        list.add(new Keys("historico", "Historico"));
+        list.add(new Keys("escola.nome", "Nome da Escola"));
         return list;
     }
 
