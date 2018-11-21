@@ -10,4 +10,5 @@ import mobi.stos.educador.common.IOperations;
  */
 public interface IOficinaDao extends IOperations<Oficina>{
     
+    public void deleteOficinaAtividade(long idOficina, long idAtividade);
 }

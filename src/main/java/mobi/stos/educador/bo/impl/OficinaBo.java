@@ -2,6 +2,7 @@
 
 package mobi.stos.educador.bo.impl;
 
+import java.util.List;
 import mobi.stos.educador.bean.Oficina;
 import mobi.stos.educador.bo.IOficinaBo;
 import mobi.stos.educador.common.AbstractService;
@@ -25,6 +26,11 @@ public class OficinaBo extends AbstractService<Oficina> implements IOficinaBo{
     @Override
     protected IOperations<Oficina> getDao() {
         return dao;
+    }
+
+    @Override
+    public void deleteOficinaAtividade(long idOficina, long idAtividade) {
+        dao.deleteOficinaAtividade(idOficina, idAtividade);
     }
 
 }

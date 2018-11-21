@@ -4,10 +4,8 @@ import java.util.List;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.common.AbstractHibernateDao;
 import mobi.stos.educador.dao.IUsuarioDao;
-import mobi.stos.educador.util.consulta.Consulta;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -50,5 +48,5 @@ public class UsuarioDao extends AbstractHibernateDao<Usuario> implements IUsuari
         return consulta.list();
 
     }
-
+    
 }

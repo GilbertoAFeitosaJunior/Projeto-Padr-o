@@ -1,5 +1,3 @@
-
-
 package mobi.stos.educador.action;
 
 import com.google.common.base.Strings;
@@ -29,6 +27,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -36,27 +37,27 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Matheus Monteiro
  */
 public class OficinaAction extends GenericAction {
-    
+
     private Oficina oficina;
-    
+
     private List<Oficina> oficinas;
     private List<Educador> educadors;
     private List<Escola> escolas;
     private List<Atividade> atividades;
-    
+
     @Autowired
     private IOficinaBo oficinaBo;
-    
+
     @Autowired
     private IEducadorBo educadorBo;
-    
+
     @Autowired
     private IEscolaBo escolaBo;
-    
+
     @Autowired
     private IAtividadeBo atividadeBo;
-    
-     @Action(value = "prepareOficina",
+
+    @Action(value = "prepareOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
             results = {
@@ -80,7 +81,7 @@ public class OficinaAction extends GenericAction {
         }
     }
 
- @Action(value = "persistOficina",
+    @Action(value = "persistOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
                 ,
@@ -93,17 +94,24 @@ public class OficinaAction extends GenericAction {
     public String persist() {
         try {
             GenericAction.isLogged(request);
-            this.oficinaBo.persist(oficina);
-            addActionMessage("Registro salvo com sucesso.");
-            setRedirectURL("listOficina");
+
+            if (getLogged().getEducador() != null) {
+                Educador educadorLogado = new Educador(getLogged().getEducador().getId());
+                oficina.setEducador(educadorLogado);
+                this.oficinaBo.persist(oficina);
+                setRedirectURL("listOficina");
+                addActionMessage("Registro salvo com sucesso.");
+            } else {
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
         }
         return SUCCESS;
-    }    
-    
+    }
+
     @Action(value = "deleteOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -121,7 +129,7 @@ public class OficinaAction extends GenericAction {
         }
         return SUCCESS;
     }
-    
+
     @Action(value = "listOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -137,8 +145,21 @@ public class OficinaAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
+
             Consulta c = getConsulta();
-            this.oficinas = oficinaBo.list(c);
+            c.addCriterion(
+                    Restrictions.or(
+                            Restrictions.isNull("historico"),
+                            Restrictions.ilike("historico", c.getValor(), MatchMode.ANYWHERE)
+                    )
+            );
+            c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
+            
+            if (getLogged().getEducador() != null) {
+                c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
+            }
+            
+            this.oficinas = this.oficinaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -150,6 +171,7 @@ public class OficinaAction extends GenericAction {
     public Oficina getOficina() {
         return oficina;
     }
+
     public void setOficina(Oficina oficina) {
         this.oficina = oficina;
     }
@@ -157,6 +179,7 @@ public class OficinaAction extends GenericAction {
     public List<Oficina> getOficinas() {
         return oficinas;
     }
+
     public void setOficinas(List<Oficina> oficinas) {
         this.oficinas = oficinas;
     }
@@ -164,6 +187,7 @@ public class OficinaAction extends GenericAction {
     public List<Educador> getEducadors() {
         return educadors;
     }
+
     public void setEducadors(List<Educador> educadors) {
         this.educadors = educadors;
     }
@@ -171,6 +195,7 @@ public class OficinaAction extends GenericAction {
     public List<Escola> getEscolas() {
         return escolas;
     }
+
     public void setEscolas(List<Escola> escolas) {
         this.escolas = escolas;
     }
@@ -178,10 +203,11 @@ public class OficinaAction extends GenericAction {
     public List<Atividade> getAtividades() {
         return atividades;
     }
+
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
     }
-    
+
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
@@ -193,6 +219,7 @@ public class OficinaAction extends GenericAction {
     public List getSituacaoOficinaEnums() {
         return Arrays.asList(SituacaoOficinaEnum.values());
     }
+
     @JSON(serialize = false)
     public List getTurnoEnums() {
         return Arrays.asList(TurnoEnum.values());
@@ -212,6 +239,5 @@ public class OficinaAction extends GenericAction {
     public void setServletResponse(HttpServletResponse hsr) {
         GenericAction.response = hsr;
     }
-    
-    
+
 }

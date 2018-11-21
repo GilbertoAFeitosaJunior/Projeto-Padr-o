@@ -31,14 +31,6 @@
 
             <div class="row">
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Educador:</label>
-                        <s:select name="oficina.educador.id" id="oficina.educador.id" cssClass="form-control" required="true" list="educadors" listValue="nome" listKey="id" emptyOption="true"/>
-                    </div>
-                </div>
-
-
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>Data de Planejamento:</label>
@@ -67,14 +59,7 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col-lg-10">
-                    <div class="form-group">
-                        <label>Histórico</label>
-                        <s:textarea name="oficina.historico" id="oficina.historico" cssClass="form-control"/>
-                    </div>
-                </div>
+               
 
                 <div class="col-lg-2">
                     <div class="form-group">
