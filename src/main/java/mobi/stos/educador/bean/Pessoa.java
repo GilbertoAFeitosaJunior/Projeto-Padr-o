@@ -61,6 +61,8 @@ public class Pessoa implements Serializable {
     @Column(nullable = false, length = 2)
     private String uf;
 
+    public byte[] textoencriptado;
+    
     public Long getId() {
         return id;
     }
@@ -69,13 +71,20 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNome() throws Exception {
+        return decrypt(textoencriptado, AES.chaveencriptacao);
     }
 
     public void setNome(String nome) throws Exception {
         
-           this.nome = nomeEncriptado(nome);
+            textoencriptado = encrypt(nome, AES.chaveencriptacao);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < textoencriptado.length; i++) {
+                builder.append(new Integer(textoencriptado[i])).append(":");
+            }
+            
+            
+        this.nome = builder.toString();
         
     }
 
@@ -151,21 +160,6 @@ public class Pessoa implements Serializable {
         this.uf = uf;
     }
     
-    public String nomeEncriptado(String nome) throws Exception{
-        
-            byte[] textoencriptado = encrypt(nome, AES.chaveencriptacao);
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < textoencriptado.length; i++) {
-                builder.append(new Integer(textoencriptado[i])).append(":");
-            }
-            
-            
-        return this.nome = builder.toString();
-       
-    }
     
-//    public String nomeDecriptado(String nome) throws Exception{
-//        String textoDecriptado = decrypt(nome.getBytes(), AES.chaveencriptacao);
-//        return textoDecriptado;
-//    }
+
 }

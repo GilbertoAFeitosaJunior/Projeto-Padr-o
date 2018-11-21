@@ -9,9 +9,9 @@ import javax.crypto.spec.SecretKeySpec;
  * @author Weibson
  */
 public class AES {
-
+    
     public static final String IV = "AAAAAAAAAAAAAAAA";
-    public static final String chaveencriptacao = "0987654321HUYTEF";   
+    public static final String chaveencriptacao = "0987654321HUYTEF"; 
     
 //    public static void main(String[] args) {
 //               try {

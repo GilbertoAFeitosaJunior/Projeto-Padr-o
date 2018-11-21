@@ -3,7 +3,7 @@ package mobi.stos.educador.action;
  *
  * @author Rafael Bloise
  */
-import com.google.api.client.repackaged.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;

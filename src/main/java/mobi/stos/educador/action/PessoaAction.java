@@ -13,6 +13,8 @@ import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.enumm.GeneroEnum;
 import mobi.stos.educador.enumm.SexoEnum;
+import mobi.stos.educador.util.AES;
+import static mobi.stos.educador.util.AES.decrypt;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
@@ -103,6 +105,7 @@ public class PessoaAction extends GenericAction{
                 setConsulta(new Consulta(field));
             }
             Consulta c = getConsulta();
+//            pessoa.getNome() = decrypt(getPessoa().nomeEncriptado(), AES.chaveencriptacao);
             this.pessoas = pessoaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
