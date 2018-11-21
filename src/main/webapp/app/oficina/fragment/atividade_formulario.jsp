@@ -17,7 +17,7 @@
             </div>
         </div>
         <br/>
-        <table class="table table-striped table-advance table-hover" id="tA">
+        <table class="table table-striped table-advance table-hover" id="tAtividades">
             <thead>
                 <tr>                      
                     <th>Nome</th>   

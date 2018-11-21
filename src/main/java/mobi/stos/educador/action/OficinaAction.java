@@ -80,37 +80,6 @@ public class OficinaAction extends GenericAction {
             return ERROR;
         }
     }
-
-//    @Action(value = "persistOficina",
-//            interceptorRefs = {
-//                @InterceptorRef(value = "fileUploadStack")
-//                ,
-//                @InterceptorRef(value = "basicStack")},
-//            results = {
-//                @Result(name = SUCCESS, location = "/app/notify/")
-//                ,
-//                @Result(name = ERROR, location = "/app/notify/")
-//            })
-//    public String persist() {
-//        try {
-//            GenericAction.isLogged(request);
-//
-//            if (getLogged().getEducador() != null) {
-//                Educador educadorLogado = new Educador(getLogged().getEducador().getId());
-//                oficina.setEducador(educadorLogado);
-//                this.oficinaBo.persist(oficina);
-//                setRedirectURL("listOficina");
-//                addActionMessage("Registro salvo com sucesso.");
-//            } else {
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
-//            return ERROR;
-//        }
-//        return SUCCESS;
-//    }
     
     @Action(value = "persistOficinaJson",
             results = {
@@ -191,7 +160,27 @@ public class OficinaAction extends GenericAction {
         return SUCCESS;
     }
     
-     @Action(value = "listOficinaJson",
+    @Action(value = "deleteOficinaAtividadeJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String deleteOficinaAtividadeJson() {
+        try {
+
+            GenericAction.isLogged(request);
+
+            this.oficinaBo.deleteOficinaAtividade(oficina.getId(), atividade.getId());
+
+            jsonReturn = new JsonReturn("Excluido com sucesso", true);
+
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            jsonReturn = new JsonReturn(false);
+        }
+        return SUCCESS;
+    }
+    
+     @Action(value = "listOficinaAtividadeJson",
             results = {
                 @Result(name = SUCCESS, type = "json")
             })
@@ -202,9 +191,11 @@ public class OficinaAction extends GenericAction {
             
             if (oficina != null && oficina.getId() != null) {
                 oficina = this.oficinaBo.load(oficina.getId());
+                if (oficina != null) {
+                    oficina.setEducador(null);
+                    oficina.setEscola(null);
+                }
             }
-            
-            //oficina.getEducador().setEscolas(null);
             jsonReturn = new JsonReturn(true);
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

@@ -63,13 +63,13 @@ public class OficinaDao extends AbstractHibernateDao<Oficina> implements IOficin
     @Override
     public void deleteOficinaAtividade(long idOficina, long idAtividade) {
         
-         Oficina oficina = super.load(idOficina);
+          Oficina oficina = super.load(idOficina);
 
         if (oficina != null) {
             StringBuilder sql = new StringBuilder();
             sql.append(" DELETE ");
-            sql.append(" FROM oficina_atividade oa ");
-            sql.append(" WHERE oa.oficina_id = :oficina_id and oa.atividade_id = :atividade.id ");
+            sql.append(" FROM oficina_atividade a ");
+            sql.append(" WHERE a.oficina_id = :oficina_id and a.atividade_id = :atividade_id ");
             SQLQuery query = getCurrentSession().createSQLQuery(sql.toString());
             query.setParameter("oficina_id", idOficina);
             query.setParameter("atividade_id", idAtividade);
