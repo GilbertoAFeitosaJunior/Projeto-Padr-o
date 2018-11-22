@@ -1,9 +1,11 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <section class="panel">
+    
     <header class="panel-heading">
-        Histórico
+        Histórico - Adicionar Registro
     </header>
-    <div class="painel-body">
+    
+    <div class="panel-body">
 
         <div class="row">
             <div class="col-lg-12">
@@ -25,7 +27,11 @@
             </div>
 
         </div>
-
+    </div>
+    <header class="panel-heading" style="margin-top: -50px;">
+        Histórico Atual
+    </header>
+                <div class="panel-body">  
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
@@ -34,5 +40,5 @@
             </div>
 
         </div>
-    </div>
+                </div>
 </section>

@@ -63,11 +63,11 @@
                 </div>
             </div>
 
-        </s:form>
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listOficina'">Cancelar</button>
                 &nbsp;
-                <button type="submit" onclick="oficina.persistSomenteOficina(); oficina.passo('tab-oficina','tab-atividade')" class="btn btn-success">Salvar Registro</button>
+                <button type="submit" onclick="" class="btn btn-success">Salvar Registro</button>
+        </s:form>
             </div>
-
+            
 </section>

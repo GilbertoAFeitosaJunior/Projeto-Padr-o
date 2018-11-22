@@ -4,7 +4,7 @@
     <header class="panel-heading">
         Visualizar Histórico
     </header>
-    <div class="painel-body">
+    <div class="panel-body">
 
         <div class="row">
             <div class="col-lg-12">

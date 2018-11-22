@@ -20,14 +20,34 @@ var Script = function () {
                 "oficina.dataPlanejada": {
                     required: "Favor preencher esse campo"
                 }
+            },
+            submitHandler: function(form){
+                oficina.persistSomenteOficina();
+                $('#tab-atividade').popover('disable');
+                $('#tab-historico').popover('disable');
+                oficina.desbloquear('tab-atividade-link');
+                oficina.desbloquear('tab-historico-link');
+                oficina.passo('tab-oficina','tab-atividade');
+                //oficina.removerPopover('tab-atividade');
             }
         });
     });
 }();
 
 var oficina = {
-  
-    passo: function( ClasseDaAbaAtual , ClasseDaProximaAba ){
+    
+    removerPopover: function(Classe){
+        var ponto = ".";
+        $(ponto.concat(Classe)).removeClass("info");
+       // $(ponto.concat(Classe)).removeClass("popovers");
+    },
+    
+    desbloquear: function(IdDaAba){
+        var jVelha = "#";
+        $(jVelha.concat(IdDaAba)).attr({"data-toggle":"tab"});
+    },
+    
+    passo: function( ClasseDaAbaAtual , ClasseDaProximaAba){
         var ponto = ".";
         $(ponto.concat(ClasseDaAbaAtual)).removeClass("active");
         $(ponto.concat(ClasseDaProximaAba)).addClass("active");
@@ -50,7 +70,6 @@ var oficina = {
             if (json.jsonReturn.success){
                 $("[name='oficina.id']").val(json.id);
                 notify.success("Sucesso", json.jsonReturn.mensagem);
-                //oficina.list();
             }else{
                 if(!json.jsonReturn.sucess){
                     notify.error("Erro", json.jsonReturn.mensagem);
