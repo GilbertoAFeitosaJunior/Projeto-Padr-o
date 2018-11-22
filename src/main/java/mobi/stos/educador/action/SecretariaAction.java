@@ -174,6 +174,25 @@ public class SecretariaAction extends GenericAction {
         this.secretaria = secretaria;
     }
 
+    public List<GestorDoTerritorio> getGestorDoTerritorios() {
+        return gestorDoTerritorios;
+    }
+
+    public void setGestorDoTerritorios(List<GestorDoTerritorio> gestorDoTerritorios) {
+        this.gestorDoTerritorios = gestorDoTerritorios;
+    }
+
+    public List<CoordenadorPedagogico> getCoordenadorPedagogicos() {
+        return coordenadorPedagogicos;
+    }
+
+    public void setCoordenadorPedagogicos(List<CoordenadorPedagogico> coordenadorPedagogicos) {
+        this.coordenadorPedagogicos = coordenadorPedagogicos;
+    }
+    
+    
+    
+
     @Override
     public void prepare() throws Exception {
         setMenu(Secretaria.class.getSimpleName());

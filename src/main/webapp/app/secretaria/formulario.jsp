@@ -33,7 +33,7 @@
                         <div class="form-group">                      
                             <label>Gestor do Território</label>
                             <div>
-                                <s:select name="secretaria.gestorDoTerritorio.id" id="secretaria.gestorDoTerritorio.id" cssClass="form-control" required="true" />
+                                <s:select name="secretaria.gestorDoTerritorio.id" id="secretaria.gestorDoTerritorio.id" list="gestorDoTerritorios" listKey="id" listValue="nome" emptyOption="true" cssClass="form-control" required="true" />
                             </div>
                         </div>
                     </div>
@@ -42,14 +42,20 @@
                         <div class="form-group">                      
                             <label>Coordenador Pedagógico</label>
                             <div>
-                                <s:select name="secretaria.coordenadorPedagogico.id" id="secretaria.coordenadorPedagogico.id" cssClass="form-control" required="true" />
+                                <s:select name="secretaria.coordenadorPedagogico.id" id="secretaria.coordenadorPedagogico.id" list="coordenadorPedagogicos" listKey="id" listValue="nome" emptyOption="true" cssClass="form-control" required="true" />
                             </div>
                         </div>
                     </div>        
 
-                </div>
-
-                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="form-group">                      
+                            <label>UF</label>
+                            <div>
+                                <s:textfield name="secretaria.uf" id="secretaria.uf" maxlength="2" cssClass="form-control" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                            
                     <div class="col-lg-3">
                         <div class="form-group">                      
                             <label>Nível da Secretaria</label>
@@ -58,15 +64,11 @@
                             </div>
                         </div>
                     </div>   
+                            
+                </div>
 
-                    <div class="col-lg-2">
-                        <div class="form-group">                      
-                            <label>UF</label>
-                            <div>
-                                <s:textfield name="secretaria.uf" id="secretaria.uf" maxlength="2" cssClass="form-control" required="true" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="row">
+
 
                     <div class="col-lg-4">
                         <div class="form-group">                      
@@ -76,26 +78,31 @@
                             </div>
                         </div>
                     </div>
-                </div>  
-
-
-                <div class="row">
-
+                            
+                    <div class="col-lg-5">
                     <div class="form-group">                      
-                        <label>Município</label>
+                        <label>Responsável</label>
                         <div>
                             <s:textfield name="secretaria.responsavel" id="secretaria.responsavel" maxlength="100" cssClass="form-control" required="true" />
                         </div>
                     </div>
-
+                    </div>
+                            
                     <div class="col-lg-3">
                         <div class="form-group">                      
-                            <label>Nome:</label>
+                            <label>Contato do Responsável</label>
                             <div>
                                 <s:textfield type="text" name="secretaria.responsavelContatoStringMask" id="secretaria.responsavelContatoStringMask" cssClass="form-control" required="true" data-mask="99999-9999" /> 
                             </div>
                         </div>
                     </div>
+                            
+                </div>  
+
+
+                <div class="row">
+                        
+                        
                 </div>
 
                 <div class="panel-body pull-right">
