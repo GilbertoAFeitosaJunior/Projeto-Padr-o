@@ -1,10 +1,12 @@
 package mobi.stos.educador.action;
 
-import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,10 +14,11 @@ import mobi.stos.educador.bean.Atividade;
 import mobi.stos.educador.bean.Educador;
 import mobi.stos.educador.bean.Escola;
 import mobi.stos.educador.bean.Oficina;
+import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.bo.IAtividadeBo;
-import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IOficinaBo;
+import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.jsonReturn;
 import static mobi.stos.educador.common.GenericAction.request;
@@ -29,6 +32,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +45,7 @@ public class OficinaAction extends GenericAction {
 
     private Oficina oficina;
     private Atividade atividade;
+    private Usuario usuario;
     
     private Long id;
 
@@ -49,6 +54,9 @@ public class OficinaAction extends GenericAction {
     private List<Escola> escolas;
     private List<Atividade> atividades;
 
+    @Autowired
+    private IUsuarioBo usuarioBo;
+    
     @Autowired
     private IOficinaBo oficinaBo;
 
@@ -74,6 +82,28 @@ public class OficinaAction extends GenericAction {
             }
             this.atividades = this.atividadeBo.listall();
             this.escolas = this.escolaBo.listall();
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+    }
+    
+      @Action(value = "prepareVisualizarOficina",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
+                @Result(name = SUCCESS, location = "/app/oficina/visualizar_formulario.jsp")
+            })
+    public String prepareVisualizarOficina() {
+        try {
+            GenericAction.isLogged(request);
+            if (oficina != null && oficina.getId() != null) {
+                oficina = this.oficinaBo.load(this.oficina.getId());
+            }
+            
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -134,6 +164,51 @@ public class OficinaAction extends GenericAction {
                 }
             } else {
                 jsonReturn = new JsonReturn(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "persistOficinaHistoricoJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String persistOficinaHistoricoJson() {
+        try {
+            GenericAction.isLogged(request);
+            if (getLogged().getEducador() != null) {
+                String historicoView = this.oficina.getHistorico();
+                this.oficina = this.oficinaBo.load(this.oficina.getId());
+                StringBuilder sb = new StringBuilder();
+                sb.append("\n\n");
+                sb.append(historicoView);
+                sb.append("\n\n");
+                sb.append("Por: ");
+                sb.append(getLogged().getEducador().getNome());
+                sb.append("\n");
+                Date date = new Date(); 
+                Date dataAtual = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
+                String horaAtual = String.valueOf(dateFormat.format(date)); 
+                String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.FULL).format(dataAtual);
+                sb.append(dataFormatada);
+                sb.append(" as " + horaAtual);
+                sb.append("\n");
+                if (oficina.getHistorico() != null) {
+                    sb.append("_______________");
+                    sb.append(oficina.getHistorico());
+                }
+
+                oficina.setHistorico(String.valueOf(sb));
+
+                this.oficina = this.oficinaBo.persist(oficina);
+                oficina.setAtividades(null);
+                oficina.setEducador(null);
+                
+            } else {
             }
 
         } catch (Exception e) {
@@ -226,7 +301,9 @@ public class OficinaAction extends GenericAction {
             if (getLogged().getEducador() != null) {
                 c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
             }
+            c.addOrder(Order.desc("id"));
             this.oficinas = this.oficinaBo.list(c);
+            this.usuario = this.usuarioBo.load(getLogged().getId());
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -234,6 +311,14 @@ public class OficinaAction extends GenericAction {
             return ERROR;
         }
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }    
 
     public Long getId() {
         return id;

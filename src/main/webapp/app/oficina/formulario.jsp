@@ -13,18 +13,19 @@
                 <li id="tab-oficina" class="tab-oficina active">
                     <a data-toggle="tab" href="#tab">Oficina</a>
                 </li>    
-                <li class="tab-atividade" >
-                    <a data-toggle="tab" href="#tab1">Atividade</a>
+                <li data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" id="tab-atividade" class="tab-atividade info popovers" >
+                    <a id="tab-atividade-link" data-toggle="" href="#tab1">Atividade</a>
                 </li>  
-                <li id="tab-historico" >
-                    <a data-toggle="tab" href="#tab2">Histórico</a>
+               
+                <li data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" id="tab-historico" class="tab-historico info popovers" >
+                    <a id="tab-historico-link" data-toggle="" href="#tab2">Histórico</a>
                 </li>  
-                <li id="tab-anexo" >
+                <!--li id="tab-anexo" >
                     <a data-toggle="tab" href="#tab3">Anexo</a>
                 </li>  
                 <li id="tab-relatorio" >
                     <a data-toggle="tab" href="#tab4">Relatório</a>
-                </li>  
+                </li-->  
             </ul>            
         </header>
 
@@ -36,7 +37,7 @@
                 <div id="tab1" class="tab-atividade tab-pane " >
                     <%@include file="../oficina/fragment/atividade_formulario.jsp" %>
                 </div>   
-                <div id="tab2" class="tab-pane " >
+                <div id="tab2" class="tab-historico tab-pane " >
                     <%@include file="../oficina/fragment/historico_formulario.jsp" %>
                 </div>   
                 <div id="tab3" class="tab-pane">
@@ -55,6 +56,7 @@
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script type="text/javascript" src="../oficina/js/oficina_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/atividade_formulario.js"></script>
+<script type="text/javascript" src="../oficina/js/historico_formulario.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
                         $(function () {
