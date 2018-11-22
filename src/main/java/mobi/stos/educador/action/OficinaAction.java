@@ -1,10 +1,12 @@
 package mobi.stos.educador.action;
 
-import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,6 @@ import mobi.stos.educador.bean.Educador;
 import mobi.stos.educador.bean.Escola;
 import mobi.stos.educador.bean.Oficina;
 import mobi.stos.educador.bo.IAtividadeBo;
-import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IOficinaBo;
 import mobi.stos.educador.common.GenericAction;
@@ -134,6 +135,51 @@ public class OficinaAction extends GenericAction {
                 }
             } else {
                 jsonReturn = new JsonReturn(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "persistOficinaHistoricoJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String persistOficinaHistoricoJson() {
+        try {
+            GenericAction.isLogged(request);
+            if (getLogged().getEducador() != null) {
+                String historicoView = this.oficina.getHistorico();
+                this.oficina = this.oficinaBo.load(this.oficina.getId());
+                StringBuilder sb = new StringBuilder();
+                sb.append("\n\n");
+                sb.append(historicoView);
+                sb.append("\n\n");
+                sb.append("Por: ");
+                sb.append(getLogged().getEducador().getNome());
+                sb.append("\n");
+                Date date = new Date(); 
+                Date dataAtual = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
+                String horaAtual = String.valueOf(dateFormat.format(date)); 
+                String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.FULL).format(dataAtual);
+                sb.append(dataFormatada);
+                sb.append(" as " + horaAtual);
+                sb.append("\n");
+                if (oficina.getHistorico() != null) {
+                    sb.append("_______________");
+                    sb.append(oficina.getHistorico());
+                }
+
+                oficina.setHistorico(String.valueOf(sb));
+
+                this.oficina = this.oficinaBo.persist(oficina);
+                oficina.setAtividades(null);
+                oficina.setEducador(null);
+                
+            } else {
             }
 
         } catch (Exception e) {

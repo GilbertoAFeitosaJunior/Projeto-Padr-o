@@ -19,12 +19,12 @@
                 <li id="tab-historico" >
                     <a data-toggle="tab" href="#tab2">Histórico</a>
                 </li>  
-                <li id="tab-anexo" >
+                <!--li id="tab-anexo" >
                     <a data-toggle="tab" href="#tab3">Anexo</a>
                 </li>  
                 <li id="tab-relatorio" >
                     <a data-toggle="tab" href="#tab4">Relatório</a>
-                </li>  
+                </li-->  
             </ul>            
         </header>
 
@@ -55,6 +55,7 @@
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script type="text/javascript" src="../oficina/js/oficina_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/atividade_formulario.js"></script>
+<script type="text/javascript" src="../oficina/js/historico_formulario.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
                         $(function () {
