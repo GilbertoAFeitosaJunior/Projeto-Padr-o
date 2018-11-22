@@ -65,13 +65,14 @@
 
     <section class="panel">
         <header class="panel-heading">Registros</header>
-
-        <div class="panel-body pull-right">
-            <button class="btn btn-primary" onclick="list.add();">
-                <i class="fa fa-plus"></i> 
-                Adicionar Novo
-            </button>
-        </div>
+            <s:if test="usuario.educador != null">
+            <div class="panel-body pull-right">
+                <button class="btn btn-primary" onclick="list.add();">
+                    <i class="fa fa-plus"></i> 
+                    Adicionar Novo
+                </button>
+            </div>
+        </s:if>
 
         <div class="panel-body">
             <table class="table table-striped table-advance table-hover table-bordered">
@@ -92,13 +93,20 @@
                             <td ><s:property value="turnoEnum.name"/></td>
                             <td ><s:property value="situacaoEnum.name"/></td>
                             <td class="text-right">
-                                <div class="btn-group btn-group-justified">
-                                    <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
-                                        <i class="fa fa-trash-o "></i>
-                                    </a>
+                                    <s:if test="usuario.educador != null">
+                                    <div class="btn-group btn-group-justified">
+                                        <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
+                                            <i class="fa fa-trash-o "></i>
+                                        </a>
+                                    </s:if><s:else>
+                                        <button class="btn btn-danger btn-xs btn-block" onclick="list.view('<s:property value="id" />');">
+                                            <i class="fa fa-eye"></i> Visualizar 
+                                        </button>
+                                    </s:else>
+
                                 </div>
                             </td>
                         </tr>
@@ -139,6 +147,9 @@
     <script type="text/javascript">
                         _helperID = null;
                         var list = {
+                            view: function (id){
+                                window.location = "prepareVisualizarOficina?oficina.id=" + id;  
+                            },
                             add: function () {
                                 window.location = "prepareOficina";
                             },
