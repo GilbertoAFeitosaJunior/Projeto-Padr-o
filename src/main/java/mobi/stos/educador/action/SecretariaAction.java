@@ -7,11 +7,17 @@ import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.educador.bean.CoordenadorPedagogico;
+import mobi.stos.educador.bean.GestorDoTerritorio;
 import mobi.stos.educador.bean.Secretaria;
+import mobi.stos.educador.bo.ICoordenadorPedagogicoBo;
+import mobi.stos.educador.bo.IGestorDoTerritorioBo;
 import mobi.stos.educador.bo.ISecretariaBo;
+import mobi.stos.educador.enumm.NivelSecretariaEnum;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.exception.LoginExpiradoException;
@@ -28,9 +34,19 @@ public class SecretariaAction extends GenericAction {
     private Secretaria secretaria;
 
     private List<Secretaria> secretarias;
+    
+    private List<GestorDoTerritorio> gestorDoTerritorios;
+    
+    private List<CoordenadorPedagogico> coordenadorPedagogicos;
 
     @Autowired
     private ISecretariaBo secretariaBo;
+    
+    @Autowired
+    private ICoordenadorPedagogicoBo coordenadorPedagogicoBo;
+    
+    @Autowired
+    private IGestorDoTerritorioBo gestorDoTerritorioBo;
 
     @Action(value = "prepareSecretaria",
             interceptorRefs = {
@@ -46,6 +62,11 @@ public class SecretariaAction extends GenericAction {
             if (secretaria != null && secretaria.getId() != null) {
                 secretaria = this.secretariaBo.load(this.secretaria.getId());
             }
+            
+            this.coordenadorPedagogicos = coordenadorPedagogicoBo.listall();
+            this.gestorDoTerritorios = gestorDoTerritorioBo.listall();
+            
+            
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -115,6 +136,8 @@ public class SecretariaAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
+            
+            
             secretarias = secretariaBo.list(getConsulta());
             return SUCCESS;
         } catch (Exception e) {
@@ -135,6 +158,13 @@ public class SecretariaAction extends GenericAction {
         list.add(new Keys("nome", "Nome"));
         return list;
     }
+    
+    
+    @JSON(serialize = false)
+    public List getNivelSecretariaEnums() {
+        return Arrays.asList(NivelSecretariaEnum.values());
+    }
+    
 
     public Secretaria getSecretaria() {
         return secretaria;
