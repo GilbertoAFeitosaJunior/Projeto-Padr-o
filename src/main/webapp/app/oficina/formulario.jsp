@@ -3,10 +3,6 @@
 <%@include file="../fragment/head.jsp" %>
 
 
-<!--s:if test="oficina == null">
-    <!%@include file="fragment/oficina_formulario.jsp" %>   
-<!/s:if->
-<!s:else-->
     <section class="panel">
         <header class="panel-heading tab-bg-dark-navy-blue ">
             <ul class="nav nav-tabs">
@@ -20,7 +16,7 @@
                 <li data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" id="tab-historico" class="tab-historico info popovers" >
                     <a id="tab-historico-link" data-toggle="" href="#tab2">Histórico</a>
                 </li>  
-                <!--li id="tab-anexo" >
+                <li id="tab-anexo" >
                     <a data-toggle="tab" href="#tab3">Anexo</a>
                 </li>  
                 <li id="tab-relatorio" >
@@ -59,6 +55,12 @@
 <script type="text/javascript" src="../oficina/js/historico_formulario.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
+                    <s:if test="oficina != null">
+                        $('#tab-atividade').popover('disable');
+                        $('#tab-historico').popover('disable');
+                        oficina.desbloquear('tab-atividade-link');
+                        oficina.desbloquear('tab-historico-link');
+                    </s:if>
                         $(function () {
                             $("html").niceScroll().remove();
 

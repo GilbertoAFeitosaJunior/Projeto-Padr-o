@@ -59,7 +59,9 @@ public class EducadorAction extends GenericAction {
     public String preparar() {
         try {
             GenericAction.isLogged(request);
+            System.out.println("AQUI");
             if (educador != null && educador.getId() != null) {
+                System.out.println("ENTREI AQUI");
                 educador = this.educadorBo.load(educador.getId());
             }
             //this.educadors = this.educadorBo.listall();
@@ -255,6 +257,14 @@ public class EducadorAction extends GenericAction {
         return list;
     }
 
+    public Educador getEducador() {
+        return educador;
+    }
+
+    public void setEducador(Educador educador) {
+        this.educador = educador;
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
