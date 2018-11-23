@@ -36,12 +36,6 @@ var Script = function () {
 
 var oficina = {
     
-    removerPopover: function(Classe){
-        var ponto = ".";
-        $(ponto.concat(Classe)).removeClass("info");
-       // $(ponto.concat(Classe)).removeClass("popovers");
-    },
-    
     desbloquear: function(IdDaAba){
         var jVelha = "#";
         $(jVelha.concat(IdDaAba)).attr({"data-toggle":"tab"});

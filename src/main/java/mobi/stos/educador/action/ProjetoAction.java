@@ -149,7 +149,7 @@ public class ProjetoAction extends GenericAction {
     public List getSituacaoProjetoEnums() {
         return Arrays.asList(SituacaoProjetoEnum.values());
     }
-
+    
     @JSON(serialize = false)
     public List<Projeto> getProjetos() {
         return projetos;

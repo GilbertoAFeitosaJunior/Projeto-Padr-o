@@ -15,6 +15,12 @@ var Script = function () {
                 },
                 "metodologia.ativo": {
                     required: "Favor preencher esse campo"
+                },
+                "metodologia.objetivo": {
+                    required: "Favor preencher esse campo"
+                },
+                "metodologia.faixaEtariaEnum": {
+                    required: "Favor preencher esse campo"
                 }
             }
         });

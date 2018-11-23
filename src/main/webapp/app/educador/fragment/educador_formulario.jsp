@@ -1,6 +1,6 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
     <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEducador" theme="simple" enctype="multipart/form-data">
-        <s:hidden name="educador.usuario.id" />
+        
 
         <section class="panel">
             <header class="panel-heading">
@@ -95,7 +95,7 @@
                 </span>
             </header>
             <div class="panel-body">
-                <s:hidden name="usuario.id" />
+                <s:hidden name="educador.usuario.id" />
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">                      
@@ -133,6 +133,7 @@
                     <button type="submit" class="btn btn-success">Salvar Registro</button>
                 </div>
             </s:form>
+            </div>
     </section>
 
 

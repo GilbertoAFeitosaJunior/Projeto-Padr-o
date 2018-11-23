@@ -50,7 +50,7 @@ public class UsuarioAction extends GenericAction {
     @Autowired
     private IGestorDoTerritorioBo gestorDoTerritorioBo;
     
-    @Autowired
+    @Autowired 
     private IEducadorBo educadorBo;
 
     @Action(value = "resurrectLogin",
