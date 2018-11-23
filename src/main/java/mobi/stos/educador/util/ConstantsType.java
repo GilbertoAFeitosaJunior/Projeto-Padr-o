@@ -3,7 +3,7 @@ package mobi.stos.educador.util;
 public enum ConstantsType {
 
     ALL(new String[]{
-        "image/png", "image/jpeg", "image/gif", "application/pdf",
+        "image/png", "image/jpeg", "image/gif", "application/pdf","text/plain",
         "plain/text", "application/msword", "application/vnd.ms-excel",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "application/vnd.ms-powerpoint", "application/zip", "application/x-rar-compressed",

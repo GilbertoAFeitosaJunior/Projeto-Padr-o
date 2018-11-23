@@ -75,7 +75,7 @@
         </s:if>
 
         <div class="panel-body">
-            <table class="table table-striped table-advance table-hover table-bordered">
+            <table class="table table-striped table-advance table-hover table-bordered ">
                 <thead>
                     <tr>
                         <th>Escola</th>
