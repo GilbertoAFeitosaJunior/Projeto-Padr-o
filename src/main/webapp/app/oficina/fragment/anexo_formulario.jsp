@@ -17,7 +17,7 @@
 
 
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="form-group">
                         <label>Anexo:</label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -31,7 +31,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 pull-left">
                         <div class="form-group">
                             <br/>
                             <p class="text-center" id="spinner" style="display:none; font-size: 12pt;">
@@ -73,12 +73,12 @@
     
     <div class="">
     <div class="panel-body">
-        <table class="table table-striped table-advance table-hover" id="tArquivo">
+        <table class="table table-striped table-advance table-hover" style="table-layout:fixed; "id="tArquivo">
             <thead>
                 <tr>
                     <th>Descrição</th>
-                    <th class="col-lg-1 col-sm-1 col-xs-1 ">Arquivo</th>
-                    <th class="col-lg-1 col-sm-1 col-xs-1 ">Tipo</th>
+                    <th class="col-lg-2 col-sm-2 col-xs-2 ">Arquivo</th>
+                    <th class="col-lg-1 col-sm-1 col-xs-1">Tipo</th>
                     <th class="col-lg-1 col-sm-1 col-xs-1 text-center">Baixado</th>                  
                     <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                 </tr>

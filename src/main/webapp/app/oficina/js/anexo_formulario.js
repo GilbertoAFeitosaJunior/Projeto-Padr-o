@@ -55,7 +55,11 @@ function uploadFiles(event) {
                 },2000);
                  
                 $("[name='anexo.descricao']").val("");
-                $('#upload').innerHTML = $('upload').innerHTML;
+                $('#upload').val('');
+                $('#fileupload-exists').attr("style","display : none;");
+                $('.fileupload-new').show();
+                
+                //$("#upload").replaceWith($("#upload").clone(true));
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -87,7 +91,7 @@ function uploadFiles(event) {
                         var HTML = "";
                         $.each(json.anexos, function (key, value) {
                             HTML += "<tr>";
-                            HTML += "<td>" + value.descricao + "</td>";
+                            HTML += "<td style='word-wrap: break-word;'>" + value.descricao + "</td>";
                             HTML += "<td class=\"col-lg-2 col-sm2 col-xs-2\"><a class='btn btn-primary btn-xs' href='../../" + value.arquivo + "' download onclick=\"anexo.atualizarQtdDownload(" + value.id + ")\"><i class=\"fa fa-cloud-download \"></i> Baixe uma cópia</a></td>";
                             HTML += "</a></td>";
                             HTML += "<td class=\"col-lg-2 col-sm-2 col-xs-2\">" + value.tipoMine + "</td>";
