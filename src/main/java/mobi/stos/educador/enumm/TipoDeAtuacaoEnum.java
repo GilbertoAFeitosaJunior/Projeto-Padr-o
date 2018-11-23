@@ -25,4 +25,10 @@ public enum TipoDeAtuacaoEnum {
     }
 
     
+    
+     public static TipoDeAtuacaoEnum retornaEnumNaPosicao (int posicao){
+        return TipoDeAtuacaoEnum.values()[posicao];
+    }
+    
+    
 }

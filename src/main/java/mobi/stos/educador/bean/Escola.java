@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
+import mobi.stos.educador.enumm.DependenciaAdministrativaEnum;
+import mobi.stos.educador.enumm.RedeEnum;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
+import mobi.stos.educador.enumm.TipoDeAtuacaoEnum;
 import mobi.stos.educador.util.Util;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -67,6 +69,24 @@ public class Escola implements Serializable {
     @Column(length = 50)
     private String inep;
     
+    @Column(nullable=false)
+    private RedeEnum redeEnum;
+    
+    @Column(nullable=false)
+    private TipoDeAtuacaoEnum tipoDeAtuacaoEnum;
+    
+    @Column
+    private DependenciaAdministrativaEnum depedenciaAdministrativaEnum;
+    
+    @Column
+    private int responsavelTelefone;
+    
+    @Column(nullable=false)
+    private String diretorResponsavel;
+    
+    @Column
+    private int diretorContato;
+    
     
     
     public String getCepStringMask() {
@@ -75,6 +95,26 @@ public class Escola implements Serializable {
     public void setCepStringMask(String cep) {
         this.cep = Integer.parseInt(Util.onlyNumber(cep));
     }
+    
+    
+     public String getResponsavelTelefoneStringMask() {
+        return Util.format("######-####", Util.zeroFill(this.responsavelTelefone, 9));
+
+    }
+    public void setResponsavelTelefoneStringMask(String responsavelTelefone) {
+        this.responsavelTelefone = Integer.parseInt(Util.onlyNumber(responsavelTelefone));
+    }
+    
+    
+     public String getDiretorContatoStringMask() {
+        return Util.format("######-####", Util.zeroFill(this.diretorContato, 9));
+
+    }
+    public void setDiretorContatoStringMask(String diretorContato) {
+        this.diretorContato = Integer.parseInt(Util.onlyNumber(diretorContato));
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -173,5 +213,57 @@ public class Escola implements Serializable {
     public void setInep(String inep) {
         this.inep = inep;
     }
+
+    public RedeEnum getRedeEnum() {
+        return redeEnum;
+    }
+
+    public void setRedeEnum(RedeEnum redeEnum) {
+        this.redeEnum = redeEnum;
+    }
+
+    public TipoDeAtuacaoEnum getTipoDeAtuacaoEnum() {
+        return tipoDeAtuacaoEnum;
+    }
+
+    public void setTipoDeAtuacaoEnum(TipoDeAtuacaoEnum tipoDeAtuacaoEnum) {
+        this.tipoDeAtuacaoEnum = tipoDeAtuacaoEnum;
+    }
+
+    public DependenciaAdministrativaEnum getDepedenciaAdministrativaEnum() {
+        return depedenciaAdministrativaEnum;
+    }
+
+    public void setDepedenciaAdministrativaEnum(DependenciaAdministrativaEnum depedenciaAdministrativaEnum) {
+        this.depedenciaAdministrativaEnum = depedenciaAdministrativaEnum;
+    }
+
+    public int getResponsavelTelefone() {
+        return responsavelTelefone;
+    }
+
+    public void setResponsavelTelefone(int responsavelTelefone) {
+        this.responsavelTelefone = responsavelTelefone;
+    }
+
+    public String getDiretorResponsavel() {
+        return diretorResponsavel;
+    }
+
+    public void setDiretorResponsavel(String diretorResponsavel) {
+        this.diretorResponsavel = diretorResponsavel;
+    }
+
+    public int getDiretorContato() {
+        return diretorContato;
+    }
+
+    public void setDiretorContato(int diretorContato) {
+        this.diretorContato = diretorContato;
+    }
+    
+    
+    
+    
 
 }

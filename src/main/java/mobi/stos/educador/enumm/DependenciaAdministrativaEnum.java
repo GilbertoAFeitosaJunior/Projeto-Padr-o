@@ -26,6 +26,11 @@ public enum DependenciaAdministrativaEnum {
     }
     
     
+        public static DependenciaAdministrativaEnum retornaEnumNaPosicao (int posicao){
+        return DependenciaAdministrativaEnum.values()[posicao];
+    }
+    
+    
   
     
 }

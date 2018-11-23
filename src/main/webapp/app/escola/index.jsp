@@ -80,7 +80,6 @@
                         <th class="col-lg-6 col-sm-6 col-xs-6">Nome</th>
                         <th class="col-lg-2 col-sm-2 col-xs-2">Projeto</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
-                        <th class="col-lg-1 col-sm-1 col-xs-1">Relacionamento</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1">UF</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
@@ -91,7 +90,6 @@
                             <td ><s:property value="nome" /></td>
                             <td><s:property value="projeto.nome" /></td>
                             <td ><s:property value="situacaoEnum.name" /></td>
-                            <td ><s:property value="nivelRelacionamentoEnum.name" /></td>
                             <td ><s:property value="uf" /></td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">

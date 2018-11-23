@@ -26,6 +26,10 @@ public enum ModoDeImplementacaoEnum {
     
     
     
+     public static ModoDeImplementacaoEnum retornaEnumNaPosicao (int posicao){
+        return ModoDeImplementacaoEnum.values()[posicao];
+    }
+    
     
     
 }

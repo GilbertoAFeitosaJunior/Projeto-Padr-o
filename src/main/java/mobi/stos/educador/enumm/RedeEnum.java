@@ -25,5 +25,9 @@ public enum RedeEnum {
     }
     
     
+    public static RedeEnum retornaEnumNaPosicao (int posicao){
+        return RedeEnum.values()[posicao];
+    }
+    
     
 }
