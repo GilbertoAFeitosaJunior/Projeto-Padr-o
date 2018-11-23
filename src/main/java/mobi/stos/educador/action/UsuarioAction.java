@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.bo.ICoordenadorDeProjetoBo;
 import mobi.stos.educador.bo.ICoordenadorPedagogicoBo;
+import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IGestorDoTerritorioBo;
 import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
@@ -48,6 +49,9 @@ public class UsuarioAction extends GenericAction {
 
     @Autowired
     private IGestorDoTerritorioBo gestorDoTerritorioBo;
+    
+    @Autowired
+    private IEducadorBo educadorBo;
 
     @Action(value = "resurrectLogin",
             interceptorRefs = {
