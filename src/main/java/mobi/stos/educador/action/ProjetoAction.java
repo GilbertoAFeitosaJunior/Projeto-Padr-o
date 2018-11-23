@@ -10,12 +10,15 @@ import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.educador.bean.CoordenadorDeProjeto;
 import mobi.stos.educador.bean.Projeto;
 import mobi.stos.educador.bean.Secretaria;
+import mobi.stos.educador.bo.ICoordenadorDeProjetoBo;
 import mobi.stos.educador.bo.IProjetoBo;
 import mobi.stos.educador.bo.ISecretariaBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
+import mobi.stos.educador.enumm.ModoDeImplementacaoEnum;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
@@ -34,11 +37,15 @@ public class ProjetoAction extends GenericAction {
     private List<Projeto> projetos;
 
     private List<Secretaria> secretarias;
+    
+    private List<CoordenadorDeProjeto> coordenadorDeProjetos;
 
     @Autowired
     private IProjetoBo projetoBo;
     @Autowired
     private ISecretariaBo secretariaBo;
+    @Autowired
+    private ICoordenadorDeProjetoBo coordenadorDeProjetoBo;
 
     @Action(value = "prepareProjeto",
             interceptorRefs = {
@@ -56,6 +63,7 @@ public class ProjetoAction extends GenericAction {
             }
 
             this.secretarias = this.secretariaBo.listall();
+            this.coordenadorDeProjetos=this.coordenadorDeProjetoBo.listall();
 
             return SUCCESS;
         } catch (Exception e) {
@@ -128,6 +136,7 @@ public class ProjetoAction extends GenericAction {
 
             Consulta c = getConsulta();
             c.addAliasTable("secretaria", "secretaria", JoinType.INNER_JOIN);
+            c.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", JoinType.INNER_JOIN);
             this.projetos = projetoBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -142,6 +151,7 @@ public class ProjetoAction extends GenericAction {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
         list.add(new Keys("secretaria.nome", "Secretaria"));
+        list.add(new Keys("coordenadorDeProjeto.nome", "Coordenador"));
         return list;
     }
 
@@ -149,6 +159,13 @@ public class ProjetoAction extends GenericAction {
     public List getSituacaoProjetoEnums() {
         return Arrays.asList(SituacaoProjetoEnum.values());
     }
+    
+    
+    @JSON(serialize = false)
+    public List getModoDeImplementacaoEnums() {
+        return Arrays.asList(ModoDeImplementacaoEnum.values());
+    }
+    
     
     @JSON(serialize = false)
     public List<Projeto> getProjetos() {
@@ -158,6 +175,11 @@ public class ProjetoAction extends GenericAction {
     @JSON(serialize = false)
     public List<Secretaria> getSecretarias() {
         return secretarias;
+    }
+    
+    @JSON(serialize = false)
+    public List<CoordenadorDeProjeto> getCoordenadorDeProjetos() {
+        return coordenadorDeProjetos;
     }
 
     public Projeto getProjeto() {

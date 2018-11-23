@@ -14,7 +14,6 @@ import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IProjetoBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
-import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
 import mobi.stos.educador.exception.LoginExpiradoException;
 import mobi.stos.educador.util.consulta.Consulta;
@@ -141,11 +140,6 @@ public class EscolaAction extends GenericAction{
             e.printStackTrace();
             return ERROR;
         }
-    }
-    
-    @JSON(serialize = false)
-    public List getNivelRelacionamentoEnums() {
-        return Arrays.asList(NivelRelacionamentoEnum.values());
     }
     
     @JSON(serialize = false)

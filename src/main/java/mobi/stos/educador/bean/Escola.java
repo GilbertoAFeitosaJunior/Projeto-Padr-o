@@ -54,8 +54,6 @@ public class Escola implements Serializable {
     @Column(length = 2, nullable = false)
     private String uf;
 
-    @Column(nullable = false)
-    private NivelRelacionamentoEnum nivelRelacionamentoEnum;
 
     @Column(length = 100)
     private String responsavel;
@@ -68,6 +66,8 @@ public class Escola implements Serializable {
 
     @Column(length = 50)
     private String inep;
+    
+    
     
     public String getCepStringMask() {
         return Util.format("#####-###", Util.zeroFill(this.cep, 8));
@@ -144,13 +144,6 @@ public class Escola implements Serializable {
     }
     public void setUf(String uf) {
         this.uf = uf;
-    }
-
-    public NivelRelacionamentoEnum getNivelRelacionamentoEnum() {
-        return nivelRelacionamentoEnum;
-    }
-    public void setNivelRelacionamentoEnum(NivelRelacionamentoEnum nivelRelacionamentoEnum) {
-        this.nivelRelacionamentoEnum = nivelRelacionamentoEnum;
     }
 
     public String getResponsavel() {

@@ -17,8 +17,8 @@
 
 
                 <div class="row">
-                            
-                    <div class="col-lg-4">
+
+                    <div class="col-lg-3">
                         <div class="form-group">                      
                             <label>Secretaria:</label>
                             <div>
@@ -28,19 +28,37 @@
                     </div>        
 
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">                      
                             <label>Situação do Projeto</label>
                             <div>
                                 <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control"    list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
                             </div>
                         </div>
-                    </div>          
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">                      
+                            <label>Coordenador de Projeto</label>
+                            <div>
+                                <s:select name="projeto.coordenadorDeProjeto.id" id="projeto.coordenadorDeProjeto.id" cssClass="form-control"    list="coordenadorDeProjetos" listKey="id" listValue="nome" emptyOption="true" required="true"/>
+                            </div>
+                        </div>
+                    </div>     
+
+                    <div class="col-lg-3">
+                        <div class="form-group">                      
+                            <label>Modo de Implementação</label>
+                            <div>
+                                <s:select name="projeto.modoDeImplementacaoEnum" id="projeto.modoDeImplementacaoEnum" cssClass="form-control"    list="modoDeImplementacaoEnums" listValue="name" emptyOption="true" required="true"/>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="form-group">                      
                             <label>Nome:</label>
                             <div>
@@ -50,9 +68,9 @@
                     </div>
                 </div>
 
-                            
-                    <div class="row">        
-                    <div class="col-lg-8">
+
+                <div class="row">        
+                    <div class="col-lg-12">
                         <div class="form-group">                      
                             <label>Reponsável:</label>
                             <div>
@@ -60,14 +78,14 @@
                             </div>
                         </div>
                     </div>
-                    </div>        
+                </div>        
 
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="form-group">                      
                             <label>Dados Contato</label>
                             <div>
-                                <s:textfield name="projeto.dadosContato" id="projeto.dadosContato" cssClass="form-control" />
+                                <s:textarea name="projeto.dadosContato" id="projeto.dadosContato" cssClass="form-control" />
                             </div>
                         </div>
                     </div>
@@ -83,8 +101,8 @@
 
         </div>
     </section>
-    
-    
+
+
 
     <%@include file="../fragment/endpage.jsp" %>
     <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
