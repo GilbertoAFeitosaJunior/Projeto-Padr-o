@@ -13,7 +13,7 @@ var historico = {
             },
         }).done(function (json) {
                 $("[name='oficina.historico']").val(json.oficina.historico);
-                notify.success("Sucesso");
+                notify.success("Sucesso", "Registro adicionado com sucesso.");
         }).fail(function () {
             notify.error("Erro", "Erro ao tentar salvar o registro, favor tente novamente.");
         }).always(function () {

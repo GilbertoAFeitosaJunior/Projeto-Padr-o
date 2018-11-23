@@ -25,7 +25,7 @@
 <script type="text/javascript" src="../js/respond.min.js" ></script>
 <script type="text/javascript" src="../assets/toastr-master/toastr.js"></script>
 <script type="text/javascript" src="../assets/gritter/js/jquery.gritter.js"></script>
-
+<link href="../assets/file-uploader/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/pt-br.js"></script>
 

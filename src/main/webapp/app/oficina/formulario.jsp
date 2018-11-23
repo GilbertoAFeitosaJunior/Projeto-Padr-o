@@ -6,7 +6,7 @@
     <section class="panel">
         <header class="panel-heading tab-bg-dark-navy-blue ">
             <ul class="nav nav-tabs">
-                <li id="tab-oficina" class="tab-oficina active">
+                <li id="tab-oficina" class="tab-oficina ">
                     <a data-toggle="tab" href="#tab">Oficina</a>
                 </li>    
                 <li data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" id="tab-atividade" class="tab-atividade info popovers" >
@@ -16,7 +16,7 @@
                 <li data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" id="tab-historico" class="tab-historico info popovers" >
                     <a id="tab-historico-link" data-toggle="" href="#tab2">Histórico</a>
                 </li>  
-                <li id="tab-anexo" >
+                <li id="tab-anexo" class="active" >
                     <a data-toggle="tab" href="#tab3">Anexo</a>
                 </li>  
                 <li id="tab-relatorio" >
@@ -27,7 +27,7 @@
 
         <div class="panel-body">
             <div class="tab-content">
-                <div id="tab" class="tab-oficina tab-pane active" >
+                <div id="tab" class="tab-oficina tab-pane " >
                     <%@include file="../oficina/fragment/oficina_formulario.jsp" %>
                 </div>   
                 <div id="tab1" class="tab-atividade tab-pane " >
@@ -36,7 +36,7 @@
                 <div id="tab2" class="tab-historico tab-pane " >
                     <%@include file="../oficina/fragment/historico_formulario.jsp" %>
                 </div>   
-                <div id="tab3" class="tab-pane">
+                <div id="tab3" class="tab-pane active">
                     <%@include file="../oficina/fragment/anexo_formulario.jsp" %>
                 </div>  
                 <div id="tab4" class="tab-pane">
@@ -53,6 +53,7 @@
 <script type="text/javascript" src="../oficina/js/oficina_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/atividade_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/historico_formulario.js"></script>
+<script type="text/javascript" src="../oficina/js/anexo_formulario.js"></script>
 <script type="text/javascript" src="../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
                     <s:if test="oficina != null">
