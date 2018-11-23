@@ -1,4 +1,3 @@
-
 package mobi.stos.educador.dao.impl;
 
 import java.math.BigInteger;
@@ -10,8 +9,10 @@ import mobi.stos.educador.bean.Escola;
 import mobi.stos.educador.bean.Projeto;
 import mobi.stos.educador.common.AbstractHibernateDao;
 import mobi.stos.educador.dao.IEducadorDao;
-import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
+import mobi.stos.educador.enumm.DependenciaAdministrativaEnum;
+import mobi.stos.educador.enumm.RedeEnum;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
+import mobi.stos.educador.enumm.TipoDeAtuacaoEnum;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
@@ -19,31 +20,31 @@ import org.springframework.stereotype.Repository;
  *
  * @author Matheus Monteiro
  */
-
 @Repository
-public class EducadorDao extends AbstractHibernateDao<Educador> implements IEducadorDao{
+public class EducadorDao extends AbstractHibernateDao<Educador> implements IEducadorDao {
 
     public EducadorDao() {
         super(Educador.class);
     }
-    
+
     @Override
     public Educador load(Long id) {
         Educador educador = super.load(id);
         if (educador != null) {
             educador.setEscolas(this.listEscola(id));
         }
-        return educador;        
+        return educador;
     }
-    
-     private Set<Escola> listEscola(long idEducador) {
+
+    private Set<Escola> listEscola(long idEducador) {
 
         Set<Escola> set = new HashSet<>();
 
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append("a.id, a.projeto_id, a.nome, a.bairro, a.cep, a.cidade, a.complemento, a.logradouro, a.numero,"
-                + " a.uf, a.nivelRelacionamentoEnum, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep ");
+                + " a.uf, a.nivelRelacionamentoEnum, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep,"
+                + " a.redeEnum, a.tipoDeAtuacaoEnum, a.dependenciaAdministrativaEnum, a.responsavelTelefone");
         sql.append("FROM escola a ");
         sql.append("INNER JOIN educador_escola b ON b.escola_id= a.id ");
         sql.append("WHERE b.educador_id = :id ");
@@ -66,11 +67,14 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
             entity.setLogradouro((String) tuple[7]);
             entity.setNumero((String) tuple[8]);
             entity.setUf((String) tuple[9]);
-            entity.setNivelRelacionamentoEnum(NivelRelacionamentoEnum.retornaEnumNaPosicao((int)tuple[10]));
-            entity.setResponsavel((String) tuple[11]);
-            entity.setResponsavelContato((String) tuple[12]);
-            entity.setSituacaoEnum(SituacaoProjetoEnum.retornaEnumNaPosicao((int)tuple[13]));
-            entity.setInep((String) tuple[14]);
+            entity.setResponsavel((String) tuple[10]);
+            entity.setResponsavelContato((String) tuple[11]);
+            entity.setSituacaoEnum(SituacaoProjetoEnum.retornaEnumNaPosicao((int) tuple[12]));
+            entity.setInep((String) tuple[13]);
+            entity.setRedeEnum(RedeEnum.retornaEnumNaPosicao((int) tuple[14]));
+            entity.setTipoDeAtuacaoEnum(TipoDeAtuacaoEnum.retornaEnumNaPosicao((int) tuple[15]));
+            entity.setDepedenciaAdministrativaEnum(DependenciaAdministrativaEnum.retornaEnumNaPosicao((int) tuple[16]));
+            entity.setResponsavelTelefone((Integer) tuple[17]);
             set.add(entity);
         }
         return set;
@@ -78,7 +82,7 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
 
     @Override
     public void deleteEducadorEscola(long idEducador, long idEscola) {
-           Educador educador = super.load(idEducador);
+        Educador educador = super.load(idEducador);
 
         if (educador != null) {
             StringBuilder sql = new StringBuilder();
@@ -92,6 +96,5 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
             query.executeUpdate();
         }
     }
-   
 
 }

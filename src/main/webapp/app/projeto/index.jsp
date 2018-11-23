@@ -79,6 +79,7 @@
                     <tr>
                         <th class="">Nome</th>
                         <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Secretaria</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Coordenador de Projeto</th>
                         <th class="col-lg-2 col-sm-2 col-xs-2 text-left" >Situação</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
@@ -88,6 +89,7 @@
                         <tr>       
                             <td><s:property value="nome" /></td>
                             <td><s:property value="secretaria.nome" /></td>
+                            <td><s:property value="coordenadorDeProjeto.nome" /></td>
                             <td><s:property value="situacaoProjetoEnum.name" />  </td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">

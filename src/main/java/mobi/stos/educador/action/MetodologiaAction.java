@@ -18,6 +18,7 @@ import mobi.stos.educador.bo.IMetodologiaBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.enumm.AplicabilidadeEnum;
+import mobi.stos.educador.enumm.FaixaEtariaEnum;
 import mobi.stos.educador.exception.LoginExpiradoException;
 import mobi.stos.educador.util.JsonReturn;
 import mobi.stos.educador.util.consulta.Consulta;
@@ -268,6 +269,13 @@ public class MetodologiaAction extends GenericAction {
     public List getAplicabilidadeEnums() {
         return Arrays.asList(AplicabilidadeEnum.values());
     }
+    
+    
+     @JSON(serialize = false)
+    public List getFaixaEtariaEnums() {
+        return Arrays.asList(FaixaEtariaEnum.values());
+    }
+    
 
     //métodos abstratos
     @Override

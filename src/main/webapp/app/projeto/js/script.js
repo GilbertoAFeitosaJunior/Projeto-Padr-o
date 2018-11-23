@@ -10,6 +10,12 @@ var Script = function () {
                 },
                 "projeto.secretaria.id": {
                     required: "Favor preencher esse campo"
+                },
+                "projeto.coordenadorDeProjeto.id": {
+                    required: "Favor preencher esse campo"
+                },
+                "projeto.modoDeImplementacaoEnum": {
+                    required: "Favor preencher esse campo"
                 }
             }
         });

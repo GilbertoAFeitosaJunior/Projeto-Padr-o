@@ -81,6 +81,7 @@ public class Educador implements Serializable {
     
     public Educador() {
     }
+    
     public Educador(Long id) {
         this.id = id;
     }

@@ -64,7 +64,7 @@ public class EducadorAction extends GenericAction {
                 System.out.println("ENTREI AQUI");
                 educador = this.educadorBo.load(educador.getId());
             }
-            //this.educadors = this.educadorBo.listall();
+            
             this.usuarios = this.usuarioBo.listall();
             this.escolas = this.escolaBo.listall();
             return SUCCESS;
@@ -86,19 +86,6 @@ public class EducadorAction extends GenericAction {
             })
     public String persist() {
         try {
-//            GenericAction.isLogged(request);
-//            Educador entity;
-//            if (educador != null && educador.getId() != null) {
-//                entity = educadorBo.load(educador.getId());
-//                
-//                if (Strings.isNullOrEmpty(educador.getSenha())) {
-//                    educador.setSenha(entity.getSenha());
-//                }
-//            }
-//            
-//            String ufMaiusculo = educador.getUf().toUpperCase();
-//            educador.setUf(ufMaiusculo);
-//            this.educadorBo.persist(educador);
             GenericAction.isLogged(request);
             Usuario entity;
 
@@ -110,7 +97,7 @@ public class EducadorAction extends GenericAction {
                     this.educador.getUsuario().setSenha(entity.getSenha());
                 }
 
-            } else {
+            }else{
                 entity = this.usuarioBo.cadastrar(this.educador.getUsuario());
                 this.educador.setUsuario(entity);
             }

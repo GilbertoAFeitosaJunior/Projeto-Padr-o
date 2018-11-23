@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import mobi.stos.educador.enumm.ModoDeImplementacaoEnum;
 import mobi.stos.educador.enumm.SituacaoProjetoEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -38,6 +39,12 @@ public class Projeto implements Serializable{
     
     @Type (type = "text")
     private String dadosContato;
+    
+    @Column(nullable=false)
+    private ModoDeImplementacaoEnum modoDeImplementacaoEnum;
+    
+    @ManyToOne (optional=false)
+    private CoordenadorDeProjeto coordenadorDeProjeto;
     
     public Projeto() {
 
@@ -94,6 +101,24 @@ public class Projeto implements Serializable{
     public void setDadosContato(String dadosContato) {
         this.dadosContato = dadosContato;
     }
+
+    public ModoDeImplementacaoEnum getModoDeImplementacaoEnum() {
+        return modoDeImplementacaoEnum;
+    }
+
+    public void setModoDeImplementacaoEnum(ModoDeImplementacaoEnum modoDeImplementacaoEnum) {
+        this.modoDeImplementacaoEnum = modoDeImplementacaoEnum;
+    }
+
+    public CoordenadorDeProjeto getCoordenadorDeProjeto() {
+        return coordenadorDeProjeto;
+    }
+
+    public void setCoordenadorDeProjeto(CoordenadorDeProjeto coordenadorDeProjeto) {
+        this.coordenadorDeProjeto = coordenadorDeProjeto;
+    }
+    
+    
     
     
     

@@ -9,8 +9,6 @@ import mobi.stos.educador.bean.Metodologia;
 import mobi.stos.educador.common.AbstractHibernateDao;
 import mobi.stos.educador.dao.IAtividadeDao;
 import mobi.stos.educador.enumm.AplicabilidadeEnum;
-import mobi.stos.educador.enumm.NivelRelacionamentoEnum;
-import mobi.stos.educador.enumm.SituacaoProjetoEnum;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 

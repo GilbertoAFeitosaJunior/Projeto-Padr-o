@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import mobi.stos.educador.enumm.AplicabilidadeEnum;
+import mobi.stos.educador.enumm.FaixaEtariaEnum;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -34,6 +35,7 @@ public class Metodologia implements Serializable{
     @Column(nullable = false, length = 100)
     private String nome;
     
+    
     @Type (type = "text")
     private String descricao;
     
@@ -42,6 +44,13 @@ public class Metodologia implements Serializable{
     
     @Column(nullable = false)
     private boolean ativo;
+    
+    @Column(nullable=false)
+    @Type(type="text")
+    private String objetivo;
+    
+    @Column(nullable=false)
+    private FaixaEtariaEnum faixaEtariaEnum;
     
     
     @ManyToMany(fetch = FetchType.LAZY)
@@ -94,6 +103,24 @@ public class Metodologia implements Serializable{
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public FaixaEtariaEnum getFaixaEtariaEnum() {
+        return faixaEtariaEnum;
+    }
+
+    public void setFaixaEtariaEnum(FaixaEtariaEnum faixaEtariaEnum) {
+        this.faixaEtariaEnum = faixaEtariaEnum;
+    }
+    
+    
 
    public Set<Escola> getEscolas() {
         return escolas;
