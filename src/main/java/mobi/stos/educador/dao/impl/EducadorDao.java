@@ -43,8 +43,9 @@ public class EducadorDao extends AbstractHibernateDao<Educador> implements IEduc
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append("a.id, a.projeto_id, a.nome, a.bairro, a.cep, a.cidade, a.complemento, a.logradouro, a.numero,"
-                + " a.uf, a.nivelRelacionamentoEnum, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep,"
-                + " a.redeEnum, a.tipoDeAtuacaoEnum, a.dependenciaAdministrativaEnum, a.responsavelTelefone");
+                + " a.uf, a.responsavel, a.responsavelContato, a.situacaoEnum, a.inep, "
+                + " a.redeEnum, a.tipoDeAtuacaoEnum, a.depedenciaAdministrativaEnum, a.responsavelTelefone, "
+                + " a.diretorResponsavel, a.diretorContato ");
         sql.append("FROM escola a ");
         sql.append("INNER JOIN educador_escola b ON b.escola_id= a.id ");
         sql.append("WHERE b.educador_id = :id ");

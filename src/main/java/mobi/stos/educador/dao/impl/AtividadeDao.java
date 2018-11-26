@@ -9,6 +9,7 @@ import mobi.stos.educador.bean.Metodologia;
 import mobi.stos.educador.common.AbstractHibernateDao;
 import mobi.stos.educador.dao.IAtividadeDao;
 import mobi.stos.educador.enumm.AplicabilidadeEnum;
+import mobi.stos.educador.enumm.FaixaEtariaEnum;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
@@ -38,7 +39,7 @@ public class AtividadeDao extends AbstractHibernateDao<Atividade> implements IAt
 
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
-        sql.append("a.id, a.nome, a.descricao, a.aplicabilidadeEnum, a.ativo ");
+        sql.append("a.id, a.nome, a.descricao, a.aplicabilidadeEnum, a.ativo, a.objetivo, a.faixaEtariaEnum ");
         sql.append("FROM metodologia a ");
         sql.append("INNER JOIN atividade_metodologia b ON b.metodologia_id = a.id ");
         sql.append("WHERE b.atividade_id = :id ");
@@ -56,6 +57,10 @@ public class AtividadeDao extends AbstractHibernateDao<Atividade> implements IAt
             entity.setDescricao((String) tuple[2]);
             entity.setAplicabilidadeEnum(AplicabilidadeEnum.retornaEnumNaPosicao((int) tuple[3]));
             entity.setAtivo((Boolean) tuple[4]);
+            entity.setObjetivo((String) tuple[5]);
+            entity.setFaixaEtariaEnum(FaixaEtariaEnum.retornaEnumNaPosicao((int) tuple[6]));
+
+            
             
             set.add(entity);
         }

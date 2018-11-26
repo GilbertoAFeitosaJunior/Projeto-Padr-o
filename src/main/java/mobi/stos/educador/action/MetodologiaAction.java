@@ -126,9 +126,11 @@ public class MetodologiaAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Metodologia entity = null;
+            
             if (metodologia != null && metodologia.getId() != null) {
-                entity = metodologiaBo.load(metodologia.getId());
-            }
+                entity = this.metodologiaBo.load(metodologia.getId());
+             }
+            metodologia.setEscolas(entity.getEscolas());
             this.metodologiaBo.persist(metodologia);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listMetodologia");

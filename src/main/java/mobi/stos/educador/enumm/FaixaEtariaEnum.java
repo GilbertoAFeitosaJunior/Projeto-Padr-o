@@ -25,4 +25,10 @@ public enum FaixaEtariaEnum {
         return name;
     }
     
+    
+       public static FaixaEtariaEnum retornaEnumNaPosicao (int posicao){
+        return FaixaEtariaEnum.values()[posicao];
+    }
+    
+    
 }
