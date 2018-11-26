@@ -1,9 +1,17 @@
-
+//$(function () {
+//    $('.summernote').summernote({
+//        height: 200,
+//        minHeight: null,
+//        maxHeight: null
+//    });
+//    $(".tagsinput").tagsInput();
+//    $("html").niceScroll().remove();
+//});
 
 var historico = {
     
      confirmacaoModal : function(){
-      var textoHistoricoAdicionado = $('.oficinahistorico').val();
+        var textoHistoricoAdicionado = $("#oficinahistorico").val();
         console.log(textoHistoricoAdicionado);
         $("#confirmacao").val(textoHistoricoAdicionado);
         
