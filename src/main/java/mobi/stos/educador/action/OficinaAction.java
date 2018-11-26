@@ -2,19 +2,23 @@ package mobi.stos.educador.action;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.educador.bean.Anexo;
 import mobi.stos.educador.bean.Atividade;
 import mobi.stos.educador.bean.Educador;
 import mobi.stos.educador.bean.Escola;
 import mobi.stos.educador.bean.Oficina;
 import mobi.stos.educador.bean.Usuario;
+import mobi.stos.educador.bo.IAnexoBo;
 import mobi.stos.educador.bo.IAtividadeBo;
 import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IOficinaBo;
@@ -46,9 +50,11 @@ public class OficinaAction extends GenericAction {
     private Oficina oficina;
     private Atividade atividade;
     private Usuario usuario;
+    private Anexo anexo;
     
     private Long id;
-
+    
+    private List<Anexo> anexos;
     private List<Oficina> oficinas;
     private List<Educador> educadors;
     private List<Escola> escolas;
@@ -65,7 +71,10 @@ public class OficinaAction extends GenericAction {
 
     @Autowired
     private IAtividadeBo atividadeBo;
-
+    
+    @Autowired
+    private IAnexoBo anexoBo;
+    
     @Action(value = "prepareOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -118,9 +127,14 @@ public class OficinaAction extends GenericAction {
     public String persistOficinaJson() {
         try {
             GenericAction.isLogged(request);
+            Oficina entity = null;
              if (getLogged().getEducador() != null) {
+                 if(oficina != null && oficina.getId() != null){
+                     entity = this.oficinaBo.load(oficina.getId());
+                 }
                 Educador educadorLogado = new Educador(getLogged().getEducador().getId());
                 oficina.setEducador(educadorLogado);
+                oficina.setAtividades(entity.getAtividades());
                 oficina = this.oficinaBo.persist(oficina);
                 id = oficina.getId();
                 oficina = null;
@@ -183,27 +197,28 @@ public class OficinaAction extends GenericAction {
                 String historicoView = this.oficina.getHistorico();
                 this.oficina = this.oficinaBo.load(this.oficina.getId());
                 StringBuilder sb = new StringBuilder();
-                sb.append("\n\n");
+                sb.append("<br/>");
+                sb.append("<br/>");
                 sb.append(historicoView);
-                sb.append("\n\n");
+                sb.append("<br/>");
                 sb.append("Por: ");
                 sb.append(getLogged().getEducador().getNome());
-                sb.append("\n");
-                Date date = new Date(); 
-                Date dataAtual = new Date();
+                sb.append("<br/>");
+                Date data = new Date(); 
                 DateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
-                String horaAtual = String.valueOf(dateFormat.format(date)); 
-                String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.FULL).format(dataAtual);
+                String horaAtual = String.valueOf(dateFormat.format(data)); 
+                String dataFormatada = java.text.DateFormat.getDateInstance(DateFormat.FULL).format(data);
                 sb.append(dataFormatada);
-                sb.append(" as " + horaAtual);
-                sb.append("\n");
+                sb.append(" as " );
+                sb.append(horaAtual);
+                sb.append("<br/>");
                 if (oficina.getHistorico() != null) {
-                    sb.append("_______________");
+                    sb.append("_________________________________________________");
                     sb.append(oficina.getHistorico());
                 }
-
+                
                 oficina.setHistorico(String.valueOf(sb));
-
+                
                 this.oficina = this.oficinaBo.persist(oficina);
                 oficina.setAtividades(null);
                 oficina.setEducador(null);
@@ -226,6 +241,19 @@ public class OficinaAction extends GenericAction {
     public String delete() {
         try {
             GenericAction.isLogged(request);
+            
+            this.anexos = anexoBo.byOficinaId(oficina.getId());
+            
+            for (Anexo anexo : anexos) {
+                anexo.setOficina(null);
+                ServletContext context = request.getServletContext();
+                File file = new File(context.getRealPath("/") + anexo.getArquivo());
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                this.anexoBo.delete(anexo.getId());
+            }
             oficinaBo.delete(oficina.getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listOficina");
@@ -312,6 +340,22 @@ public class OficinaAction extends GenericAction {
         }
     }
 
+    public Anexo getAnexo() {
+        return anexo;
+    }
+
+    public void setAnexo(Anexo anexo) {
+        this.anexo = anexo;
+    }
+
+    public List<Anexo> getAnexos() {
+        return anexos;
+    }
+
+    public void setAnexos(List<Anexo> anexos) {
+        this.anexos = anexos;
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }

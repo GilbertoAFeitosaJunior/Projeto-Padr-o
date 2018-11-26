@@ -5,6 +5,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.educador.bean.Anexo;
@@ -60,7 +61,6 @@ public class AnexoAction extends GenericAction{
 
             //<editor-fold defaultstate="collapsed" desc="Função de Upload">
             if (upload != null) {
-                System.out.println(uploadContentType);
                 String ark = Util.uploadFile(upload, uploadContentType,
                         "repo/educador/download/",
                         ConstantsType.ALL.getTypes(),
@@ -70,6 +70,7 @@ public class AnexoAction extends GenericAction{
                 anexo.setOficina(oficina);
                 anexo.setDataPublicacao(new Date());
                 anexoBo.persist(anexo);
+                
             }
             //</editor-fold>
 
@@ -114,7 +115,6 @@ public class AnexoAction extends GenericAction{
             anexos = anexoBo.byOficinaId(anexo.getOficina().getId());
             for (Anexo anexo : anexos) {
                 anexo.setOficina(null);
-                System.out.println(anexo.getDescricao());
             }
             jsonReturn = new JsonReturn(true);
 
@@ -135,11 +135,26 @@ public class AnexoAction extends GenericAction{
     public String delete() {
         try {
             GenericAction.isLogged(request);
+            
+//            Consulta consulta = getConsulta();
+//            consulta.addCriterion(Restrictions.eq("oficina.id", oficina.getId()));
+//            anexos = anexoBo.list(consulta);
+            
+//            for(Anexo anexo: anexos){
+                
+            this.anexo = this.anexoBo.load(this.anexo.getId());
+            anexo.setOficina(null);
 
+            ServletContext context = request.getServletContext();
+            File file = new File(context.getRealPath("/") + anexo.getArquivo());
+            if (file.exists()) {
+                file.delete();
+            }
+            
             this.anexoBo.delete(this.anexo.getId());
 
-            addActionMessage("Registro excluído com sucesso.");
-            setRedirectURL("listOficina");
+            //addActionMessage("Registro excluído com sucesso.");
+            //setRedirectURL("listOficina");
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             e.printStackTrace();

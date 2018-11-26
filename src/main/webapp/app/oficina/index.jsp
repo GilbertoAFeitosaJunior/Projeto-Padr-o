@@ -131,7 +131,9 @@
                     <h4 class="modal-title">Excluir?</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja excluir esse registro?
+                    Deseja excluir esse registro?<br/>
+                    Atenção! 
+                    Todos os arquivos anexados também serão excluídos!
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Não</button>
