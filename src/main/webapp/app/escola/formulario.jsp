@@ -194,6 +194,11 @@
                 </div>
             </div>   
 
+    <div class="panel-body pull-right">
+        <button type="button" class="btn btn-danger" onclick="window.location = 'listEscola'">Cancelar</button>
+        &nbsp;
+        <button type="submit" class="btn btn-success">Salvar Registro</button>
+    </div>
         </div>
     </div>
 
@@ -206,12 +211,7 @@
 
 
 
-    <div class="panel-body pull-right">
-        <button type="button" class="btn btn-danger" onclick="window.location = 'listEscola'">Cancelar</button>
-        &nbsp;
-        <button type="submit" class="btn btn-success">Salvar Registro</button>
-    </div>
-</div>
+
 
 
 </section>                 

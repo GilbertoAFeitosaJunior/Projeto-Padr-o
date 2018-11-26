@@ -1,7 +1,6 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
-<compress:html compressCss="true">
 
     <%@include file="../fragment/head.jsp" %>
 
@@ -40,8 +39,8 @@
                     <a href="javascript:;" class="fa fa-chevron-down"></a>
                 </span>
             </header>
+                <s:hidden name="gestorDoTerritorio.usuario.id" />
             <div class="panel-body">
-                <s:hidden name="usuario.id" />
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">                      
@@ -69,7 +68,12 @@
                     <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Senha:</label>
-                            <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
+                            <s:if test="gestorDoTerritorio == null" >
+                                <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="" maxlength="32" cssClass="form-control" required="true"/>
+                            </s:if>
+                            <s:else>
+                                <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
+                            </s:else>
                         </div>
                     </div>
                 </div>
@@ -78,6 +82,7 @@
                     &nbsp;
                     <button type="submit" class="btn btn-success">Salvar Registro</button>
                 </div>
+            </div>
             </s:form>
     </section>
 
@@ -88,4 +93,3 @@
     <script type="text/javascript" src="../gestorDoTerritorio/js/script.js"></script>
     <%@include file="../fragment/truend.jsp" %>
 
-</compress:html>

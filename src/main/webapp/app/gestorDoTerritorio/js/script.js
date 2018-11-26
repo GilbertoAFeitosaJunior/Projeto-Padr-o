@@ -13,7 +13,10 @@ var Script = function () {
                 },
                 "gestorDoTerritorio.usuario.email": {
                     required: "Favor preencher esse campo"
-                }             
+                },
+                "gestorDoTerritorio.usuario.senha": {
+                    required: "Favor preencher esse campo"
+                }
             }
         });
     });

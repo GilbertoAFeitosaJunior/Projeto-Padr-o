@@ -1,6 +1,7 @@
 package mobi.stos.educador.action;
 
 import com.google.common.base.Strings;
+import static com.opensymphony.xwork2.Action.ERROR;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import mobi.stos.educador.bo.IGestorDoTerritorioBo;
 import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
+import mobi.stos.educador.exception.AvoidDuplicationEmailException;
 import mobi.stos.educador.exception.LoginExpiradoException;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
@@ -33,7 +35,6 @@ public class GestorDoTerritorioAction extends GenericAction {
 
     private List<GestorDoTerritorio> gestorDoTerritorios;
 
-    private List<Usuario> usuarios;
 
     @Autowired
     private IGestorDoTerritorioBo gestorDoTerritorioBo;
@@ -55,9 +56,6 @@ public class GestorDoTerritorioAction extends GenericAction {
             if (gestorDoTerritorio != null && gestorDoTerritorio.getId() != null) {
                 gestorDoTerritorio = this.gestorDoTerritorioBo.load(this.gestorDoTerritorio.getId());
             }
-
-            this.usuarios = this.usuarioBo.listall();
-
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -79,11 +77,8 @@ public class GestorDoTerritorioAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Usuario entity;
-
             if (this.gestorDoTerritorio != null && this.gestorDoTerritorio.getId() != null) {
-
                 entity = this.usuarioBo.load(this.gestorDoTerritorio.getUsuario().getId());
-
                 if (Strings.isNullOrEmpty(this.gestorDoTerritorio.getUsuario().getSenha())) {
                     this.gestorDoTerritorio.getUsuario().setSenha(entity.getSenha());
                 }
@@ -97,7 +92,11 @@ public class GestorDoTerritorioAction extends GenericAction {
 
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listGestorDoTerritorio");
-        } catch (Exception e) {
+        }catch (AvoidDuplicationEmailException e){
+            e.printStackTrace();
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
@@ -142,7 +141,6 @@ public class GestorDoTerritorioAction extends GenericAction {
             }
 
             Consulta c = getConsulta();
-            c.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
             this.gestorDoTerritorios = gestorDoTerritorioBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -177,14 +175,7 @@ public class GestorDoTerritorioAction extends GenericAction {
         this.gestorDoTerritorios = gestorDoTerritorios;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
+ 
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
