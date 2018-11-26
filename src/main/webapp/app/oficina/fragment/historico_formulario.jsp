@@ -11,16 +11,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <s:textarea name="oficinaHistorico" id="oficina.historico" cssClass="form-control oficinahistorico" rows="5" />
+                    <s:textarea name="oficinaHistorico" id="oficinahistorico" cssClass="form-control " rows="5" />
                 </div>
             </div>
 
             <div class="panel-body pull-right">
                 <div class="row">
                     <div class="col-lg-12">
-
                         <div class="form-group ">
-
                             <button id="botaoAdicionarHistorico" class="btn btn-primary " data-toggle="modal" href="#confirmarAdicionar"><i class="fa fa-plus"></i> Adicionar</button>
                         </div>
                     </div>

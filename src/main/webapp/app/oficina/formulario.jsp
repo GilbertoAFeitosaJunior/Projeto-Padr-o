@@ -48,8 +48,11 @@
 <!--/s:else-->
 
 <%@include file="../fragment/endpage.jsp" %>
+<!--link href="../assets/summernote/dist/summernote.css" rel="stylesheet"-->
 <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
 <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<!--script type="text/javascript" src="../assets/summernote/dist/summernote.min.js"></script>
+<script type="text/javascript" src="../assets/summernote/lang/summernote-pt-BR.js"></script-->
 <script type="text/javascript" src="../oficina/js/oficina_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/atividade_formulario.js"></script>
 <script type="text/javascript" src="../oficina/js/historico_formulario.js"></script>
@@ -73,10 +76,10 @@
                             });
                         });
                       $(document).ready(function(){
-                        $("#botaoAdicionarHistorico").on("click", function(){
-                            historico.confirmacaoModal(); 
-                        });
-                      } ); 
+                            $("#botaoAdicionarHistorico").on("click", function(){
+                                historico.confirmacaoModal(); 
+                            });
+                        }); 
                         
                         
 </script>
