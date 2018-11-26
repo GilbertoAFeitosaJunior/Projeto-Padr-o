@@ -14,9 +14,6 @@ var Script = function () {
                 "educador.celularStringMask":{
                   required: "Favor preencher esse campo"
                 },
-                "educador.senha":{
-                  required: "Favor preencher esse campo" 
-                },
                 "educador.logradouro":{
                   required: "Favor preencher esse campo"
                 },
@@ -47,6 +44,9 @@ var Script = function () {
                 },
                  "educador.usuario.email":{
                   required: "Favor preencher esse campo"
+                }, 
+                "educador.usuario.senha":{
+                  required: "Favor preencher esse campo" 
                 }
             }
         });

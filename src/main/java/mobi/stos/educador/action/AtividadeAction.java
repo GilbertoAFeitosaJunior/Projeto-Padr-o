@@ -118,10 +118,13 @@ public class AtividadeAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Atividade entity = null;
+            
+                       
             if (atividade != null && atividade.getId() != null) {
-                entity = atividadeBo.load(atividade.getId());
+                entity = this.atividadeBo.load(atividade.getId());
+                atividade.setMetodologias(entity.getMetodologias());
             }
-            atividade.setMetodologias(entity.getMetodologias());
+            
             this.atividadeBo.persist(atividade);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listAtividade");

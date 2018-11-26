@@ -64,7 +64,7 @@ public class EducadorAction extends GenericAction {
                 System.out.println("ENTREI AQUI");
                 educador = this.educadorBo.load(educador.getId());
             }
-            
+
             this.usuarios = this.usuarioBo.listall();
             this.escolas = this.escolaBo.listall();
             return SUCCESS;
@@ -94,16 +94,16 @@ public class EducadorAction extends GenericAction {
 
                 entity = this.usuarioBo.load(this.educador.getUsuario().getId());
                 ed_entity = this.educadorBo.load(this.educador.getId());
+                educador.setEscolas(ed_entity.getEscolas());
 
                 if (Strings.isNullOrEmpty(this.educador.getUsuario().getSenha())) {
                     this.educador.getUsuario().setSenha(entity.getSenha());
                 }
 
-            }else{
+            } else {
                 entity = this.usuarioBo.cadastrar(this.educador.getUsuario());
                 this.educador.setUsuario(entity);
             }
-            educador.setEscolas(ed_entity.getEscolas());
             this.usuarioBo.persist(this.educador.getUsuario());
             this.educadorBo.persist(this.educador);
             addActionMessage("Registro salvo com sucesso.");
@@ -254,7 +254,7 @@ public class EducadorAction extends GenericAction {
     public void setEducador(Educador educador) {
         this.educador = educador;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
