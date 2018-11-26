@@ -56,8 +56,6 @@ function uploadFiles(event) {
                  
                 $("[name='anexo.descricao']").val("");
                 $('#upload').val('');
-                $('#fileupload-exists').attr("style","display : none;");
-                $('.fileupload-new').show();
                 
                 //$("#upload").replaceWith($("#upload").clone(true));
 
@@ -113,11 +111,11 @@ function uploadFiles(event) {
                     type: "POST",
                     url: "deleteAnexo",
                     data: {
+                        "oficina.id":$("[name='oficina.id']").val(),
                         "anexo.id": id
                     },
                     dataType: "json",
                     beforeSend: function () {
-
                     },
                     complete: function () {
                         anexo.list();

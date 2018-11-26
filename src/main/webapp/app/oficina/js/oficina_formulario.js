@@ -25,10 +25,11 @@ var Script = function () {
                 oficina.persistSomenteOficina();
                 $('#tab-atividade').popover('disable');
                 $('#tab-historico').popover('disable');
+                $('#tab-anexo').popover('disable');
                 oficina.desbloquear('tab-atividade-link');
                 oficina.desbloquear('tab-historico-link');
+                oficina.desbloquear('tab-anexo-link');
                 oficina.passo('tab-oficina','tab-atividade');
-                //oficina.removerPopover('tab-atividade');
             }
         });
     });
