@@ -46,7 +46,7 @@
         </div>
                     
 <div class="modal fade" id="confirmarAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -54,11 +54,11 @@
                 </div>
                 <div class="modal-body">
                     Deseja realmente adicionar o seguinte texto ao Histórico Atual?<br/>
-                    <s:textarea id="confirmacao.historico" cssClass="form-control" readonly="true" rows="10"/>
+                    <s:textarea id="confirmacao" cssClass="form-control" readonly="true" rows="5"/>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Não</button>
-                    <button class="btn btn-success" type="button" onclick="historico.persist()">Sim</button>
+                    <button class="btn btn-success" type="button" onclick="historico.persist();">Sim</button>
                 </div>
             </div>
         </div>
