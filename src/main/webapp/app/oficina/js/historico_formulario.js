@@ -5,7 +5,8 @@ var historico = {
      confirmacaoModal : function(){
       var textoHistoricoAdicionado = $('.oficinahistorico').val();
         console.log(textoHistoricoAdicionado);
-        $('#confirmacao.historico').val(textoHistoricoAdicionado);
+        $("#confirmacao").val(textoHistoricoAdicionado);
+        
      },
     persist: function(){
           $.ajax({

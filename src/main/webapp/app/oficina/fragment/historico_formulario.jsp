@@ -54,7 +54,7 @@
                 </div>
                 <div class="modal-body">
                     Deseja realmente adicionar o seguinte texto ao Histórico Atual?<br/>
-                    <s:textarea id="confirmacao.historico" cssClass="form-control" readonly="true" rows="10"/>
+                    <s:textarea id="confirmacao" cssClass="form-control" readonly="true" rows="10"/>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Não</button>
