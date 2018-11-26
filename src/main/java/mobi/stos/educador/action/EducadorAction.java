@@ -88,10 +88,12 @@ public class EducadorAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Usuario entity;
+            Educador ed_entity = null;
 
             if (this.educador != null && this.educador.getId() != null) {
 
                 entity = this.usuarioBo.load(this.educador.getUsuario().getId());
+                ed_entity = this.educadorBo.load(this.educador.getId());
 
                 if (Strings.isNullOrEmpty(this.educador.getUsuario().getSenha())) {
                     this.educador.getUsuario().setSenha(entity.getSenha());
@@ -101,6 +103,7 @@ public class EducadorAction extends GenericAction {
                 entity = this.usuarioBo.cadastrar(this.educador.getUsuario());
                 this.educador.setUsuario(entity);
             }
+            educador.setEscolas(ed_entity.getEscolas());
             this.usuarioBo.persist(this.educador.getUsuario());
             this.educadorBo.persist(this.educador);
             addActionMessage("Registro salvo com sucesso.");
