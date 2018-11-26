@@ -121,6 +121,7 @@ public class AtividadeAction extends GenericAction {
             if (atividade != null && atividade.getId() != null) {
                 entity = atividadeBo.load(atividade.getId());
             }
+            
             this.atividadeBo.persist(atividade);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listAtividade");

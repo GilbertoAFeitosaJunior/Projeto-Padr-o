@@ -38,6 +38,15 @@ var Script = function () {
                 "educador.email": {
                     required: "Favor preencher esse campo",
                     email: "E-mail inválido"
+                },
+                 "educador.usuario.ativo":{
+                  required: "Favor preencher esse campo"
+                },
+                 "educador.usuario.nome":{
+                  required: "Favor preencher esse campo"
+                },
+                 "educador.usuario.email":{
+                  required: "Favor preencher esse campo"
                 }
             }
         });
