@@ -7,14 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mobi.stos.educador.bean.Escola;
 import mobi.stos.educador.bean.Pessoa;
+import mobi.stos.educador.bean.Turma;
+import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IPessoaBo;
+import mobi.stos.educador.bo.ITurmaBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
 import mobi.stos.educador.enumm.GeneroEnum;
 import mobi.stos.educador.enumm.SexoEnum;
-import mobi.stos.educador.util.AES;
-import static mobi.stos.educador.util.AES.decrypt;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
@@ -31,11 +33,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PessoaAction extends GenericAction{
     
     private Pessoa pessoa;
+    private Escola escola;
+    private Turma turma;
     
+    private List<Turma> turmas;
+    private List<Escola> escolas;
     private List<Pessoa> pessoas;
     
     @Autowired
     private IPessoaBo pessoaBo;
+    
+    @Autowired
+    private IEscolaBo escolaBo;
+    
+    @Autowired
+    private ITurmaBo turmaBo;
     
      @Action(value = "preparePessoa",
             interceptorRefs = {
@@ -50,7 +62,10 @@ public class PessoaAction extends GenericAction{
             GenericAction.isLogged(request);
             if (pessoa != null && pessoa.getId() != null) {
                 pessoa = this.pessoaBo.load(pessoa.getId());
+                escola = this.escolaBo.load(pessoa.getTurma().getEscola().getId());
             }
+            this.escolas = this.escolaBo.listall();
+            this.turmas = this.turmaBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -78,13 +93,31 @@ public class PessoaAction extends GenericAction{
             
             String ufMaiusculo = pessoa.getUf().toUpperCase();
             pessoa.setUf(ufMaiusculo);
-            this.pessoaBo.persist(pessoa);
+            
+           this.pessoaBo.persist(pessoa);
+           
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listPessoa");
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
+        }
+        return SUCCESS;
+    }
+    
+    @Action(value = "listPessoaTurmaJson",
+            results = {
+                @Result(name = SUCCESS, type = "json")
+            })
+    public String listPessoaTurmaJson() {
+        try {
+            GenericAction.isLogged(request);
+            if(escola.getId() != null){
+             this.turmas = this.turmaBo.byEscolaId(escola.getId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return SUCCESS;
     }
@@ -149,6 +182,29 @@ public class PessoaAction extends GenericAction{
     public List getGeneroEnums() {
         return Arrays.asList(GeneroEnum.values());
     }
+
+    public Turma getTurma() {
+        return turma;
+    }
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+    
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
+    }
+    
+    public List<Escola> getEscolas() {
+        return escolas;
+    }
+
+    public void setEscolas(List<Escola> escolas) {
+        this.escolas = escolas;
+    }
     
     public Pessoa getPessoa() {
         return pessoa;
@@ -157,6 +213,13 @@ public class PessoaAction extends GenericAction{
         this.pessoa = pessoa;
     }
 
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+    
     public List<Pessoa> getPessoas() {
         return pessoas;
     }

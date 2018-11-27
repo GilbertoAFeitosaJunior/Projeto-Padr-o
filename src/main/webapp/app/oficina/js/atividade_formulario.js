@@ -36,7 +36,6 @@
         }).done(function (json) {
             var html = "";
             $.each(json.oficina.atividades, function (index, value) {
-                console.log(json.oficina.atividades.nome);
                 html += "<tr>";
                 html += "<td>" + value.nome + "</td>";
                 html += "<td class='text-right'>";

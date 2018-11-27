@@ -1,8 +1,16 @@
-
-$().ready(function(){
+$().ready(function () {
     turma.list();
+    $("#formTurma").validate({
+        messages: {
+            "turma.nome": {
+                required: "Favor preencher esse campo"
+            }
+        },
+        submitHandler: function(form){
+            turma.persist();
+        }
+    });
 });
-    
 
 var turma = {
   

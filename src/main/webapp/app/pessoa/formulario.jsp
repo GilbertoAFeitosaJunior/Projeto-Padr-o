@@ -71,6 +71,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Escola</label>
+                            <s:select name="escola.id" id="escolaid" list="escolas" listValue="nome" listKey="id" cssClass="form-control" emptyOption="true" required="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="select" class="form-group">
+                            <label>Turma</label>
+                            <s:if test="pessoa == null">
+                                <select name="pessoa.turma.id" id="turmaid" class="form-control" required="true">
+                                </select>
+                            </s:if><s:else>
+                                <s:select name="pessoa.turma.id" id="turmaid" list="turmas" class="form-control"  listValue="nome" required="true"/>
+                            </s:else>
+                        </div>
+                    </div>
+
+                </div>
 
 
                 <div class="panel-body pull-right">
@@ -86,6 +106,13 @@
     <%@include file="../fragment/endpage.jsp" %>
     <script type="text/javascript" src="../assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
     <script type="text/javascript" src="../pessoa/js/script.js"></script>
+    <script>
+        $().ready(function(){
+           $("#escolaid").on("change", function(){
+               pessoa.carregarTurma();
+           }); 
+        });
+    </script>
     <%@include file="../fragment/truend.jsp" %>
 
 </compress:html>

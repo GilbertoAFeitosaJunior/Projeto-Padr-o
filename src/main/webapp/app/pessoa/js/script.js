@@ -19,8 +19,36 @@ var Script = function () {
                 },
                 "pessoa.uf": {
                     required: "Favor preencher esse campo"
+                },
+                "escola.id":{
+                    required: "Favor preencher esse campo"
+                },
+                "pessoa.turma.id":{
+                    required: "Favor preencher esse campo"
                 }
             }
         });
     });
 }();
+
+var pessoa = {
+    carregarTurma: function(){
+        $.ajax({
+            type: "POST",
+            url: "listPessoaTurmaJson",
+            dataType: "json",
+            data: {
+                "escola.id": $("[name='escola.id']").val()
+            }
+        }).done(function (json) {
+            var opcoes =  ""; 
+            $.each(json.turmas, function(index, value){
+                opcoes += '<option value="'+value.id+'">'+value.nome+'</option>'; 
+            });
+            $("#turmaid").html(opcoes);
+        }).fail(function () {
+            notify.error("Erro", "Erro ao tentar salvar o registro, favor tente novamente.");
+        }).always(function () {
+        });
+    }
+};

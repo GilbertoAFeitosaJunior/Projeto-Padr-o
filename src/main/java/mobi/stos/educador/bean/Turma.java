@@ -31,6 +31,13 @@ public class Turma implements Serializable{
     @ManyToOne(optional = false)
     private Escola escola;
 
+    public Turma(Long id) {
+        this.id = id;
+    }
+
+    public Turma() {
+    }
+    
     public Long getId() {
         return id;
     }
