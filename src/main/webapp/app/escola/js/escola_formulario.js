@@ -27,22 +27,10 @@ var Script = function () {
                 "escola.uf": {
                     required: "Favor preencher esse campo"
                 },
-                "escola.depedenciaAdministrativaEnum": {
+                "escola.nivelRelacionamentoEnum": {
                     required: "Favor preencher esse campo"
                 },
                 "escola.situacaoEnum": {
-                    required: "Favor preencher esse campo"
-                },
-                "escola.redeEnum": {
-                    required: "Favor preencher esse campo"
-                },
-                "escola.tipoDeAtuacaoEnum": {
-                    required: "Favor preencher esse campo"
-                },
-                "escola.responsavelContato": {
-                    required: "Favor preencher esse campo"
-                },
-                "escola.responsavelTelefoneStringMask": {
                     required: "Favor preencher esse campo"
                 }
             }

@@ -290,7 +290,6 @@ public class OficinaAction extends GenericAction {
     public String listOficinaAtividadeJson() {
         try {
             GenericAction.isLogged(request);
-            System.out.println(oficina.getId());
             
             if (oficina != null && oficina.getId() != null) {
                 oficina = this.oficinaBo.load(oficina.getId());
