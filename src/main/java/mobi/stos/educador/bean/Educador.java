@@ -2,7 +2,6 @@
 package mobi.stos.educador.bean;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -17,10 +16,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import mobi.stos.educador.enumm.NivelEducacionalEnum;
 import mobi.stos.educador.util.Util;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -77,7 +77,15 @@ public class Educador implements Serializable {
     
     @Column(length = 2, nullable = false)
     private String uf;
-
+    
+    @ManyToOne(optional=false)
+    private Parceira parceira;
+    
+    @Type(type="text")
+    private String formacao;
+    
+    @Column(nullable=false)
+    private NivelEducacionalEnum nivelEducacionalEnum;
     
     public Educador() {
     }
@@ -186,6 +194,32 @@ public class Educador implements Serializable {
         this.escolas = escolas;
     }
 
+    public Parceira getParceira() {
+        return parceira;
+    }
+
+    public void setParceira(Parceira parceira) {
+        this.parceira = parceira;
+    }
+
+    public String getFormacao() {
+        return formacao;
+    }
+
+    public void setFormacao(String formacao) {
+        this.formacao = formacao;
+    }
+
+    public NivelEducacionalEnum getNivelEducacionalEnum() {
+        return nivelEducacionalEnum;
+    }
+
+    public void setNivelEducacionalEnum(NivelEducacionalEnum nivelEducacionalEnum) {
+        this.nivelEducacionalEnum = nivelEducacionalEnum;
+    }
+    
+    
+    
     public void addEscola(Escola escola) {
         if (this.escolas == null) {
             this.escolas = new HashSet<>();

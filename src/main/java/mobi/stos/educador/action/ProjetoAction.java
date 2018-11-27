@@ -34,17 +34,17 @@ import org.apache.struts2.convention.annotation.Result;
 import org.hibernate.sql.JoinType;
 
 public class ProjetoAction extends GenericAction {
-
+    
     private Projeto projeto;
-
+    
     private List<Projeto> projetos;
-
+    
     private List<Secretaria> secretarias;
-
+    
     private List<CoordenadorDeProjeto> coordenadorDeProjetos;
-
+    
     private List<Parceira> parceiras;
-
+    
     @Autowired
     private IProjetoBo projetoBo;
     @Autowired
@@ -53,7 +53,7 @@ public class ProjetoAction extends GenericAction {
     private ICoordenadorDeProjetoBo coordenadorDeProjetoBo;
     @Autowired
     private IParceiraBo parceiraBo;
-
+    
     @Action(value = "prepareProjeto",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -68,18 +68,18 @@ public class ProjetoAction extends GenericAction {
             if (projeto != null && projeto.getId() != null) {
                 projeto = this.projetoBo.load(this.projeto.getId());
             }
-
+            
             this.secretarias = this.secretariaBo.listall();
             this.coordenadorDeProjetos = this.coordenadorDeProjetoBo.listall();
             this.parceiras = this.parceiraBo.listall();
-
+            
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
         }
     }
-
+    
     @Action(value = "persistProjeto",
             interceptorRefs = {
                 @InterceptorRef(value = "fileUploadStack")
@@ -97,6 +97,9 @@ public class ProjetoAction extends GenericAction {
             if (projeto != null && projeto.getId() != null) {
                 entity = projetoBo.load(projeto.getId());
             }
+            if (projeto != null && projeto.getParceira().getId() == null) {
+                projeto.setParceira(null);
+            }
             this.projetoBo.persist(projeto);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listProjeto");
@@ -107,7 +110,7 @@ public class ProjetoAction extends GenericAction {
         }
         return SUCCESS;
     }
-
+    
     @Action(value = "deleteProjeto",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -125,7 +128,7 @@ public class ProjetoAction extends GenericAction {
         }
         return SUCCESS;
     }
-
+    
     @Action(value = "listProjeto",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -141,7 +144,7 @@ public class ProjetoAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-
+            
             Consulta c = getConsulta();
             c.addAliasTable("secretaria", "secretaria", JoinType.INNER_JOIN);
             c.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", JoinType.INNER_JOIN);
@@ -153,7 +156,7 @@ public class ProjetoAction extends GenericAction {
             return ERROR;
         }
     }
-
+    
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
@@ -162,32 +165,32 @@ public class ProjetoAction extends GenericAction {
         list.add(new Keys("coordenadorDeProjeto.nome", "Coordenador"));
         return list;
     }
-
+    
     @JSON(serialize = false)
     public List getSituacaoProjetoEnums() {
         return Arrays.asList(SituacaoProjetoEnum.values());
     }
-
+    
     @JSON(serialize = false)
     public List getModoDeImplementacaoEnums() {
         return Arrays.asList(ModoDeImplementacaoEnum.values());
     }
-
+    
     @JSON(serialize = false)
     public List<Projeto> getProjetos() {
         return projetos;
     }
-
+    
     @JSON(serialize = false)
     public List<Secretaria> getSecretarias() {
         return secretarias;
     }
-
+    
     @JSON(serialize = false)
     public List<CoordenadorDeProjeto> getCoordenadorDeProjetos() {
         return coordenadorDeProjetos;
     }
-
+    
     @JSON(serialize = false)
     public List<Parceira> getParceiras() {
         return parceiras;
@@ -196,25 +199,24 @@ public class ProjetoAction extends GenericAction {
     public Projeto getProjeto() {
         return projeto;
     }
-
-
+    
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-
+    
     @Override
     public void prepare() throws Exception {
         setMenu(Projeto.class.getSimpleName());
     }
-
+    
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         GenericAction.request = hsr;
     }
-
+    
     @Override
     public void setServletResponse(HttpServletResponse hsr) {
         GenericAction.response = hsr;
     }
-
+    
 }

@@ -30,7 +30,7 @@
     
      <li>
         <a href="listParceira" <s:if test='menu == "Parceira"'> class="active"</s:if>>
-            <i class="fa fa-cogs"></i>
+            <i class="fa fa-group"></i>
             <span>Parceiras</span>
          </a>
      </li>
@@ -54,7 +54,7 @@
             <i class="fa fa-pencil"></i>
             <span>Educadores</span>
         </a>
-    </li>-->
+    </li> -->
      
     <li>
         <a href="listAtividade" <s:if test='menu == "Atividade"'> class="active"</s:if>>

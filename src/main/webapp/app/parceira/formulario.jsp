@@ -142,19 +142,16 @@
                     </div>
                 </div>
 
-            </div>  
-
-
-            <div class="row">
-
-
-            </div>
-
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listParceira'">Cancelar</button>
                 &nbsp;
                 <button type="submit" class="btn btn-success">Salvar Registro</button>
             </div>
+            </div>  
+
+
+            
+
         </s:form>
 
     </div>

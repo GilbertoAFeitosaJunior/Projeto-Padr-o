@@ -4,6 +4,9 @@ var Script = function () {
             messages: {
                 "educador.nome":{
                     required: "Favor preencher esse campo"
+                }, 
+                "educador.parceira.id":{
+                  required: "Favor preencher esse campo" 
                 },
                 "educador.usuario.id":{
                     required: "Favor preencher esse campo"
@@ -46,6 +49,12 @@ var Script = function () {
                   required: "Favor preencher esse campo"
                 }, 
                 "educador.usuario.senha":{
+                  required: "Favor preencher esse campo" 
+                }, 
+                "educador.formacao":{
+                  required: "Favor preencher esse campo" 
+                }, 
+                "educador.nivelEducacionalEnum":{
                   required: "Favor preencher esse campo" 
                 }
             }

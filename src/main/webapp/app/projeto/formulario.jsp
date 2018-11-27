@@ -15,7 +15,6 @@
                 <s:hidden name="projeto.id" />
 
 
-
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -32,7 +31,7 @@
                         <div class="form-group">                      
                             <label>Situação do Projeto</label>
                             <div>
-                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control"    list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
+                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control" list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
                             </div>
                         </div>
                     </div>
@@ -71,11 +70,10 @@
                         <div class="form-group">                      
                             <label>Parceira</label>
                             <div>
-                                <s:select name="projeto.parceira.id" id="projeto.parceira.id" cssClass="form-control" list="parceiras" listKey="id" listValue="nome" emptyOption="true" required="true" />
+                                <s:select name="projeto.parceira.id" id="projeto.parceira.id" cssClass="form-control" list="parceiras" listKey="id" listValue="nome" emptyOption="true" />
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 

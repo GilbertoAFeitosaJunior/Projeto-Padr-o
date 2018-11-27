@@ -14,28 +14,59 @@
             <s:hidden name="educador.id" />
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10">
                     <div class="form-group">                      
                         <label>Nome do Educador</label>
                         <s:textfield name="educador.nome" id="educador.nome" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 
+                <div class="col-lg-2">
+                    <div class="form-group">                      
+                        <label>Parceira</label>
+                        <s:select name="educador.parceira.id" id="educador.parceira.id" cssClass="form-control" listKey="id" list="parceiras" listValue="nome" emptyOption="true" required="true" />
+                    </div>
+                </div>
+
             </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="form-group">
+                                <label>Formação do Educador</label>
+                                    <s:textarea name="educador.formacao" id="educador.formacao" cssClass="form-control" required="true" />
+                            </div>
+                        </div>
+                            
+                            
+                <div class="col-lg-2">
+                    <div class="form-group">                      
+                        <label>Nível Educacional</label>
+                                <s:select name="educador.nivelEducacionalEnum" id="educador.nivelEducacionalEnum" cssClass="form-control"  list="nivelEducacionalEnums" listValue="name" emptyOption="true" required="true"/>
+                    </div>
+                </div>
+                            
+                            
+                    </div>      
+                    
             <div class="row">
+                
                 <div class="col-lg-10">
                     <div class="form-group">
                         <label>Logradouro</label>
                         <s:textfield name="educador.logradouro" id="educador.logradouro" cssClass="form-control" required="true" maxlength="100"/> 
                     </div>
                 </div>
+                    
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>Número</label>
                         <s:textfield type="text" name="educador.numero" id="educador.numero" cssClass="form-control" required="true" maxlength="10"/>
                     </div>
                 </div>
+                    
             </div>
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -62,6 +93,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-lg-1">
                     <div class="form-group">
@@ -84,6 +117,7 @@
 
 
             </div>
+        </div>
 
     </section>
 
@@ -123,7 +157,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">                      
                         <label>Senha:</label>
-                        <s:if test="educador.usuario.senha == null">
+                        <s:if test="educador == null">
                             <s:password name="educador.usuario.senha" id="educador.usuario.senha"  maxlength="32" cssClass="form-control" required="true"/>
                         </s:if>
                         <s:else>
@@ -146,4 +180,3 @@
 
 
 
-<!--/compress:html-->

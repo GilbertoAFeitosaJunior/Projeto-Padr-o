@@ -4,17 +4,21 @@ import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mobi.stos.educador.bean.Educador;
 import mobi.stos.educador.bean.Escola;
+import mobi.stos.educador.bean.Parceira;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IEscolaBo;
+import mobi.stos.educador.bo.IParceiraBo;
 import mobi.stos.educador.bo.IUsuarioBo;
 import mobi.stos.educador.common.GenericAction;
 import static mobi.stos.educador.common.GenericAction.request;
+import mobi.stos.educador.enumm.NivelEducacionalEnum;
 import mobi.stos.educador.util.JsonReturn;
 import mobi.stos.educador.util.consulta.Consulta;
 import mobi.stos.educador.util.consulta.Keys;
@@ -38,6 +42,7 @@ public class EducadorAction extends GenericAction {
     private List<Usuario> usuarios;
     private List<Educador> educadors;
     private List<Escola> escolas;
+    private List<Parceira> parceiras;
 
     @Autowired
     private IEducadorBo educadorBo;
@@ -47,6 +52,9 @@ public class EducadorAction extends GenericAction {
 
     @Autowired
     private IEscolaBo escolaBo;
+    
+    @Autowired
+    private IParceiraBo parceiraBo;
 
     @Action(value = "prepareEducador",
             interceptorRefs = {
@@ -67,6 +75,7 @@ public class EducadorAction extends GenericAction {
 
             this.usuarios = this.usuarioBo.listall();
             this.escolas = this.escolaBo.listall();
+            this.parceiras = this.parceiraBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -239,6 +248,13 @@ public class EducadorAction extends GenericAction {
     public JsonReturn getJsonReturn() {
         return super.getJsonReturn();
     }
+    
+    
+    @JSON(serialize = false)
+    public List getNivelEducacionalEnums() {
+        return Arrays.asList(NivelEducacionalEnum.values());
+    }
+    
 
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
@@ -294,6 +310,12 @@ public class EducadorAction extends GenericAction {
     public void setEscolas(List<Escola> escolas) {
         this.escolas = escolas;
     }
+
+    public List<Parceira> getParceiras() {
+        return parceiras;
+    }
+    
+    
 
     @Override
     public void prepare() throws Exception {

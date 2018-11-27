@@ -4,7 +4,7 @@
 <compress:html compressCss="true">
 
     <%@include file="../fragment/head.jsp" %>
-
+    <section class="panel">
     <section class="panel">
         <header class="panel-heading">
             Salvar Escola
@@ -28,7 +28,7 @@
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Tipo Atuação:</label>
+                            <label>Tipo de Atuação:</label>
                             <s:select name="escola.tipoDeAtuacaoEnum" id="tipoDeAtuacaoEnum" list="tipoDeAtuacaoEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
                         </div>
                     </div>
@@ -215,7 +215,7 @@
 
 
 </section>                 
-
+</section>
 
 </s:form>
 

@@ -46,7 +46,7 @@ public class Projeto implements Serializable{
     @ManyToOne (optional=false)
     private CoordenadorDeProjeto coordenadorDeProjeto;
     
-    @ManyToOne
+    @ManyToOne(optional=true)
     private Parceira parceira;
     
     public Projeto() {

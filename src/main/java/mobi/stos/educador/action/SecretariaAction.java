@@ -3,7 +3,6 @@ package mobi.stos.educador.action;
  *
  * @author Rafael Bloise
  */
-import com.google.common.base.Strings;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
@@ -151,7 +150,7 @@ public class SecretariaAction extends GenericAction {
     public List<Secretaria> getSecretarias() {
         return secretarias;
     }
-
+    
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
