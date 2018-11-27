@@ -84,7 +84,7 @@ public class Educador implements Serializable {
     @Type(type="text")
     private String formacao;
     
-    @Column(nullable=false)
+    @Column
     private NivelEducacionalEnum nivelEducacionalEnum;
     
     public Educador() {
@@ -217,6 +217,8 @@ public class Educador implements Serializable {
     public void setNivelEducacionalEnum(NivelEducacionalEnum nivelEducacionalEnum) {
         this.nivelEducacionalEnum = nivelEducacionalEnum;
     }
+
+   
     
     
     

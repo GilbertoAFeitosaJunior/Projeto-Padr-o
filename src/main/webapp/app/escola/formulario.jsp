@@ -4,7 +4,7 @@
 <compress:html compressCss="true">
 
     <%@include file="../fragment/head.jsp" %>
-    <section class="panel">
+    
     <section class="panel">
         <header class="panel-heading">
             Salvar Escola
@@ -93,7 +93,7 @@
                         
                 </div>
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label>Contato</label>
                             <s:textarea type="text" name="escola.responsavelContato" id="escola.responsavelContato" cssClass="form-control" required="true" /> 
@@ -201,21 +201,7 @@
     </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>                 
-</section>
 
 </s:form>
 
