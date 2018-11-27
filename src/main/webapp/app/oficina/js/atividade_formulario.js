@@ -51,7 +51,6 @@
         }).always(function () {
         });
     },
-    
     remove: function (id) {
         if (confirm("Deseja excluir esse registro?")) {
             $.ajax({

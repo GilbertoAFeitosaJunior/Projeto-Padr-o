@@ -56,7 +56,6 @@ public class Escola implements Serializable {
     @Column(length = 2, nullable = false)
     private String uf;
 
-
     @Column(length = 100)
     private String responsavel;
 
@@ -86,8 +85,13 @@ public class Escola implements Serializable {
     
     @Column
     private int diretorContato;
-    
-    
+
+    public Escola(Long id) {
+        this.id = id;
+    }
+
+    public Escola() {
+    }
     
     public String getCepStringMask() {
         return Util.format("#####-###", Util.zeroFill(this.cep, 8));

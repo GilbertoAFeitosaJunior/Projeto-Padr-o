@@ -1,20 +1,17 @@
 package mobi.stos.educador.bean;
 
-import freemarker.template.utility.StringUtil;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import mobi.stos.educador.enumm.GeneroEnum;
 import mobi.stos.educador.enumm.SexoEnum;
 import mobi.stos.educador.util.AES;
 import static mobi.stos.educador.util.AES.decrypt;
 import static mobi.stos.educador.util.AES.encrypt;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -60,6 +57,9 @@ public class Pessoa implements Serializable {
 
     @Column(nullable = false, length = 2)
     private String uf;
+    
+    @ManyToOne(optional = false)
+    private Turma turma;
 
     public byte[] textoencriptado;
     
