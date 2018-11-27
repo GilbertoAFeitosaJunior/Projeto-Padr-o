@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-9">
                         <div class="form-group">                      
                             <label>Nome:</label>
                             <div>
@@ -66,6 +66,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">                      
+                            <label>Parceira</label>
+                            <div>
+                                <s:select name="projeto.parceira.id" id="projeto.parceira.id" cssClass="form-control" list="parceiras" listKey="id" listValue="nome" emptyOption="true" required="true" />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
 

@@ -28,6 +28,13 @@
         </a>
     </li>
     
+     <li>
+        <a href="listParceira" <s:if test='menu == "Parceira"'> class="active"</s:if>>
+            <i class="fa fa-cogs"></i>
+            <span>Parceiras</span>
+         </a>
+     </li>
+    
     <li>
         <a href="listEscola" <s:if test='menu == "Escola"'> class="active"</s:if>>
             <i class="fa fa-book"></i>

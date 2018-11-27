@@ -46,6 +46,9 @@ public class Projeto implements Serializable{
     @ManyToOne (optional=false)
     private CoordenadorDeProjeto coordenadorDeProjeto;
     
+    @ManyToOne
+    private Parceira parceira;
+    
     public Projeto() {
 
     }
@@ -117,9 +120,16 @@ public class Projeto implements Serializable{
     public void setCoordenadorDeProjeto(CoordenadorDeProjeto coordenadorDeProjeto) {
         this.coordenadorDeProjeto = coordenadorDeProjeto;
     }
-    
-    
-    
+
+    public Parceira getParceira() {
+        return parceira;
+    }
+
+    public void setParceira(Parceira parceira) {
+        this.parceira = parceira;
+    }
+
+  
     
     
     
