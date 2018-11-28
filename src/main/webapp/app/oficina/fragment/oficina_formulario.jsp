@@ -68,6 +68,14 @@
                     </div>
                 </div>
             </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Educador</label>
+                                        <s:select name="oficina.educador.id" id="oficinaeducadorid" list="educadors" cssClass="form-control" listValue="nome" listKey="id" required="true" />
+                                    </div>
+                                </div>
+                            </div>
 
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listOficina'">Cancelar</button>

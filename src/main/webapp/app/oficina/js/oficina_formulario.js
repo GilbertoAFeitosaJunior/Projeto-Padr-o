@@ -60,6 +60,7 @@ var oficina = {
                 "oficina.id": $("[name='oficina.id']").val(),
                 "oficina.nome": $("[name='oficina.nome']").val(),
                 "oficina.escola.id": $("[name='oficina.escola.id']").val(),
+                "oficina.educador.id": $("[name='oficina.educador.id']").val(),
                 "oficina.turnoEnum":$("[name='oficina.turnoEnum']").val(),
                 "oficina.situacaoEnum":$("[name='oficina.situacaoEnum']").val(),
                 "oficina.dataPlanejada":$("[name='oficina.dataPlanejada']").val(),
@@ -68,7 +69,8 @@ var oficina = {
         }).done(function (json) {
             if (json.jsonReturn.success){
                 $("[name='oficina.id']").val(json.id);
-                notify.success("Sucesso", json.jsonReturn.mensagem);
+                //notify.success("Sucesso", json.jsonReturn.mensagem);
+                notify.success("Sucesso", "Registro salvo com sucesso.");
             }else{
                 if(!json.jsonReturn.sucess){
                     notify.error("Erro", json.jsonReturn.mensagem);
