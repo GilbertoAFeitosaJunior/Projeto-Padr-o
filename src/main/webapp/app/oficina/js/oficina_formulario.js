@@ -2,6 +2,9 @@ var Script = function () {
     $().ready(function () {
         $("#form").validate({
             messages: {
+                "oficina.nome": {
+                    required: "Favor preencher esse campo"
+                },
                 "oficina.educador.id": {
                     required: "Favor preencher esse campo"
                 },
@@ -55,12 +58,13 @@ var oficina = {
             dataType: "json",
             data: {
                 "oficina.id": $("[name='oficina.id']").val(),
+                "oficina.nome": $("[name='oficina.nome']").val(),
                 "oficina.escola.id": $("[name='oficina.escola.id']").val(),
                 "oficina.turnoEnum":$("[name='oficina.turnoEnum']").val(),
                 "oficina.situacaoEnum":$("[name='oficina.situacaoEnum']").val(),
                 "oficina.dataPlanejada":$("[name='oficina.dataPlanejada']").val(),
                 "oficina.dataRealizada":$("[name='oficina.dataRealizada']").val()
-            },
+            }
         }).done(function (json) {
             if (json.jsonReturn.success){
                 $("[name='oficina.id']").val(json.id);

@@ -28,13 +28,18 @@
             </a>
         </div>     
         <div class="col-lg-3 m-bot15">
+            <a href="listEducador" class="btn btn-primary btn-block">
+                Educador
+            </a>
+        </div>  
+        <div class="col-lg-3 m-bot15">
             <a href="listUsuario"  class="btn btn-primary btn-block">
                Usuário
             </a>
         </div>
         <div class="col-lg-3 m-bot15">
-            <a href="listEducador" class="btn btn-primary btn-block">
-                Educador
+            <a href="listUsuarioGeral" class="btn btn-primary btn-block">
+                Geral
             </a>
         </div>  
     </div>  

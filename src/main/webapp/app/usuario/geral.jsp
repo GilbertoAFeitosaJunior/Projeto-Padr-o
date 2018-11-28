@@ -8,14 +8,14 @@
 
     <section class="panel">
         <header class="panel-heading">
-            Pesquisar Oficina
+            Pesquisar Usu&aacute;rio
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
         </header>
 
         <div class="panel-body">
-            <s:form acceptcharset="UTF-8" method="post" action="listOficina" theme="simple">
+            <s:form acceptcharset="UTF-8" method="post" action="listUsuarioGeral" theme="simple">
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -65,49 +65,64 @@
 
     <section class="panel">
         <header class="panel-heading">Registros</header>
-            <!--s:if test="usuario.educador != null"-->
-            <div class="panel-body pull-right">
-                <button class="btn btn-primary" onclick="list.add();">
-                    <i class="fa fa-plus"></i> 
-                    Adicionar Novo
-                </button>
-            </div>
-        <!--/s:if-->
+
+        <div class="panel-body pull-right">
+             <a class="btn btn-primary" href="prepareUsuarioBotoes" >
+                <i class="fa fa-arrow-left"></i> 
+            Voltar 
+            </a>
+            <button class="btn btn-primary" onclick="list.add();">
+                <i class="fa fa-plus"></i> 
+                Adicionar Novo
+            </button>
+        </div>
 
         <div class="panel-body">
-            <table class="table table-striped table-advance table-hover table-bordered ">
+            <div class="table-responsive-lg">
+            <table class="table table-striped table-advance table-hover table-bordered" >
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Escola</th>
-                        <th>Data de planejamento</th>
-                        <th>Turno</th>
-                        <th>Situação</th>
+                        <th>E-mail</th>
+                        <th>Tipo</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1">Status</th>
+                        <th>&Uacute;ltimo Acesso</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="oficinas">
+                    <s:iterator value="usuarios">
                         <tr>
-                            <td><s:property value="nome"/></td>
-                            <td><s:property value="escola.nome"/></td>
-                            <td ><s:property value="dataPlanejada"/></td>
-                            <td ><s:property value="turnoEnum.name"/></td>
-                            <td ><s:property value="situacaoEnum.name"/></td>
+                            <td><s:property value="nome" /></td>
+                            <td><s:property value="email" /></td>
+                            <td><s:if test="educador != null">
+                                    Educador
+                                </s:if><s:elseif test="gestorDoTerritorio != null">
+                                    Gestor do Território
+                                </s:elseif>
+                                    <s:elseif test="coordenadorPedagogico != null">
+                                    Coordenador Pedagógico
+                                </s:elseif>
+                                    <s:elseif test="coordenadorDeProjeto != null ">
+                                    Coordenador de Projeto
+                                    </s:elseif><s:else>
+                                        Painel
+                                    </s:else>
+                             <td class="text-center"> <s:if test="ativo == true">
+                                     <span class="label label-success" style="display: block;">Ativo</span> 
+                                </s:if>
+                                <s:else>
+                                    <span class="label label-danger">Desativado</span>
+                                </s:else> </td>
+                            <td><s:property value="ultimoAcessoFormat" /></td>
                             <td class="text-right">
-                                    <!-- s:if test="usuario.educador != null" --> 
-                                    <div class="btn-group btn-group-justified">
-                                        <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
-                                            <i class="fa fa-trash-o "></i>
-                                        </a>
-                                    <!-- /s:if--><!--s:else -->
-                                        <!--button class="btn btn-danger btn-xs btn-block" onclick="list.view('<!s:property value="id" />');">
-                                            <i class="fa fa-eye"></i> Visualizar 
-                                        </button>
-                                    <!--/s:else-->
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
+                                        <i class="fa fa-trash-o "></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
@@ -115,7 +130,7 @@
                 </tbody>
             </table>
         </div>
-
+    </div>
         <div class="panel-body">
             <div>
                 <ul class="pagination pagination-sm pull-right" id="pagination"></ul>
@@ -132,9 +147,7 @@
                     <h4 class="modal-title">Excluir?</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja excluir esse registro?<br/>
-                    Atenção! 
-                    Todos os arquivos anexados também serão excluídos!
+                    Deseja excluir esse registro?
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Não</button>
@@ -150,20 +163,17 @@
     <script type="text/javascript">
                         _helperID = null;
                         var list = {
-                            view: function (id){
-                                window.location = "prepareVisualizarOficina?oficina.id=" + id;  
-                            },
                             add: function () {
-                                window.location = "prepareOficina";
+                                window.location = "prepareUsuario";
                             },
                             edit: function (id) {
-                                window.location = "prepareOficina?oficina.id=" + id;
+                                window.location = "prepareUsuario?usuario.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
                             },
                             confirmDelete: function () {
-                                window.location = "deleteOficina?oficina.id=" + _helperID;
+                                window.location = "deleteUsuario?usuario.id=" + _helperID;
                             }
                         };
 
@@ -175,11 +185,10 @@
                                 "operador": "${consulta.operador}",
                                 "campo": "${consulta.campo}",
                                 "valor": "${consulta.valor}",
-                                "url": "listOficina"
+                                "url": "listUsuario"
                             });
                         });
     </script>
     <%@include file="../fragment/truend.jsp" %>
 
 </compress:html>
-

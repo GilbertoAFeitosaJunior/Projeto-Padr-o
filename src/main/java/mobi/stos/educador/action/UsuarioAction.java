@@ -38,6 +38,7 @@ public class UsuarioAction extends GenericAction {
 
     private Usuario usuario;
     private List<Usuario> usuarios;
+    
     @Autowired
     private IUsuarioBo usuarioBo;
 
@@ -323,6 +324,32 @@ public class UsuarioAction extends GenericAction {
                     Restrictions.isNull("educador.id")
             ));
             this.usuarios = this.usuarioBo.list(consulta);
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            e.printStackTrace();
+            return ERROR;
+        }
+    }
+    
+    @Action(value = "listUsuarioGeral",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
+                @Result(name = SUCCESS, location = "/app/usuario/geral.jsp")
+            })
+    public String listUsuarioGeral() {
+        try {
+            GenericAction.isLogged(request);
+
+            if (getConsulta() == null) {
+                String field = (String) getCamposConsultaEnum().get(0).getKey();
+                setConsulta(new Consulta(field));
+            }
+
+            this.usuarios = this.usuarioBo.list(getConsulta());
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

@@ -37,6 +37,9 @@ public class Oficina implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable = false, length = 100)
+    private String nome;
+    
     @ManyToOne(optional = false)
     private Educador educador;
     
@@ -74,6 +77,13 @@ public class Oficina implements Serializable{
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     public Educador getEducador() {
         return educador;
     }

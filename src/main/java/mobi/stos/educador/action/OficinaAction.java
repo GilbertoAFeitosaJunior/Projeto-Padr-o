@@ -428,6 +428,7 @@ public class OficinaAction extends GenericAction {
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
+        list.add(new Keys("nome", "Nome"));
         list.add(new Keys("escola.nome", "Nome da Escola"));
         return list;
     }

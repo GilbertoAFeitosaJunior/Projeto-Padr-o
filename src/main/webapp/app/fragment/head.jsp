@@ -44,6 +44,7 @@
         <link rel="stylesheet" type="text/css" href="../css/slidebars.css" />
         <!-- Custom styles for this template -->
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
+        <link rel="stylesheet" type="text/css" href="../css/stoscss.css" />
         <link rel="stylesheet" type="text/css" href="../css/style-responsive.css"/>
         <link rel="stylesheet" type="text/css" href="../assets/toastr-master/toastr.css" />
         <link rel="stylesheet" type="text/css" href="../assets/gritter/css/jquery.gritter.css" />
