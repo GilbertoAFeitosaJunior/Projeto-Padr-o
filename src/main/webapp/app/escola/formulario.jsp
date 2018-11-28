@@ -40,4 +40,3 @@
 <script type="text/javascript" src="../escola/js/turma_formulario.js"></script>
 <%@include file="../fragment/truend.jsp" %>
 
-</compress:html>
