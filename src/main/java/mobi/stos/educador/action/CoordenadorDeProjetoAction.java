@@ -21,6 +21,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -137,6 +138,8 @@ public class CoordenadorDeProjetoAction extends GenericAction{
                 setConsulta(new Consulta(field));
             }
             Consulta consulta = getConsulta();
+            consulta.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
+
            this.coordenadorDeProjetos = coordenadorDeProjetoBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
@@ -171,7 +174,7 @@ public class CoordenadorDeProjetoAction extends GenericAction{
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
-        list.add(new Keys("email", "E-mail"));
+        list.add(new Keys("usuario.email", "E-mail"));
         return list;
     }
 

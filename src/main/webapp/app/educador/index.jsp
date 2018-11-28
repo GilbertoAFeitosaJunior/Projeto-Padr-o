@@ -97,7 +97,7 @@
                             <td ><s:property value="nome"/></td>
                             <td ><s:property value="ddd"/></td>
                             <td ><s:property value="celular"/></td>
-                            <td ><s:property value="email"/></td>
+                            <td ><s:property value="usuario.email"/></td>
                             <td ><s:property value="uf"/></td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
