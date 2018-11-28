@@ -260,6 +260,7 @@ public class EducadorAction extends GenericAction {
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
+        list.add(new Keys("usuario.email", "E-mail"));
         return list;
     }
 

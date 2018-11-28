@@ -86,7 +86,8 @@
                 <thead>
                     <tr>
                         <th class="">Nome</th>
-                        <th class="col-lg-2 col-sm-2 col-xs-2 text-left">Usuário</th>
+                         <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
+                        <th class="col-lg-3 col-sm-3 col-xs-3">E-mail</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>
@@ -94,7 +95,13 @@
                     <s:iterator value="gestorDoTerritorios">
                         <tr>       
                             <td><s:property value="nome" /></td>
-                            <td><s:property value="usuario.nome" /></td>
+                            <td> <s:if test="usuario.ativo == true">
+                                    Ativo
+                                </s:if>
+                                <s:else>
+                                    Desativado
+                                </s:else> </td>
+                            <td><s:property value="usuario.email"/></td>
                             <td class="text-right">
                                 <div class="btn-group btn-group-justified">
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">

@@ -1,12 +1,12 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
+        <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEscola" theme="simple" enctype="multipart/form-data">
 
 <section class="panel">
     <header class="panel-heading">
         Salvar Escola
     </header>
 
-    <div class="panel-body">
-        <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEscola" theme="simple" enctype="multipart/form-data">
+    <div class="panel-body"> 
             <s:hidden name="escola.id" />
 
             <div class="row">
@@ -95,8 +95,11 @@
 
     <section class="panel">
 
-        <header class="panel-heading">
-            Endereço da Escola
+         <header class="panel-heading">
+           Endereço da Escola
+            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+            </span>
         </header>
 
         <div class="panel-body">    
@@ -154,8 +157,11 @@
 
     <section class="panel">
 
-        <header class="panel-heading">
-            Dados Diretor
+         <header class="panel-heading">
+            Dados do Diretor da Escola
+            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+            </span>
         </header>
 
         <div class="panel-body">

@@ -35,7 +35,6 @@ public class GestorDoTerritorioAction extends GenericAction {
 
     private List<GestorDoTerritorio> gestorDoTerritorios;
 
-
     @Autowired
     private IGestorDoTerritorioBo gestorDoTerritorioBo;
 
@@ -92,11 +91,11 @@ public class GestorDoTerritorioAction extends GenericAction {
 
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listGestorDoTerritorio");
-        }catch (AvoidDuplicationEmailException e){
+        } catch (AvoidDuplicationEmailException e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
             return ERROR;
@@ -141,6 +140,8 @@ public class GestorDoTerritorioAction extends GenericAction {
             }
 
             Consulta c = getConsulta();
+            c.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
+
             this.gestorDoTerritorios = gestorDoTerritorioBo.list(c);
             return SUCCESS;
         } catch (Exception e) {
@@ -175,11 +176,11 @@ public class GestorDoTerritorioAction extends GenericAction {
         this.gestorDoTerritorios = gestorDoTerritorios;
     }
 
- 
     @JSON(serialize = false)
     public List<Keys> getCamposConsultaEnum() {
         List<Keys> list = new ArrayList<>();
         list.add(new Keys("nome", "Nome"));
+        list.add(new Keys("usuario.email", "E-mail"));
         return list;
     }
 
