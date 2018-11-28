@@ -118,6 +118,8 @@ public class Escola implements Serializable {
         this.diretorContato = Integer.parseInt(Util.onlyNumber(diretorContato));
     }
     
+   
+    
     
 
     public Long getId() {
