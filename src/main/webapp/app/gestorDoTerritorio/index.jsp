@@ -67,55 +67,57 @@
         <header class="panel-heading">Registros</header>
 
         <div class="panel-body pull-right">
-            
+
             <a class="btn btn-primary" href="prepareUsuarioBotoes" >
                 <i class="fa fa-arrow-left"></i> 
                 Voltar
             </a>
-            
+
             <button class="btn btn-primary" onclick="list.add();">
                 <i class="fa fa-plus"></i> 
                 Adicionar Novo
             </button>
-            
-            
+
+
         </div>
 
         <div class="panel-body">
-            <table class="table table-striped table-advance table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th class="">Nome</th>
-                         <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
-                        <th class="col-lg-3 col-sm-3 col-xs-3">E-mail</th>
-                        <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <s:iterator value="gestorDoTerritorios">
-                        <tr>       
-                            <td><s:property value="nome" /></td>
-                            <td> <s:if test="usuario.ativo == true">
-                                    Ativo
-                                </s:if>
-                                <s:else>
-                                    Desativado
-                                </s:else> </td>
-                            <td><s:property value="usuario.email"/></td>
-                            <td class="text-right">
-                                <div class="btn-group btn-group-justified">
-                                    <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
-                                        <i class="fa fa-trash-o "></i>
-                                    </a>
-                                </div>
-                            </td>
+            <div class="table-responsive-lg">
+                <table class="table table-striped table-advance table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="">Nome</th>
+                            <th class="col-lg-1 col-sm-1 col-xs-1">Situação</th>
+                            <th class="col-lg-3 col-sm-3 col-xs-3">E-mail</th>
+                            <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                         </tr>
-                    </s:iterator>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <s:iterator value="gestorDoTerritorios">
+                            <tr>       
+                                <td><s:property value="nome" /></td>
+                                <td> <s:if test="usuario.ativo == true">
+                                        Ativo
+                                    </s:if>
+                                    <s:else>
+                                        Desativado
+                                    </s:else> </td>
+                                <td><s:property value="usuario.email"/></td>
+                                <td class="text-right">
+                                    <div class="btn-group btn-group-justified">
+                                        <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
+                                            <i class="fa fa-trash-o "></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </s:iterator>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="panel-body">

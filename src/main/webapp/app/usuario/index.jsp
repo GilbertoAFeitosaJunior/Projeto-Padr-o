@@ -78,6 +78,7 @@
         </div>
 
         <div class="panel-body">
+            <div class="table-responsive-lg">
             <table class="table table-striped table-advance table-hover table-bordered">
                 <thead>
                     <tr>
@@ -108,6 +109,7 @@
                 </tbody>
             </table>
         </div>
+        </div>    
 
         <div class="panel-body">
             <div>
