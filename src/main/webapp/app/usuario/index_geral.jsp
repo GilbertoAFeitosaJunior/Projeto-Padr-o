@@ -167,7 +167,7 @@
                                 window.location = "prepareUsuario";
                             },
                             edit: function (id) {
-                                window.location = "prepareUsuario?usuario.id=" + id;
+                                window.location = "prepareUsuarioGeral?usuario.id=" + id;
                             },
                             remove: function (id) {
                                 _helperID = id;
@@ -185,7 +185,7 @@
                                 "operador": "${consulta.operador}",
                                 "campo": "${consulta.campo}",
                                 "valor": "${consulta.valor}",
-                                "url": "listUsuario"
+                                "url": "listUsuarioGeral"
                             });
                         });
     </script>
