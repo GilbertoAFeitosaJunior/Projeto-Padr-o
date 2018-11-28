@@ -18,13 +18,13 @@ var Script = function () {
                 "secretaria.responsavel": {
                     required: "Favor preencher esse campo"
                 },
-                "secretaria.responsavelContato": {
+                "secretaria.responsavelContatoStringMask": {
                     required: "Favor preencher esse campo"
                 },
-                "secretaria.gestorDoTerritorio": {
+                "secretaria.gestorDoTerritorio.id": {
                     required: "Favor preencher esse campo"
                 },
-                "secretaria.coordenadorPedagogico": {
+                "secretaria.coordenadorPedagogico.id": {
                     required: "Favor preencher esse campo"
                 }
                 
