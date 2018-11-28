@@ -19,7 +19,7 @@
 
                     <div class="col-lg-3">
                         <div class="form-group">                      
-                            <label>Secretaria:</label>
+                            <label>Secretaria</label>
                             <div>
                                 <s:select name="projeto.secretaria.id" id="projeto.secretaria.id" cssClass="form-control" list="secretarias" listKey="id" listValue="nome" emptyOption="true" required="true"/>
                             </div>
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="form-group">                      
-                            <label>Nome:</label>
+                            <label>Nome</label>
                             <div>
                                 <s:textfield name="projeto.nome" id="projeto.nome" maxlength="255" cssClass="form-control" required="true" />
                             </div>
@@ -80,7 +80,7 @@
                 <div class="row">        
                     <div class="col-lg-12">
                         <div class="form-group">                      
-                            <label>Reponsável:</label>
+                            <label>Reponsável</label>
                             <div>
                                 <s:textfield name="projeto.responsavel" id="projeto.responsavel" maxlength="100" cssClass="form-control" />
                             </div>

@@ -12,9 +12,9 @@
 
             <div class="row">
 
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Nome:</label>
+                        <label>Nome</label>
                         <div>
                             <s:textfield name="metodologia.nome" id="metodologia.nome" cssClass="form-control" required="true"/>
                         </div>
@@ -23,9 +23,9 @@
             </div>
 
             <div class="row">        
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Descrição:</label>
+                        <label>Descrição</label>
                         <div>
                             <s:textarea name="metodologia.descricao" id="metodologia.descricao" cssClass="form-control" required="true" />
                         </div>
@@ -34,27 +34,27 @@
             </div>        
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="form-group">                      
-                        <label>Situação:</label>
+                        <label>Situação</label>
                         <div>
                             <s:select name="metodologia.ativo" id="metodologia.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="form-group">                      
-                        <label>Aplicabilidade da Metodologia:   </label>
+                        <label>Aplicabilidade da Metodologia</label>
                         <div>
                             <s:select name="metodologia.aplicabilidadeEnum" id="metodologia.aplicabilidadeEnum" cssClass="form-control"    list="aplicabilidadeEnums" listValue="name" emptyOption="true" required="true"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="form-group">                      
-                        <label>Faixa Etária:   </label>
+                        <label>Faixa Etária</label>
                         <div>
                             <s:select name="metodologia.faixaEtariaEnum" id="metodologia.faixaEtariaEnum" cssClass="form-control"    list="faixaEtariaEnums" listValue="name" emptyOption="true" required="true"/>
                         </div>
@@ -64,9 +64,9 @@
 
 
             <div class="row">        
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Objetivo:</label>
+                        <label>Objetivo</label>
                         <div>
                             <s:textarea name="metodologia.objetivo" id="metodologia.objetivo" cssClass="form-control" required="true" />
                         </div>

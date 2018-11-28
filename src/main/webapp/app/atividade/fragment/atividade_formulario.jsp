@@ -17,9 +17,9 @@
 
             <div class="row">
 
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Nome:</label>
+                        <label>Nome</label>
                         <div>
                             <s:textfield name="atividade.nome" id="atividade.nome" cssClass="form-control" required="true"/>
                         </div>
@@ -29,9 +29,9 @@
 
 
             <div class="row">        
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Descrição:</label>
+                        <label>Descrição</label>
                         <div>
                             <s:textarea name="atividade.descricao" id="atividade.descricao" cssClass="form-control" />
                         </div>

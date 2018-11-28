@@ -9,7 +9,7 @@
             <!--s:hidden name="produto.id" /-->
 
             <div class="form-group">
-                <label>Descrição do Anexo:</label>
+                <label>Descrição do Anexo</label>
                 <div>
                     <s:textarea name="anexo.descricao" id="anexo.descricao" cssClass="form-control" />
                 </div>
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="form-group">
-                        <label>Anexo:</label>
+                        <label>Anexo</label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <span class="btn btn-white btn-file">
                                     <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Selecione um arquivo</span>
@@ -50,7 +50,7 @@
                     <div class="col-lg-5">
                         <div class="form-group">
                             <p>
-                                <strong>Arquivos permitidos:</strong><br/>
+                                <strong>Arquivos permitidos</strong><br/>
                             <ol>
                                 <li>Imagens;</li>   
                                 <li>Microsoft Office ( Word, Excel e PowerPoint );</li>    

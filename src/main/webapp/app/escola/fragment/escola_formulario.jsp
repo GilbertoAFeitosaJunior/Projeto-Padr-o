@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Nome:</label>
+                        <label>Nome</label>
                         <s:textfield name="escola.nome" id="escola.nome" maxlength="100" cssClass="form-control" required="true" />
                     </div>
                 </div>
@@ -21,21 +21,21 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label>Tipo Atuação:</label>
+                        <label>Tipo Atuação</label>
                         <s:select name="escola.tipoDeAtuacaoEnum" id="tipoDeAtuacaoEnum" list="tipoDeAtuacaoEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label>Rede:</label>
+                        <label>Rede</label>
                         <s:select name="escola.redeEnum" id="redeEnum" list="redeEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label>Dependência Administrativa:</label>
+                        <label>Dependência Administrativa</label>
                         <s:select name="escola.depedenciaAdministrativaEnum" id="depedenciaAdministrativaEnum" list="dependenciaAdministrativaEnums" emptyOption="true" listValue="name" cssClass="form-control" required="true" />
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label>Projeto:</label>
+                        <label>Projeto</label>
                         <s:select name="escola.projeto.id" id="escola.projeto.id" list="projetos" emptyOption="true" listKey="id" listValue="nome" cssClass="form-control" required="true" />
                     </div>
                 </div>
@@ -169,14 +169,14 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="form-group">
-                        <label>Diretor Responsável:</label>
+                        <label>Diretor Responsável</label>
                         <s:textfield type="text" name="escola.diretorResponsavel" id="escola.diretorResponsavel" cssClass="form-control" required="true" />
 
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label>Contato Diretor:</label>
+                        <label>Contato Diretor</label>
                         <s:textfield type="text" name="escola.diretorContatoStringMask" id="escola.diretorContatoStringMask" cssClass="form-control" required="true" data-mask="99999-9999" /> 
                     </div>
                 </div>

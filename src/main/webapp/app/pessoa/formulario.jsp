@@ -24,13 +24,13 @@
 
                     <div class="col-lg-2">
                         <div class="form-group">                      
-                            <label>Sexo:</label>
+                            <label>Sexo</label>
                             <s:select name="pessoa.sexoEnum" id="pessoa.sexoEnum" cssClass="form-control"    list="sexoEnums" listValue="name" emptyOption="true" required="true"/>
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">                      
-                            <label>Gênero:</label>
+                            <label>Gênero</label>
                             <s:select name="pessoa.generoEnum" id="pessoa.generoEnum" cssClass="form-control" list="generoEnums" listValue="name" emptyOption="true" required="true" />
                         </div>
                     </div>      
@@ -39,14 +39,14 @@
                 <div class="row">        
                     <div class="col-lg-6">
                         <div class="form-group">                      
-                            <label>Nome do Pai:</label>
+                            <label>Nome do Pai</label>
                             <s:textfield name="pessoa.pai" id="pessoa.pai" maxlength="100" cssClass="form-control" />
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">                      
-                            <label>Nome da Mãe:</label>
+                            <label>Nome da Mãe</label>
                             <s:textfield name="pessoa.mae" id="pessoa.mae" maxlength="100" cssClass="form-control" />
                         </div>
                     </div>

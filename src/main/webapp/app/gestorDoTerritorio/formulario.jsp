@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">                      
-                        <label>Nome:</label>
+                        <label>Nome</label>
                         <div>
                             <s:textfield name="gestorDoTerritorio.nome" id="gestorDoTerritorio.nome" maxlength="100" cssClass="form-control" required="true" />
                         </div>
@@ -41,13 +41,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="form-group">                      
-                        <label>Situacão:</label>
+                        <label>Situacão</label>
                         <s:select name="gestorDoTerritorio.usuario.ativo" id="gestorDoTerritorio.usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">                      
-                        <label>Nome de Usuário:</label>
+                        <label>Nome de Usuário</label>
                         <s:textfield name="gestorDoTerritorio.usuario.nome" id="gestorDoTerritorio.usuario.nome" maxlength="100" cssClass="form-control" required="true" />
                     </div>
                 </div>
@@ -57,14 +57,14 @@
 
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>E-mail:</label>
+                        <label>E-mail</label>
                         <s:textfield name="gestorDoTerritorio.usuario.email" id="gestorDoTerritorio.usuario.email" type="email" placeholder="O usuário precisa ter um email" maxlength="100" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
                     <div class="form-group">                      
-                        <label>Senha:</label>
+                        <label>Senha</label>
                         <s:if test="gestorDoTerritorio == null" >
                             <s:password name="gestorDoTerritorio.usuario.senha" id="gestorDoTerritorio.usuario.senha" placeholder="" maxlength="32" cssClass="form-control" required="true"/>
                         </s:if>

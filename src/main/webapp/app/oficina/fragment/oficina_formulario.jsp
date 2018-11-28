@@ -20,7 +20,7 @@
                     </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Escola:</label>
+                        <label>Escola</label>
                         <s:select name="oficina.escola.id" id="oficina.escola.id" cssClass="form-control" required="true" list="escolas" listValue="nome" listKey="id" emptyOption="true"/>
                     </div>
                 </div>
@@ -30,19 +30,19 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Turno:</label>
+                        <label>Turno</label>
                         <s:select name="oficina.turnoEnum" id="oficina.turnoEnum" cssClass="form-control" list="TurnoEnums" listValue="name" emptyOption="true" required="true"/>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Situação:</label>
+                        <label>Situação</label>
                         <s:select name="oficina.situacaoEnum" id="oficina.situacaoEnum" cssClass="form-control" list="SituacaoOficinaEnums" listValue="name" emptyOption="true" required="true"/>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Data de Planejamento:</label>
+                        <label>Data de Planejamento</label>
                         <div class="input-group m-bot15 right date default-date-picker" >
                             <s:textfield name="oficina.dataPlanejada" id="oficina.dataPlanejada" required="true" cssClass="form-control" value="%{getText('format.dateShort', {oficina.dataPlanejada})}" />
                             <span class="input-group-btn" >
@@ -56,7 +56,7 @@
                             
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Data da Realização:</label>
+                        <label>Data da Realização</label>
                         <div class="input-group m-bot15 right date default-date-picker" >
                             <s:textfield name="oficina.dataRealizada" id="oficina.dataRealizada" cssClass="form-control" value="%{getText('format.dateShort', {oficina.dataRealizada})}" />
                             <span class="input-group-btn" >

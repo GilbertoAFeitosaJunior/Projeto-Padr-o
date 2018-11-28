@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">                      
-                            <label>Nome:</label>
+                            <label>Nome</label>
                             <div>
                                 <s:textfield name="secretaria.nome" id="secretaria.nome" maxlength="100" cssClass="form-control" required="true" />
                             </div>

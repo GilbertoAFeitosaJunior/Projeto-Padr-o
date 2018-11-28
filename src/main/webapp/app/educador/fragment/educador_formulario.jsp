@@ -131,13 +131,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="form-group">                      
-                        <label>Situacão:</label>
+                        <label>Situacão</label>
                         <s:select name="educador.usuario.ativo" id="educador.usuario.ativo" cssClass="form-control" listKey="key" list="booleanConditionEnum" listValue="value" emptyOption="true" required="true"/>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">                      
-                        <label>Nome de Usuário:</label>
+                        <label>Nome de Usuário</label>
                         <s:textfield name="educador.usuario.nome" id="educador.usuario.nome" maxlength="100" cssClass="form-control" required="true" />
                     </div>
                 </div>
@@ -147,14 +147,14 @@
 
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>E-mail:</label>
+                        <label>E-mail</label>
                         <s:textfield name="educador.usuario.email" id="educador.usuario.email" type="email" placeholder="O usuário precisa ter um email" maxlength="100" cssClass="form-control" required="true"/>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
                     <div class="form-group">                      
-                        <label>Senha:</label>
+                        <label>Senha</label>
                         <s:if test="educador == null">
                             <s:password name="educador.usuario.senha" id="educador.usuario.senha"  maxlength="32" cssClass="form-control" required="true"/>
                         </s:if>
