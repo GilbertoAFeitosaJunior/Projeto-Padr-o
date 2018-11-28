@@ -12,19 +12,19 @@
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Escola:</label>
+                        <label>Escola</label>
                         <s:textfield name="oficina.escola.nome" id="oficina.escola.id" cssClass="form-control" readonly="true"/>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Turno:</label>
+                        <label>Turno</label>
                         <s:textfield name="oficina.turnoEnum.name" id="oficina.turnoEnum" cssClass="form-control" readonly="true"/>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Situação:</label>
+                        <label>Situação</label>
                         <s:textfield name="oficina.situacaoEnum.name" id="oficina.situacaoEnum" cssClass="form-control" readonly="true"/>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
 
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Data de Planejamento:</label>
+                        <label>Data de Planejamento</label>
                         <div class="input-group m-bot15 right date " >
                             <s:textfield name="oficina.dataPlanejada" id="oficina.dataPlanejada" cssClass="form-control" value="%{getText('format.dateShort', {oficina.dataPlanejada})}" readonly="true" />
                             <span class="input-group-btn" >
@@ -48,7 +48,7 @@
                             
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label>Data da Realização:</label>
+                        <label>Data da Realização</label>
                         <div class="input-group m-bot15 right date " >
                             <s:textfield name="oficina.dataRealizada" id="oficina.dataRealizada" cssClass="form-control" value="%{getText('format.dateShort', {oficina.dataRealizada})}" readonly="true"/>
                             <span class="input-group-btn" >

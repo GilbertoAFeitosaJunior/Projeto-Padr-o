@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Nome:</label>
+                            <label>Nome</label>
                             <s:textfield name="oficina.nome" id="oficina.nome" cssClass="form-control" required="true" />
                         </div>
                     </div>
