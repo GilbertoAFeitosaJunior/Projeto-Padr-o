@@ -20,6 +20,7 @@ import mobi.stos.educador.bean.Oficina;
 import mobi.stos.educador.bean.Usuario;
 import mobi.stos.educador.bo.IAnexoBo;
 import mobi.stos.educador.bo.IAtividadeBo;
+import mobi.stos.educador.bo.IEducadorBo;
 import mobi.stos.educador.bo.IEscolaBo;
 import mobi.stos.educador.bo.IOficinaBo;
 import mobi.stos.educador.bo.IUsuarioBo;
@@ -75,6 +76,9 @@ public class OficinaAction extends GenericAction {
     @Autowired
     private IAnexoBo anexoBo;
     
+    @Autowired
+    private IEducadorBo educadorBo;
+    
     @Action(value = "prepareOficina",
             interceptorRefs = {
                 @InterceptorRef(value = "basicStack")},
@@ -91,6 +95,7 @@ public class OficinaAction extends GenericAction {
             }
             this.atividades = this.atividadeBo.listall();
             this.escolas = this.escolaBo.listall();
+            this.educadors = this.educadorBo.listall();
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
@@ -128,20 +133,17 @@ public class OficinaAction extends GenericAction {
         try {
             GenericAction.isLogged(request);
             Oficina entity = null;
-             if (getLogged().getEducador() != null) {
+             //if (getLogged().getEducador() != null) {
                  if(oficina != null && oficina.getId() != null){
                      entity = this.oficinaBo.load(oficina.getId());
+                    oficina.setAtividades(entity.getAtividades());
                  }
-                Educador educadorLogado = new Educador(getLogged().getEducador().getId());
-                oficina.setEducador(educadorLogado);
-                oficina.setAtividades(entity.getAtividades());
+               //Educador educadorLogado = new Educador(getLogged().getEducador().getId());
+                //oficina.setEducador(educadorLogado);
                 oficina = this.oficinaBo.persist(oficina);
                 id = oficina.getId();
                 oficina = null;
-                jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
-            } else {
-                jsonReturn = new JsonReturn("Erro ao salvar o registro.", false);
-            }
+                //jsonReturn = new JsonReturn("Registro salvo com sucesso.", true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,7 +195,7 @@ public class OficinaAction extends GenericAction {
     public String persistOficinaHistoricoJson() {
         try {
             GenericAction.isLogged(request);
-            if (getLogged().getEducador() != null) {
+            //if (getLogged().getEducador() != null) {
                 String historicoView = this.oficina.getHistorico();
                 this.oficina = this.oficinaBo.load(this.oficina.getId());
                 StringBuilder sb = new StringBuilder();
@@ -202,7 +204,8 @@ public class OficinaAction extends GenericAction {
                 sb.append(historicoView);
                 sb.append("<br/>");
                 sb.append("Por: ");
-                sb.append(getLogged().getEducador().getNome());
+                //sb.append(getLogged().getEducador.getNome());
+                sb.append(getLogged().getNome());
                 sb.append("<br/>");
                 Date data = new Date(); 
                 DateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
@@ -223,8 +226,8 @@ public class OficinaAction extends GenericAction {
                 oficina.setAtividades(null);
                 oficina.setEducador(null);
                 
-            } else {
-            }
+//            } else {
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -323,14 +326,14 @@ public class OficinaAction extends GenericAction {
             }
             
            Consulta c = getConsulta();
-           c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
-           c.addAliasTable("escola", "escola", JoinType.INNER_JOIN);
-            if (getLogged().getEducador() != null) {
-                c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
-            }
-            c.addOrder(Order.desc("id"));
-            this.oficinas = this.oficinaBo.list(c);
-            this.usuario = this.usuarioBo.load(getLogged().getId());
+          // c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
+          // c.addAliasTable("escola", "escola", JoinType.INNER_JOIN);
+           // if (getLogged().getEducador() != null) {
+            //    c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
+           // }
+          //  c.addOrder(Order.desc("id"));
+            this.oficinas = this.oficinaBo.listall();
+            //this.usuario = this.usuarioBo.load(getLogged().getId());
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

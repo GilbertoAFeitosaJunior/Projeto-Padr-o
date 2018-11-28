@@ -73,7 +73,8 @@
     
     <div class="">
     <div class="panel-body">
-        <table class="table table-striped table-advance table-hover" style="table-layout:fixed; "id="tArquivo">
+        <div class="table-responsive-lg">
+        <table class="table table-striped table-advance table-hover" id="tArquivo">
             <thead>
                 <tr>
                     <th>Descrição</th>
@@ -95,6 +96,7 @@
                 </tr>
             </tfoot-->
         </table>
+            </div>
     </div>
 </div>
     <!--div class="panel-body pull-right">
