@@ -128,6 +128,27 @@ public class UsuarioAction extends GenericAction {
             return ERROR;
         }
     }
+    
+    @Action(value = "prepareUsuarioGeral",
+            interceptorRefs = {
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = ERROR, location = "/app/notify/")
+                ,
+                @Result(name = SUCCESS, location = "/app/usuario/formulario_geral.jsp")
+            })
+    public String prepararUsuarioGeral() {
+        try {
+            GenericAction.isLogged(request);
+            if (usuario != null && usuario.getId() != null) {
+                usuario = this.usuarioBo.load(this.usuario.getId());
+            }
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+    }
 
     @Action(value = "login",
             interceptorRefs = {
@@ -268,6 +289,42 @@ public class UsuarioAction extends GenericAction {
         }
         return SUCCESS;
     }
+    
+    @Action(value = "persistUsuarioGeral",
+            interceptorRefs = {
+                @InterceptorRef(value = "fileUploadStack")
+                ,
+                @InterceptorRef(value = "basicStack")},
+            results = {
+                @Result(name = SUCCESS, location = "/app/notify/")
+                ,
+                @Result(name = ERROR, location = "/app/notify/")
+            })
+    public String persistUsuarioGeral() {
+        try {
+            GenericAction.isLogged(request);
+
+            if (usuario != null && usuario.getId() != null) {
+                Usuario entity = usuarioBo.load(usuario.getId());
+
+                if (Strings.isNullOrEmpty(usuario.getSenha())) {
+                    usuario.setSenha(entity.getSenha());
+                }
+
+                usuario.setEmail(entity.getEmail());
+                this.usuarioBo.persist(usuario);
+            } else {
+                usuarioBo.cadastrar(usuario);
+            }
+            addActionMessage("Registro salvo com sucesso.");
+            setRedirectURL("listUsuarioGeral");
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+            return ERROR;
+        }
+        return SUCCESS;
+    }
 
     @Action(value = "deleteUsuario",
             interceptorRefs = {
@@ -338,7 +395,7 @@ public class UsuarioAction extends GenericAction {
             results = {
                 @Result(name = ERROR, location = "/app/notify/")
                 ,
-                @Result(name = SUCCESS, location = "/app/usuario/geral.jsp")
+                @Result(name = SUCCESS, location = "/app/usuario/index_geral.jsp")
             })
     public String listUsuarioGeral() {
         try {

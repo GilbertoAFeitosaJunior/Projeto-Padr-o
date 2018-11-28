@@ -26,9 +26,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </section>
 
     <section class="panel">
