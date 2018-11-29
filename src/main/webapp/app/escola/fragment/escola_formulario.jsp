@@ -1,12 +1,12 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
-        <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEscola" theme="simple" enctype="multipart/form-data">
+<s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistEscola" theme="simple" enctype="multipart/form-data">
 
-<section class="panel">
-    <header class="panel-heading">
-        Salvar Escola
-    </header>
+    <section class="panel">
+        <header class="panel-heading">
+            Salvar Escola
+        </header>
 
-    <div class="panel-body"> 
+        <div class="panel-body"> 
             <s:hidden name="escola.id" />
 
             <div class="row">
@@ -95,8 +95,8 @@
 
     <section class="panel">
 
-         <header class="panel-heading">
-           Endereço da Escola
+        <header class="panel-heading">
+            Endereço da Escola
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
             </span>
@@ -105,59 +105,80 @@
         <div class="panel-body">    
 
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="form-group">
-                        <label>Logradouro</label>
-                        <s:textfield type="text" name="escola.logradouro" id="escola.logradouro" cssClass="form-control" required="true" maxlength="100"/>
-                    </div>
-                </div>
+
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>CEP</label>
                         <s:textfield type="text" name="escola.cepStringMask" id="escola.cepStringMask" cssClass="form-control" data-mask="99999-999" required="true" />
                     </div>
                 </div>
+                <div class="col-lg-7">
+                    <div class="form-group">
+                        <label>Logradouro</label>
+                        <s:textfield type="text" name="escola.logradouro" id="escola.logradouro" cssClass="form-control" required="true" maxlength="100"/>
+                    </div>
+                </div>
+
+
                 <div class="col-lg-2">
                     <div class="form-group">
-                        <label>Numero</label>
+                        <label>Número</label>
                         <s:textfield type="text" name="escola.numero" id="escola.numero" cssClass="form-control" required="true" maxlength="10" />
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Complemento</label>
-                        <s:textfield type="text" name="escola.complemento" id="escola.complemento" cssClass="form-control" maxlength="100"/>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label>Bairro</label>
-                        <s:textfield type="text" name="escola.bairro" id="escola.bairro" cssClass="form-control" required="true" maxlength="50" />
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label>Cidade</label>
-                        <s:textfield type="text" name="escola.cidade" id="escola.cidade" cssClass="form-control" required="true" maxlength="50" />
-                    </div>
-                </div>
                 <div class="col-lg-1">
                     <div class="form-group">
                         <label>UF</label>
                         <s:textfield type="text" name="escola.uf" id="escola.uf" cssClass="form-control" required="true" maxlength="2" />
                     </div>
                 </div>
+
             </div>
+
+            <div class="row">
+
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <s:textfield type="text" name="escola.complemento" id="escola.complemento" cssClass="form-control" maxlength="100"/>
+                    </div>
+                </div>
+                    
+                    <div class="col-lg-3">  
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <s:textfield type="text" name="escola.bairro" id="escola.bairro" cssClass="form-control" required="true" maxlength="50" />
+                    </div>
+                </div>
+                    
+                    <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <s:textfield type="text" name="escola.cidade" id="escola.cidade" cssClass="form-control" required="true" maxlength="50" />
+                    </div>
+                </div>
+
+                
+
+
+
+            </div>
+
+
+            
+
+
+                
+
+                 
 
         </div>
     </section>
 
     <section class="panel">
 
-         <header class="panel-heading">
+        <header class="panel-heading">
             Dados do Diretor da Escola
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
