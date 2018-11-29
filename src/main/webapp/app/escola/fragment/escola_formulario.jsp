@@ -145,6 +145,13 @@
                     </div>
                 </div>
                     
+                    <div class="col-lg-3">  
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <s:textfield type="text" name="escola.bairro" id="escola.bairro" cssClass="form-control" required="true" maxlength="50" />
+                    </div>
+                </div>
+                    
                     <div class="col-lg-4">
                     <div class="form-group">
                         <label>Cidade</label>
@@ -152,12 +159,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">  
-                    <div class="form-group">
-                        <label>Bairro</label>
-                        <s:textfield type="text" name="escola.bairro" id="escola.bairro" cssClass="form-control" required="true" maxlength="50" />
-                    </div>
-                </div>
+                
 
 
 
