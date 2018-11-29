@@ -327,7 +327,7 @@ public class OficinaAction extends GenericAction {
             
            Consulta c = getConsulta();
           // c.addAliasTable("educador", "educador", JoinType.INNER_JOIN);
-          // c.addAliasTable("escola", "escola", JoinType.INNER_JOIN);
+           c.addAliasTable("escola", "escola", JoinType.INNER_JOIN);
            // if (getLogged().getEducador() != null) {
             //    c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
            // }
