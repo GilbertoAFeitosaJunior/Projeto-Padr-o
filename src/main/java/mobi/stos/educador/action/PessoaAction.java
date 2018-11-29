@@ -87,9 +87,12 @@ public class PessoaAction extends GenericAction{
         try {
             GenericAction.isLogged(request);
             Pessoa entity;
+            
             if (pessoa != null && pessoa.getId() != null) {
                 entity = pessoaBo.load(pessoa.getId());
             }
+            
+            System.out.println(pessoa.getTurma().getId());
             
             String ufMaiusculo = pessoa.getUf().toUpperCase();
             pessoa.setUf(ufMaiusculo);

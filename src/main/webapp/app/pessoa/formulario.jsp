@@ -86,7 +86,7 @@
                                     <option value="">Selecione uma Escola pra carregar as Turmas</option>
                                 </select>
                             </s:if><s:else>
-                                <s:select name="pessoa.turma.id" id="turmaid" list="turmas" class="form-control"  listValue="nome" required="true"/>
+                                <s:select name="pessoa.turma.id" id="turmaid" list="turmas" cssClass="form-control"  listValue="nome" listKey="id" required="true" emptyOption="true" />
                             </s:else>
                         </div>
                     </div>

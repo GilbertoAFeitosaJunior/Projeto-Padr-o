@@ -1,3 +1,4 @@
+  
 $(function () {
     uploadAjax();
     anexo.list();
@@ -85,11 +86,12 @@ function uploadFiles(event) {
                     $("table#tArquivo tbody").html("<tr><td colspan=\"3\" class=\"text-center\"><img src=\"../img/ajax-loader.gif\" /></td></tr>");
                 },
                 success: function (json) {
+                    //style='word-wrap: break-word;'
                     if (json.jsonReturn.success) {
                         var HTML = "";
                         $.each(json.anexos, function (key, value) {
                             HTML += "<tr>";
-                            HTML += "<td style='word-wrap: break-word;'>" + value.descricao + "</td>";
+                            HTML += "<td style='white-space: pre-wrap;'>" + value.descricao + "</td>";
                             HTML += "<td class=\"col-lg-2 col-sm2 col-xs-2\"><a class='btn btn-primary btn-xs' href='../../" + value.arquivo + "' download onclick=\"anexo.atualizarQtdDownload(" + value.id + ")\"><i class=\"fa fa-cloud-download \"></i> Baixe uma cópia</a></td>";
                             HTML += "</a></td>";
                             HTML += "<td class=\"col-lg-2 col-sm-2 col-xs-2\">" + value.tipoMine + "</td>";

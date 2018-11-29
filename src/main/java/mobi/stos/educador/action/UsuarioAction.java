@@ -31,6 +31,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -380,6 +381,7 @@ public class UsuarioAction extends GenericAction {
                     Restrictions.isNull("gestorDoTerritorio.id"),
                     Restrictions.isNull("educador.id")
             ));
+            consulta.addOrder(Order.desc("id"));
             this.usuarios = this.usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
@@ -405,8 +407,9 @@ public class UsuarioAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-
-            this.usuarios = this.usuarioBo.list(getConsulta());
+            Consulta consulta = getConsulta();
+            consulta.addOrder(Order.desc("id"));
+            this.usuarios = this.usuarioBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

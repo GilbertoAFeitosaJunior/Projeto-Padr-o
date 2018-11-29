@@ -26,6 +26,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SecretariaAction extends GenericAction {
@@ -91,6 +92,9 @@ public class SecretariaAction extends GenericAction {
                  entity = secretariaBo.load(secretaria.getId());
                 }
             
+            String ufMaiusculo = secretaria.getUf().toUpperCase();
+            secretaria.setUf(ufMaiusculo);
+            
             this.secretariaBo.persist(secretaria);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listSecretaria");
@@ -136,8 +140,9 @@ public class SecretariaAction extends GenericAction {
                 setConsulta(new Consulta(field));
             }
             
-            
-            secretarias = secretariaBo.list(getConsulta());
+            Consulta consulta = getConsulta();
+            consulta.addOrder(Order.desc("id"));
+            secretarias = secretariaBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

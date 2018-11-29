@@ -89,6 +89,9 @@ public class EscolaAction extends GenericAction{
             if (escola != null && escola.getId() != null) {
                 entity = escolaBo.load(escola.getId());
             }
+            String ufMaiusculo = escola.getUf().toUpperCase();
+            escola.setUf(ufMaiusculo);
+            
             this.escolaBo.persist(escola);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listEscola");

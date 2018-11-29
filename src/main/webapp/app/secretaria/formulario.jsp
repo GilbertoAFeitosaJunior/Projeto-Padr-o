@@ -14,9 +14,6 @@
             <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="persistSecretaria" theme="simple" enctype="multipart/form-data">
                 <s:hidden name="secretaria.id" />
 
-
-
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">                      

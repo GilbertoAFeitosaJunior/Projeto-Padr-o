@@ -44,7 +44,12 @@
                         <div class="form-group">                      
                             <label>Senha</label>
                             <div>
-                                <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" required="true"/>
+                            <s:if test="usuario == null" >
+                                <s:password name="usuario.senha" id="usuario.senha" placeholder="" maxlength="32" cssClass="form-control" required="true"/>
+                            </s:if>
+                            <s:else>
+                                <s:password name="usuario.senha" id="usuario.senha" placeholder="Deixe em branco se quiser manter a senha atual" maxlength="32" cssClass="form-control" />
+                            </s:else>
                             </div>
                         </div>
                     </div>

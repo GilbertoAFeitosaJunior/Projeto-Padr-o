@@ -26,6 +26,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -113,6 +114,10 @@ public class EducadorAction extends GenericAction {
                 entity = this.usuarioBo.cadastrar(this.educador.getUsuario());
                 this.educador.setUsuario(entity);
             }
+            
+            String ufMaiusculo = this.educador.getUf().toUpperCase();
+            educador.setUf(ufMaiusculo);
+            
             this.usuarioBo.persist(this.educador.getUsuario());
             this.educadorBo.persist(this.educador);
             addActionMessage("Registro salvo com sucesso.");
@@ -177,7 +182,8 @@ public class EducadorAction extends GenericAction {
             }
             Consulta c = getConsulta();
             c.addAliasTable("usuario", "usuario", JoinType.INNER_JOIN);
-
+            c.addOrder(Order.desc("id"));
+            
             this.educadors = educadorBo.list(c);
             return SUCCESS;
         } catch (Exception e) {

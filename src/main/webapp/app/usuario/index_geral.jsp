@@ -71,10 +71,10 @@
                 <i class="fa fa-arrow-left"></i> 
             Voltar 
             </a>
-            <button class="btn btn-primary" onclick="list.add();">
+            <!--button class="btn btn-primary" onclick="list.add();">
                 <i class="fa fa-plus"></i> 
                 Adicionar Novo
-            </button>
+            </button-->
         </div>
 
         <div class="panel-body">
@@ -120,9 +120,9 @@
                                     <a class="btn btn-primary btn-xs" onclick="list.edit(<s:property value="id" />);">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<s:property value="id" />);">
+                                    <!--a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal" onclick="list.remove(<!s:property value="id" />);">
                                         <i class="fa fa-trash-o "></i>
-                                    </a>
+                                    </a-->
                                 </div>
                             </td>
                         </tr>
