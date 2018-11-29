@@ -116,8 +116,8 @@ public class EscolaAction extends GenericAction{
             escolaBo.delete(escola.getId());
             addActionMessage("Registro excluído com sucesso.");
             setRedirectURL("listEscola");
-        } catch (LoginExpiradoException e) {
-            addActionError("Erro ao processar a informação. Erro: " + e.getMessage());
+        } catch (Exception e) {
+            addActionError("Erro ao excluir a Escola. A escola esta atrelada a outras turmas e/ou alunos(as) e não pode ser excluida.");
         }
         return SUCCESS;
     }
