@@ -14,73 +14,75 @@
             <s:hidden name="educador.id" />
 
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                     <div class="form-group">                      
                         <label>Nome do Educador</label>
                         <s:textfield name="educador.nome" id="educador.nome" cssClass="form-control" required="true"/>
                     </div>
                 </div>
-
-                <div class="col-lg-2">
+            </div>
+                    
+            <div class="row">
+                <div class="col-lg-6">
                     <div class="form-group">                      
                         <label>Parceira</label>
                         <s:select name="educador.parceira.id" id="educador.parceira.id" cssClass="form-control" listKey="id" list="parceiras" listValue="nome" emptyOption="true" required="true" />
                     </div>
                 </div>
 
-            </div>
-                    
-                    <div class="row">
-                        <div class="col-lg-10">
-                            <div class="form-group">
-                                <label>Formação do Educador</label>
-                                    <s:textarea name="educador.formacao" id="educador.formacao" cssClass="form-control" required="true" />
-                            </div>
-                        </div>
-                            
-                            
-                <div class="col-lg-2">
+
+                <div class="col-lg-6">
                     <div class="form-group">                      
                         <label>Nível Educacional</label>
-                                <s:select name="educador.nivelEducacionalEnum" id="educador.nivelEducacionalEnum" cssClass="form-control"  list="nivelEducacionalEnums" listValue="name" emptyOption="true" required="true"/>
+                        <s:select name="educador.nivelEducacionalEnum" id="educador.nivelEducacionalEnum" cssClass="form-control"  list="nivelEducacionalEnums" listValue="name" emptyOption="true" required="true"/>
                     </div>
                 </div>
-                            
-                            
-                    </div>      
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Formação do Educador</label>
+                        <s:textarea name="educador.formacao" id="educador.formacao" cssClass="form-control" required="true" />
+                    </div>
+                </div>
+            </div>      
                     
             <div class="row">
-                
                 <div class="col-lg-10">
                     <div class="form-group">
                         <label>Logradouro</label>
                         <s:textfield name="educador.logradouro" id="educador.logradouro" cssClass="form-control" required="true" maxlength="100"/> 
                     </div>
                 </div>
-                    
+
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label>Número</label>
                         <s:textfield type="text" name="educador.numero" id="educador.numero" cssClass="form-control" required="true" maxlength="10"/>
                     </div>
                 </div>
-                    
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="form-group">
                         <label>Complemento</label>
                         <s:textfield type="text" name="educador.complemento" id="educador.complemento" cssClass="form-control" maxlength="100"/>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <div class="form-group">
                         <label>Bairro</label>
                         <s:textfield type="text" name="educador.bairro" id="educador.bairro" cssClass="form-control" required="true" maxlength="50" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label>Cidade</label>
                         <s:textfield type="text" name="educador.cidade" id="educador.cidade" cssClass="form-control" required="true" maxlength="50" />
@@ -92,10 +94,6 @@
                         <s:textfield type="text" name="educador.uf" id="educador.uf" cssClass="form-control" required="true" maxlength="2"/>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="row">
                 <div class="col-lg-1">
                     <div class="form-group">
                         <label>DDD</label>
@@ -114,8 +112,6 @@
                         <s:textfield type="email" name="educador.email" id="educador.email" cssClass="form-control" required="true" autocomplete="off" />
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -124,7 +120,7 @@
     <section class="panel">
         <header class="panel-heading">
             Dados para o Login
-            
+
         </header>
         <div class="panel-body">
             <s:hidden name="educador.usuario.id" />

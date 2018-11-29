@@ -17,7 +17,7 @@
 
                 <div class="row">
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Secretaria</label>
                             <div>
@@ -27,16 +27,9 @@
                     </div>        
 
 
-                    <div class="col-lg-3">
-                        <div class="form-group">                      
-                            <label>Situação do Projeto</label>
-                            <div>
-                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control" list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-3">
+
+                    <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Coordenador de Projeto</label>
                             <div>
@@ -45,7 +38,21 @@
                         </div>
                     </div>     
 
-                    <div class="col-lg-3">
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">                      
+                            <label>Situação do Projeto</label>
+                            <div>
+                                <s:select name="projeto.situacaoProjetoEnum" id="projeto.situacaoProjetoEnum" cssClass="form-control" list="situacaoProjetoEnums" listValue="name" emptyOption="true" required="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Modo de Implementação</label>
                             <div>
@@ -53,11 +60,10 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </div>            
 
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="form-group">                      
                             <label>Nome</label>
                             <div>
@@ -65,20 +71,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-3">
-                        <div class="form-group">                      
-                            <label>Parceira</label>
-                            <div>
-                                <s:select name="projeto.parceira.id" id="projeto.parceira.id" cssClass="form-control" list="parceiras" listKey="id" listValue="nome" emptyOption="true" />
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-
                 <div class="row">        
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">                      
                             <label>Reponsável</label>
                             <div>
@@ -86,6 +82,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">                      
+                            <label>Parceira</label>
+                            <div>
+                                <s:select name="projeto.parceira.id" id="projeto.parceira.id" cssClass="form-control" list="parceiras" listKey="id" listValue="nome" emptyOption="true" />
+                            </div>
+                        </div>
+                    </div>        
+
                 </div>        
 
                 <div class="row">
