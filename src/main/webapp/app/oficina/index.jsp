@@ -81,9 +81,9 @@
                     <tr>
                         <th>Nome</th>
                         <th>Escola</th>
-                        <th>Data de planejamento</th>
-                        <th>Turno</th>
-                        <th>Situação</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2">Data de planejamento</th>
+                        <th class="col-lg-2 col-sm-2 col-xs-2 ">Turno</th>
+                        <th class="col-lg-1 col-sm-1 col-xs-1 ">Situação</th>
                         <th class="col-lg-1 col-sm-1 col-xs-1 text-right">A&ccedil;&otilde;es</th>
                     </tr>
                 </thead>

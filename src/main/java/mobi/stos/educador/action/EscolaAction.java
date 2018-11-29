@@ -25,6 +25,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -139,6 +140,7 @@ public class EscolaAction extends GenericAction{
 
             Consulta c = getConsulta();
             c.addAliasTable("projeto", "projeto", JoinType.INNER_JOIN);
+            c.addOrder(Order.desc("id"));
             this.escolas = escolaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {

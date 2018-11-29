@@ -27,6 +27,12 @@
             <tbody>
             </tbody>
         </table>
+           <div class="panel-body pull-right">
+            <a class="btn btn-primary" href="listOficina" >
+                <i class="fa fa-arrow-left"></i> 
+                Voltar 
+            </a>
+        </div>
     </div>
 </section>
 

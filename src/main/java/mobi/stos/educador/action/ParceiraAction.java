@@ -16,6 +16,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -69,7 +70,10 @@ public class ParceiraAction extends GenericAction {
             if (parceira != null && parceira.getId() != null) {
                 entity = parceiraBo.load(parceira.getId());
             }
-
+            
+            String ufMaiusculo = parceira.getUf().toUpperCase();
+            parceira.setUf(ufMaiusculo);
+            
             this.parceiraBo.persist(parceira);
             addActionMessage("Registro salvo com sucesso.");
             setRedirectURL("listParceira");
@@ -114,8 +118,10 @@ public class ParceiraAction extends GenericAction {
                 String field = (String) getCamposConsultaEnum().get(0).getKey();
                 setConsulta(new Consulta(field));
             }
-
-            parceiras = parceiraBo.list(getConsulta());
+            
+            Consulta consulta = getConsulta();
+            consulta.addOrder(Order.desc("id"));
+            parceiras = parceiraBo.list(consulta);
             return SUCCESS;
         } catch (Exception e) {
             addActionError("Erro ao processar a informação. Erro: " + e.getMessage());

@@ -10,24 +10,31 @@
 
         <s:form id="form" acceptcharset="UTF-8" method="post" cssClass="cmxform" action="" theme="simple" enctype="multipart/form-data" autocomplete="off">
 
-                <s:hidden name="oficina.id"/>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <s:textfield name="oficina.nome" id="oficina.nome" cssClass="form-control" required="true" />
-                        </div>
+            <s:hidden name="oficina.id"/>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <s:textfield name="oficina.nome" id="oficina.nome" cssClass="form-control" required="true" />
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Educador</label>
+                        <s:select name="oficina.educador.id" id="oficinaeducadorid" list="educadors" cssClass="form-control" listValue="nome" listKey="id" required="true" />
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Escola</label>
                         <s:select name="oficina.escola.id" id="oficina.escola.id" cssClass="form-control" required="true" list="escolas" listValue="nome" listKey="id" emptyOption="true"/>
                     </div>
-                </div>
-          
-            </div>
-
-            <div class="row">
+                </div>    
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>Turno</label>
@@ -40,6 +47,9 @@
                         <s:select name="oficina.situacaoEnum" id="oficina.situacaoEnum" cssClass="form-control" list="SituacaoOficinaEnums" listValue="name" emptyOption="true" required="true"/>
                     </div>
                 </div>
+
+            </div>
+            <div class="row">
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>Data de Planejamento</label>
@@ -53,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                            
+
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>Data da Realização</label>
@@ -68,20 +78,12 @@
                     </div>
                 </div>
             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Educador</label>
-                                        <s:select name="oficina.educador.id" id="oficinaeducadorid" list="educadors" cssClass="form-control" listValue="nome" listKey="id" required="true" />
-                                    </div>
-                                </div>
-                            </div>
 
             <div class="panel-body pull-right">
                 <button type="button" class="btn btn-danger" onclick="window.location = 'listOficina'">Cancelar</button>
                 &nbsp;
                 <button type="submit" onclick="" class="btn btn-success">Salvar Registro</button>
-        </s:form>
-            </div>
-            
+            </s:form>
+        </div>
+        </div>
 </section>

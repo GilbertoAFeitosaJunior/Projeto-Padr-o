@@ -27,7 +27,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.sql.JoinType;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MetodologiaAction extends GenericAction {
@@ -214,6 +214,7 @@ public class MetodologiaAction extends GenericAction {
             }
 
             Consulta c = getConsulta();
+            c.addOrder(Order.desc("id"));
             this.metodologias = metodologiaBo.list(c);
             return SUCCESS;
         } catch (Exception e) {

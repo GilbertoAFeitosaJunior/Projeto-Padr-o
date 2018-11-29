@@ -31,6 +31,7 @@ import mobi.stos.educador.util.consulta.Keys;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
+import org.hibernate.criterion.Order;
 import org.hibernate.sql.JoinType;
 
 public class ProjetoAction extends GenericAction {
@@ -148,6 +149,7 @@ public class ProjetoAction extends GenericAction {
             Consulta c = getConsulta();
             c.addAliasTable("secretaria", "secretaria", JoinType.INNER_JOIN);
             c.addAliasTable("coordenadorDeProjeto", "coordenadorDeProjeto", JoinType.INNER_JOIN);
+            c.addOrder(Order.desc("id"));
             this.projetos = projetoBo.list(c);
             return SUCCESS;
         } catch (Exception e) {

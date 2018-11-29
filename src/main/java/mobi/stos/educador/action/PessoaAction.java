@@ -23,6 +23,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -141,6 +142,7 @@ public class PessoaAction extends GenericAction{
                 setConsulta(new Consulta(field));
             }
             Consulta c = getConsulta();
+            c.addOrder(Order.desc("id"));
 //            pessoa.getNome() = decrypt(getPessoa().nomeEncriptado(), AES.chaveencriptacao);
             this.pessoas = pessoaBo.list(c);
             return SUCCESS;

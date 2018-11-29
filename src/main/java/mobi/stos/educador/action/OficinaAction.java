@@ -331,8 +331,8 @@ public class OficinaAction extends GenericAction {
            // if (getLogged().getEducador() != null) {
             //    c.addCriterion(Restrictions.eq("educador.id", getLogged().getEducador().getId()));
            // }
-          //  c.addOrder(Order.desc("id"));
-            this.oficinas = this.oficinaBo.listall();
+           c.addOrder(Order.desc("id"));
+            this.oficinas = this.oficinaBo.list(c);
             //this.usuario = this.usuarioBo.load(getLogged().getId());
             return SUCCESS;
         } catch (Exception e) {

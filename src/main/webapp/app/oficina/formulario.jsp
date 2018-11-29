@@ -18,7 +18,7 @@
                 </li>  
                 <li id="tab-anexo" data-original-title="Desativado" data-content="Cadastre uma oficina para ter acesso a esta aba." data-placement="bottom" data-trigger="hover" class="tab-anexo info popovers"  >
                     <a id="tab-anexo-link" data-toggle="" href="#tab3">Anexo</a>
-                </li>  
+                </li>
                 <!--li id="tab-relatorio"  >
                     <a data-toggle="tab" href="#tab4">Relatório</a>
                 </li-->  
