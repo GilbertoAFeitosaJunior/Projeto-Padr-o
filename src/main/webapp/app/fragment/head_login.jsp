@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="S'tos App" />
         
-        <title>Educador</title>
+        <title>Projeto Padrão</title>
 
         <link rel="apple-touch-icon" sizes="57x57" href="../img/icon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="../img/icon/apple-icon-60x60.png">

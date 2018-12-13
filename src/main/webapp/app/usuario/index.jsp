@@ -67,7 +67,7 @@
         <header class="panel-heading">Registros</header>
 
         <div class="panel-body pull-right">
-             <a class="btn btn-primary" href="prepareUsuarioBotoes" >
+             <a class="btn btn-primary" href="index.jsp" >
                 <i class="fa fa-arrow-left"></i> 
             Voltar 
             </a>
